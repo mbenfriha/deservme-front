@@ -1,0 +1,70 @@
+<div class="header row background-gradient">
+  <div class="logo col s12 ">
+    ?
+  </div>
+  <div class="col s12 center-align">
+    <div class="col l3 offset-l5 s12">
+      <button class="white-button col l4 s12" (click)="openModal()">Connexion</button>
+      <button class="white-button col l4 s12" id="register"><span>Inscription</span></button>
+    </div>
+
+  </div>
+
+  <div class="header-text col s12">
+    Qui te connait vraiment ? Crée un quizz et partage à tes amis ! <br>
+    Tout est gratuit il te suffit de créer un compte.
+  </div>
+
+  <div class="main row">
+    <div class="card col s12 l3">
+      <div class="card-image">
+        <img src="https://images.frandroid.com/wp-content/uploads/2019/04/iphone-x-final.png">
+        <span class="card-title">Créer ton profil</span>
+        <a class="btn-floating halfway-fab waves-effect waves-light background-gradient-invert">1</a>
+      </div>
+    </div>
+
+    <div class="card col s12 l3">
+      <div class="card-image">
+        <img src="https://images.frandroid.com/wp-content/uploads/2019/04/iphone-x-final.png">
+        <span class="card-title">Créer ton Quizz</span>
+        <a class="btn-floating halfway-fab waves-effect waves-light background-gradient-invert">2</a>
+      </div>
+    </div>
+
+    <div class="card col s12 l3">
+      <div class="card-image">
+        <img src="https://images.frandroid.com/wp-content/uploads/2019/04/iphone-x-final.png">
+        <span class="card-title">Partage ton Quizz</span>
+        <a class="btn-floating halfway-fab waves-effect waves-light background-gradient-invert">3</a>
+      </div>
+    </div>
+
+    <div class="card col s12 l3">
+      <div class="card-image">
+        <img src="https://images.frandroid.com/wp-content/uploads/2019/04/iphone-x-final.png">
+        <span class="card-title">Regarde les résultats</span>
+        <a class="btn-floating halfway-fab waves-effect waves-light background-gradient-invert">4</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="overlay" (click)="closeModal()" *ngIf="modal">test</div>
+
+<div class="modal-connexion modal" *ngIf="modal">
+  <div class="modal-content">
+    <h4>Connexion/Inscription</h4>
+    <p>Tu peux te connecter ou créer un compte via facebook ou twitter puis compléter ton profil par la suite</p>
+    <button class="loginBtn loginBtn--facebook">
+      Connexion via Facebook
+    </button>
+    <button class="loginBtn loginBtn--twitter">
+      Connexion via Twitter
+    </button>
+  </div>
+</div>
+

@@ -1,0 +1,93 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body {
+  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+}
+
+
+
+.background-gradient {
+  background: linear-gradient(41deg, #863bf2, #03da7d);
+  background-size: 400% 400%;
+
+  -webkit-animation: headerGradient 8s ease infinite;
+  -moz-animation: headerGradient 8s ease infinite;
+  animation: headerGradient 8s ease infinite;
+
+  @-webkit-keyframes headerGradient {
+    0%{background-position:82% 0%}
+    50%{background-position:19% 100%}
+    100%{background-position:82% 0%}
+  }
+  @-moz-keyframes headerGradient {
+    0%{background-position:82% 0%}
+    50%{background-position:19% 100%}
+    100%{background-position:82% 0%}
+  }
+  @keyframes headerGradient {
+    0%{background-position:82% 0%}
+    50%{background-position:19% 100%}
+    100%{background-position:82% 0%}
+  }
+
+}
+
+
+.background-gradient-invert {
+  background: linear-gradient(41deg, #03da7d, #863bf2);
+  background-size: 400% 400%;
+
+  -webkit-animation: headerGradient 8s ease infinite;
+  -moz-animation: headerGradient 8s ease infinite;
+  animation: headerGradient 8s ease infinite;
+
+  @-webkit-keyframes headerGradient {
+    0%{background-position:82% 0%}
+    50%{background-position:19% 100%}
+    100%{background-position:82% 0%}
+  }
+  @-moz-keyframes headerGradient {
+    0%{background-position:82% 0%}
+    50%{background-position:19% 100%}
+    100%{background-position:82% 0%}
+  }
+  @keyframes headerGradient {
+    0%{background-position:82% 0%}
+    50%{background-position:19% 100%}
+    100%{background-position:82% 0%}
+  }
+
+}
+
+
+.page-footer {
+  background-color: white !important;
+  color:black ;
+}
+
+.footer-copyright {
+  background-color: white !important;
+  a {
+    margin-left:8px;
+    color:black;
+  }
+  a:hover {
+
+    background: -webkit-linear-gradient(256deg, #863bf2, #03da7d);
+    background-size: 400% 400%;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: headerGradient 10s infinite linear;
+  }
+}
+
+
+
