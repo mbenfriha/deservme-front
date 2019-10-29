@@ -1,0 +1,24 @@
+.register {
+  height: 100%;
+
+  input {
+    border-bottom: 1px solid #26a69a;
+    box-shadow: 0 1px 0 0 #26a69a;
+  }
+  h2 {
+    color:white;
+    font-size: 20px;
+  }
+  .form-control {
+    border-bottom: white 2Px solid;
+    color: white;
+  }
+
+  .invalid-feedback {
+    text-align: left;
+    color:white;
+    .fa {
+      text-shadow: black 1Px 1Px 4Px;
+    }
+  }
+}

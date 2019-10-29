@@ -1,0 +1,25 @@
+<div class="background-gradient row register">
+  <div class="logo col s12" >
+    <span routerLink="/">?</span>
+  </div>
+  <div class="col s12 l4 center-align offset-l4" *ngIf="step == 1">
+    <h2>Saisis un pseudo</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <input  type="text" (keyup)="usernameChange()" formControlName="username" class="form-control"/>
+      <div class="invalid-feedback col s6">
+        <div> <i *ngIf="name.unique" class="fa fa-check-square green-text"></i> <i *ngIf="!name.unique" class="fa fa-minus-circle red-text"></i> Pseudo libre</div>
+        <div> <i *ngIf="name.length" class="fa fa-check-square green-text"></i> <i *ngIf="!name.length" class="fa fa-minus-circle red-text"></i> 3 caractères minimum </div>
+        <div> <i *ngIf="name.alpha" class="fa fa-check-square green-text"></i> <i *ngIf="!name.alpha" class="fa fa-minus-circle red-text"></i> Alpha-numérique </div>
+      </div>
+      <div class="col s12">
+        <button [disabled]="!name.unique || !name.length || !name.alpha" class="white-button col s4 offset-s4 center-align">Valider</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="col s12 l4 center-align offset-l4" *ngIf="step == 2">
+    <h2>Créée ton premier quizz</h2>
+
+    <app-create-quizz></app-create-quizz>
+  </div>
+</div>

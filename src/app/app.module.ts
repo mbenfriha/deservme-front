@@ -6,8 +6,9 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { UserRegisterComponent } from './user-register/user-register.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
+
 
 
 import { CookieService } from 'ngx-cookie-service';
@@ -18,13 +19,29 @@ import {
   MatButtonModule,
   MatCardModule } from '@angular/material';
 import { HomeComponent } from './home/home.component';
+import { TermsComponent } from './terms/terms.component';
+import { PrivacyComponent } from './privacy/privacy.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { ContactComponent } from './contact/contact.component';
+import { RegisterComponent } from './register/register.component';
+import { ProfilComponent } from './profil/profil.component';
+import { CreateQuizzComponent } from './create-quizz/create-quizz.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     UserRegisterComponent,
-    HomeComponent
+    HomeComponent,
+    TermsComponent,
+    PrivacyComponent,
+    HeaderComponent,
+    FooterComponent,
+    ContactComponent,
+    RegisterComponent,
+    ProfilComponent,
+    CreateQuizzComponent
   ],
   imports: [
     BrowserModule,
@@ -34,9 +51,10 @@ import { HomeComponent } from './home/home.component';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    ReactiveFormsModule
   ],
   providers: [CookieService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, FooterComponent]
 })
 export class AppModule { }

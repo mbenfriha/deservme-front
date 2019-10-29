@@ -1,0 +1,21 @@
+.page-footer {
+  background-color: white !important;
+  color:black ;
+}
+
+.footer-copyright {
+  background-color: white !important;
+  a {
+    margin-left:8px;
+    color:black;
+  }
+  a:hover {
+
+    background: -webkit-linear-gradient(256deg, #863bf2, #03da7d);
+    background-size: 400% 400%;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: headerGradient 10s infinite linear;
+  }
+}

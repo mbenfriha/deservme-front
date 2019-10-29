@@ -1,13 +1,11 @@
-<div class="header row background-gradient">
-  <div class="logo col s12 ">
-    ?
-  </div>
-  <div class="col s12 center-align">
-    <div class="col l3 offset-l5 s12">
-      <button class="white-button col l4 s12" (click)="openModal()">Connexion</button>
-      <button class="white-button col l4 s12" id="register"><span>Inscription</span></button>
-    </div>
+<app-header>
 
+<div class="header-home">
+  <div class="col s12 l4 offset-l4 center-align">
+
+    <button class="white-button col l5 s12" (click)="openModal()">Connexion</button>
+    <div class="col l2"></div>
+    <button class="white-button col l5 s12" (click)="openModal()" id="register"><span>Inscription</span></button>
   </div>
 
   <div class="header-text col s12">
@@ -48,23 +46,40 @@
       </div>
     </div>
   </div>
-
 </div>
+</app-header>
 
 
-
-<div class="overlay" (click)="closeModal()" *ngIf="modal">test</div>
+<div class="overlay" (click)="closeModal()" *ngIf="modal"></div>
 
 <div class="modal-connexion modal" *ngIf="modal">
   <div class="modal-content">
-    <h4>Connexion/Inscription</h4>
-    <p>Tu peux te connecter ou créer un compte via facebook ou twitter puis compléter ton profil par la suite</p>
+    <h4>Connexion</h4>
+    <p>Tu peux te connecter ou créer un compte via facebook ou twitter puis compléter ton profil par la suite.
+      <br> Sache que nous ne posterons jamais sans ta permission !</p>
+  <p class="center-align hide-on-med-and-down">
+    <a href="http://localhost:3000/auth/facebook">
     <button class="loginBtn loginBtn--facebook">
       Connexion via Facebook
     </button>
+    </a>
+    <a href="http://localhost:3000/auth/twitter">
     <button class="loginBtn loginBtn--twitter">
       Connexion via Twitter
     </button>
+    </a>
+  </p>
+    <p class="center-align hide-on-large-only">
+      <button class="loginBtn loginBtn--facebook">
+        via Facebook
+      </button>
+      <button class="loginBtn loginBtn--twitter">
+        via Twitter
+      </button>
+    </p>
+    <p class="center-align">
+      En t'inscrivant tu acceptes les <a [routerLink]="'/terms'">conditions d'utilisation</a> et la <a [routerLink]="'/privacy'">politique de confidentialité</a>
+    </p>
   </div>
 </div>
 

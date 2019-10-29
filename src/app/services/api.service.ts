@@ -39,9 +39,9 @@ export class ApiService {
   }
 
   // Create a new item
-  createItem(item): Observable<User> {
+  createUser(user): Observable<User> {
     return this.http
-      .post<User>(this.base_path + 'register', JSON.stringify(item), this.httpOptions)
+      .post<User>(this.base_path + 'register', JSON.stringify(user), this.httpOptions)
       .pipe(
         retry(0),
         catchError(this.handleError)
@@ -49,9 +49,29 @@ export class ApiService {
   }
 
   // Get single student data by ID
-  getItem(): Observable<User> {
+  getCurrentUser(): Observable<User> {
     return this.http
       .get<User>(this.base_path + 'user', { withCredentials: true })
+      .pipe(
+        retry(0),
+        catchError(this.handleError)
+      );
+  }
+
+  // Get single student data by ID
+  getCurrentUsername(username): Observable<User> {
+    return this.http
+      .get<User>(this.base_path + 'username/' + username, { withCredentials: true })
+      .pipe(
+        retry(0),
+        catchError(this.handleError)
+      );
+  }
+
+  // Create a new item
+  updateUser(user): Observable<User> {
+    return this.http
+      .post<User>(this.base_path + 'update', JSON.stringify(user), this.httpOptions)
       .pipe(
         retry(0),
         catchError(this.handleError)

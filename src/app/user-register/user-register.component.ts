@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {User, UserRegister} from '../models/user';
 import { ApiService } from '../services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import {CookieService} from 'ngx-cookie-service';
 
 import { AuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
 
@@ -16,16 +15,13 @@ export class UserRegisterComponent implements OnInit {
 
   data: UserRegister;
   id: number;
-  email: any;
-  private cookieValue: string;
-  login: boolean;
   currentUser: User;
+  step = 1;
 
   constructor(
     public apiService: ApiService,
     public router: Router,
     private  activatedRoute: ActivatedRoute,
-    private cookieService: CookieService
   ) {
     this.data = new UserRegister();
 
@@ -41,7 +37,7 @@ export class UserRegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiService.getItem().subscribe(resp => {
+    this.apiService.getCurrentUser().subscribe(resp => {
       this.currentUser = resp;
       console.log(this.currentUser);
     });
@@ -53,7 +49,7 @@ export class UserRegisterComponent implements OnInit {
   }
 
   submitForm() {
-    this.apiService.createItem(this.data).subscribe((response) => {
+    this.apiService.createUser(this.data).subscribe((response) => {
       console.log(response);
     });
   }

@@ -1,0 +1,43 @@
+<div class="row create-quizz">
+  <div class="row">
+    <div class="col s12">
+      <label for="title">Titre du quizz</label>
+      <input type="text" id="title" name="title" placeholder="titre" [(ngModel)]="quizz.title">
+    </div>
+  </div>
+  <div class="questions row" *ngFor="let question of quizz.questions; let i = index;">
+    <div class="row question">
+      <div class="col s12 ">
+        <label for="question">Question</label>
+        <input type="text" id="question" name="question" placeholder="question" [(ngModel)]="question.name">
+      </div>
+    </div>
+    <div class="row answers" >
+      <div class="col s12 answer" *ngFor="let choice of question.choices; let j = index">
+        <div class="col s8">
+          <label for="answer">Réponses</label>
+          <input type="text" id="answer" name="answer" placeholder="réponses" [(ngModel)]="choice.name">
+        </div>
+        <div class="col s2">
+          <p class="answer-right">
+            <label>
+              <input (click)="uncheckAll(i, j)" type="checkbox" class="filled-in" [checked]="choice.rep" [(ngModel)]="choice.rep"/>
+              <span>{{choice.rep ? 'Vrai': 'Faux'}}</span>
+            </label>
+          </p>
+        </div>
+        <div class="col s2">
+          <button class="white-button">X</button>
+        </div>
+      </div>
+    </div>
+    <div class="col s8 add-answer">
+      <button class="white-button" (click)="addAnswer(i)">Ajouter une réponse </button>
+    </div>
+  </div>
+  <div class="row add-question">
+    <div class="col s12">
+      <button class="white-button" (click)="addQuestion(i)">Ajouter une question</button>
+    </div>
+  </div>
+</div>

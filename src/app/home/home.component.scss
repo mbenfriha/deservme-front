@@ -1,4 +1,4 @@
-.header {
+.header-home {
 
   button {
     font-size: 20px;
@@ -16,30 +16,14 @@
       -webkit-animation: AnimationName 10s infinite linear;
     }
   }
+
   .header-text {
-    margin: 2em 0em;
+    text-align: center;
+    color:white;
+    font-size:20px;
   }
 }
 
-.logo {
-  color: white;
-  font-weight: 900;
-  font-size: 43px;
-  text-align: center;
-}
-
-.header-text {
-  text-align: center;
-  color:white;
-  font-size:20px;
-}
-.white-button {
-  color: white;
-  background: transparent;
-  border: 2px solid white;
-  margin: 1em;
-  border-radius: 10px;
-}
 
 .main {
  .card {
@@ -75,7 +59,7 @@
   background-color: #fafafa;
   padding: 0;
   max-height: 70%;
-  width: 55%;
+  width: 80%;
   margin: auto;
   overflow-y: auto;
   border-radius: 2px;
@@ -158,5 +142,8 @@
     background-image: linear-gradient(#1bb7ee, #19a4d6);
   }
 
+  .title-modal {
+    font-size: 16px;
+  }
 
 }
