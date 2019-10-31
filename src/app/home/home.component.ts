@@ -21,7 +21,12 @@ export class HomeComponent implements OnInit {
   }
 
   openModal() {
-  this.modal = true;
+    if (localStorage.getItem('user')) {
+      this.router.navigate(['/register']);
+    } else {
+      this.modal = true;
+
+    }
   }
 
   closeModal() {

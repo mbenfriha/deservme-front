@@ -1,1 +1,46 @@
-<p>answer-quizz works!</p>
+<app-profil>
+</app-profil>
+<div class="container z-depth-3 answer-quizz" *ngIf="quizz && !alreadyAnswer">
+  <h2>{{quizz.title}}</h2>
+  <div class="row">
+
+    <ng-container  *ngFor="let q of quizz.questions, let i = index;">
+    <div class="col s12 question row z-depth-3" *ngIf="nbrQ == i" >
+        <div class="title-question col s12 ">{{q.name}} </div>
+
+      <div class="row answers" >
+        <h2>les réponses</h2>
+       <!-- <div class="col s12 answer {{choice.rep ? 'true-answer': 'false-answer'}}" *ngFor="let choice of q.choices; let j = index">
+          <div class="col s8 answer-name">
+            {{choice.name}}
+          </div>
+          <div class="col s2 large-answer">
+            <p class="answer-right">
+              <label>
+                <input (click)="uncheckAll(i, j)" type="checkbox" class="filled-in" />
+                <span></span>
+              </label>
+            </p>
+          </div>
+        </div>-->
+        <p *ngFor="let choice of q.choices; let j = index">
+          <label>
+            <input name="group{{i}}" type="radio" (click)="setAnswer(choice, q)" />
+            <span>{{choice.name}}</span>
+          </label>
+        </p>
+      </div>
+    </div>
+    </ng-container>
+    <button (click)="previewQ()" class="btn white-button left" *ngIf="nbrQ > 0">Précédent</button>
+    <button (click)="nextQ()" class="btn white-button right" *ngIf="nbrQ < quizz.questions.length -1">Suivant</button>
+    <button (click)="validateAnswer()" class="btn white-button right" *ngIf="nbrQ == quizz.questions.length -1">Valider</button>
+  </div>
+</div>
+
+<div *ngIf="alreadyAnswer" class="container already">
+  {{finalString}}<br>
+  <span>
+    {{result}} %
+  </span>
+</div>

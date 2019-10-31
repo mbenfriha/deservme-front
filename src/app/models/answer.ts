@@ -1,8 +1,8 @@
-export class Quizz {
+export class Answer {
   _id: string;
   title: string;
   user_id: string;
-  answer_count: number;
+  username: string;
   avatar: string;
   avatar_type: string;
   createdAt: string;
@@ -10,9 +10,10 @@ export class Quizz {
 }
 
 export class Question {
-  _id: string
+  _id: string;
+  question_id: string;
   name: string;
-  choices: [Choice];
+  answer: Choice;
 }
 
 export class Choice {

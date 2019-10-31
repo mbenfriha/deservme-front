@@ -1,0 +1,20 @@
+<app-profil>
+</app-profil>
+
+<div class="container">
+  <div class="row">
+  <h2 *ngIf="currentUser._id == id">Mes quizz</h2>
+  <div class="col s12" *ngIf="currentUser != id">
+  </div>
+  <ul class="collection">
+    <app-single-quizz-list *ngFor="let quizz of quizzs" [quizz]="quizz"></app-single-quizz-list>
+  </ul>
+  <div class="empty" *ngIf="quizzs < 1">
+    Aucun quizz pour le moment <br>
+    <i class="material-icons">
+      error_outline
+    </i>
+  </div>
+  </div>
+</div>
+

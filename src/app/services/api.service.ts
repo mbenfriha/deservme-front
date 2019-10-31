@@ -4,6 +4,7 @@ import { User } from '../models/user';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import {Quizz} from '../models/quizz';
+import {Answer} from '../models/answer';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,9 @@ export class ApiService {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
     } else {
+      if (error.status) {
+        localStorage.removeItem('user');
+      }
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
       console.error(
@@ -89,6 +93,8 @@ export class ApiService {
         catchError(this.handleError)
       );
   }
+
+  // get all quizz
   getAllQuizz(): Observable<Quizz[]> {
     return this.http
       .get<Quizz[]>(this.base_path + 'quizz', this.httpOptions)
@@ -97,4 +103,44 @@ export class ApiService {
         catchError(this.handleError)
       );
   }
+
+  // get quizz by user
+  getMyQuizz(id: string): Observable<Quizz[]> {
+    return this.http
+      .get<Quizz[]>(this.base_path + 'quizzs/' + id, this.httpOptions)
+      .pipe(
+        retry(0),
+        catchError(this.handleError)
+      );
+  }
+
+  // get quizz by user
+  getQuizz(id: string): Observable<Quizz> {
+    return this.http
+      .get<Quizz>(this.base_path + 'quizz/' + id, this.httpOptions)
+      .pipe(
+        retry(0),
+        catchError(this.handleError)
+      );
+  }
+
+  // create answer
+  createAnswer(answer: Answer, quizz_id: string): Observable<Answer> {
+    return this.http
+      .post<Answer>(this.base_path + 'answer/create/' + quizz_id, JSON.stringify(answer), this.httpOptions)
+      .pipe(
+        retry(0),
+        catchError(this.handleError)
+      );
+  }
+
+  getAnswerByUserId(quizz_id: string): Observable<Answer> {
+    return this.http
+      .get<Answer>(this.base_path + 'answerUser/' + quizz_id, this.httpOptions)
+      .pipe(
+        retry(0),
+        catchError(this.handleError)
+      );
+  }
+
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import {Choice, Question, Quizz} from '../models/quizz';
 import {ApiService} from '../services/api.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-create-quizz',
@@ -16,7 +18,7 @@ export class CreateQuizzComponent implements OnInit {
 
   @Output() quizzCreated = new EventEmitter<any>();
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.quizz = new Quizz;
@@ -64,11 +66,14 @@ export class CreateQuizzComponent implements OnInit {
 
   createQuizz()  {
     if (!this.verifyQuestion(this.quizz.questions)) {
-      alert('Vérifiez qu\'aucune questions/réponses n\'est vide');
+      this.toastr.error('Vérifiez qu\'aucune questions/réponses n\'est vide');
+
     } else if (this.quizz.questions.length < 1) {
-      alert('Votre quizz doit comporter au moin une question');
+      this.toastr.error('Votre quizz doit comporter au moin une question');
+
     } else if (!this.quizz.title) {
-      alert('Vous devez donner un titre à votre quizz');
+      this.toastr.error('Vous devez donner un titre à votre quizz');
+
     } else {
       this.api.createQuizz(this.quizz).subscribe(v => {
         console.log(v);
@@ -90,7 +95,7 @@ export class CreateQuizzComponent implements OnInit {
         this.quizz.questions[q].choices[0].rep = true;
       }
     } else {
-      alert('il faut deux réponses minimum');
+      this.toastr.error('Deux réponses minimum par question');
     }
   }
 
@@ -102,13 +107,11 @@ export class CreateQuizzComponent implements OnInit {
     var empty = true;
     question.filter((q) => {
       if (!q.name) {
-        console.log('false q');
         empty = false;
       }
     });
     question.map(q => q.choices.filter(a => {
       if (!a.name) {
-        console.log('false ans')
         empty = false;
       }
     }));

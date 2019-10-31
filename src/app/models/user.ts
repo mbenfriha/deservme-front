@@ -5,6 +5,8 @@ export class User {
   email: string;
   facebook: FacebookUser;
   twitter: TwitterUser;
+  avatar: string;
+  avatar_type: string;
 }
 
 class FacebookUser {

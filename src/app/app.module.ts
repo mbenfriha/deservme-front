@@ -8,10 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
-
-
-
-import { CookieService } from 'ngx-cookie-service';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import {
@@ -32,6 +30,7 @@ import { NavComponent } from './nav/nav.component';
 import { DiscoverComponent } from './discover/discover.component';
 import { SingleQuizzListComponent } from './single-quizz-list/single-quizz-list.component';
 import { NewQuizzComponent } from './new-quizz/new-quizz.component';
+import { MyQuizzComponent } from './my-quizz/my-quizz.component';
 
 
 @NgModule({
@@ -51,7 +50,8 @@ import { NewQuizzComponent } from './new-quizz/new-quizz.component';
     NavComponent,
     DiscoverComponent,
     SingleQuizzListComponent,
-    NewQuizzComponent
+    NewQuizzComponent,
+    MyQuizzComponent
   ],
   imports: [
     BrowserModule,
@@ -62,9 +62,14 @@ import { NewQuizzComponent } from './new-quizz/new-quizz.component';
     MatButtonModule,
     MatCardModule,
     MatGridListModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-full-width',
+      preventDuplicates: true,
+    }),
+    BrowserAnimationsModule
   ],
-  providers: [CookieService],
+  providers: [],
   bootstrap: [AppComponent, FooterComponent]
 })
 export class AppModule { }

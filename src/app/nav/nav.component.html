@@ -1,11 +1,17 @@
-<nav>
+<nav *ngIf="currentUser">
   <div class="nav-wrapper">
-    <a href="#" class="user right" *ngIf="currentUser"><img src="https://materializecss.com/images/yuna.jpg" alt="img">{{currentUser.username}}</a>
+    <a class="right hide-on-med-and-down" (click)="disconnect()"><i class="material-icons disconnect-button">
+      exit_to_app
+    </i></a>
+    <a href="#" class="user right">
+      <img src="https://avatars.io/{{currentUser.avatar_type}}/{{currentUser.avatar}}" alt="img">
+      {{currentUser.username}}
+    </a>
     <a data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <ul id="nav-mobile" class="left hide-on-med-and-down">
-      <li><a [routerLink]="['/discover']">Découverte</a></li>
-      <li><a [routerLink]="['/createQuizz']">Créer un quizz</a></li>
-      <li><a [routerLink]="['/myQuizz']">Mes quizz</a></li>
+      <li><a [ngClass]="{'text-purple': currentRoute=='discover'}" [routerLink]="['/discover']">Découverte</a></li>
+      <li><a [ngClass]="{'text-purple': currentRoute=='createQuizz'}"  [routerLink]="['/createQuizz']">Créer un quizz</a></li>
+      <li><a [ngClass]="{'text-purple': currentRoute=='allQuizz'}" [routerLink]="['/allQuizz/'+currentUser._id]">Mes quizz</a></li>
     </ul>
   </div>
 </nav>
@@ -18,7 +24,13 @@
       </div>
     </div>
     </li>
-  <li><a [routerLink]="['/discover']">Découverte</a></li>
-  <li><a [routerLink]="['/createQuizz']">Créer un quizz</a></li>
-  <li><a [routerLink]="['/myQuizz']">Mes quizz</a></li>
+  <li><a [ngClass]="{'text-purple': currentRoute=='discover'}" [routerLink]="['/discover']">Découverte</a></li>
+  <li><a [ngClass]="{'text-purple': currentRoute=='createQuizz'}"  [routerLink]="['/createQuizz']">Créer un quizz</a></li>
+  <li><a [ngClass]="{'text-purple': currentRoute=='allQuizz'}" [routerLink]="['/allQuizz/'+currentUser?._id]">Mes quizz</a></li>
+  <li>
+    <a (click)="disconnect()">Deconnexion</a>
+  </li>
+  <li class="grey-text lighten-4 bottom-nav-menu">
+    Deserve.me 2019
+  </li>
 </ul>

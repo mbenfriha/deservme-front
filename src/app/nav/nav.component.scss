@@ -8,12 +8,14 @@ nav {
   }
 
   .nav-wrapper {
+    padding-right: 10px;
     a {
       background: -webkit-linear-gradient(256deg, #863bf2, #03da7d);
       background-size: 100% 100%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       -webkit-animation: AnimationName 10s infinite linear;
+      cursor: pointer;
     }
 
     .user {
@@ -49,4 +51,27 @@ nav {
     -webkit-text-fill-color: transparent;
     -webkit-animation: AnimationName 10s infinite linear;
   }
+}
+
+.text-purple {
+  color: #863bf2;
+  font-weight: 900;
+  border-bottom: 2px solid #863bf2;
+}
+
+.bottom-nav-menu {
+  padding: 0px 1em;
+  position: absolute;
+  bottom: 8%;
+  width: 100%;
+  text-align:center;
+}
+
+#nav-mobile a:hover {
+  border-bottom: 2px solid #03da7d;
+}
+
+.disconnect-button {
+  border-left: 1px solid #863bf2;
+  padding-left: 10px;
 }
