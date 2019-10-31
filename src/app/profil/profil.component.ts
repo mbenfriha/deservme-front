@@ -18,12 +18,14 @@ export class ProfilComponent implements OnInit {
 
   ngOnInit() {
     this.api.getCurrentUser().subscribe((v: User) => {
-      localStorage.setItem('user', JSON.stringify(v));
+      if (!localStorage.getItem('user')) {
+        localStorage.setItem('user', JSON.stringify(v));
+        console.log('ajouter');
+      }
       if (!v.username) {
         this.router.navigate(['/register']);
       } else {
         this.currentUser = v;
-        console.log(v);
       }
     }, error => {
       if (error) {

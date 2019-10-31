@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ShareButtonsModule } from '@ngx-share/buttons';
+
 
 
 import {
@@ -63,6 +65,7 @@ import { MyQuizzComponent } from './my-quizz/my-quizz.component';
     MatCardModule,
     MatGridListModule,
     ReactiveFormsModule,
+    ShareButtonsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-full-width',
       preventDuplicates: true,

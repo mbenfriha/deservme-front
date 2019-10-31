@@ -27,6 +27,8 @@ export class AnswerQuizzComponent implements OnInit {
   alreadyAnswer: boolean;
   result: number;
   finalString: string;
+  myQuizz = false;
+  allAnswer: Answer[];
 
   constructor(private api: ApiService,
               private route: ActivatedRoute,
@@ -34,8 +36,8 @@ export class AnswerQuizzComponent implements OnInit {
 
   ngOnInit() {
     this.nbrQ = 0;
-    this.currentUser = JSON.parse(localStorage.getItem('user'));
     this.id = this.route.snapshot.paramMap.get('id');
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
 
     this.api.getAnswerByUserId(this.id).subscribe((a: Answer) => {
       this.calculResult(a, true);
@@ -43,13 +45,21 @@ export class AnswerQuizzComponent implements OnInit {
     }, error => {
       this.alreadyAnswer = false;
       this.api.getQuizz(this.id).subscribe((q: Quizz) => {
-        this.quizz = q;
-        this.answer = new Answer;
-        this.answer.user_id = this.currentUser._id;
-        this.answer.username = this.currentUser.username;
-        this.answer.avatar = this.currentUser.avatar;
-        this.answer.avatar_type = this.currentUser.avatar_type;
-        this.answer.questions = [new Question()];
+        if (q.user_id == this.currentUser._id) {
+          this.myQuizz = true;
+          this.api.getAnswerOfQuizz(this.id).subscribe((answers: Answer[]) => {
+            this.allAnswer = answers;
+            console.log(answers);
+          });
+        } else {
+          this.quizz = q;
+          this.answer = new Answer;
+          this.answer.user_id = this.currentUser._id;
+          this.answer.username = this.currentUser.username;
+          this.answer.avatar = this.currentUser.avatar;
+          this.answer.avatar_type = this.currentUser.avatar_type;
+          this.answer.questions = [new Question()];
+        }
       });
     });
   }
@@ -73,6 +83,19 @@ export class AnswerQuizzComponent implements OnInit {
     } else {
       this.finalString = 'Bravo tu as terminé, voici ton résultat :';
     }
+  }
+
+  returnResult(answer) {
+    const total = answer.questions.length;
+    let good = 0;
+
+    answer.questions.map(a => {
+      if (a.answer.rep) {
+        good++;
+      }
+    });
+
+    return 100 * good / total;
   }
 
   nextQ() {

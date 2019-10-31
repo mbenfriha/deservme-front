@@ -133,10 +133,20 @@ export class ApiService {
         catchError(this.handleError)
       );
   }
-
+  // get anwer by user
   getAnswerByUserId(quizz_id: string): Observable<Answer> {
     return this.http
       .get<Answer>(this.base_path + 'answerUser/' + quizz_id, this.httpOptions)
+      .pipe(
+        retry(0),
+        catchError(this.handleError)
+      );
+  }
+
+  // get anwer by user
+  getAnswerOfQuizz(quizz_id: string): Observable<Answer[]> {
+    return this.http
+      .get<Answer[]>(this.base_path + 'answers/' + quizz_id, this.httpOptions)
       .pipe(
         retry(0),
         catchError(this.handleError)

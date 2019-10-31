@@ -1,6 +1,6 @@
 <app-profil>
 </app-profil>
-<div class="container z-depth-3 answer-quizz" *ngIf="quizz && !alreadyAnswer">
+<div class="container z-depth-3 answer-quizz" *ngIf="quizz && !alreadyAnswer && !myQuizz">
   <h2>{{quizz.title}}</h2>
   <div class="row">
 
@@ -38,9 +38,21 @@
   </div>
 </div>
 
-<div *ngIf="alreadyAnswer" class="container already">
+<div *ngIf="alreadyAnswer && !myQuizz" class="container already">
   {{finalString}}<br>
   <span>
     {{result}} %
   </span>
+</div>
+
+<div class="container" *ngIf="myQuizz && allAnswer">
+  <h2>Résultats :</h2>
+  <ul class="collection" *ngIf="allAnswer.length > 0">
+    <li class="collection-item avatar" *ngFor="let answer of allAnswer">
+      <img src="https://avatars.io/{{answer.avatar_type}}/{{answer.avatar}}" alt="" class="circle">
+      <span class="title">{{answer.username}}</span>
+      <p> Score de {{returnResult(answer)}}%<br>
+      </p>
+    </li>
+  </ul>
 </div>

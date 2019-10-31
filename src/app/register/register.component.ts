@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
   name = {length: false, unique: false, alpha: false};
   subject: Subject<any> = new Subject();
   step = 1;
-
+  quizz: Quizz;
 
   constructor(private api: ApiService,
               private route: ActivatedRoute,
@@ -103,8 +103,9 @@ export class RegisterComponent implements OnInit {
 
   checkQuizzCreate(quizz) {
     if (quizz) {
-      console.log('quizz created:', quizz);
+      this.quizz = quizz;
     this.step = 3;
+    console.log(quizz._id, 'nouveau quizzz');
     } else {
       console.log('erreur');
     }

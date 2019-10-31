@@ -6,7 +6,7 @@
     <h2>Saisis un pseudo</h2>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <input  type="text" (keyup)="usernameChange()" formControlName="username" class="form-control"/>
-      <div class="invalid-feedback col s6">
+      <div class="invalid-feedback col s8">
         <div> <i *ngIf="name.unique" class="fa fa-check-square green-text"></i> <i *ngIf="!name.unique" class="fa fa-minus-circle red-text"></i> Pseudo libre</div>
         <div> <i *ngIf="name.length" class="fa fa-check-square green-text"></i> <i *ngIf="!name.length" class="fa fa-minus-circle red-text"></i> 3 caractères minimum </div>
         <div> <i *ngIf="name.alpha" class="fa fa-check-square green-text"></i> <i *ngIf="!name.alpha" class="fa fa-minus-circle red-text"></i> Alpha-numérique </div>
@@ -27,6 +27,19 @@
 
   <div class="col s12 l4 center-align offset-l4" *ngIf="step == 3">
     <h2>Partage ton premier quizz</h2>
+
+    <share-buttons [theme]="'default'"
+                   [include]="['facebook','twitter','messenger','whatsapp','sms']"
+                   [show]="5"
+                   [size]="4"
+                   [url]="'https://deserv.me/quizz/'+ quizz._id"
+                   [title]="'Mon quizz : '+ quizz.title"
+                   [description]="'Essaye de répondre au mieux à mon quizz'"
+                   [autoSetMeta]="false">
+
+    </share-buttons>
+    <button class="btn white-button" (click)="goToProfile()">Terminer</button>
+
 
   </div>
 </div>
