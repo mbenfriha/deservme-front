@@ -20,6 +20,13 @@
   <div class="col s12 l4 center-align offset-l4" *ngIf="step == 2">
     <h2>Créée ton premier quizz</h2>
 
-    <app-create-quizz></app-create-quizz>
+    <app-create-quizz (quizzCreated)="checkQuizzCreate($event)"></app-create-quizz>
+
+    <button class="btn white-button" (click)="goToProfile()">Créer mon quizz plus-tard</button>
+  </div>
+
+  <div class="col s12 l4 center-align offset-l4" *ngIf="step == 3">
+    <h2>Partage ton premier quizz</h2>
+
   </div>
 </div>

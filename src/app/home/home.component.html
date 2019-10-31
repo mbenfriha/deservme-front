@@ -70,12 +70,16 @@
     </a>
   </p>
     <p class="center-align hide-on-large-only">
-      <button class="loginBtn loginBtn--facebook">
-        via Facebook
-      </button>
-      <button class="loginBtn loginBtn--twitter">
-        via Twitter
-      </button>
+      <a href="http://localhost:3000/auth/facebook">
+        <button class="loginBtn loginBtn--facebook">
+          via Facebook
+        </button>
+      </a>
+      <a href="http://localhost:3000/auth/twitter">
+        <button class="loginBtn loginBtn--twitter">
+          via Twitter
+        </button>
+      </a>
     </p>
     <p class="center-align">
       En t'inscrivant tu acceptes les <a [routerLink]="'/terms'">conditions d'utilisation</a> et la <a [routerLink]="'/privacy'">politique de confidentialité</a>

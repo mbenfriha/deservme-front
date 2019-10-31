@@ -27,6 +27,11 @@ import { ContactComponent } from './contact/contact.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfilComponent } from './profil/profil.component';
 import { CreateQuizzComponent } from './create-quizz/create-quizz.component';
+import { AnswerQuizzComponent } from './answer-quizz/answer-quizz.component';
+import { NavComponent } from './nav/nav.component';
+import { DiscoverComponent } from './discover/discover.component';
+import { SingleQuizzListComponent } from './single-quizz-list/single-quizz-list.component';
+import { NewQuizzComponent } from './new-quizz/new-quizz.component';
 
 
 @NgModule({
@@ -41,7 +46,12 @@ import { CreateQuizzComponent } from './create-quizz/create-quizz.component';
     ContactComponent,
     RegisterComponent,
     ProfilComponent,
-    CreateQuizzComponent
+    CreateQuizzComponent,
+    AnswerQuizzComponent,
+    NavComponent,
+    DiscoverComponent,
+    SingleQuizzListComponent,
+    NewQuizzComponent
   ],
   imports: [
     BrowserModule,

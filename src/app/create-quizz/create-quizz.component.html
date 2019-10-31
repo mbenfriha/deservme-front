@@ -5,20 +5,21 @@
       <input type="text" id="title" name="title" placeholder="titre" [(ngModel)]="quizz.title">
     </div>
   </div>
-  <div class="questions row" *ngFor="let question of quizz.questions; let i = index;">
+  <div class="questions row z-depth-3" *ngFor="let question of quizz.questions; let i = index;">
+    <button class="white-button right delete-question" (click)="deleteQuestion(i)">X</button>
     <div class="row question">
       <div class="col s12 ">
-        <label for="question">Question</label>
+        <label for="question">La question n°{{i+1}}</label>
         <input type="text" id="question" name="question" placeholder="question" [(ngModel)]="question.name">
       </div>
     </div>
     <div class="row answers" >
-      <div class="col s12 answer" *ngFor="let choice of question.choices; let j = index">
-        <div class="col s8">
-          <label for="answer">Réponses</label>
-          <input type="text" id="answer" name="answer" placeholder="réponses" [(ngModel)]="choice.name">
+      <h2>les réponses</h2>
+      <div class="col s12 answer {{choice.rep ? 'true-answer': 'false-answer'}}" *ngFor="let choice of question.choices; let j = index">
+        <div class="col s8 ">
+          <input type="text" id="answer" name="answer" placeholder="réponse" [(ngModel)]="choice.name">
         </div>
-        <div class="col s2">
+        <div class="col s2 large-answer">
           <p class="answer-right">
             <label>
               <input (click)="uncheckAll(i, j)" type="checkbox" class="filled-in" [checked]="choice.rep" [(ngModel)]="choice.rep"/>
@@ -26,18 +27,24 @@
             </label>
           </p>
         </div>
-        <div class="col s2">
-          <button class="white-button">X</button>
+        <div class="col s2 large-answer">
+          <button class="white-button" (click)="deleteAnswer(i, j)">X</button>
         </div>
       </div>
     </div>
     <div class="col s8 add-answer">
-      <button class="white-button" (click)="addAnswer(i)">Ajouter une réponse </button>
+      <button class="white-button btn" (click)="addAnswer(i)"><i class="material-icons right">add</i> Ajouter une réponse </button>
     </div>
   </div>
   <div class="row add-question">
     <div class="col s12">
-      <button class="white-button" (click)="addQuestion(i)">Ajouter une question</button>
+      <button class="white-button btn" (click)="addQuestion(i)"><i class="material-icons right">add</i> Ajouter une question </button>
+    </div>
+  </div>
+
+  <div class="row create-quizz">
+    <div class="col s12">
+      <button class="white-button right btn" (click)="createQuizz()">Créer mon quizz</button>
     </div>
   </div>
 </div>

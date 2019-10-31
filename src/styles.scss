@@ -27,10 +27,11 @@ button.white-button {
   margin-bottom: 1em;
   border-radius: 10px;
   cursor:pointer;
+  text-transform: none;
 }
 
 .white-button:hover {
-  background: linear-gradient(41deg, #863bf2, #03da7d);;
+  background: linear-gradient(41deg, #863bf2, #03da7d);
 }
 .white-button:disabled {
   border: #ccc 1px solid;
@@ -87,6 +88,14 @@ button.white-button {
     0%{background-position:82% 0%}
     50%{background-position:19% 100%}
     100%{background-position:82% 0%}
+  }
+
+}
+
+
+@media screen and (max-width: 992px){
+  .container {
+    width: 100% !important;
   }
 
 }

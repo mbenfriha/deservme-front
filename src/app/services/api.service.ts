@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { User } from '../models/user';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import {Quizz} from '../models/quizz';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,9 @@ export class ApiService {
   // Http Options
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
+      'Content-Type': 'application/json',
+    }),
+    withCredentials: true
   }
 
   // Handle API errors
@@ -72,6 +74,24 @@ export class ApiService {
   updateUser(user): Observable<User> {
     return this.http
       .post<User>(this.base_path + 'update', JSON.stringify(user), this.httpOptions)
+      .pipe(
+        retry(0),
+        catchError(this.handleError)
+      );
+  }
+
+  // create quizz
+  createQuizz(quizz): Observable<Quizz> {
+    return this.http
+      .post<Quizz>(this.base_path + 'quizz/create', JSON.stringify(quizz), this.httpOptions)
+      .pipe(
+        retry(0),
+        catchError(this.handleError)
+      );
+  }
+  getAllQuizz(): Observable<Quizz[]> {
+    return this.http
+      .get<Quizz[]>(this.base_path + 'quizz', this.httpOptions)
       .pipe(
         retry(0),
         catchError(this.handleError)

@@ -5,6 +5,7 @@ import {User} from '../models/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {debounceTime} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {Quizz} from '../models/quizz';
 
 @Component({
   selector: 'app-register',
@@ -42,7 +43,7 @@ export class RegisterComponent implements OnInit {
     this.api.getCurrentUser().subscribe((v: User) => {
       localStorage.setItem('user', JSON.stringify(v));
       if (v.username) {
-        this.router.navigate(['/profil']);
+        this.router.navigate(['/discover']);
       } else {
         this.register = true;
       }
@@ -64,11 +65,11 @@ export class RegisterComponent implements OnInit {
     }
 
     // display form values on success
-  /*  this.api.updateUser({username: this.registerForm.value.username}).subscribe((v: User) => {
+    this.api.updateUser({username: this.registerForm.value.username}).subscribe((v: User) => {
       this.step = 2;
     }, (error) => {
       console.log('une erreur est survenue');
-    });*/
+    });
 
     this.step = 2;
   }
@@ -98,6 +99,19 @@ export class RegisterComponent implements OnInit {
 
   usernameChange() {
     this.subject.next();
+  }
+
+  checkQuizzCreate(quizz) {
+    if (quizz) {
+      console.log('quizz created:', quizz);
+    this.step = 3;
+    } else {
+      console.log('erreur');
+    }
+  }
+
+  goToProfile() {
+    this.router.navigate(['/discover']);
   }
 
 }

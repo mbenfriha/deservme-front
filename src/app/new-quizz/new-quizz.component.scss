@@ -1,0 +1,43 @@
+.createQuizz {
+  padding-top: 1em;
+}
+
+:host ::ng-deep .create-quizz {
+  padding: 0em 1em;
+  input {
+    border-bottom: 1px solid white;
+    box-shadow: 0 1px 0 0 #9851f4;
+    color:#863bf2 !important;
+    font-weight: 600;
+  }
+  input:focus {
+    border-bottom: 1px solid #d6d6d6;
+    box-shadow: 0 1px 0 0 #9851f4;
+    color:#03da7d !important;
+    font-weight: 900;
+  }
+  label {
+    background: -webkit-linear-gradient(256deg, #863bf2, #03da7d);
+    background-size: 100% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: AnimationName 10s infinite linear;
+    color:black !important;
+  }
+  button.white-button {
+    color: #9851f4;
+  }
+  button.white-button:hover {
+    color:white !important;
+  }
+
+  .add-question, .add-answer {
+    text-align: center;
+  }
+
+
+  button.white-button:focus {
+    background: -webkit-linear-gradient(256deg, #863bf2, #03da7d);
+    color:white !important;
+  }
+}

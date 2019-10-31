@@ -1,0 +1,52 @@
+nav {
+  background: transparent;
+
+  li {
+    a {
+
+    }
+  }
+
+  .nav-wrapper {
+    a {
+      background: -webkit-linear-gradient(256deg, #863bf2, #03da7d);
+      background-size: 100% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-animation: AnimationName 10s infinite linear;
+    }
+
+    .user {
+      font-size: 18px;
+      padding: 0 15px;
+
+      img {
+        float: left;
+        margin: 15px 8px 0 -12px;
+        height: 32px;
+        width: 32px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+.sidenav-trigger {
+  cursor: pointer;
+}
+
+.header-nav {
+  color: white;
+  text-align:center;
+  height: 85px;
+}
+
+.sidenav {
+  a {
+    background: -webkit-linear-gradient(256deg, #863bf2, #03da7d);
+    background-size: 60% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: AnimationName 10s infinite linear;
+  }
+}
