@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import {Choice, Question, Quizz} from '../models/quizz';
 import {ApiService} from '../services/api.service';
 import { ToastrService } from 'ngx-toastr';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,9 @@ export class CreateQuizzComponent implements OnInit {
 
   @Output() quizzCreated = new EventEmitter<any>();
 
-  constructor(private api: ApiService, private toastr: ToastrService) { }
+  constructor(private api: ApiService,
+              private toastr: ToastrService,
+              private router: Router) { }
 
   ngOnInit() {
     this.quizz = new Quizz;
@@ -38,7 +41,7 @@ export class CreateQuizzComponent implements OnInit {
 
   uncheckAll(q, a) {
     if (!this.quizz.questions[q].choices[a].rep) {
-      this.quizz.questions[q].choices.map(v => v.rep = false);
+      this.quizz.questions[q].choices.map(v => v.rep == false);
       this.quizz.questions[q].choices[a].rep = true;
     }
   }
@@ -78,6 +81,7 @@ export class CreateQuizzComponent implements OnInit {
       this.api.createQuizz(this.quizz).subscribe(v => {
         console.log(v);
         this.quizzCreated.emit(v);
+        this.router.navigate(['/quizz/' + v._id]);
       }, error => {
         console.log(error);
         this.quizzCreated.emit(false);
@@ -104,7 +108,7 @@ export class CreateQuizzComponent implements OnInit {
   }
 
   verifyQuestion(question) {
-    var empty = true;
+    let empty = true;
     question.filter((q) => {
       if (!q.name) {
         empty = false;

@@ -5,6 +5,8 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import {Quizz} from '../models/quizz';
 import {Answer} from '../models/answer';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,7 @@ import {Answer} from '../models/answer';
 export class ApiService {
 
   // API path
-  base_path = 'http://localhost:3000/';
+  base_path = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -37,7 +39,7 @@ export class ApiService {
       // The response body may contain clues as to what went wrong,
       console.error(
         `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+        `body was: ${error.error.message}`);
     }
     // return an observable with a user-facing error message
     return throwError(

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { environment } from '../../environments/environment';
+
 
 @Component({
   selector: 'app-home',
@@ -9,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   modal: boolean;
+  environment = environment;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 

@@ -3,6 +3,7 @@ import {User} from '../models/user';
 import { ActivatedRoute } from '@angular/router';
 declare var jQuery: any;
 
+import { environment } from '../../environments/environment';
 
 
 @Component({
@@ -13,6 +14,8 @@ declare var jQuery: any;
 export class NavComponent implements OnInit {
 
   currentRoute: string;
+  environment = environment;
+
   @Input() currentUser: User;
   constructor(private el: ElementRef,
               private route: ActivatedRoute) { }
@@ -24,7 +27,7 @@ export class NavComponent implements OnInit {
 
   disconnect() {
     localStorage.removeItem('user');
-    window.location.href = 'http://localhost:3000/logout';
+    window.location.href = this.environment.baseUrl + 'logout';
   }
 
 }

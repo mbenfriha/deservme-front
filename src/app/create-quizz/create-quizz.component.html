@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col s12">
       <label for="title">Titre du quizz</label>
-      <input type="text" id="title" name="title" placeholder="titre" [(ngModel)]="quizz.title">
+      <input type="text" id="title" name="title" placeholder="titre" maxlength="80" [(ngModel)]="quizz.title">
     </div>
   </div>
   <div class="questions row z-depth-3" *ngFor="let question of quizz.questions; let i = index;">
@@ -10,14 +10,14 @@
     <div class="row question">
       <div class="col s12 ">
         <label for="question">La question n°{{i+1}}</label>
-        <input type="text" id="question" name="question" placeholder="question" [(ngModel)]="question.name">
+        <input type="text" id="question" name="question" placeholder="question" maxlength="80" [(ngModel)]="question.name">
       </div>
     </div>
     <div class="row answers" >
       <h2>les réponses</h2>
       <div class="col s12 answer {{choice.rep ? 'true-answer': 'false-answer'}}" *ngFor="let choice of question.choices; let j = index">
         <div class="col s8 ">
-          <input type="text" id="answer" name="answer" placeholder="réponse" [(ngModel)]="choice.name">
+          <input type="text" id="answer" name="answer" placeholder="réponse" maxlength="50" [(ngModel)]="choice.name">
         </div>
         <div class="col s2 large-answer">
           <p class="answer-right">
@@ -38,7 +38,7 @@
   </div>
   <div class="row add-question">
     <div class="col s12">
-      <button class="white-button btn" (click)="addQuestion(i)"><i class="material-icons right">add</i> Ajouter une question </button>
+      <button class="white-button btn" (click)="addQuestion()"><i class="material-icons right">add</i> Ajouter une question </button>
     </div>
   </div>
 
