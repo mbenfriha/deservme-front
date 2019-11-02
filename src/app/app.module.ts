@@ -59,7 +59,7 @@ import { MyQuizzComponent } from './my-quizz/my-quizz.component';
     MyQuizzComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'deserveme' }),
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

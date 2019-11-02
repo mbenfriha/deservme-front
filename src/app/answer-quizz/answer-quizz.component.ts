@@ -39,14 +39,10 @@ export class AnswerQuizzComponent implements OnInit {
               private readonly metafrenzyService: MetafrenzyService) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.api.getQuizz(this.id).subscribe((q: Quizz) => {
-      this.metafrenzyService.setOpenGraph({
-        title: 'Deserv.me - ' + q.title,
-        description: 'Crée, répond et partagez des quizz',
-        type: 'website',
-        url: 'https://deserv.me',
-        image: 'https://deserv.me/assets/images/white-logo.png',
-        site_name: 'Deserv.me'
-      });
+        this.metafrenzyService.setLinkTag({
+            property: 'og:title',
+            value: 'Deserv.me - ' + q.title
+        });
       this.exist = true;
     }, err => {
       this.exist = false;
@@ -64,6 +60,10 @@ export class AnswerQuizzComponent implements OnInit {
     }, error => {
       this.alreadyAnswer = false;
       this.api.getQuizz(this.id).subscribe((q: Quizz) => {
+          this.metafrenzyService.setLinkTag({
+              property: 'og:title',
+              value: 'Deserv.me - ' + q.title
+          });
         if (q.user_id == this.currentUser._id) {
           this.exist = true;
           this.quizz = q;

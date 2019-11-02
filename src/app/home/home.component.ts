@@ -18,22 +18,6 @@ export class HomeComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private readonly metafrenzyService: MetafrenzyService) {
-    this.metafrenzyService.setTitle('Deserv.me - Crée ton quizz');
-
-    this.metafrenzyService.setMetaTag('og:title', 'Deserv.me - Crée ton quizz');
-
-    this.metafrenzyService.setLinkTag({
-      rel: 'canonical',
-      href: 'https://deserv.me'
-    });
-    this.metafrenzyService.setOpenGraph({
-      title: 'Deserv.me - Crée ton quizz',
-      description: 'Crée, répond et partagez des quizz',
-      type: 'website',
-      url: 'https://deserv.me',
-      image: 'https://deserv.me/assets/images/white-logo.png',
-      site_name: 'Deserv.me'
-    });
   }
 
   ngOnInit() {

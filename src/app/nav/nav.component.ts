@@ -1,6 +1,8 @@
 import {Component, Input, OnInit, ElementRef} from '@angular/core';
 import {User} from '../models/user';
 import {ActivatedRoute, Router} from '@angular/router';
+
+
 declare var jQuery: any;
 
 import { environment } from '../../environments/environment';

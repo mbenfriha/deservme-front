@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
+import { MetafrenzyService } from 'ngx-metafrenzy';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,22 @@ export class AppComponent implements OnInit {
   currentRoute = '';
 
   constructor(
-    private route: Router) {
+    private route: Router,
+    private readonly metafrenzyService: MetafrenzyService) {
+
+      this.metafrenzyService.setOpenGraph({
+          title: 'Deserv.me - Crée ton quizz',
+          description: 'Crée, répond et partagez des quizz',
+          type: 'website',
+          url: 'https://deserv.me',
+          image: 'https://deserv.me/assets/images/white-logo.png',
+          site_name: 'Deserv.me'
+      });
+      this.metafrenzyService.setMetaTag('fb:app_id', '396653554338782');
+      this.metafrenzyService.setLinkTag({
+          rel: 'canonical',
+          href: 'https://deserv.me'
+      });
   }
   ngOnInit() {
     this.route.events.subscribe((event) => {
