@@ -1,7 +1,7 @@
-<app-header></app-header>
-<div class="container">
+
+<div class="container" *ngIf="!nav">
   <div class="row">
-    <app-nav [currentUser]="currentUser"></app-nav>
+    <app-nav [currentUser]="currentUser" [currentRoute]="currentRoute"></app-nav>
   </div>
 </div>
 <ng-component></ng-component>

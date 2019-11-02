@@ -11,26 +11,26 @@
     <ul id="nav-mobile" class="left hide-on-med-and-down">
       <li><a [ngClass]="{'text-purple': currentRoute=='discover'}" [routerLink]="['/discover']">Découverte</a></li>
       <li><a [ngClass]="{'text-purple': currentRoute=='createQuizz'}"  [routerLink]="['/createQuizz']">Créer un quizz</a></li>
-      <li><a [ngClass]="{'text-purple': currentRoute=='allQuizz'}" [routerLink]="['/allQuizz/'+currentUser._id]">Mes quizz</a></li>
+      <li><a [ngClass]="{'text-purple': currentRoute=='allQuizz/:id'}" [routerLink]="['/allQuizz/'+currentUser._id]">Mes quizz</a></li>
     </ul>
   </div>
 </nav>
 
 <ul class="sidenav" id="mobile-demo">
-  <li class="header-nav background-gradient">
+  <li class="header-nav background-gradient-fixed">
     <div class="row">
-      <div class="col s12 logo">
-        ?
+      <div class="col s12 logo-top">
+        <img routerLink="/"  src="../../assets/images/white-logo.png" alt="logo deserv.me deservme quizz">
       </div>
     </div>
     </li>
   <li><a [ngClass]="{'text-purple': currentRoute=='discover'}" [routerLink]="['/discover']">Découverte</a></li>
   <li><a [ngClass]="{'text-purple': currentRoute=='createQuizz'}"  [routerLink]="['/createQuizz']">Créer un quizz</a></li>
-  <li><a [ngClass]="{'text-purple': currentRoute=='allQuizz'}" [routerLink]="['/allQuizz/'+currentUser?._id]">Mes quizz</a></li>
+  <li><a [ngClass]="{'text-purple': currentRoute=='allQuizz/:id'}" [routerLink]="['/allQuizz/'+currentUser?._id]">Mes quizz</a></li>
   <li>
     <a (click)="disconnect()">Deconnexion</a>
   </li>
-  <li class="grey-text lighten-4 bottom-nav-menu">
-    Deserve.me 2019
+  <li class="grey-text lighten-4 bottom-nav-menu logo">
+    <img routerLink="/"  src="../../assets/images/color-logo.png" alt="logo deserv.me deservme quizz">
   </li>
 </ul>

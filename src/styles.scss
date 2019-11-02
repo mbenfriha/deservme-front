@@ -16,7 +16,6 @@ main {
   font-weight: 900;
   font-size: 43px;
   text-align: center;
-  margin-bottom: 1em;
 }
 
 // white button
@@ -32,7 +31,7 @@ button.white-button {
 }
 
 .white-button:hover {
-  background: #9851f4 !important;
+  background:  var(--color-purple) !important;
 }
 
 .white-button:focus {
@@ -42,7 +41,7 @@ button.white-button {
 
 // purple button
 button.purple-button {
-  background: #9851f4;
+  background:  var(--color-purple);
   color: white;
   font-weight: 700;
   border: 2px solid white;
@@ -54,12 +53,12 @@ button.purple-button {
 
 button.purple-button:hover {
   background: transparent;
-  color: #9851f4;
-  border-color: #9851f4;
+  color:  var(--color-purple);
+  border-color:  var(--color-purple);
 }
 
 button.purple-button:focus {
-  background: #9851f4;
+  background:  var(--color-purple);
   color: white;
   border-color: white;
 }
@@ -68,9 +67,9 @@ button.purple-button:focus {
 
 button.purple-border {
   background: transparent;
-  color: #9851f4;
+  color:  var(--color-purple);
   font-weight: 700;
-  border: 2px solid #9851f4;
+  border: 2px solid  var(--color-purple);
   margin-bottom: 1em;
   border-radius: 10px;
   cursor:pointer;
@@ -79,7 +78,7 @@ button.purple-border {
 
 
 button.purple-border:hover {
-  background: #9851f4;
+  background:  var(--color-purple);
   color: white;
   border-color: white;
 }
@@ -87,15 +86,15 @@ button.purple-border:hover {
 
 button.purple-border:focus {
   background: transparent;
-  color: #9851f4;
-  border-color: #9851f4;
+  color:  var(--color-purple);
+  border-color:  var(--color-purple);
 }
 
 
 
 // green button
 button.green-button {
-  background: #03da7d;
+  background: var(--color-green);
   color: white;
   font-weight: 700;
   border: 2px solid white;
@@ -107,21 +106,21 @@ button.green-button {
 
 button.green-button:hover {
   background: transparent;
-  color: #03da7d;
-  border-color: #03da7d;
+  color: var(--color-green);
+  border-color: var(--color-green);
 }
 
 button.green-button:focus {
-  background: #03da7d;
+  background: var(--color-green);
   color: white;
   border-color: white;
 }
 
 button.green-border {
   background: transparent;
-  color: #03da7d;
+  color: var(--color-green);
   font-weight: 700;
-  border: 2px solid #03da7d;
+  border: 2px solid var(--color-green);
   margin-bottom: 1em;
   border-radius: 10px;
   cursor:pointer;
@@ -130,7 +129,7 @@ button.green-border {
 
 
 button.green-border:hover {
-  background: #03da7d;
+  background: var(--color-green);
   color: white;
   border-color: white;
 }
@@ -138,8 +137,8 @@ button.green-border:hover {
 
 button.green-border:focus {
   background: transparent;
-  color: #03da7d;
-  border-color: #03da7d;
+  color: var(--color-green);
+  border-color: var(--color-green);
 }
 
 
@@ -152,13 +151,18 @@ button.green-border:focus {
 
 .title-page {
   color: white;
-  background: #8442ef;
+  background: var(--color-purple);
   margin-bottom: 0px;
   padding: 15px;
 }
 
+
+.background-gradient-fixed {
+  background: linear-gradient(41deg, var(--color-purple), var(--color-green));
+}
+
 .background-gradient {
-  background: linear-gradient(41deg, #863bf2, #03da7d);
+  background: linear-gradient(41deg,  var(--color-purple), var(--color-green));
   background-size: 400% 400%;
 
   -webkit-animation: headerGradient 8s ease infinite;
@@ -184,7 +188,7 @@ button.green-border:focus {
 }
 
 .background-gradient-invert {
-  background: linear-gradient(41deg, #03da7d, #863bf2);
+  background: linear-gradient(41deg,  var(--color-green),  var(--color-purple));
   background-size: 400% 400%;
 
   -webkit-animation: headerGradient 8s ease infinite;

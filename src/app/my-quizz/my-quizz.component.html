@@ -1,8 +1,6 @@
-<app-profil>
-</app-profil>
 
 <div class="container" *ngIf="quizzs">
-  <div class="row">
+  <div class="row" *ngIf="currentUser._id">
     <h2 class="title-page" *ngIf="currentUser._id == id">Mes quizz</h2>
 
     <ul class="collection" >

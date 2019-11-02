@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../models/user';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../services/api.service';
+import {Quizz} from '../models/quizz';
 
 @Component({
   selector: 'app-profil',
@@ -10,6 +11,9 @@ import {ApiService} from '../services/api.service';
 })
 export class ProfilComponent implements OnInit {
 
+  @Input() nav: Boolean = false;
+  @Input() currentRoute: string;
+
   currentUser: User;
 
   constructor(private api: ApiService,
@@ -17,6 +21,7 @@ export class ProfilComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    console.log(this.nav);
     this.api.getCurrentUser().subscribe((v: User) => {
       if (!localStorage.getItem('user')) {
         localStorage.setItem('user', JSON.stringify(v));

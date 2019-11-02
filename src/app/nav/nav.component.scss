@@ -10,11 +10,10 @@ nav {
   .nav-wrapper {
     padding-right: 10px;
     a {
-      background: -webkit-linear-gradient(256deg, #863bf2, #03da7d);
+      background: -webkit-linear-gradient(256deg, var(--color-purple), var(--color-green));
       background-size: 100% 100%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      -webkit-animation: AnimationName 10s infinite linear;
       cursor: pointer;
     }
 
@@ -40,23 +39,22 @@ nav {
 .header-nav {
   color: white;
   text-align:center;
-  height: 85px;
+  height: 132px;
 }
 
 .sidenav {
   a {
-    background: -webkit-linear-gradient(256deg, #863bf2, #03da7d);
+    background: -webkit-linear-gradient(256deg, var(--color-purple), var(--color-green));
     background-size: 60% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    -webkit-animation: AnimationName 10s infinite linear;
   }
 }
 
 .text-purple {
-  color: #863bf2;
+  color: var(--color-purple);
   font-weight: 900;
-  border-bottom: 2px solid #863bf2;
+  border-bottom: 2px solid  var(--color-purple);
 }
 
 .bottom-nav-menu {
@@ -68,10 +66,24 @@ nav {
 }
 
 #nav-mobile a:hover {
-  border-bottom: 2px solid #03da7d;
+  border-bottom: 2px solid var(--color-green);
 }
 
 .disconnect-button {
-  border-left: 1px solid #863bf2;
+  border-left: 1px solid  var(--color-purple);
   padding-left: 10px;
+}
+
+.logo {
+  img {
+    width: 48px;
+
+  }
+}
+
+.logo-top {
+  img {
+    margin-top:2em;
+    width: 80px;
+  }
 }

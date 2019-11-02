@@ -46,6 +46,7 @@ export class AnswerQuizzComponent implements OnInit {
       this.alreadyAnswer = false;
       this.api.getQuizz(this.id).subscribe((q: Quizz) => {
         if (q.user_id == this.currentUser._id) {
+          this.quizz = q;
           this.myQuizz = true;
           this.api.getAnswerOfQuizz(this.id).subscribe((answers: Answer[]) => {
             this.allAnswer = answers;
@@ -72,6 +73,11 @@ export class AnswerQuizzComponent implements OnInit {
     const total = answer.questions.length;
     let good = 0;
 
+    this.api.getQuizz(this.id).subscribe((q: Quizz) => {
+      this.quizz = q;
+    })
+
+    this.answer = answer;
     answer.questions.map(a => {
       if (a.answer.rep) {
         good++;

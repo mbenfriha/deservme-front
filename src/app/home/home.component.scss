@@ -8,7 +8,7 @@
     background: white;
     span {
 
-      background: -webkit-linear-gradient(256deg, #863bf2, #03da7d);
+      background: -webkit-linear-gradient(256deg, var(--color-purple), var(--color-green));
       background-size: 400% 400%;
 
       -webkit-background-clip: text;
