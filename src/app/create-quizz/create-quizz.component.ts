@@ -41,7 +41,8 @@ export class CreateQuizzComponent implements OnInit {
 
   uncheckAll(q, a) {
     if (!this.quizz.questions[q].choices[a].rep) {
-      this.quizz.questions[q].choices.map(v => v.rep == false);
+      console.log(this.quizz.questions[q].choices[a].rep);
+      this.quizz.questions[q].choices.map(v => v.rep = false);
       this.quizz.questions[q].choices[a].rep = true;
     }
   }
@@ -81,7 +82,6 @@ export class CreateQuizzComponent implements OnInit {
       this.api.createQuizz(this.quizz).subscribe(v => {
         console.log(v);
         this.quizzCreated.emit(v);
-        this.router.navigate(['/quizz/' + v._id]);
       }, error => {
         console.log(error);
         this.quizzCreated.emit(false);

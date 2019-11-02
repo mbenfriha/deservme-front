@@ -7,6 +7,7 @@ export class Quizz {
   avatar_type: string;
   createdAt: string;
   questions: [Question];
+  username: string;
 }
 
 export class Question {

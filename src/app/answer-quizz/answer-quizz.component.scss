@@ -1,64 +1,85 @@
-.title-question {
-  background: -webkit-linear-gradient(256deg, #863bf2, #03da7d);
-  background-size: 20% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-animation: AnimationName 10s infinite linear;
-  color: black !important;
-  font-size: 32px;
-}
 
-button.white-button {
-  color: #9851f4;
-}
-button.white-button:hover {
-  color:white !important;
-}
-
-.add-question, .add-answer {
-  text-align: center;
+.user {
+  margin-bottom: 1em;
+  padding: 1em;
+  img {
+    margin-top: 20px;
+  }
 }
 
 .answer-quizz {
-  padding: 1em 1em;
+  padding: 0em;
   margin-bottom: 2em;
-}
-
-button.white-button:focus {
-  background: -webkit-linear-gradient(256deg, #863bf2, #03da7d);
-  color:white !important;
-}
-.answers {
-  margin-bottom:0em;
-  padding-left: 1em;
-  h2 {
-    font-size: 18px;
+  .title-answer {
+    font-size: 14px;
+    background: #8443ed;
+    margin: 0;
+    padding: 1em;
     color:white;
   }
-  .answer {
-    height: 5em;
-    .white-button {
-      margin: 1em 0em;
-    }
-    .answer-name {
-      border-bottom: 1px solid #863bf2;
-    }
-  }
-  .true-answer {
-    input {
-      border-bottom: 1px solid #00ff00;
-      box-shadow: 0 1px 0 0 #464646;
-    }
+
+  .question {
+    border: 1px solid white;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    margin: 1em 1em;
   }
 
-  .false-answer {
-    input {
-      border-bottom: 1px solid #ff0020;
-      box-shadow: 0 1px 0 0 #464646;
-    }
+  .title-question {
+    font-size: 14px;
+    margin: 0;
+    padding: 1em;
+    color: black;
+    font-size: 12px;
+  }
+  .answer-end {
+    margin: 0;
+    background: #17d77f;
+    padding-top: 1em;
   }
 
+  .answers {
+    margin-bottom:0em;
+    padding-left: 1em;
+
+    [type="radio"]:checked + span:after, [type="radio"].with-gap:checked + span:after {
+      background-color: #863bf2;
+    }
+    [type="radio"]:checked + span:after, [type="radio"].with-gap:checked + span:before, [type="radio"].with-gap:checked + span:after {
+      border: 2px solid #863bf2;
+    }
+    h2 {
+      font-size: 18px;
+      color:black;
+    }
+    .answer {
+      height: 5em;
+      .white-button {
+        margin: 1em 0em;
+      }
+      .answer-name {
+        border-bottom: 1px solid #863bf2;
+      }
+    }
+    .true-answer {
+      input {
+        border-bottom: 1px solid #00ff00;
+        box-shadow: 0 1px 0 0 #464646;
+      }
+    }
+
+    .false-answer {
+      input {
+        border-bottom: 1px solid #ff0020;
+        box-shadow: 0 1px 0 0 #464646;
+      }
+    }
+
+  }
 }
+
+
+
 
 
 .already {
@@ -81,3 +102,14 @@ button.white-button:focus {
   }
 }
 
+@media only screen and (min-width: 993px) {
+  .row .col.offset-l1 { margin-left: 2.333333%; }
+}
+
+@media only screen and (min-width: 993px) {
+  .row .col.l4 { width: 30.9%; margin-left: auto; left: auto; right: auto; }
+}
+
+.collection {
+  margin-top: 0;
+}

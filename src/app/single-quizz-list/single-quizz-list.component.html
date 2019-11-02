@@ -6,7 +6,7 @@
         <span  *ngIf="quizz.answer_count > 0">{{quizz.answer_count}} personnes qui ont participé à ce quizz</span>
         <span  *ngIf="quizz.answer_count < 1">Soit le premier à participer à ce quizz</span>
       </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">
+      <a [routerLink]="['/quizz/'+quizz._id]" class="secondary-content"><i class="material-icons">
         chevron_right
       </i></a>
     </li>

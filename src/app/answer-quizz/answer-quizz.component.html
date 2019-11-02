@@ -1,40 +1,60 @@
 <app-profil>
 </app-profil>
-<div class="container z-depth-3 answer-quizz" *ngIf="quizz && !alreadyAnswer && !myQuizz">
-  <h2>{{quizz.title}}</h2>
+<div class="container " *ngIf="quizz && !alreadyAnswer && !myQuizz">
   <div class="row">
+    <div class="col s12 l4 user z-depth-3">
+      <div class="col s2">
+        <img class="circle" src="https://avatars.io/{{quizz.avatar_type}}/{{quizz.avatar}}" alt="img">
+      </div>
 
-    <ng-container  *ngFor="let q of quizz.questions, let i = index;">
-    <div class="col s12 question row z-depth-3" *ngIf="nbrQ == i" >
-        <div class="title-question col s12 ">{{q.name}} </div>
-
-      <div class="row answers" >
-        <h2>les réponses</h2>
-       <!-- <div class="col s12 answer {{choice.rep ? 'true-answer': 'false-answer'}}" *ngFor="let choice of q.choices; let j = index">
-          <div class="col s8 answer-name">
-            {{choice.name}}
-          </div>
-          <div class="col s2 large-answer">
-            <p class="answer-right">
-              <label>
-                <input (click)="uncheckAll(i, j)" type="checkbox" class="filled-in" />
-                <span></span>
-              </label>
-            </p>
-          </div>
-        </div>-->
-        <p *ngFor="let choice of q.choices; let j = index">
-          <label>
-            <input name="group{{i}}" type="radio" (click)="setAnswer(choice, q)" />
-            <span>{{choice.name}}</span>
-          </label>
+      <div class="col s10">
+        <p>- Ce Quizz a été crée par {{quizz.username}} <br>
+          - Ce quizz contient {{quizz.questions.length}} questions <br>
+          - <span *ngIf="quizz.answer_count < 1">Tu es le premier a participer à ce quizz</span>
+          <span *ngIf="quizz.answer_count > 0">{{quizz.answer_count}} personnes ont participés à ce quizz</span>
         </p>
       </div>
     </div>
-    </ng-container>
-    <button (click)="previewQ()" class="btn white-button left" *ngIf="nbrQ > 0">Précédent</button>
-    <button (click)="nextQ()" class="btn white-button right" *ngIf="nbrQ < quizz.questions.length -1">Suivant</button>
-    <button (click)="validateAnswer()" class="btn white-button right" *ngIf="nbrQ == quizz.questions.length -1">Valider</button>
+
+    <div class="col s12 l8 offset-l1 answer-quizz z-depth-3">
+      <div class="title-answer">{{quizz.title}}</div>
+        <ng-container  *ngFor="let q of quizz.questions, let i = index;">
+          <div class="row question z-depth-3" *ngIf="nbrQ == i" >
+            <div class="title-question col s12 ">{{q.name}} </div>
+
+            <div class="row answers" >
+              <h2>Choisis une réponse :</h2>
+              <!-- <div class="col s12 answer {{choice.rep ? 'true-answer': 'false-answer'}}" *ngFor="let choice of q.choices; let j = index">
+                 <div class="col s8 answer-name">
+                   {{choice.name}}
+                 </div>
+                 <div class="col s2 large-answer">
+                   <p class="answer-right">
+                     <label>
+                       <input (click)="uncheckAll(i, j)" type="checkbox" class="filled-in" />
+                       <span></span>
+                     </label>
+                   </p>
+                 </div>
+               </div>-->
+              <p *ngFor="let choice of q.choices; let j = index">
+                <label>
+                  <input name="group{{i}}" type="radio" (click)="setAnswer(choice, q)" />
+                  <span>{{choice.name}}</span>
+                </label>
+              </p>
+            </div>
+          </div>
+        </ng-container>
+      <div class="row answer-end">
+       <div class="col s12">
+         <button (click)="previewQ()" class="white-button left btn" *ngIf="nbrQ > 0">Précédent</button>
+         <button (click)="nextQ()" class="white-button right btn" *ngIf="nbrQ < quizz.questions.length -1">Suivant</button>
+         <button (click)="validateAnswer()" class="white-button right btn" *ngIf="nbrQ == quizz.questions.length -1">Valider</button>
+       </div>
+      </div>
+
+      </div>
   </div>
 </div>
 
@@ -46,7 +66,7 @@
 </div>
 
 <div class="container" *ngIf="myQuizz && allAnswer">
-  <h2>Résultats :</h2>
+  <h2 class="title-page">Résultats :</h2>
   <ul class="collection" *ngIf="allAnswer.length > 0">
     <li class="collection-item avatar" *ngFor="let answer of allAnswer">
       <img src="https://avatars.io/{{answer.avatar_type}}/{{answer.avatar}}" alt="" class="circle">

@@ -19,9 +19,10 @@ main {
   margin-bottom: 1em;
 }
 
-
+// white button
 button.white-button {
   color: white;
+  font-weight: 700;
   background: transparent;
   border: 2px solid white;
   margin-bottom: 1em;
@@ -31,13 +32,129 @@ button.white-button {
 }
 
 .white-button:hover {
-  background: linear-gradient(41deg, #863bf2, #03da7d);
+  background: #9851f4 !important;
 }
+
+.white-button:focus {
+  background: transparent;
+}
+
+
+// purple button
+button.purple-button {
+  background: #9851f4;
+  color: white;
+  font-weight: 700;
+  border: 2px solid white;
+  margin-bottom: 1em;
+  border-radius: 10px;
+  cursor:pointer;
+  text-transform: none;
+}
+
+button.purple-button:hover {
+  background: transparent;
+  color: #9851f4;
+  border-color: #9851f4;
+}
+
+button.purple-button:focus {
+  background: #9851f4;
+  color: white;
+  border-color: white;
+}
+
+
+
+button.purple-border {
+  background: transparent;
+  color: #9851f4;
+  font-weight: 700;
+  border: 2px solid #9851f4;
+  margin-bottom: 1em;
+  border-radius: 10px;
+  cursor:pointer;
+  text-transform: none;
+}
+
+
+button.purple-border:hover {
+  background: #9851f4;
+  color: white;
+  border-color: white;
+}
+
+
+button.purple-border:focus {
+  background: transparent;
+  color: #9851f4;
+  border-color: #9851f4;
+}
+
+
+
+// green button
+button.green-button {
+  background: #03da7d;
+  color: white;
+  font-weight: 700;
+  border: 2px solid white;
+  margin-bottom: 1em;
+  border-radius: 10px;
+  cursor:pointer;
+  text-transform: none;
+}
+
+button.green-button:hover {
+  background: transparent;
+  color: #03da7d;
+  border-color: #03da7d;
+}
+
+button.green-button:focus {
+  background: #03da7d;
+  color: white;
+  border-color: white;
+}
+
+button.green-border {
+  background: transparent;
+  color: #03da7d;
+  font-weight: 700;
+  border: 2px solid #03da7d;
+  margin-bottom: 1em;
+  border-radius: 10px;
+  cursor:pointer;
+  text-transform: none;
+}
+
+
+button.green-border:hover {
+  background: #03da7d;
+  color: white;
+  border-color: white;
+}
+
+
+button.green-border:focus {
+  background: transparent;
+  color: #03da7d;
+  border-color: #03da7d;
+}
+
+
 .white-button:disabled {
   border: #ccc 1px solid;
   background: transparent !important;
   color: #ccc;
   cursor: initial;
+}
+
+.title-page {
+  color: white;
+  background: #8442ef;
+  margin-bottom: 0px;
+  padding: 15px;
 }
 
 .background-gradient {

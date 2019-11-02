@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-new-quizz',
@@ -8,7 +9,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NewQuizzComponent implements OnInit {
 
-  constructor(private toastr: ToastrService) { }
+  constructor(private toastr: ToastrService,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -16,6 +18,8 @@ export class NewQuizzComponent implements OnInit {
   checkQuizzCreate(quizz) {
     if (quizz) {
       this.toastr.success('Quizz créée avec succès');
+      this.router.navigate(['/quizz/' + quizz._id]);
+
 
     } else {
       this.toastr.error('Une erreur est survenue');

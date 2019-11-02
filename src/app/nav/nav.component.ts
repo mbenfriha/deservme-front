@@ -22,7 +22,8 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     this.currentRoute = this.route.snapshot.url[0].path;
-    jQuery(this.el.nativeElement).find('.sidenav').sidenav();
+    jQuery('.sidenav').sidenav();
+
   }
 
   disconnect() {

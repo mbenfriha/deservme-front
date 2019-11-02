@@ -1,23 +1,25 @@
 <div class="row create-quizz">
-  <div class="row">
+  <div class="row title-quizz">
     <div class="col s12">
-      <label for="title">Titre du quizz</label>
-      <input type="text" id="title" name="title" placeholder="titre" maxlength="80" [(ngModel)]="quizz.title">
+      <input type="text" id="title" name="title" placeholder="Titre du quizz" maxlength="50" [(ngModel)]="quizz.title">
     </div>
   </div>
   <div class="questions row z-depth-3" *ngFor="let question of quizz.questions; let i = index;">
     <button class="white-button right delete-question" (click)="deleteQuestion(i)">X</button>
     <div class="row question">
       <div class="col s12 ">
-        <label for="question">La question n°{{i+1}}</label>
-        <input type="text" id="question" name="question" placeholder="question" maxlength="80" [(ngModel)]="question.name">
+        <input type="text" id="question" name="question" placeholder="Question n°{{i+1}}" maxlength="50" [(ngModel)]="question.name">
       </div>
     </div>
     <div class="row answers" >
       <h2>les réponses</h2>
       <div class="col s12 answer {{choice.rep ? 'true-answer': 'false-answer'}}" *ngFor="let choice of question.choices; let j = index">
-        <div class="col s8 ">
-          <input type="text" id="answer" name="answer" placeholder="réponse" maxlength="50" [(ngModel)]="choice.name">
+
+        <div class="col large-answer">
+          <button class="purple-border " (click)="deleteAnswer(i, j)">X</button>
+        </div>
+        <div class="col s7 l8 ">
+          <input type="text" id="answer" name="answer" placeholder="réponse {{j+1}}" maxlength="40" [(ngModel)]="choice.name">
         </div>
         <div class="col s2 large-answer">
           <p class="answer-right">
@@ -27,23 +29,17 @@
             </label>
           </p>
         </div>
-        <div class="col s2 large-answer">
-          <button class="white-button" (click)="deleteAnswer(i, j)">X</button>
-        </div>
       </div>
     </div>
-    <div class="col s8 add-answer">
-      <button class="white-button btn" (click)="addAnswer(i)"><i class="material-icons right">add</i> Ajouter une réponse </button>
-    </div>
-  </div>
-  <div class="row add-question">
-    <div class="col s12">
-      <button class="white-button btn" (click)="addQuestion()"><i class="material-icons right">add</i> Ajouter une question </button>
+    <div class="col s12 l8 add-answer">
+      <button class="green-border btn" *ngIf="question.choices.length < 4" (click)="addAnswer(i)">Ajouter une réponse </button>
     </div>
   </div>
 
-  <div class="row create-quizz">
+  <div class="row create-quizz create-end">
     <div class="col s12">
+      <button class="white-button left btn" (click)="addQuestion()" *ngIf="quizz.questions.length < 20"> Ajouter une question </button>
+
       <button class="white-button right btn" (click)="createQuizz()">Créer mon quizz</button>
     </div>
   </div>

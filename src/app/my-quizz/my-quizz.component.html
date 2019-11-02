@@ -3,7 +3,7 @@
 
 <div class="container" *ngIf="quizzs">
   <div class="row">
-    <h2 *ngIf="currentUser._id == id">Mes quizz</h2>
+    <h2 class="title-page" *ngIf="currentUser._id == id">Mes quizz</h2>
 
     <ul class="collection" >
       <app-single-quizz-list *ngFor="let quizz of quizzs" [quizz]="quizz"></app-single-quizz-list>
