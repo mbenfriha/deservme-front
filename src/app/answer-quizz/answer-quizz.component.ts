@@ -38,6 +38,11 @@ export class AnswerQuizzComponent implements OnInit {
               private toastr: ToastrService,
               private readonly metafrenzyService: MetafrenzyService) {
     this.id = this.route.snapshot.paramMap.get('id');
+
+      this.metafrenzyService.setLinkTag({
+          property: 'og:title',
+          value: 'Deserv.me - Essayez de répondre à mon quizz',
+      });
     this.api.getQuizz(this.id).subscribe((q: Quizz) => {
         this.metafrenzyService.setLinkTag({
             property: 'og:title',
