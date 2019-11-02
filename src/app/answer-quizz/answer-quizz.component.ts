@@ -6,6 +6,8 @@ import {Answer, Question} from '../models/answer';
 import {User} from '../models/user';
 import {Choice} from '../models/answer';
 import { ToastrService } from 'ngx-toastr';
+import { MetafrenzyService } from 'ngx-metafrenzy';
+
 
 
 
@@ -29,10 +31,27 @@ export class AnswerQuizzComponent implements OnInit {
   finalString: string;
   myQuizz = false;
   allAnswer: Answer[];
+  exist = true;
 
   constructor(private api: ApiService,
               private route: ActivatedRoute,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              private readonly metafrenzyService: MetafrenzyService) {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.api.getQuizz(this.id).subscribe((q: Quizz) => {
+      this.metafrenzyService.setOpenGraph({
+        title: 'Deserv.me - ' + q.title,
+        description: 'Crée, répond et partagez des quizz',
+        type: 'website',
+        url: 'https://deserv.me',
+        image: 'https://deserv.me/assets/images/white-logo.png',
+        site_name: 'Deserv.me'
+      });
+      this.exist = true;
+    }, err => {
+      this.exist = false;
+    });
+  }
 
   ngOnInit() {
     this.nbrQ = 0;
@@ -46,6 +65,7 @@ export class AnswerQuizzComponent implements OnInit {
       this.alreadyAnswer = false;
       this.api.getQuizz(this.id).subscribe((q: Quizz) => {
         if (q.user_id == this.currentUser._id) {
+          this.exist = true;
           this.quizz = q;
           this.myQuizz = true;
           this.api.getAnswerOfQuizz(this.id).subscribe((answers: Answer[]) => {
@@ -61,6 +81,8 @@ export class AnswerQuizzComponent implements OnInit {
           this.answer.avatar_type = this.currentUser.avatar_type;
           this.answer.questions = [new Question()];
         }
+      }, (err) => {
+        this.exist = false;
       });
     });
   }

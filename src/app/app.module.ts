@@ -11,6 +11,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShareButtonsModule } from '@ngx-share/buttons';
+import { MetafrenzyModule } from 'ngx-metafrenzy';
+
 
 
 
@@ -33,6 +35,7 @@ import { DiscoverComponent } from './discover/discover.component';
 import { SingleQuizzListComponent } from './single-quizz-list/single-quizz-list.component';
 import { NewQuizzComponent } from './new-quizz/new-quizz.component';
 import { MyQuizzComponent } from './my-quizz/my-quizz.component';
+
 
 
 @NgModule({
@@ -70,7 +73,9 @@ import { MyQuizzComponent } from './my-quizz/my-quizz.component';
       positionClass: 'toast-top-full-width',
       preventDuplicates: true,
     }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MetafrenzyModule.forRoot(),
+
   ],
   providers: [],
   bootstrap: [AppComponent, FooterComponent]

@@ -1,5 +1,5 @@
 
-<div class="container " *ngIf="quizz && !alreadyAnswer && !myQuizz">
+<div class="container " *ngIf="quizz && !alreadyAnswer && !myQuizz && exist">
 
   <div class="row">
     <div class="col s12 l4 user z-depth-3">
@@ -61,7 +61,7 @@
   </div>
 </div>
 
-<div class="row container" *ngIf="alreadyAnswer && !myQuizz">
+<div class="row container" *ngIf="alreadyAnswer && !myQuizz && exist">
   <div class="title-page">{{quizz.title}}</div>
 
   <div class="col s12  user z-depth-3">
@@ -98,7 +98,7 @@
 </div>
 
 
-<div class="container" *ngIf="myQuizz && allAnswer">
+<div class="container" *ngIf="myQuizz && allAnswer && exist">
   <div class="title-page">{{quizz.title}}</div>
   <ul class="collection" *ngIf="allAnswer.length > 0">
     <li class="collection-item avatar" *ngFor="let answer of allAnswer">
@@ -114,4 +114,11 @@
       error_outline
     </i>
   </div>
+</div>
+
+<div class="empty" *ngIf="!exist">
+  Ce quizz n'existe pas ou a été supprimé <br>
+  <i class="material-icons">
+    error_outline
+  </i>
 </div>
