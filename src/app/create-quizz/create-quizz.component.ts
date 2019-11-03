@@ -19,6 +19,7 @@ export class CreateQuizzComponent implements OnInit {
 
   @Output() quizzCreated = new EventEmitter<any>();
 
+
   constructor(private api: ApiService,
               private toastr: ToastrService,
               private router: Router) { }

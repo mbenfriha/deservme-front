@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, ElementRef, OnChanges, OnInit, SimpleChange} from '@angular/core';
 import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
 import { MetafrenzyService } from 'ngx-metafrenzy';
 
@@ -7,7 +7,7 @@ import { MetafrenzyService } from 'ngx-metafrenzy';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnChanges {
   title = 'deserveme';
   home = true;
   currentRoute = '';
@@ -17,11 +17,11 @@ export class AppComponent implements OnInit {
     private readonly metafrenzyService: MetafrenzyService) {
 
       this.metafrenzyService.setOpenGraph({
-          title: 'Deserv.me - Crée ton quizz',
-          description: 'Crée, répond et partagez des quizz',
+          title: 'Deserv.me - Réponde aux quizz',
+          description: 'Crée, participe et partage des quizz',
           type: 'website',
           url: 'https://deserv.me',
-          image: 'https://deserv.me/assets/images/white-logo.png',
+          image: 'https://deserv.me/assets/images/color-logo.png',
           site_name: 'Deserv.me'
       });
       this.metafrenzyService.setMetaTag('fb:app_id', '396653554338782');
@@ -33,7 +33,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.route.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        if (!this.getDeepestTitle(this.route.routerState.snapshot.root)) {
+        if (!this.getDeepestTitle(this.route.routerState.snapshot.root) ||
+            this.getDeepestTitle(this.route.routerState.snapshot.root) == 'register') {
           this.home = true;
           this.currentRoute = '';
             console.log('home');
@@ -46,9 +47,25 @@ export class AppComponent implements OnInit {
       }
     });
   }
+    ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+        this.route.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+                if (!this.getDeepestTitle(this.route.routerState.snapshot.root) ||
+                    this.getDeepestTitle(this.route.routerState.snapshot.root) == 'register') {
+                    this.home = true;
+                    this.currentRoute = '';
+                    console.log('home');
+                } else {
+                    this.currentRoute = this.getDeepestTitle(this.route.routerState.snapshot.root)
+
+                    this.home = false;
+                    console.log(this.currentRoute);
+                }
+            }
+        });
+    }
 
   getDeepestTitle(routeSnapshot: ActivatedRouteSnapshot) {
-      console.log(routeSnapshot);
     if (routeSnapshot.routeConfig && routeSnapshot.routeConfig.path) {
       return routeSnapshot.routeConfig.path;
     }

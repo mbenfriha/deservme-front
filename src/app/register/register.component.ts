@@ -42,7 +42,9 @@ export class RegisterComponent implements OnInit {
     // check if user is connected and have username ?
     this.api.getCurrentUser().subscribe((v: User) => {
       localStorage.setItem('user', JSON.stringify(v));
-      if (v.username) {
+      if (v.banned) {
+          this.router.navigate(['/'], { queryParams: { banned: true } });
+      } else if (v.username) {
         this.router.navigate(['/discover']);
       } else {
         this.register = true;

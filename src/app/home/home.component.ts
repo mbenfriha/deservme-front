@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MetafrenzyService } from 'ngx-metafrenzy';
-
+import { ToastrService } from 'ngx-toastr';
 
 import { environment } from '../../environments/environment';
 
@@ -17,13 +17,18 @@ export class HomeComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private readonly metafrenzyService: MetafrenzyService) {
+              private readonly metafrenzyService: MetafrenzyService,
+              private toastr: ToastrService,) {
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (params['id']) {
         this.router.navigate(['/register']);
+      }
+      if (params['banned']) {
+          localStorage.removeItem('user');
+          this.toastr.error('Vous avez été bannis');
       }
     });
   }

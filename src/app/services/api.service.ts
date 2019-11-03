@@ -155,4 +155,14 @@ export class ApiService {
       );
   }
 
+    // get anwer by user
+    reportQuizz(quizz_id: string): Observable<Answer> {
+        return this.http
+            .get<Answer>(this.base_path + 'report/' + quizz_id, this.httpOptions)
+            .pipe(
+                retry(0),
+                catchError(this.handleError)
+            );
+    }
+
 }

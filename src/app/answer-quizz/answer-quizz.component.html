@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col s12 l4 user z-depth-3">
       <div class="col s2">
-        <img class="circle" src="https://avatars.io/{{quizz.avatar_type}}/{{quizz.avatar}}" alt="img">
+        <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img">
       </div>
 
       <div class="col s10">
@@ -15,7 +15,7 @@
         </p>
 
       </div>
-      <button class="btn purple-border right col s12">Signaler le quizz
+      <button class="btn purple-border right col s12" (click)="reportQuizz()" [disabled]="report">Signaler le quizz
       </button>
     </div>
 
@@ -66,7 +66,7 @@
 
   <div class="col s12  user z-depth-3">
     <div class="col s2">
-      <img class="circle" src="https://avatars.io/{{quizz.avatar_type}}/{{quizz.avatar}}" alt="img">
+      <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img">
     </div>
 
     <div class="col s10">
@@ -102,7 +102,7 @@
   <div class="title-page">{{quizz.title}}</div>
   <ul class="collection" *ngIf="allAnswer.length > 0">
     <li class="collection-item avatar" *ngFor="let answer of allAnswer">
-      <img src="https://avatars.io/{{answer.avatar_type}}/{{answer.avatar}}" alt="" class="circle">
+      <img src="{{getAvatar(answer.user_id)}}" alt="" class="circle">
       <span class="title">{{answer.username}}</span>
       <p> Score de {{returnResult(answer)}}%<br>
       </p>

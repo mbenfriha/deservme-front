@@ -1,7 +1,6 @@
-<div class="background-gradient row register">
-  <div class="logo col s12" >
-    <span routerLink="/">?</span>
-  </div>
+<app-header>
+
+<div class="background-gradient-fixed row register">
   <div class="col s12 l4 center-align offset-l4" *ngIf="step == 1">
     <h2>Saisis un pseudo</h2>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
@@ -43,3 +42,4 @@
 
   </div>
 </div>
+</app-header>

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../models/user';
 import {Quizz} from '../models/quizz';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-single-quizz-list',
@@ -15,5 +16,10 @@ export class SingleQuizzListComponent implements OnInit {
 
   ngOnInit() {
   }
+
+
+    getAvatar(id) {
+        return environment.baseUrl + 'avatar/' + id + '.jpg';
+    }
 
 }

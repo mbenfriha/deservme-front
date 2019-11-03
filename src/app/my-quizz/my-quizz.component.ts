@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import {ApiService} from '../services/api.service';
 import {Quizz} from '../models/quizz';
 import {User} from '../models/user';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-my-quizz',
@@ -15,9 +17,11 @@ export class MyQuizzComponent implements OnInit {
   quizzs: Quizz[];
   currentUser: User;
   id: string;
+  report = false;
 
   constructor(private api: ApiService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('user'));

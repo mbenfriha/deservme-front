@@ -5,8 +5,10 @@ export class User {
   email: string;
   facebook: FacebookUser;
   twitter: TwitterUser;
+  instagram: InstagramUser;
   avatar: string;
   avatar_type: string;
+  banned: boolean;
 }
 
 class FacebookUser {
@@ -17,6 +19,12 @@ class FacebookUser {
 }
 
 class TwitterUser {
+  id: string;
+  token: string;
+  email: string;
+  name: string;
+}
+class InstagramUser {
   id: string;
   token: string;
   email: string;
