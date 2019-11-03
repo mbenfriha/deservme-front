@@ -1,12 +1,12 @@
 {
-  "name": "MyQuizz",
+    "name": "MyQuizz",
     "short_name": "MyQuizz",
     "theme_color": "#9851f4",
     "background_color": "#03da7d",
     "display": "fullscreen",
     "orientation": "portrait",
     "scope": "/",
-    "start_url": "/"
+    "start_url": "/",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
