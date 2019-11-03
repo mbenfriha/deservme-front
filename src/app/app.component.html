@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <app-header *ngIf="!home" ></app-header>
-<app-profil [nav]="home" (changePage)="checkHome($event)" [currentRoute]="currentRoute">
+<app-profil [nav]="home" [currentRoute]="currentRoute">
 
   <router-outlet></router-outlet>
 </app-profil>

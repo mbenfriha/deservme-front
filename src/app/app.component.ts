@@ -47,23 +47,6 @@ export class AppComponent implements OnInit, OnChanges {
       }
     });
   }
-    ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-        this.route.events.subscribe((event) => {
-            if (event instanceof NavigationEnd) {
-                if (!this.getDeepestTitle(this.route.routerState.snapshot.root) ||
-                    this.getDeepestTitle(this.route.routerState.snapshot.root) == 'register') {
-                    this.home = true;
-                    this.currentRoute = '';
-                    console.log('home');
-                } else {
-                    this.currentRoute = this.getDeepestTitle(this.route.routerState.snapshot.root)
-
-                    this.home = false;
-                    console.log(this.currentRoute);
-                }
-            }
-        });
-    }
 
   getDeepestTitle(routeSnapshot: ActivatedRouteSnapshot) {
     if (routeSnapshot.routeConfig && routeSnapshot.routeConfig.path) {
