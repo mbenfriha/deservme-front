@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
           description: 'Crée, participe et partage des quizz',
           type: 'website',
           url: 'https://myquizzy.com',
-          image: 'https://myquizzy.com/assets/images/color-logo.png',
+          image: 'https://myquizzy.com/assets/images/logomyquizzy.png',
           site_name: 'MyQuizzy'
       });
       this.metafrenzyService.setMetaTag('fb:app_id', '396653554338782');
