@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
     private readonly metafrenzyService: MetafrenzyService) {
 
       this.metafrenzyService.setOpenGraph({
-          title: 'Deserv.me - Réponde aux quizz',
+          title: 'Deserv.me - Viens répondre à mon quizz',
           description: 'Crée, participe et partage des quizz',
           type: 'website',
           url: 'https://deserv.me',

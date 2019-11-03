@@ -25,7 +25,7 @@ export class MyQuizzComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('user'));
-    this.id = this.route.snapshot.paramMap.get('id');
+      this.id = this.route.snapshot.paramMap.get('id');
     this.api.getMyQuizz(this.id).subscribe((q: Quizz[]) => {
       this.quizzs = q;
     });

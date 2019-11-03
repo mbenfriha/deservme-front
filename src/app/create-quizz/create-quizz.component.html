@@ -5,10 +5,10 @@
     </div>
   </div>
   <div class="questions row z-depth-3" *ngFor="let question of quizz.questions; let i = index;">
-    <button class="white-button right delete-question" (click)="deleteQuestion(i)">X</button>
+    <button class="purple-border right delete-question" (click)="deleteQuestion(i)">X</button>
     <div class="row question">
       <div class="col s12 ">
-        <input type="text" id="question" name="question" placeholder="Question n°{{i+1}}" maxlength="50" [(ngModel)]="question.name">
+        <input type="text" id="question" name="question" placeholder="Question n°{{i+1}}" maxlength="90" [(ngModel)]="question.name">
       </div>
     </div>
     <div class="row answers" >
