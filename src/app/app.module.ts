@@ -35,6 +35,8 @@ import { DiscoverComponent } from './discover/discover.component';
 import { SingleQuizzListComponent } from './single-quizz-list/single-quizz-list.component';
 import { NewQuizzComponent } from './new-quizz/new-quizz.component';
 import { MyQuizzComponent } from './my-quizz/my-quizz.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 
@@ -75,6 +77,7 @@ import { MyQuizzComponent } from './my-quizz/my-quizz.component';
     }),
     BrowserAnimationsModule,
     MetafrenzyModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
 
   ],
   providers: [],
