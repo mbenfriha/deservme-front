@@ -45,12 +45,12 @@ export class AnswerQuizzComponent implements OnInit {
 
         this.metafrenzyService.setLinkTag({
             property: 'og:title',
-            value: 'Deserv.me - Essayez de répondre à mon quizz',
+            value: 'myquizzy.com - Essayez de répondre à mon quizz',
         });
         this.api.getQuizz(this.id).subscribe((q: Quizz) => {
             this.metafrenzyService.setLinkTag({
                 property: 'og:title',
-                value: 'Deserv.me - ' + q.title
+                value: 'myquizzy.com - ' + q.title
             });
             this.exist = true;
         }, err => {
@@ -67,7 +67,7 @@ export class AnswerQuizzComponent implements OnInit {
             this.api.getQuizz(this.id).subscribe((q: Quizz) => {
                 this.metafrenzyService.setLinkTag({
                     property: 'og:title',
-                    value: 'Deserv.me - ' + q.title
+                    value: 'myquizzy.com - ' + q.title
                 });
                 this.exist = true;
                 this.quizz = q;
@@ -84,7 +84,7 @@ export class AnswerQuizzComponent implements OnInit {
                 this.api.getQuizz(this.id).subscribe((q: Quizz) => {
                     this.metafrenzyService.setLinkTag({
                         property: 'og:title',
-                        value: 'Deserv.me - ' + q.title
+                        value: 'myquizzy.com - ' + q.title
                     });
                     if (q.user_id == this.currentUser._id) {
                         this.exist = true;

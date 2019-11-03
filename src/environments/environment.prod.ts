@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://api.deserv.me/'
+  baseUrl: 'https://api.myquizzy.com/'
 };

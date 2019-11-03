@@ -8,7 +8,7 @@ import { MetafrenzyService } from 'ngx-metafrenzy';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'deserveme';
+  title = 'MyQuizzy';
   home = true;
   currentRoute = '';
 
@@ -17,17 +17,17 @@ export class AppComponent implements OnInit {
     private readonly metafrenzyService: MetafrenzyService) {
 
       this.metafrenzyService.setOpenGraph({
-          title: 'Deserv.me - Viens répondre à mon quizz',
+          title: 'Myquizzy.com - Viens répondre à mon quizz',
           description: 'Crée, participe et partage des quizz',
           type: 'website',
-          url: 'https://deserv.me',
-          image: 'https://deserv.me/assets/images/color-logo.png',
-          site_name: 'Deserv.me'
+          url: 'https://myquizzy.com',
+          image: 'https://myquizzy.com/assets/images/color-logo.png',
+          site_name: 'MyQuizzy'
       });
       this.metafrenzyService.setMetaTag('fb:app_id', '396653554338782');
       this.metafrenzyService.setLinkTag({
           rel: 'canonical',
-          href: 'https://deserv.me'
+          href: 'https://myquizzy.com'
       });
   }
   ngOnInit() {
