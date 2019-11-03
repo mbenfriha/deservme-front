@@ -7,7 +7,7 @@ import { MetafrenzyService } from 'ngx-metafrenzy';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnChanges {
+export class AppComponent implements OnInit {
   title = 'deserveme';
   home = true;
   currentRoute = '';
