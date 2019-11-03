@@ -1,6 +1,6 @@
 
     <li class="collection-item avatar" [routerLink]="['/quizz/'+quizz._id]">
-      <img src="{{getAvatar(quizz.user_id)}}" alt="" class="circle">
+      <img src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" class="circle">
       <span class="title">{{quizz.title}}</span>
       <p>Le quizz contient {{quizz.questions.length}} questions<br>
         <span  *ngIf="quizz.answer_count > 0">{{quizz.answer_count}} personnes qui ont participé à ce quizz</span>
