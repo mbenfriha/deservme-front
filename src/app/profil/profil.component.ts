@@ -33,8 +33,10 @@ export class ProfilComponent implements OnInit, OnChanges {
       }
     }, error => {
       if (error) {
-          if (this.currentRoute != 'quizz/:id')
-            this.router.navigate(['/']);
+          if (this.currentRoute !== 'quizz/:id' && this.currentRoute !== 'terms' && this.currentRoute !== 'privacy' && this.currentRoute !== 'contact') {
+              this.router.navigate(['/']);
+
+          }
       }
     });
   }
@@ -53,8 +55,11 @@ export class ProfilComponent implements OnInit, OnChanges {
             }
         }, error => {
             if (error) {
-                if (this.currentRoute != 'quizz/:id')
+                if (this.currentRoute !== 'quizz/:id' && this.currentRoute !== 'terms' && this.currentRoute !== 'privacy' && this.currentRoute !== 'contact') {
+                    console.log('noninonon')
                     this.router.navigate(['/']);
+
+                }
             }
         });
     }
