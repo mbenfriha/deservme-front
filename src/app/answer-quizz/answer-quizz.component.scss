@@ -114,3 +114,11 @@
 .collection {
   margin-top: 0;
 }
+
+
+.sidebar-answer, .my-quizz {
+  .allanswers {
+    height: 31em;
+    overflow: scroll;
+  }
+}

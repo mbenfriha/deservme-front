@@ -29,7 +29,7 @@ export class AnswerQuizzComponent implements OnInit {
     currentQuestion: Question;
     indexQuestion: number;
     alreadyAnswer: boolean;
-    result: number;
+    result: string;
     finalString: string;
     myQuizz = false;
     allAnswer: Answer[];
@@ -63,54 +63,50 @@ export class AnswerQuizzComponent implements OnInit {
         this.nbrQ = 0;
         this.id = this.route.snapshot.paramMap.get('id');
         this.currentUser = JSON.parse(localStorage.getItem('user'));
+
         this.api.getAnswerOfQuizz(this.id).subscribe((answers: Answer[]) => {
             this.allAnswer = answers;
             console.log(answers);
         });
-        if (!this.currentUser) {
-            this.isConnected = false;
-            this.api.getQuizz(this.id).subscribe((q: Quizz) => {
-                this.metafrenzyService.setLinkTag({
-                    property: 'og:title',
-                    value: 'myquizzy.com - ' + q.title
-                });
-                this.exist = true;
-                this.quizz = q;
-                this.answer = new Answer;
-                this.answer.questions = [new Question()];
-            }, (err) => {
-                this.exist = false;
+
+        this.api.getQuizz(this.id).subscribe((q: Quizz) => {
+            this.metafrenzyService.setLinkTag({
+                property: 'og:title',
+                value: 'myquizzy.com - ' + q.title
             });
-        } else {
-            this.isConnected = true;
-            this.api.getAnswerByUserId(this.id).subscribe((a: Answer) => {
-                this.calculResult(a, true);
-                this.alreadyAnswer = true;
-            }, error => {
-                this.alreadyAnswer = false;
-                this.api.getQuizz(this.id).subscribe((q: Quizz) => {
-                    this.metafrenzyService.setLinkTag({
-                        property: 'og:title',
-                        value: 'myquizzy.com - ' + q.title
-                    });
-                    if (q.user_id == this.currentUser._id) {
-                        this.exist = true;
-                        this.quizz = q;
+            this.exist = true;
+            this.quizz = q;
+            this.answer = new Answer;
+            this.answer.questions = [new Question()];
+            if (!this.currentUser) {
+                this.isConnected = false;
+                console.log('PAS CONNECTER');
+
+            } else {
+                console.log(this.currentUser);
+                this.isConnected = true;
+                console.log('CONNECTER')
+
+                this.api.getAnswerByUserId(this.id).subscribe((a: Answer) => {
+                    this.calculResult(a, true);
+                    this.alreadyAnswer = true;
+                }, error => {
+                    this.alreadyAnswer = false;
+                    if (this.quizz.user_id == this.currentUser._id) {
                         this.myQuizz = true;
-                    } else {
-                        this.quizz = q;
-                        this.answer = new Answer;
+                    }
+
                         this.answer.user_id = this.currentUser._id;
                         this.answer.username = this.currentUser.username;
                         this.answer.avatar = this.currentUser.avatar;
                         this.answer.avatar_type = this.currentUser.avatar_type;
                         this.answer.questions = [new Question()];
-                    }
-                }, (err) => {
-                    this.exist = false;
+                    console.log(this.currentUser.username, this.answer.username);
                 });
-            });
-        }
+            }
+        }, (err) => {
+            this.exist = false;
+        });
     }
     previewQ() {
         this.nbrQ--;
@@ -135,7 +131,8 @@ export class AnswerQuizzComponent implements OnInit {
                 good++;
             }
         });
-        this.result = 100 * good / total;
+        const number = (100 * good / total).toFixed();
+        this.result = number;
         if (alr) {
             this.finalString = 'Tu as déjà participé à ce quizz, ton résultat :';
         } else {
@@ -153,11 +150,10 @@ export class AnswerQuizzComponent implements OnInit {
             }
         });
 
-        return 100 * good / total;
+        return (100 * good / total).toFixed();
     }
 
     nextQ() {
-        console.log(this.currentAnswer, this.answer.questions[this.nbrQ]);
         if (!this.currentAnswer) {
             this.toastr.error('Vous devez choisir une réponse');
         } else if (!this.currentAnswer.name) {
@@ -195,11 +191,16 @@ export class AnswerQuizzComponent implements OnInit {
             this.answer.questions[this.nbrQ].name = this.currentQuestion.name;
             this.answer.questions[this.nbrQ].question_id = this.currentQuestion._id;
             this.answer.questions[this.nbrQ].answer = this.currentAnswer;
-            this.answer.username = this.username;
+            console.log(this.answer.username, this.username);
 
-            if (!this.username) {
+            if (!this.answer.username) {
+                this.answer.username = this.username;
+            }
+
+            if (!this.answer.username) {
+                console.log(this.answer.username, this.username);
                 this.toastr.error('Vous devez rentrer un pseudo');
-            } else if (!RegExp('^[a-zA-Z0-9]*$').test(this.username)) {
+            } else if (!RegExp('^[a-zA-Z0-9]*$').test(this.answer.username)) {
                 this.toastr.error('Le pseudo ne peut contenir que des chiffres et lettres');
             } else {
                 this.api.createAnswer(this.answer, this.quizz._id).subscribe((answer) => {

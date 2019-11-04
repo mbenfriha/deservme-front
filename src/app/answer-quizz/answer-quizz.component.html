@@ -89,15 +89,15 @@
 
   </div>
 
-  <div  class="already col s12">
+  <div  class="already col s8">
     {{finalString}}<br>
     <span>
     {{result}} %
   </span>
   </div>
-  <div class="col s12 l8 offset-l4 answer-quizz z-depth-3">
-    <ul class="collection" *ngIf="allAnswer.length > 0">
-      <div class="title-page">Les résultats</div>
+  <div class="col s4 answer-quizz sidebar-answer z-depth-3">
+    <div class="title-page">Les résultats</div>
+    <ul class="collection allanswers" *ngIf="allAnswer.length > 0">
       <li class="collection-item avatar" *ngFor="let answer of allAnswer">
         <img src="{{getAvatar(answer.user_id)}}" alt="img avatar {{answer.username}}" class="circle">
         <span class="title">{{answer.username}}</span>
@@ -115,24 +115,38 @@
 </div>
 
 
-<div class="container" *ngIf="myQuizz && allAnswer && exist">
-  <div class="title-page">{{quizz.title}}</div>
-  <ul class="collection" *ngIf="allAnswer.length > 0">
-    <li class="collection-item avatar" *ngFor="let answer of allAnswer">
-      <img src="{{getAvatar(answer.user_id)}}" alt="img avatar {{answer.username}}" class="circle">
-      <span class="title">{{answer.username}}</span>
-      <p> Score de {{returnResult(answer)}}%<br>
-      </p>
-    </li>
-  </ul>
-  <div class="empty" *ngIf="allAnswer.length < 1">
-    Personne n'a encore participer au quizz <br>
-    <i class="material-icons">
-      error_outline
-    </i>
+<div class="container my-quizz" *ngIf="myQuizz && allAnswer && exist">
+  <div class="row">
+    <div class="col s5">
+    <div class="title-page">les résultats</div>
+    <ul class="collection allanswers" *ngIf="allAnswer.length > 0">
+      <li class="collection-item avatar" *ngFor="let answer of allAnswer">
+        <img src="{{getAvatar(answer.user_id)}}" alt="img avatar {{answer.username}}" class="circle">
+        <span class="title">{{answer.username}}</span>
+        <p> Score de {{returnResult(answer)}}%<br>
+        </p>
+      </li>
+    </ul>
+    <div class="empty" *ngIf="allAnswer.length < 1">
+      Personne n'a encore participer au quizz <br>
+      <i class="material-icons">
+        error_outline
+      </i>
+    </div>
+    </div>
+    <div class="col s7">
+      <div class="title-page">{{quizz.title}}</div>
+      <ul class="collection">
+        <li class="collection-item" *ngFor="let q of quizz.questions">
+          <span class="title">{{q.name}} -></span>
+          <ng-container *ngFor="let a of q.choices">
+            <span class="text-green" *ngIf="a.rep == true"> {{a.name}}</span>
+          </ng-container>
+        </li>
+      </ul>
+    </div>
   </div>
 
-  
 </div>
 
 <div class="empty" *ngIf="!exist">

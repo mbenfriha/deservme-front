@@ -68,7 +68,8 @@ export class RegisterComponent implements OnInit {
 
     // display form values on success
     this.api.updateUser({username: this.registerForm.value.username}).subscribe((v: User) => {
-      this.step = 2;
+        localStorage.setItem('user', JSON.stringify(v));
+        this.step = 2;
     }, (error) => {
       console.log('une erreur est survenue');
     });
