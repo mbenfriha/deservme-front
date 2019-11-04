@@ -4,7 +4,7 @@
   <div class="col s12 l4 center-align offset-l4" *ngIf="step == 1">
     <h2>Saisis un pseudo</h2>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <input  type="text" (keyup)="usernameChange()" formControlName="username" class="form-control"/>
+      <input  type="text" (keyup)="usernameChange()" maxlength="16" formControlName="username" class="form-control"/>
       <div class="invalid-feedback col s8">
         <div> <i *ngIf="name.unique" class="fa fa-check-square green-text"></i> <i *ngIf="!name.unique" class="fa fa-minus-circle red-text"></i> Pseudo libre</div>
         <div> <i *ngIf="name.length" class="fa fa-check-square green-text"></i> <i *ngIf="!name.length" class="fa fa-minus-circle red-text"></i> 3 caractères minimum </div>

@@ -95,6 +95,23 @@
     {{result}} %
   </span>
   </div>
+  <div class="col s12 l8 offset-l4 answer-quizz z-depth-3">
+    <ul class="collection" *ngIf="allAnswer.length > 0">
+      <div class="title-page">Les résultats</div>
+      <li class="collection-item avatar" *ngFor="let answer of allAnswer">
+        <img src="{{getAvatar(answer.user_id)}}" alt="img avatar {{answer.username}}" class="circle">
+        <span class="title">{{answer.username}}</span>
+        <p> Score de {{returnResult(answer)}}%<br>
+        </p>
+      </li>
+    </ul>
+    <div class="empty" *ngIf="allAnswer.length < 1">
+      Personne n'a encore participer au quizz <br>
+      <i class="material-icons">
+        error_outline
+      </i>
+    </div>
+  </div>
 </div>
 
 
@@ -114,6 +131,8 @@
       error_outline
     </i>
   </div>
+
+  
 </div>
 
 <div class="empty" *ngIf="!exist">
@@ -123,7 +142,7 @@
   </i>
 </div>
 
-<div class="container " *ngIf="quizz && exist && !isConnected">
+<div class="container " *ngIf="quizz && exist && !isConnected && !alreadyAnswer">
 
   <div class="row">
     <div class="col s12 l4 user z-depth-3">
@@ -143,28 +162,22 @@
 
     <div class="col s12 l8 offset-l1 answer-quizz z-depth-3">
       <div class="title-answer">{{quizz.title}}</div>
+      <div class="row question z-depth-3" *ngIf="nbrQ == quizz.questions.length">
+        <div class="col s12">
+          <div class="title-question col s12 ">Rentre un pseudo </div>
+
+          <input type="text" placeholder="Pseudo" maxlength="16" [(ngModel)]="username">
+        </div>
+      </div>
       <ng-container  *ngFor="let q of quizz.questions, let i = index;">
         <div class="row question z-depth-3" *ngIf="nbrQ == i" >
           <div class="title-question col s12 ">{{q.name}} </div>
 
           <div class="row answers" >
             <h2>Choisis une réponse :</h2>
-            <!-- <div class="col s12 answer {{choice.rep ? 'true-answer': 'false-answer'}}" *ngFor="let choice of q.choices; let j = index">
-               <div class="col s8 answer-name">
-                 {{choice.name}}
-               </div>
-               <div class="col s2 large-answer">
-                 <p class="answer-right">
-                   <label>
-                     <input (click)="uncheckAll(i, j)" type="checkbox" class="filled-in" />
-                     <span></span>
-                   </label>
-                 </p>
-               </div>
-             </div>-->
             <p *ngFor="let choice of q.choices; let j = index">
               <label>
-                <input name="group{{i}}" type="radio" (click)="setAnswer(choice, q)" disabled />
+                <input name="group{{i}}" type="radio" (click)="setAnswer(choice, q)"  [checked]="answer?.questions[i]?.answer?.name == choice.name" />
                 <span>{{choice.name}}</span>
               </label>
             </p>
@@ -173,10 +186,30 @@
       </ng-container>
       <div class="row answer-end">
         <div class="col s12">
-          <button class="white-button left btn" [routerLink]="['/']">Pour répondre tu dois te connecter</button>
+          <button (click)="previewQ()" class="white-button left btn" *ngIf="nbrQ > 0">Précédent</button>
+          <button (click)="nextQ()" class="white-button right btn" *ngIf="nbrQ < quizz.questions.length">Suivant</button>
+          <button (click)="validateAnswer()" class="white-button right btn" *ngIf="nbrQ == quizz.questions.length">Valider</button>
         </div>
       </div>
 
+    </div>
+
+    <div class="col s12 l8 offset-l4 answer-quizz z-depth-3">
+      <ul class="collection" *ngIf="allAnswer.length > 0">
+        <div class="title-page">Les résultats</div>
+        <li class="collection-item avatar" *ngFor="let answer of allAnswer">
+          <img src="{{getAvatar(answer.user_id)}}" alt="img avatar {{answer.username}}" class="circle">
+          <span class="title">{{answer.username}}</span>
+          <p> Score de {{returnResult(answer)}}%<br>
+          </p>
+        </li>
+      </ul>
+      <div class="empty" *ngIf="allAnswer.length < 1">
+        Personne n'a encore participer au quizz <br>
+        <i class="material-icons">
+          error_outline
+        </i>
+      </div>
     </div>
   </div>
 </div>

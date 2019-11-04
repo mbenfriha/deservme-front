@@ -36,6 +36,7 @@ export class AnswerQuizzComponent implements OnInit {
     exist = true;
     report = false;
     isConnected = false;
+    username =  '';
 
     constructor(private api: ApiService,
                 private route: ActivatedRoute,
@@ -62,6 +63,10 @@ export class AnswerQuizzComponent implements OnInit {
         this.nbrQ = 0;
         this.id = this.route.snapshot.paramMap.get('id');
         this.currentUser = JSON.parse(localStorage.getItem('user'));
+        this.api.getAnswerOfQuizz(this.id).subscribe((answers: Answer[]) => {
+            this.allAnswer = answers;
+            console.log(answers);
+        });
         if (!this.currentUser) {
             this.isConnected = false;
             this.api.getQuizz(this.id).subscribe((q: Quizz) => {
@@ -71,6 +76,8 @@ export class AnswerQuizzComponent implements OnInit {
                 });
                 this.exist = true;
                 this.quizz = q;
+                this.answer = new Answer;
+                this.answer.questions = [new Question()];
             }, (err) => {
                 this.exist = false;
             });
@@ -90,10 +97,6 @@ export class AnswerQuizzComponent implements OnInit {
                         this.exist = true;
                         this.quizz = q;
                         this.myQuizz = true;
-                        this.api.getAnswerOfQuizz(this.id).subscribe((answers: Answer[]) => {
-                            this.allAnswer = answers;
-                            console.log(answers);
-                        });
                     } else {
                         this.quizz = q;
                         this.answer = new Answer;
@@ -111,6 +114,10 @@ export class AnswerQuizzComponent implements OnInit {
     }
     previewQ() {
         this.nbrQ--;
+        this.currentQuestion.name = this.answer.questions[this.nbrQ].name;
+        this.currentQuestion._id = this.answer.questions[this.nbrQ].question_id;
+        this.currentAnswer = this.answer.questions[this.nbrQ].answer;
+
     }
 
     calculResult(answer, alr) {
@@ -150,7 +157,10 @@ export class AnswerQuizzComponent implements OnInit {
     }
 
     nextQ() {
+        console.log(this.currentAnswer, this.answer.questions[this.nbrQ]);
         if (!this.currentAnswer) {
+            this.toastr.error('Vous devez choisir une réponse');
+        } else if (!this.currentAnswer.name) {
             this.toastr.error('Vous devez choisir une réponse');
         } else {
             this.answer.questions[this.nbrQ].name = this.currentQuestion.name;
@@ -159,10 +169,11 @@ export class AnswerQuizzComponent implements OnInit {
             this.nbrQ++;
             if (!this.answer.questions[this.nbrQ]) {
                 this.answer.questions.push(new Question());
+                this.currentAnswer = new Choice();
+                this.currentQuestion = new Question();
             }
-            this.currentAnswer = new Choice();
-            this.currentQuestion = new Question();
         }
+
     }
 
     uncheckAll(q, a) {
@@ -178,21 +189,27 @@ export class AnswerQuizzComponent implements OnInit {
     }
 
     validateAnswer() {
-
-
         if (!this.currentAnswer) {
             this.toastr.error('Vous devez choisir une réponse');
         } else {
             this.answer.questions[this.nbrQ].name = this.currentQuestion.name;
             this.answer.questions[this.nbrQ].question_id = this.currentQuestion._id;
             this.answer.questions[this.nbrQ].answer = this.currentAnswer;
-            this.api.createAnswer(this.answer, this.quizz._id).subscribe((answer) => {
-                console.log(answer);
-                this.calculResult(answer, false);
-                this.alreadyAnswer = true;
-            }, (error) => {
-                this.toastr.error('Une erreur est survenue');
-            });
+            this.answer.username = this.username;
+
+            if (!this.username) {
+                this.toastr.error('Vous devez rentrer un pseudo');
+            } else if (!RegExp('^[a-zA-Z0-9]*$').test(this.username)) {
+                this.toastr.error('Le pseudo ne peut contenir que des chiffres et lettres');
+            } else {
+                this.api.createAnswer(this.answer, this.quizz._id).subscribe((answer) => {
+                    console.log(answer);
+                    this.calculResult(answer, false);
+                    this.alreadyAnswer = true;
+                }, (error) => {
+                    this.toastr.error('Une erreur est survenue');
+                });
+            }
         }
     }
 
