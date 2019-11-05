@@ -247,10 +247,10 @@
         <div  class="already col s12">
           {{finalString}}<br>
           <span> {{result}} % </span>
+          <button class="btn green-button" (click)="openModal()">Inscris toi pour créer ton quizz</button>
         </div>
 
         <div class="col s12">
-          <div class="title-page">les résultats</div>
           <app-answers-list [allAnswer]="allAnswer"></app-answers-list>
         </div>
       </ng-container>

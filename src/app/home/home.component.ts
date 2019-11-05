@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  modal: boolean;
+  modal= false;
   environment = environment;
 
   constructor(private route: ActivatedRoute,
@@ -36,16 +36,13 @@ export class HomeComponent implements OnInit {
   }
 
   openModal() {
+    console.log(this.modal);
     if (localStorage.getItem('user')) {
       this.router.navigate(['/register']);
     } else {
       this.modal = true;
 
     }
-  }
-
-  closeModal() {
-    this.modal = false;
   }
 
 }

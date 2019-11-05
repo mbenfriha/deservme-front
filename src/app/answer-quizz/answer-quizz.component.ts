@@ -214,4 +214,8 @@ export class AnswerQuizzComponent implements OnInit {
     getAvatar(id) {
         return environment.baseUrl + 'avatar/' + id + '.jpg';
     }
+
+    openModal() {
+        console.log('ok')
+    }
 }
