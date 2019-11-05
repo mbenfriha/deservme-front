@@ -51,4 +51,4 @@
 </app-header>
 
 
-<app-modal-register [modal]="modal"></app-modal-register>
+<app-modal-register (modalClose)="closeModal()" [modal]="modal"></app-modal-register>

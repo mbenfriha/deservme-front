@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, OnChanges} from '@angular/core';
+import {Component, Input, OnInit, OnChanges, Output, EventEmitter} from '@angular/core';
 
 import { environment } from '../../environments/environment';
 
@@ -11,18 +11,19 @@ import { environment } from '../../environments/environment';
 export class ModalRegisterComponent implements OnInit, OnChanges {
 
     @Input() modal: boolean;
+    @Output() modalClose = new EventEmitter<any>();
     environment = environment;
 
     constructor() { }
 
     ngOnInit() {
     }
-    ngOnChanges()
-    {
-      console.log('caca');
+    ngOnChanges() {
+      console.log(this.modal);
     }
     closeModal() {
         this.modal = false;
+        this.modalClose.emit();
     }
 
 

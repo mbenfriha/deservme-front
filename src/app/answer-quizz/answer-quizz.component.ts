@@ -37,6 +37,7 @@ export class AnswerQuizzComponent implements OnInit {
     report = false;
     isConnected = false;
     username =  '';
+    modal = false;
 
     constructor(private api: ApiService,
                 private route: ActivatedRoute,
@@ -216,6 +217,10 @@ export class AnswerQuizzComponent implements OnInit {
     }
 
     openModal() {
-        console.log('ok')
+            this.modal = true;
     }
+    closeModal() {
+        this.modal = false;
+    }
+
 }
