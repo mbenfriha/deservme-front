@@ -93,7 +93,7 @@ export class RegisterComponent implements OnInit {
       this.name.alpha = false;
     }
 
-    if (RegExp('^[a-zA-Z0-9]*$').test(this.registerForm.value.username)) {
+    if (RegExp('^[A-Za-zÀ-ÖØ-öø-ÿ0-9._-]*$').test(this.registerForm.value.username)) {
       this.name.alpha = true;
     } else {
       this.name.alpha = false;

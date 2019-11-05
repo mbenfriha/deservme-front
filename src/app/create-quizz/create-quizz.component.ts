@@ -3,6 +3,7 @@ import {Choice, Question, Quizz} from '../models/quizz';
 import {ApiService} from '../services/api.service';
 import { ToastrService } from 'ngx-toastr';
 import {Router} from '@angular/router';
+import {MetafrenzyService} from 'ngx-metafrenzy';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class CreateQuizzComponent implements OnInit {
 
   constructor(private api: ApiService,
               private toastr: ToastrService,
-              private router: Router) { }
+              private router: Router,
+              private readonly metafrenzyService: MetafrenzyService) { }
 
   ngOnInit() {
     this.quizz = new Quizz;

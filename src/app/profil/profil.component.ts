@@ -33,7 +33,8 @@ export class ProfilComponent implements OnInit, OnChanges {
       }
     }, error => {
       if (error) {
-          if (this.currentRoute !== 'quizz/:id' && this.currentRoute !== 'terms' && this.currentRoute !== 'privacy' && this.currentRoute !== 'contact') {
+          if (this.currentRoute !== 'quizz/:id' && this.currentRoute !== 'terms' && this.currentRoute !==
+                'privacy' && this.currentRoute !== 'contact') {
               this.router.navigate(['/']);
 
           }
@@ -42,7 +43,6 @@ export class ProfilComponent implements OnInit, OnChanges {
   }
 
     ngOnChanges() {
-        console.log(this.nav);
         this.api.getCurrentUser().subscribe((v: User) => {
             if (!localStorage.getItem('user')) {
                 localStorage.setItem('user', JSON.stringify(v));
@@ -55,7 +55,8 @@ export class ProfilComponent implements OnInit, OnChanges {
             }
         }, error => {
             if (error) {
-                if (this.currentRoute !== 'quizz/:id' && this.currentRoute !== 'terms' && this.currentRoute !== 'privacy' && this.currentRoute !== 'contact') {
+                if (this.currentRoute !== 'quizz/:id' && this.currentRoute !== 'terms'
+                    && this.currentRoute !== 'privacy' && this.currentRoute !== 'contact') {
                     console.log('noninonon')
                     this.router.navigate(['/']);
 

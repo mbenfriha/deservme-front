@@ -8,7 +8,7 @@
       <div class="invalid-feedback col s8">
         <div> <i *ngIf="name.unique" class="fa fa-check-square green-text"></i> <i *ngIf="!name.unique" class="fa fa-minus-circle red-text"></i> Pseudo libre</div>
         <div> <i *ngIf="name.length" class="fa fa-check-square green-text"></i> <i *ngIf="!name.length" class="fa fa-minus-circle red-text"></i> 3 caractères minimum </div>
-        <div> <i *ngIf="name.alpha" class="fa fa-check-square green-text"></i> <i *ngIf="!name.alpha" class="fa fa-minus-circle red-text"></i> Alpha-numérique </div>
+        <div> <i *ngIf="name.alpha" class="fa fa-check-square green-text"></i> <i *ngIf="!name.alpha" class="fa fa-minus-circle red-text"></i> uniquement chiffres, lettres, caractères : "_" "-" "."' autorisé </div>
       </div>
       <div class="col s12">
         <button [disabled]="!name.unique || !name.length || !name.alpha" class="white-button col s4 offset-s4 center-align">Valider</button>

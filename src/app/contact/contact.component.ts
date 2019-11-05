@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import {MetafrenzyService} from 'ngx-metafrenzy';
 
 @Component({
-  selector: 'app-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+    selector: 'app-contact',
+    templateUrl: './contact.component.html',
+    styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+    constructor(
+        private readonly metafrenzyService: MetafrenzyService) {
+        this.metafrenzyService.setAllTitleTags('MyQuizzy - Contact');
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

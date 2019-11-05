@@ -44,15 +44,8 @@ export class AnswerQuizzComponent implements OnInit {
                 private readonly metafrenzyService: MetafrenzyService) {
         this.id = this.route.snapshot.paramMap.get('id');
 
-        this.metafrenzyService.setLinkTag({
-            property: 'og:title',
-            value: 'myquizzy.com - Essayez de répondre à mon quizz',
-        });
         this.api.getQuizz(this.id).subscribe((q: Quizz) => {
-            this.metafrenzyService.setLinkTag({
-                property: 'og:title',
-                value: 'myquizzy.com - ' + q.title
-            });
+            this.metafrenzyService.setAllTitleTags('MyQuizzy - ' + q.title);
             this.exist = true;
         }, err => {
             this.exist = false;
@@ -66,7 +59,6 @@ export class AnswerQuizzComponent implements OnInit {
 
         this.api.getAnswerOfQuizz(this.id).subscribe((answers: Answer[]) => {
             this.allAnswer = answers;
-            console.log(answers);
         });
 
         this.api.getQuizz(this.id).subscribe((q: Quizz) => {
@@ -80,13 +72,10 @@ export class AnswerQuizzComponent implements OnInit {
             this.answer.questions = [new Question()];
             if (!this.currentUser) {
                 this.isConnected = false;
-                console.log('PAS CONNECTER');
 
             } else {
                 console.log(this.currentUser);
                 this.isConnected = true;
-                console.log('CONNECTER')
-
                 this.api.getAnswerByUserId(this.id).subscribe((a: Answer) => {
                     this.calculResult(a, true);
                     this.alreadyAnswer = true;
@@ -101,7 +90,6 @@ export class AnswerQuizzComponent implements OnInit {
                         this.answer.avatar = this.currentUser.avatar;
                         this.answer.avatar_type = this.currentUser.avatar_type;
                         this.answer.questions = [new Question()];
-                    console.log(this.currentUser.username, this.answer.username);
                 });
             }
         }, (err) => {
@@ -117,13 +105,12 @@ export class AnswerQuizzComponent implements OnInit {
     }
 
     calculResult(answer, alr) {
-        console.log(answer);
         const total = answer.questions.length;
         let good = 0;
 
         this.api.getQuizz(this.id).subscribe((q: Quizz) => {
             this.quizz = q;
-        })
+        });
 
         this.answer = answer;
         answer.questions.map(a => {
@@ -191,20 +178,20 @@ export class AnswerQuizzComponent implements OnInit {
             this.answer.questions[this.nbrQ].name = this.currentQuestion.name;
             this.answer.questions[this.nbrQ].question_id = this.currentQuestion._id;
             this.answer.questions[this.nbrQ].answer = this.currentAnswer;
-            console.log(this.answer.username, this.username);
 
-            if (!this.answer.username) {
+            if (!this.isConnected) {
                 this.answer.username = this.username;
             }
 
             if (!this.answer.username) {
-                console.log(this.answer.username, this.username);
                 this.toastr.error('Vous devez rentrer un pseudo');
-            } else if (!RegExp('^[a-zA-Z0-9]*$').test(this.answer.username)) {
-                this.toastr.error('Le pseudo ne peut contenir que des chiffres et lettres');
+            } else if (!RegExp('^[A-Za-zÀ-ÖØ-öø-ÿ0-9._-]*$').test(this.answer.username)) {
+                this.toastr.error('Le pseudo ne peut contenir que des chiffres et lettres et les caractères : "_" "-" "."' );
+            } else if (this.answer.username.length < 3 || this.answer.username.length > 16) {
+                this.toastr.error('Le pseudo doit faire 3 caractères au minimum');
             } else {
+                this.answer.questions.pop();
                 this.api.createAnswer(this.answer, this.quizz._id).subscribe((answer) => {
-                    console.log(answer);
                     this.calculResult(answer, false);
                     this.alreadyAnswer = true;
                 }, (error) => {

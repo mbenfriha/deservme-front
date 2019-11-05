@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import {Router} from '@angular/router';
+import {MetafrenzyService} from 'ngx-metafrenzy';
 
 @Component({
   selector: 'app-new-quizz',
@@ -10,7 +11,10 @@ import {Router} from '@angular/router';
 export class NewQuizzComponent implements OnInit {
 
   constructor(private toastr: ToastrService,
-              private router: Router) { }
+              private router: Router,
+              private readonly metafrenzyService: MetafrenzyService) {
+      this.metafrenzyService.setTitle('MyQuizzy - Créer un quizz');
+  }
 
   ngOnInit() {
   }

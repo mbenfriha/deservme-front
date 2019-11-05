@@ -8,6 +8,9 @@ import './icon';
 
 if (environment.production) {
   enableProdMode();
+    if (window) {
+        window.console.log = function() {};
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

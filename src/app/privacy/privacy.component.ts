@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MetafrenzyService} from 'ngx-metafrenzy';
 
 @Component({
   selector: 'app-privacy',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrivacyComponent implements OnInit {
 
-  constructor() { }
+  constructor(private readonly metafrenzyService: MetafrenzyService) {
+
+      this.metafrenzyService.setAllTitleTags('MyQuizzy - Privacy');
+  }
 
   ngOnInit() {
   }

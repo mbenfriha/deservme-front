@@ -17,9 +17,9 @@ import { MetafrenzyModule } from 'ngx-metafrenzy';
 
 
 import {
-  MatIconModule,
-  MatButtonModule,
-  MatCardModule } from '@angular/material';
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule } from '@angular/material';
 import { HomeComponent } from './home/home.component';
 import { TermsComponent } from './terms/terms.component';
 import { PrivacyComponent } from './privacy/privacy.component';
@@ -30,6 +30,7 @@ import { RegisterComponent } from './register/register.component';
 import { ProfilComponent } from './profil/profil.component';
 import { CreateQuizzComponent } from './create-quizz/create-quizz.component';
 import { AnswerQuizzComponent } from './answer-quizz/answer-quizz.component';
+import { AnswersListComponent } from './answers-list/answers-list.component';
 import { NavComponent } from './nav/nav.component';
 import { DiscoverComponent } from './discover/discover.component';
 import { SingleQuizzListComponent } from './single-quizz-list/single-quizz-list.component';
@@ -41,46 +42,47 @@ import { environment } from '../environments/environment';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    UserRegisterComponent,
-    HomeComponent,
-    TermsComponent,
-    PrivacyComponent,
-    HeaderComponent,
-    FooterComponent,
-    ContactComponent,
-    RegisterComponent,
-    ProfilComponent,
-    CreateQuizzComponent,
-    AnswerQuizzComponent,
-    NavComponent,
-    DiscoverComponent,
-    SingleQuizzListComponent,
-    NewQuizzComponent,
-    MyQuizzComponent
-  ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'deserveme' }),
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    MatGridListModule,
-    ReactiveFormsModule,
-    ShareButtonsModule,
-    ToastrModule.forRoot({
-      positionClass: 'toast-top-full-width',
-      preventDuplicates: true,
-    }),
-    BrowserAnimationsModule,
-    MetafrenzyModule.forRoot(),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    declarations: [
+        AppComponent,
+        UserRegisterComponent,
+        HomeComponent,
+        TermsComponent,
+        PrivacyComponent,
+        HeaderComponent,
+        FooterComponent,
+        ContactComponent,
+        RegisterComponent,
+        ProfilComponent,
+        CreateQuizzComponent,
+        AnswerQuizzComponent,
+        NavComponent,
+        DiscoverComponent,
+        SingleQuizzListComponent,
+        AnswersListComponent,
+        NewQuizzComponent,
+        MyQuizzComponent
+    ],
+    imports: [
+        BrowserModule.withServerTransition({ appId: 'deserveme' }),
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        MatIconModule,
+        MatButtonModule,
+        MatCardModule,
+        MatGridListModule,
+        ReactiveFormsModule,
+        ShareButtonsModule,
+        ToastrModule.forRoot({
+            positionClass: 'toast-top-full-width',
+            preventDuplicates: true,
+        }),
+        BrowserAnimationsModule,
+        MetafrenzyModule.forRoot(),
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
 
-  ],
-  providers: [],
-  bootstrap: [AppComponent, FooterComponent]
+    ],
+    providers: [],
+    bootstrap: [AppComponent, FooterComponent]
 })
 export class AppModule { }

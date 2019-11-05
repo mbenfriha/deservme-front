@@ -1,0 +1,31 @@
+
+<ul class="collection allanswers z-depth-3" *ngIf="allAnswer.length > 0">
+    <div class="title-page">
+        <div class="left">Classement</div>
+        <div class="right buttons">
+        <button class="btn" (click)="sortBy()">
+            <i class="material-icons">
+                sort_by_alpha
+            </i>
+        </button>
+        <button class="right btn" (click)="top()">
+            <i class="material-icons">
+                stars
+            </i>
+        </button>
+        </div>
+    </div>
+    <li class="collection-item avatar" *ngFor="let answer of allAnswer">
+        <img src="{{answer.user_id ? getAvatar(answer.user_id) : '../assets/images/android-icon-144x144.png'}}" alt="img avatar {{answer.username}}" class="circle">
+
+        <span class="title">{{answer.username}}</span>
+        <p> Score de {{returnResult(answer)}}%<br>
+        </p>
+    </li>
+</ul>
+<div class="empty" *ngIf="allAnswer.length < 1">
+    Personne n'a encore participer au quizz <br>
+    <i class="material-icons">
+        error_outline
+    </i>
+</div>

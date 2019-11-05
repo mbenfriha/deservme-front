@@ -18,7 +18,9 @@ export class HomeComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private readonly metafrenzyService: MetafrenzyService,
-              private toastr: ToastrService,) {
+              private toastr: ToastrService) {
+
+      this.metafrenzyService.setAllTitleTags('MyQuizzy - Crée, joue et partage des tas de quizz');
   }
 
   ngOnInit() {

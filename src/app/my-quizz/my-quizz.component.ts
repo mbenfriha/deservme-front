@@ -5,6 +5,7 @@ import {ApiService} from '../services/api.service';
 import {Quizz} from '../models/quizz';
 import {User} from '../models/user';
 import { ToastrService } from 'ngx-toastr';
+import {MetafrenzyService} from 'ngx-metafrenzy';
 
 
 @Component({
@@ -21,7 +22,11 @@ export class MyQuizzComponent implements OnInit {
 
   constructor(private api: ApiService,
               private route: ActivatedRoute,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              private readonly metafrenzyService: MetafrenzyService) {
+      this.metafrenzyService.setAllTitleTags('MyQuizzy - Mes quizz');
+
+  }
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('user'));
