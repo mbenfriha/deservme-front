@@ -134,6 +134,9 @@ export class CreateQuizzComponent implements OnInit {
       }
     }));
     return empty;
+  }
 
+  checkPrivate() {
+    console.log(this.quizz.private);
   }
 }
