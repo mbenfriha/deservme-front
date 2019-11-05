@@ -3,7 +3,7 @@
     <div class="col s12">
       <input type="text" id="title" name="title" placeholder="Titre du quizz" maxlength="50" [(ngModel)]="quizz.title">
       <label>
-        <input type="checkbox" class="filled-in" (change)="quizz.private = !quizz.private" [(ngModel)]="quizz.private" />
+        <input type="checkbox" class="filled-in" (click)="console.log(quizz.private)" (change)="quizz.private = !quizz.private" [(ngModel)]="quizz.private" />
         <span>Privé</span>
       </label>
     </div>

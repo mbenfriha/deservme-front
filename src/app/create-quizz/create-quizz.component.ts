@@ -45,9 +45,19 @@ export class CreateQuizzComponent implements OnInit {
 
   uncheckAll(q, a) {
     if (!this.quizz.questions[q].choices[a].rep) {
-      console.log(this.quizz.questions[q].choices[a].rep);
       this.quizz.questions[q].choices.map(v => v.rep = false);
       this.quizz.questions[q].choices[a].rep = true;
+    } else {
+      console.log(a);
+        if (a == 0) {
+          console.log(0)
+            this.quizz.questions[q].choices.map(v => v.rep = false);
+            this.quizz.questions[q].choices[a + 1].rep = true;
+        } else {
+            this.quizz.questions[q].choices.map(v => v.rep = false);
+
+            this.quizz.questions[q].choices[a - 1].rep = true;
+        }
     }
   }
 
@@ -77,7 +87,7 @@ export class CreateQuizzComponent implements OnInit {
       this.toastr.error('Vérifiez qu\'aucune questions/réponses n\'est vide');
 
     } else if (this.quizz.questions.length < 1) {
-      this.toastr.error('Votre quizz doit comporter au moin une question');
+      this.toastr.error('Votre quizz doit comporter au moins une question');
 
     } else if (!this.quizz.title) {
       this.toastr.error('Vous devez donner un titre à votre quizz');
