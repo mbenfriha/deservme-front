@@ -14,6 +14,8 @@ export class NewQuizzComponent implements OnInit {
               private router: Router,
               private readonly metafrenzyService: MetafrenzyService) {
       this.metafrenzyService.setTitle('MyQuizzy - Créer un quizz');
+      this.metafrenzyService.setAllDescriptionTags('Crée un quizz sur toi, le cinema, le foot, ton chat... ');
+
   }
 
   ngOnInit() {

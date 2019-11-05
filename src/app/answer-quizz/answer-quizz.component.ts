@@ -47,6 +47,7 @@ export class AnswerQuizzComponent implements OnInit {
 
         this.api.getQuizz(this.id).subscribe((q: Quizz) => {
             this.metafrenzyService.setAllTitleTags('MyQuizzy - ' + q.title);
+            this.metafrenzyService.setAllDescriptionTags('Viens répondre au quizz de ' + q.username);
             this.exist = true;
         }, err => {
             this.exist = false;
@@ -63,10 +64,6 @@ export class AnswerQuizzComponent implements OnInit {
         });
 
         this.api.getQuizz(this.id).subscribe((q: Quizz) => {
-            this.metafrenzyService.setLinkTag({
-                property: 'og:title',
-                value: 'myquizzy.com - ' + q.title
-            });
             this.exist = true;
             this.quizz = q;
             this.answer = new Answer;
@@ -119,7 +116,7 @@ export class AnswerQuizzComponent implements OnInit {
                 good++;
             }
         });
-        const number = (100 * good / total).toFixed();
+        let number = (100 * good / total).toFixed();
         this.result = number;
         if (alr) {
             this.finalString = 'Tu as déjà participé à ce quizz, ton résultat :';
@@ -191,10 +188,15 @@ export class AnswerQuizzComponent implements OnInit {
             } else if (this.answer.username.length < 3 || this.answer.username.length > 16) {
                 this.toastr.error('Le pseudo doit faire 3 caractères au minimum');
             } else {
-                this.answer.questions.pop();
+                if (!this.isConnected) {
+                    this.answer.questions.pop();
+                }
                 this.api.createAnswer(this.answer, this.quizz._id).subscribe((answer) => {
                     this.calculResult(answer, false);
                     this.alreadyAnswer = true;
+                    this.api.getAnswerOfQuizz(this.id).subscribe((answers: Answer[]) => {
+                        this.allAnswer = answers;
+                    });
                 }, (error) => {
                     this.toastr.error('Une erreur est survenue');
                 });

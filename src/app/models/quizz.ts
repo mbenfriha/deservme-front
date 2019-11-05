@@ -8,6 +8,7 @@ export class Quizz {
   createdAt: string;
   questions: [Question];
   username: string;
+  private: boolean;
 }
 
 export class Question {

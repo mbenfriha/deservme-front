@@ -11,6 +11,8 @@ export class PrivacyComponent implements OnInit {
   constructor(private readonly metafrenzyService: MetafrenzyService) {
 
       this.metafrenzyService.setAllTitleTags('MyQuizzy - Privacy');
+      this.metafrenzyService.setAllDescriptionTags('Privacy de MyQuizzy');
+
   }
 
   ngOnInit() {

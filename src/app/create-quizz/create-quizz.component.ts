@@ -29,6 +29,7 @@ export class CreateQuizzComponent implements OnInit {
   ngOnInit() {
     this.quizz = new Quizz;
     this.quizz.title = '';
+    this.quizz.private = false;
     this.question = new Question;
     this.question.name = '';
     this.answers = [new Choice, new Choice] ;

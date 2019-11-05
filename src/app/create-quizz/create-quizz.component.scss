@@ -2,8 +2,28 @@
   background: white;
   .title-quizz {
     background: var(--color-purple);
+
+    [type="checkbox"].filled-in:checked + span:not(.lever):after {
+
+      border: 2px solid white;
+      background-color: var(--color-green);
+    }
+
+    [type="checkbox"].filled-in:not(:checked) + span:not(.lever):after {
+
+      border-color: white;
+    }
     input {
       color:white;
+      width:80%;
+    }
+    label {
+      float: right;
+      margin-top: 10px;
+    }
+    span {
+      padding-left: 25px;
+      color: white;
     }
     margin: 0;
     input:focus {

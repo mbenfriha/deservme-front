@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-  <ng-container *ngIf="exist">
+  <ng-container *ngIf="exist && quizz">
     <ng-container *ngIf="isConnected">
       <ng-container *ngIf="myQuizz">
         <div class="col s12 l4 user z-depth-3">
@@ -12,8 +12,9 @@
           <div class="col s10">
             <p>
               - Ce quizz contient {{quizz.questions.length}} questions <br>
-              - <span *ngIf="quizz.answer_count < 1">Tu es le premier a participer à ce quizz</span>
-              <span *ngIf="quizz.answer_count > 0">{{quizz.answer_count}} personnes ont participés à ce quizz</span>
+              - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
+              <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
+              <span *ngIf="quizz?.answer_count > 1">{{quizz.answer_count}} ont participés à ce quizz</span>
             </p>
 
             <share-buttons class="right" [theme]="'default'"
@@ -55,8 +56,9 @@
             <div class="col s10">
               <p>- Ce Quizz a été crée par {{quizz.username}} <br>
                 - Ce quizz contient {{quizz.questions.length}} questions <br>
-                - <span *ngIf="quizz.answer_count < 1">Tu es le premier a participer à ce quizz</span>
-                <span *ngIf="quizz.answer_count > 0">{{quizz.answer_count}} personnes ont participés à ce quizz</span>
+                - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
+                <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
+                <span *ngIf="quizz?.answer_count > 1">{{quizz.answer_count}} ont participés à ce quizz</span>
               </p>
 
               <share-buttons class="right" [theme]="'default'"
@@ -99,8 +101,8 @@
             <div class="row answer-end">
               <div class="col s12">
                 <button (click)="previewQ()" class="white-button left btn" *ngIf="nbrQ > 0">Précédent</button>
-                <button (click)="nextQ()" class="white-button right btn" *ngIf="nbrQ < quizz.questions.length">Suivant</button>
-                <button (click)="validateAnswer()" class="white-button right btn" *ngIf="nbrQ == quizz.questions.length">Valider</button>
+                <button (click)="nextQ()" class="white-button right btn" *ngIf="nbrQ < quizz.questions.length - 1 ">Suivant</button>
+                <button (click)="validateAnswer()" class="white-button right btn" *ngIf="nbrQ == quizz.questions.length - 1 ">Valider</button>
               </div>
             </div>
 
@@ -122,8 +124,9 @@
             <div class="col s10">
               <p>- Ce Quizz a été crée par {{quizz.username}} <br>
                 - Ce quizz contient {{answer.questions.length}} questions <br>
-                - <span *ngIf="quizz.answer_count == 1">Tu es le premier à avoir participer à ce quizz</span>
-                <span *ngIf="quizz.answer_count > 1">{{quizz.answer_count}} personnes ont participés à ce quizz</span>
+                - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
+                <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
+                <span *ngIf="quizz?.answer_count > 1">{{quizz.answer_count}} ont participés à ce quizz</span>
               </p>
               <share-buttons class="right" [theme]="'default'"
                              [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"
@@ -161,8 +164,9 @@
           <div class="col s10">
             <p>- Ce Quizz a été crée par {{quizz.username}} <br>
               - Ce quizz contient {{quizz.questions.length}} questions <br>
-              - <span *ngIf="quizz.answer_count < 1">Tu es le premier a participer à ce quizz</span>
-              <span *ngIf="quizz.answer_count > 0">{{quizz.answer_count}} personnes ont participés à ce quizz</span>
+              - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
+              <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
+              <span *ngIf="quizz?.answer_count > 1">{{quizz.answer_count}} ont participés à ce quizz</span>
             </p>
 
             <share-buttons class="right" [theme]="'default'"
@@ -227,8 +231,9 @@
           <div class="col s10">
             <p>- Ce Quizz a été crée par {{quizz.username}} <br>
               - Ce quizz contient {{answer.questions.length}} questions <br>
-              - <span *ngIf="quizz.answer_count == 1">Tu es le premier à avoir participer à ce quizz</span>
-              <span *ngIf="quizz.answer_count > 1">{{quizz.answer_count}} personnes ont participés à ce quizz</span>
+              - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
+              <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
+              <span *ngIf="quizz?.answer_count > 1">{{quizz.answer_count}} ont participés à ce quizz</span>
             </p>
             <share-buttons class="right" [theme]="'default'"
                            [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"

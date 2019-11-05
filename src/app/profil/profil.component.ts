@@ -21,11 +21,8 @@ export class ProfilComponent implements OnInit, OnChanges {
               private router: Router) { }
 
   ngOnInit() {
-    console.log(this.nav);
     this.api.getCurrentUser().subscribe((v: User) => {
-      if (!localStorage.getItem('user')) {
         localStorage.setItem('user', JSON.stringify(v));
-      }
       if (!v.username) {
         this.router.navigate(['/register']);
       } else {

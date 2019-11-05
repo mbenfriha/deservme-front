@@ -25,6 +25,8 @@ export class MyQuizzComponent implements OnInit {
               private toastr: ToastrService,
               private readonly metafrenzyService: MetafrenzyService) {
       this.metafrenzyService.setAllTitleTags('MyQuizzy - Mes quizz');
+      this.metafrenzyService.setAllDescriptionTags('Liste de tes quizz');
+
 
   }
 

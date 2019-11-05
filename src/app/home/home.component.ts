@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
               private toastr: ToastrService) {
 
       this.metafrenzyService.setAllTitleTags('MyQuizzy - Crée, joue et partage des tas de quizz');
+      this.metafrenzyService.setAllDescriptionTags('Crée, participe et partage des quizz avec tes amis');
+
   }
 
   ngOnInit() {

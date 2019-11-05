@@ -15,6 +15,8 @@ export class DiscoverComponent implements OnInit {
   constructor(private api: ApiService,
               private readonly metafrenzyService: MetafrenzyService) {
       this.metafrenzyService.setAllTitleTags('MyQuizzy - Découvre les quizz de la semaine');
+      this.metafrenzyService.setAllDescriptionTags('Découvre tous les meilleurs quizz crée cette semaine');
+
   }
 
   ngOnInit() {

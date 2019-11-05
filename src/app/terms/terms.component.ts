@@ -11,6 +11,8 @@ export class TermsComponent implements OnInit {
   constructor(private readonly metafrenzyService: MetafrenzyService) {
 
       this.metafrenzyService.setAllTitleTags('MyQuizzy - Conditions Générales Utilisations');
+      this.metafrenzyService.setAllDescriptionTags('Les conditions de MyQuizzy');
+
   }
 
   ngOnInit() {
