@@ -1,16 +1,19 @@
 
-<div class="container" *ngIf="quizzs">
-  <div class="row" *ngIf="currentUser._id">
-    <h2 class="title-page" *ngIf="currentUser._id == id">Mes quizz</h2>
 
-    <ul class="collection" >
-      <app-single-quizz-list *ngFor="let quizz of quizzs" [quizz]="quizz"></app-single-quizz-list>
-    </ul>
-    <div class="empty" *ngIf="quizzs.length < 1">
-      Aucun quizz pour le moment <br>
-      <i class="material-icons">
-        error_outline
-      </i>
+<div class="container" *ngIf="quizzs">
+  <div class="row">
+    <div class="col s12 l12 ">
+      <div class="title-page" >mes quizz</div>
+
+      <ul class="collection" >
+        <app-single-quizz-list *ngFor="let quizz of quizzs" [quizz]="quizz"></app-single-quizz-list>
+      </ul>
+      <div class="empty" *ngIf="quizzs.length < 1">
+        Aucun quizz pour le moment <br>
+        <i class="material-icons">
+          error_outline
+        </i>
+      </div>
     </div>
   </div>
 </div>

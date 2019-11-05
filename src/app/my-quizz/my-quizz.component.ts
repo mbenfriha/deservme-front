@@ -19,6 +19,7 @@ export class MyQuizzComponent implements OnInit {
   currentUser: User;
   id: string;
   report = false;
+  myQuizz = false;
 
   constructor(private api: ApiService,
               private route: ActivatedRoute,
@@ -26,13 +27,16 @@ export class MyQuizzComponent implements OnInit {
               private readonly metafrenzyService: MetafrenzyService) {
       this.metafrenzyService.setAllTitleTags('MyQuizzy - Mes quizz');
       this.metafrenzyService.setAllDescriptionTags('Liste de tes quizz');
-
-
   }
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('user'));
       this.id = this.route.snapshot.paramMap.get('id');
+
+      if (this.id == this.currentUser._id) {
+          this.myQuizz = true;
+      }
+
     this.api.getMyQuizz(this.id).subscribe((q: Quizz[]) => {
       this.quizzs = q;
     });
