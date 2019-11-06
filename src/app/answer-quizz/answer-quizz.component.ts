@@ -8,6 +8,8 @@ import {Choice} from '../models/answer';
 import { ToastrService } from 'ngx-toastr';
 import { MetafrenzyService } from 'ngx-metafrenzy';
 import { environment } from '../../environments/environment';
+import {Subject} from 'rxjs';
+import {debounceTime, takeUntil} from 'rxjs/operators';
 
 
 
@@ -38,6 +40,9 @@ export class AnswerQuizzComponent implements OnInit {
     isConnected = false;
     username =  '';
     modal = false;
+    modalDelete = false;
+    subjectState: Subject<any> = new Subject();
+    subjectReport: Subject<any> = new Subject();
 
     constructor(private api: ApiService,
                 private route: ActivatedRoute,
@@ -81,6 +86,20 @@ export class AnswerQuizzComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        // create subject for debouncetime, anti spam backend
+        this.subjectState
+            .pipe(debounceTime(500))
+            .subscribe(() => {
+                    this.changeState();
+                }
+            );
+        this.subjectReport
+            .pipe(debounceTime(500))
+            .subscribe(() => {
+                    this.reportQuizz();
+                }
+            );
         this.nbrQ = 0;
         this.id = this.route.snapshot.paramMap.get('id');
         this.currentUser = JSON.parse(localStorage.getItem('user'));
@@ -112,7 +131,7 @@ export class AnswerQuizzComponent implements OnInit {
                 good++;
             }
         });
-        let number = (100 * good / total).toFixed();
+        const number = (100 * good / total).toFixed();
         this.result = number;
         if (alr) {
             this.finalString = 'Tu as déjà participé à ce quizz, ton résultat :';
@@ -207,6 +226,7 @@ export class AnswerQuizzComponent implements OnInit {
             this.report = true;
         }, (err) => {
             console.log(err);
+            this.report = true;
             this.toastr.error(err.message);
         });
     }
@@ -215,10 +235,25 @@ export class AnswerQuizzComponent implements OnInit {
         if (this.quizz.user_id == this.currentUser._id) {
             this.api.changeStateQuizz(this.id).subscribe((q: Quizz) => {
                 this.quizz = q;
+                this.toastr.success('ton quizz est maintenant en ' + (this.quizz.private ? 'privé' : 'public'));
             }, (err) => this.toastr.error('Une erreur est survenue'));
         }
     }
 
+    openModalDelete() {
+        this.modalDelete = true;
+    }
+    closeModalDelete() {
+        this.modalDelete = false;
+    }
+
+    sendReport() {
+        this.subjectReport.next();
+    }
+
+    setState() {
+        this.subjectState.next();
+    }
     deleteQuizz() {
         if (this.quizz.user_id == this.currentUser._id) {
             this.api.deleteQuizz(this.id).subscribe((q: Quizz) => {

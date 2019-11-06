@@ -31,8 +31,8 @@
 
           </div>
           <div class="col s12">
-            <button class="purple-border col s12 btn" (click)="changeState()">Rendre mon quizz <span color="red-text">{{quizz.private ? "public" : "privé"}}</span></button>
-            <button class="purple-border col s12 btn" (click)="deleteQuizz()">Supprimer mon quizz</button>
+            <button class="purple-border col s12 btn" (click)="setState()">Rendre mon quizz <span color="red-text">{{quizz.private ? "public" : "privé"}}</span></button>
+            <button class="purple-border col s12 btn" (click)="openModalDelete()">Supprimer mon quizz</button>
           </div>
 
         </div>
@@ -79,7 +79,7 @@
               </share-buttons>
             </div>
 
-            <button class="btn purple-border right col s12" (click)="reportQuizz()" [disabled]="report">
+            <button class="btn purple-border right col s12" (click)="sendReport()" [disabled]="report">
               Signaler le quizz
             </button>
 
@@ -150,7 +150,7 @@
               </share-buttons>
             </div>
 
-            <button class="btn purple-border right col s12" (click)="reportQuizz()" [disabled]="report">
+            <button class="btn purple-border right col s12" (click)="sendReport()" [disabled]="report">
               Signaler le quizz
             </button>
           </div>
@@ -193,7 +193,7 @@
 
             </share-buttons>
 
-            <button class="btn purple-border right col s12" (click)="reportQuizz()" [disabled]="report">
+            <button class="btn purple-border right col s12" (click)="sendReport()" [disabled]="report">
               Signaler le quizz
             </button>
           </div>
@@ -261,7 +261,7 @@
 
             </share-buttons>
           </div>
-          <button class="btn purple-border right col s12" (click)="reportQuizz()" [disabled]="report">
+          <button class="btn purple-border right col s12" (click)="sendReport()" [disabled]="report">
             Signaler le quizz
           </button>
 
@@ -292,3 +292,16 @@
 </div>
 
 <app-modal-register (modalClose)="closeModal()" [modal]="modal"></app-modal-register>
+
+<div class="overlay" (click)="closeModalDelete()" *ngIf="modalDelete"></div>
+
+<div class="modal-connexion modal" *ngIf="modalDelete">
+  <div class="modal-content row">
+    <h4>Est tu sur de vouloir supprimer ton quizz ?</h4>
+
+    <div class="col s12">
+      <button class="btn col s5 waves-effect waves-light green" (click)="deleteQuizz()">Oui</button>
+      <button class="btn col s5 offset-s2 waves-effect waves-light red" (click)="closeModalDelete()">Annuler</button>
+    </div>
+  </div>
+</div>
