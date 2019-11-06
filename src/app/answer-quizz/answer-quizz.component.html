@@ -50,11 +50,11 @@
         <ng-container *ngIf="!alreadyAnswer">
           <div class="col s12 l4 user z-depth-3">
             <div class="col s2">
-              <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}">
+              <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" [routerLink]="['/profil/'+quizz.user_id]">
             </div>
 
             <div class="col s10">
-              <p>- Ce Quizz a été crée par {{quizz.username}} <br>
+              <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}}</a> <br>
                 - Ce quizz contient {{quizz.questions.length}} questions <br>
                 - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
                 <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>

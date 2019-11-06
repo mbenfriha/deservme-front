@@ -18,7 +18,7 @@
     <li class="collection-item avatar" *ngFor="let answer of allAnswer">
 
         <img *ngIf="answer.user_id" src="{{getAvatar(answer.user_id)}}" alt="img avatar {{answer.username}}" [routerLink]="['/profil/'+answer.user_id]" class="circle">
-        <img *ngIf="!answer.user_id" src="{{'../assets/images/android-icon-144x144.png'" alt="img avatar {{answer.username}}" class="circle">
+        <img *ngIf="!answer.user_id" src="'../assets/images/android-icon-144x144.png'" alt="img avatar {{answer.username}}" class="circle">
 
         <span class="title">{{answer.username}}</span>
         <p> Score de {{returnResult(answer)}}%<br>
