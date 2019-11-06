@@ -55,7 +55,6 @@ export class ProfilComponent implements OnInit, OnChanges {
                 if (this.currentRoute !== 'quizz/:id' && this.currentRoute !== 'terms'
                     && this.currentRoute !== 'privacy' && this.currentRoute !== 'contact'
                     && this.currentRoute !== 'profil/:id') {
-                    console.log('noninonon')
                     this.router.navigate(['/']);
                 }
             }

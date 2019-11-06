@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Quizz} from '../models/quizz';
 import {ApiService} from '../services/api.service';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Answer, Question} from '../models/answer';
 import {User} from '../models/user';
 import {Choice} from '../models/answer';
@@ -42,28 +42,13 @@ export class AnswerQuizzComponent implements OnInit {
     constructor(private api: ApiService,
                 private route: ActivatedRoute,
                 private toastr: ToastrService,
+                private router: Router,
                 private readonly metafrenzyService: MetafrenzyService) {
         this.id = this.route.snapshot.paramMap.get('id');
 
         this.api.getQuizz(this.id).subscribe((q: Quizz) => {
             this.metafrenzyService.setAllTitleTags('MyQuizzy - ' + q.title);
             this.metafrenzyService.setAllDescriptionTags('Viens répondre au quizz de ' + q.username);
-            this.exist = true;
-        }, err => {
-            this.exist = false;
-        });
-    }
-
-    ngOnInit() {
-        this.nbrQ = 0;
-        this.id = this.route.snapshot.paramMap.get('id');
-        this.currentUser = JSON.parse(localStorage.getItem('user'));
-
-        this.api.getAnswerOfQuizz(this.id).subscribe((answers: Answer[]) => {
-            this.allAnswer = answers;
-        });
-
-        this.api.getQuizz(this.id).subscribe((q: Quizz) => {
             this.exist = true;
             this.quizz = q;
             this.answer = new Answer;
@@ -83,16 +68,27 @@ export class AnswerQuizzComponent implements OnInit {
                         this.myQuizz = true;
                     }
 
-                        this.answer.user_id = this.currentUser._id;
-                        this.answer.username = this.currentUser.username;
-                        this.answer.avatar = this.currentUser.avatar;
-                        this.answer.avatar_type = this.currentUser.avatar_type;
-                        this.answer.questions = [new Question()];
+                    this.answer.user_id = this.currentUser._id;
+                    this.answer.username = this.currentUser.username;
+                    this.answer.avatar = this.currentUser.avatar;
+                    this.answer.avatar_type = this.currentUser.avatar_type;
+                    this.answer.questions = [new Question()];
                 });
             }
-        }, (err) => {
+        }, err => {
             this.exist = false;
         });
+    }
+
+    ngOnInit() {
+        this.nbrQ = 0;
+        this.id = this.route.snapshot.paramMap.get('id');
+        this.currentUser = JSON.parse(localStorage.getItem('user'));
+
+        this.api.getAnswerOfQuizz(this.id).subscribe((answers: Answer[]) => {
+            this.allAnswer = answers;
+        });
+
     }
     previewQ() {
         this.nbrQ--;
@@ -213,6 +209,22 @@ export class AnswerQuizzComponent implements OnInit {
             console.log(err);
             this.toastr.error(err.message);
         });
+    }
+
+    changeState() {
+        if (this.quizz.user_id == this.currentUser._id) {
+            this.api.changeStateQuizz(this.id).subscribe((q: Quizz) => {
+                this.quizz = q;
+            }, (err) => this.toastr.error('Une erreur est survenue'));
+        }
+    }
+
+    deleteQuizz() {
+        if (this.quizz.user_id == this.currentUser._id) {
+            this.api.deleteQuizz(this.id).subscribe((q: Quizz) => {
+                this.router.navigate(['/allQuizz/' + this.currentUser._id]);
+            }, (err) => this.toastr.error('Une erreur est survenue'));
+        }
     }
 
     getAvatar(id) {

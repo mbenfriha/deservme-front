@@ -35,11 +35,10 @@ export class MyQuizzComponent implements OnInit {
 
       if (this.id == this.currentUser._id) {
           this.myQuizz = true;
+          this.api.getMyQuizz(this.id).subscribe((q: Quizz[]) => {
+              this.quizzs = q;
+          });
       }
-
-    this.api.getMyQuizz(this.id).subscribe((q: Quizz[]) => {
-      this.quizzs = q;
-    });
   }
 
 }

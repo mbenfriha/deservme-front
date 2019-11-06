@@ -163,10 +163,32 @@ export class ApiService {
                 catchError(this.handleError)
             );
     }
+
     // get anwer by user
     getUserQuizz(user_id: string): Observable<Answer> {
         return this.http
             .get<Answer>(this.base_path + 'user/' + user_id, this.httpOptions)
+            .pipe(
+                retry(0),
+                catchError(this.handleError)
+            );
+    }
+
+
+    // change state quizz
+    changeStateQuizz(quizz_id: string): Observable<Quizz> {
+        return this.http
+            .get<Quizz>(this.base_path + 'changeQuizz/' + quizz_id, this.httpOptions)
+            .pipe(
+                retry(0),
+                catchError(this.handleError)
+            );
+    }
+
+    // delete state quizz
+    deleteQuizz(quizz_id: string): Observable<Quizz> {
+        return this.http
+            .get<Quizz>(this.base_path + 'deleteQuizz/' + quizz_id, this.httpOptions)
             .pipe(
                 retry(0),
                 catchError(this.handleError)

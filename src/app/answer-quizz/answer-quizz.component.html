@@ -11,6 +11,7 @@
 
           <div class="col s10">
             <p>
+              - <span>Ce quizz est <span class="{{quizz.private ? 'red-text' : 'green-text'}}">{{quizz.private ? "privé" : "public"}}</span></span> <br>
               - Ce quizz contient {{quizz.questions.length}} questions <br>
               - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
               <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
@@ -29,6 +30,11 @@
             </share-buttons>
 
           </div>
+          <div class="col s12">
+            <button class="purple-border col s12 btn" (click)="changeState()">Rendre mon quizz <span color="red-text">{{quizz.private ? "public" : "privé"}}</span></button>
+            <button class="purple-border col s12 btn" (click)="deleteQuizz()">Supprimer mon quizz</button>
+          </div>
+
         </div>
         <div class="col s12 l8 right">
           <div class="title-page">Les bonnes réponses</div>
