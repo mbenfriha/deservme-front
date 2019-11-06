@@ -210,7 +210,8 @@ export class AnswerQuizzComponent implements OnInit {
             this.toastr.success('Merci d\'avoir signalé le quizz');
             this.report = true;
         }, (err) => {
-            this.toastr.error('Une erreur est survenue');
+            console.log(err);
+            this.toastr.error(err.message);
         });
     }
 

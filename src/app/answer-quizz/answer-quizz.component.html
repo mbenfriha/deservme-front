@@ -72,7 +72,9 @@
 
               </share-buttons>
             </div>
-            <button class="btn purple-border right col s12" (click)="reportQuizz()" [disabled]="report">Signaler le quizz
+
+            <button class="btn purple-border right col s12" (click)="reportQuizz()" [disabled]="report">
+              Signaler le quizz
             </button>
 
           </div>
@@ -142,6 +144,9 @@
               </share-buttons>
             </div>
 
+            <button class="btn purple-border right col s12" (click)="reportQuizz()" [disabled]="report">
+              Signaler le quizz
+            </button>
           </div>
 
           <div  class="already col s12">
@@ -182,6 +187,9 @@
 
             </share-buttons>
 
+            <button class="btn purple-border right col s12" (click)="reportQuizz()" [disabled]="report">
+              Signaler le quizz
+            </button>
           </div>
         </div>
         <div class="col s12 l8 offset-l1 answer-quizz">
@@ -221,7 +229,6 @@
           <app-answers-list [allAnswer]="allAnswer"></app-answers-list>
         </div>
       </ng-container>
-
       <ng-container *ngIf="alreadyAnswer">
         <div class="title-page">{{quizz.title}}</div>
 
@@ -248,6 +255,9 @@
 
             </share-buttons>
           </div>
+          <button class="btn purple-border right col s12" (click)="reportQuizz()" [disabled]="report">
+            Signaler le quizz
+          </button>
 
         </div>
 
