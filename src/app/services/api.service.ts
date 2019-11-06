@@ -164,5 +164,14 @@ export class ApiService {
                 catchError(this.handleError)
             );
     }
+    // get anwer by user
+    getUserQuizz(user_id: string): Observable<Answer> {
+        return this.http
+            .get<Answer>(this.base_path + 'user/' + user_id, this.httpOptions)
+            .pipe(
+                retry(0),
+                catchError(this.handleError)
+            );
+    }
 
 }

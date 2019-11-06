@@ -30,21 +30,21 @@
 
           </div>
         </div>
-        <div class="col s12 l3">
-          <div class="title-page">les résultats</div>
+        <div class="col s12 l8 right">
+          <div class="title-page">Les bonnes réponses</div>
+          <ul class="collection z-depth-3">
+            <li class="collection-item" *ngFor="let q of quizz.questions">
+              <span class="title">{{q.name}}: </span>
+              <ng-container *ngFor="let a of q.choices">
+                <span class="text-green" *ngIf="a.rep == true"> {{a.name}}</span>
+              </ng-container>
+            </li>
+          </ul>
+        </div>
+        <div class="col s12">
           <app-answers-list [allAnswer]="allAnswer"></app-answers-list>
         </div>
-          <div class="col s12 l5 right">
-            <div class="title-page">Les bonnes réponses</div>
-            <ul class="collection z-depth-3">
-              <li class="collection-item" *ngFor="let q of quizz.questions">
-                <span class="title">{{q.name}}: </span>
-                <ng-container *ngFor="let a of q.choices">
-                  <span class="text-green" *ngIf="a.rep == true"> {{a.name}}</span>
-                </ng-container>
-              </li>
-            </ul>
-        </div>
+
       </ng-container>
       <ng-container *ngIf="!myQuizz">
         <ng-container *ngIf="!alreadyAnswer">
@@ -71,8 +71,10 @@
                              [autoSetMeta]="false">
 
               </share-buttons>
-
             </div>
+            <button class="btn purple-border right col s12" (click)="reportQuizz()" [disabled]="report">Signaler le quizz
+            </button>
+
           </div>
           <div class="col s12 l8 offset-l1 answer-quizz">
             <div class="title-answer">{{quizz.title}}</div>
@@ -118,11 +120,11 @@
 
           <div class="col s12  user z-depth-3">
             <div class="col s2">
-              <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}">
+              <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" [routerLink]="['/profil/'+quizz.user_id]">
             </div>
 
             <div class="col s10">
-              <p>- Ce Quizz a été crée par {{quizz.username}} <br>
+              <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}}</a> <br>
                 - Ce quizz contient {{answer.questions.length}} questions <br>
                 - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
                 <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
@@ -158,11 +160,11 @@
       <ng-container *ngIf="!alreadyAnswer">
         <div class="col s12 l4 user z-depth-3">
           <div class="col s2">
-            <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}">
+            <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" [routerLink]="['/profil/'+quizz.user_id]">
           </div>
 
           <div class="col s10">
-            <p>- Ce Quizz a été crée par {{quizz.username}} <br>
+            <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}}</a> <br>
               - Ce quizz contient {{quizz.questions.length}} questions <br>
               - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
               <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
@@ -225,11 +227,11 @@
 
         <div class="col s12  user z-depth-3">
           <div class="col s2">
-            <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}">
+            <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" [routerLink]="['/profil/'+quizz.user_id]">
           </div>
 
           <div class="col s10">
-            <p>- Ce Quizz a été crée par {{quizz.username}} <br>
+            <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}} </a><br>
               - Ce quizz contient {{answer.questions.length}} questions <br>
               - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
               <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>

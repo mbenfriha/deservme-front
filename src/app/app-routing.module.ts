@@ -7,10 +7,10 @@ import {ContactComponent} from './contact/contact.component';
 import {RegisterComponent} from './register/register.component';
 import {ProfilComponent} from './profil/profil.component';
 import {DiscoverComponent} from './discover/discover.component';
-import {CreateQuizzComponent} from './create-quizz/create-quizz.component';
 import {NewQuizzComponent} from './new-quizz/new-quizz.component';
 import {MyQuizzComponent} from './my-quizz/my-quizz.component';
 import {AnswerQuizzComponent} from './answer-quizz/answer-quizz.component';
+import {UserProfilComponent} from './user-profil/user-profil.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'createQuizz', component: NewQuizzComponent},
   { path: 'allQuizz/:id', component: MyQuizzComponent},
   { path: 'quizz/:id', component: AnswerQuizzComponent},
+  { path: 'profil/:id', component: UserProfilComponent},
 ];
 
 @NgModule({

@@ -39,6 +39,7 @@ import { MyQuizzComponent } from './my-quizz/my-quizz.component';
 import { ModalRegisterComponent } from './modal-register/modal-register.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import {UserProfilComponent} from './user-profil/user-profil.component';
 
 
 
@@ -62,7 +63,8 @@ import { environment } from '../environments/environment';
         AnswersListComponent,
         NewQuizzComponent,
         MyQuizzComponent,
-        ModalRegisterComponent
+        ModalRegisterComponent,
+        UserProfilComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'deserveme' }),

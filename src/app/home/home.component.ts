@@ -26,6 +26,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+      if (localStorage.getItem('user')) {
+          this.router.navigate(['/discover']);
+      }
     this.route.queryParams.subscribe(params => {
       if (params['id']) {
         this.router.navigate(['/register']);

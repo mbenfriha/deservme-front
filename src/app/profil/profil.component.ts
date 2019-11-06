@@ -30,8 +30,9 @@ export class ProfilComponent implements OnInit, OnChanges {
       }
     }, error => {
       if (error) {
-          if (this.currentRoute !== 'quizz/:id' && this.currentRoute !== 'terms' && this.currentRoute !==
-                'privacy' && this.currentRoute !== 'contact') {
+          if (this.currentRoute !== 'quizz/:id' && this.currentRoute !== 'terms'
+              && this.currentRoute !== 'privacy' && this.currentRoute !== 'contact'
+              && this.currentRoute !== 'profil/:id') {
               this.router.navigate(['/']);
 
           }
@@ -43,7 +44,6 @@ export class ProfilComponent implements OnInit, OnChanges {
         this.api.getCurrentUser().subscribe((v: User) => {
             if (!localStorage.getItem('user')) {
                 localStorage.setItem('user', JSON.stringify(v));
-                console.log('ajouter');
             }
             if (!v.username) {
                 this.router.navigate(['/register']);
@@ -53,10 +53,10 @@ export class ProfilComponent implements OnInit, OnChanges {
         }, error => {
             if (error) {
                 if (this.currentRoute !== 'quizz/:id' && this.currentRoute !== 'terms'
-                    && this.currentRoute !== 'privacy' && this.currentRoute !== 'contact') {
+                    && this.currentRoute !== 'privacy' && this.currentRoute !== 'contact'
+                    && this.currentRoute !== 'profil/:id') {
                     console.log('noninonon')
                     this.router.navigate(['/']);
-
                 }
             }
         });
