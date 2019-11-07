@@ -10,8 +10,7 @@ import { MetafrenzyService } from 'ngx-metafrenzy';
 import { environment } from '../../environments/environment';
 import {Subject} from 'rxjs';
 import {debounceTime, takeUntil} from 'rxjs/operators';
-
-
+import {StorageMap} from '@ngx-pwa/local-storage';
 
 
 @Component({
@@ -48,40 +47,43 @@ export class AnswerQuizzComponent implements OnInit {
                 private route: ActivatedRoute,
                 private toastr: ToastrService,
                 private router: Router,
-                private readonly metafrenzyService: MetafrenzyService) {
+                private readonly metafrenzyService: MetafrenzyService,
+                private storage: StorageMap) {
         this.id = this.route.snapshot.paramMap.get('id');
-
-        this.api.getQuizz(this.id).subscribe((q: Quizz) => {
-            this.metafrenzyService.setAllTitleTags('MyQuizzy - ' + q.title);
-            this.metafrenzyService.setAllDescriptionTags('Viens répondre au quizz de ' + q.username);
-            this.exist = true;
-            this.quizz = q;
-            this.answer = new Answer;
-            this.answer.questions = [new Question()];
-            if (!this.currentUser) {
-                this.isConnected = false;
-
-            } else {
-                console.log(this.currentUser);
+        this.storage.get('user').subscribe((user: User) => {
+            if(user != null) {
+                this.currentUser = user;
                 this.isConnected = true;
-                this.api.getAnswerByUserId(this.id).subscribe((a: Answer) => {
-                    this.calculResult(a, true);
-                    this.alreadyAnswer = true;
-                }, error => {
-                    this.alreadyAnswer = false;
-                    if (this.quizz.user_id == this.currentUser._id) {
-                        this.myQuizz = true;
-                    }
-
-                    this.answer.user_id = this.currentUser._id;
-                    this.answer.username = this.currentUser.username;
-                    this.answer.avatar = this.currentUser.avatar;
-                    this.answer.avatar_type = this.currentUser.avatar_type;
-                    this.answer.questions = [new Question()];
-                });
             }
-        }, err => {
-            this.exist = false;
+            this.api.getQuizz(this.id).subscribe((q: Quizz) => {
+                this.metafrenzyService.setAllTitleTags('MyQuizzy - ' + q.title);
+                this.metafrenzyService.setAllDescriptionTags('Viens répondre au quizz de ' + q.username);
+                this.exist = true;
+                this.quizz = q;
+                this.answer = new Answer;
+                this.answer.questions = [new Question()];
+                if(this.isConnected) {
+                    console.log(this.currentUser, 'ok');
+                    this.isConnected = true;
+                    this.api.getAnswerByUserId(this.id).subscribe((a: Answer) => {
+                        this.calculResult(a, true);
+                        this.alreadyAnswer = true;
+                    }, error => {
+                        this.alreadyAnswer = false;
+                        if (this.quizz.user_id == this.currentUser._id) {
+                            this.myQuizz = true;
+                        }
+
+                        this.answer.user_id = this.currentUser._id;
+                        this.answer.username = this.currentUser.username;
+                        this.answer.avatar = this.currentUser.avatar;
+                        this.answer.avatar_type = this.currentUser.avatar_type;
+                        this.answer.questions = [new Question()];
+                    });
+                }
+            }, err => {
+                this.exist = false;
+            });
         });
     }
 
@@ -102,7 +104,6 @@ export class AnswerQuizzComponent implements OnInit {
             );
         this.nbrQ = 0;
         this.id = this.route.snapshot.paramMap.get('id');
-        this.currentUser = JSON.parse(localStorage.getItem('user'));
 
         this.api.getAnswerOfQuizz(this.id).subscribe((answers: Answer[]) => {
             this.allAnswer = answers;
@@ -267,7 +268,7 @@ export class AnswerQuizzComponent implements OnInit {
     }
 
     openModal() {
-            this.modal = true;
+        this.modal = true;
     }
     closeModal() {
         this.modal = false;

@@ -4,6 +4,7 @@ import { MetafrenzyService } from 'ngx-metafrenzy';
 import { ToastrService } from 'ngx-toastr';
 
 import { environment } from '../../environments/environment';
+import {StorageMap} from '@ngx-pwa/local-storage';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private readonly metafrenzyService: MetafrenzyService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private storage: StorageMap) {
 
       this.metafrenzyService.setAllTitleTags('MyQuizzy - Crée, joue et partage des tas de quizz');
       this.metafrenzyService.setAllDescriptionTags('Crée, participe et partage des quizz avec tes amis');
@@ -26,15 +28,17 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-      if (localStorage.getItem('user')) {
-          this.router.navigate(['/discover']);
-      }
+      this.storage.get('user').subscribe((data: any) => {
+         if(data != null) {
+             this.router.navigate(['/discover']);
+         }
+      });
     this.route.queryParams.subscribe(params => {
       if (params['id']) {
         this.router.navigate(['/register']);
       }
       if (params['banned']) {
-          localStorage.removeItem('user');
+          this.storage.delete('user').subscribe(() => {});
           this.toastr.error('Vous avez été bannis');
       }
     });
@@ -42,12 +46,15 @@ export class HomeComponent implements OnInit {
 
   openModal() {
     console.log(this.modal);
-    if (localStorage.getItem('user')) {
-      this.router.navigate(['/register']);
-    } else {
-      this.modal = true;
-    }
+      this.storage.get('user').subscribe((data: any) => {
+          if(data == null) {
+              this.modal = true;
+          } else {
+              this.router.navigate(['/register']);
+          }
+      });
   }
+
   closeModal() {
     this.modal = false;
   }

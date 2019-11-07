@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {debounceTime} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {Quizz} from '../models/quizz';
+import {StorageMap} from '@ngx-pwa/local-storage';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +25,8 @@ export class RegisterComponent implements OnInit {
   constructor(private api: ApiService,
               private route: ActivatedRoute,
               private router: Router,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private storage: StorageMap) { }
 
   ngOnInit() {
     // create username form
@@ -41,7 +43,7 @@ export class RegisterComponent implements OnInit {
       );
     // check if user is connected and have username ?
     this.api.getCurrentUser().subscribe((v: User) => {
-      localStorage.setItem('user', JSON.stringify(v));
+        this.storage.set('user', v).subscribe(() => {})
       if (v.banned) {
           this.router.navigate(['/'], { queryParams: { banned: true } });
       } else if (v.username) {
@@ -68,7 +70,7 @@ export class RegisterComponent implements OnInit {
 
     // display form values on success
     this.api.updateUser({username: this.registerForm.value.username}).subscribe((v: User) => {
-        localStorage.setItem('user', JSON.stringify(v));
+        this.storage.set('user', v).subscribe(() => {})
         this.step = 2;
     }, (error) => {
       console.log('une erreur est survenue');

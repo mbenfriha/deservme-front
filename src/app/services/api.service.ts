@@ -6,6 +6,7 @@ import { retry, catchError } from 'rxjs/operators';
 import {Quizz} from '../models/quizz';
 import {Answer} from '../models/answer';
 import { environment } from '../../environments/environment';
+import {StorageMap} from '@ngx-pwa/local-storage';
 
 
 @Injectable({
@@ -16,7 +17,8 @@ export class ApiService {
   // API path
   base_path = environment.baseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private storage: StorageMap) { }
 
   // Http Options
   httpOptions = {
@@ -33,7 +35,7 @@ export class ApiService {
       console.error('An error occurred:', error.error.message);
     } else {
       if (error.status == 401) {
-        localStorage.removeItem('user');
+          this.storage.delete('user').subscribe(() => {});
       }
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,

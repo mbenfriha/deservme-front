@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {User, UserRegister} from '../models/user';
 import { ApiService } from '../services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { StorageMap } from '@ngx-pwa/local-storage';
 
 import { AuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
+import {environment} from 'src/environments/environment';
 
 
 @Component({
@@ -22,6 +24,7 @@ export class UserRegisterComponent implements OnInit {
     public apiService: ApiService,
     public router: Router,
     private  activatedRoute: ActivatedRoute,
+    private storage: StorageMap
   ) {
     this.data = new UserRegister();
 
@@ -29,9 +32,13 @@ export class UserRegisterComponent implements OnInit {
       this.id = params['id'];
       console.log(params);
       if (this.id != null) {
-        localStorage.setItem('ID', JSON.stringify(this.id));
+          this.storage.set('ID', this.id).subscribe(() => {})
+
       } else {
-        this.id = JSON.parse(localStorage.getItem('ID'));
+            this.storage.get('ID').subscribe((data: any) => {
+              if(data != null)
+                this.id = data;
+            });
       }
     });
   }
@@ -44,8 +51,8 @@ export class UserRegisterComponent implements OnInit {
   }
 
   logout() {
-    localStorage.clear();
-    window.location.href = 'http://localhost:3000/logout';
+      this.storage.delete('user').subscribe(() => {});
+      window.location.href = environment.baseUrl + 'logout';
   }
 
   submitForm() {

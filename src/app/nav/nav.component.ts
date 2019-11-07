@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 declare var jQuery: any;
 
 import { environment } from '../../environments/environment';
+import {StorageMap} from '@ngx-pwa/local-storage';
 
 
 @Component({
@@ -17,15 +18,10 @@ export class NavComponent implements OnInit {
     @Input() currentUser: User;
     @Input() currentRoute: String;
     constructor(private el: ElementRef,
-                private route: Router) { }
+                private route: Router,
+                private storage: StorageMap) { }
 
     ngOnInit() {
-        console.log(this.route.url);
-        /*  if (this.route.snapshot && this.route.snapshot.url[0]) {
-            this.currentRoute = this.route.snapshot.url[0].path;
-          } else {
-            console.log('pas de lien', this.route.snapshot);
-          }*/
         jQuery('.sidenav').sidenav();
     }
 
@@ -34,7 +30,7 @@ export class NavComponent implements OnInit {
     }
 
     disconnect() {
-        localStorage.removeItem('user');
+        this.storage.delete('user').subscribe(() => {});
         window.location.href = environment.baseUrl + 'logout';
     }
 }

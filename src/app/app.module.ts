@@ -40,6 +40,7 @@ import { ModalRegisterComponent } from './modal-register/modal-register.componen
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {UserProfilComponent} from './user-profil/user-profil.component';
+import { StorageModule } from '@ngx-pwa/local-storage';
 
 
 
@@ -84,6 +85,7 @@ import {UserProfilComponent} from './user-profil/user-profil.component';
         BrowserAnimationsModule,
         MetafrenzyModule.forRoot(),
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+        StorageModule.forRoot({ IDBNoWrap: true }),
 
     ],
     providers: [],

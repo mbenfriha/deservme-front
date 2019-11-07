@@ -3,6 +3,7 @@ import {User} from '../models/user';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../services/api.service';
 import {Quizz} from '../models/quizz';
+import {StorageMap} from '@ngx-pwa/local-storage';
 
 @Component({
   selector: 'app-profil',
@@ -18,11 +19,13 @@ export class ProfilComponent implements OnInit, OnChanges {
 
   constructor(private api: ApiService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private storage: StorageMap) { }
 
   ngOnInit() {
     this.api.getCurrentUser().subscribe((v: User) => {
-        localStorage.setItem('user', JSON.stringify(v));
+        this.storage.set('user', v).subscribe(() => {})
+
       if (!v.username) {
         this.router.navigate(['/register']);
       } else {
@@ -42,9 +45,11 @@ export class ProfilComponent implements OnInit, OnChanges {
 
     ngOnChanges() {
         this.api.getCurrentUser().subscribe((v: User) => {
-            if (!localStorage.getItem('user')) {
-                localStorage.setItem('user', JSON.stringify(v));
-            }
+            this.storage.get('ID').subscribe((data: any) => {
+                if(data == null){
+                    this.storage.set('user', v).subscribe(() => {})
+                }
+            }, () => {});
             if (!v.username) {
                 this.router.navigate(['/register']);
             } else {
