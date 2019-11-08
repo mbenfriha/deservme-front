@@ -2,7 +2,7 @@
   margin-top: 0;
 }
 
-button i {
+button fa-icon {
   color: white;
   font-size: 27px;
 
@@ -21,9 +21,14 @@ button {
 
 button:focus {
   background: white;
-  i {
+  fa-icon {
     color: var(--color-purple);
   }
+}
+
+button:hover {
+  color: var(--color-purple);
+  background: white;
 }
 
 .buttons button:first-of-type {

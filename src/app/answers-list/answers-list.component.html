@@ -4,14 +4,11 @@
         <div class="left">Classement</div>
         <div class="right buttons">
         <button class="btn" (click)="sortBy()">
-            <i class="material-icons">
-                sort_by_alpha
-            </i>
+            <fa-icon [icon]="faSortAlphaDown"></fa-icon>
+
         </button>
         <button class="right btn" (click)="top()">
-            <i class="material-icons">
-                stars
-            </i>
+            <fa-icon [icon]="faSortNumericDown"></fa-icon>
         </button>
         </div>
     </div>

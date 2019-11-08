@@ -13,7 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { MetafrenzyModule } from 'ngx-metafrenzy';
 
-
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 
 
 import {
@@ -42,6 +42,12 @@ import { environment } from '../environments/environment';
 import {UserProfilComponent} from './user-profil/user-profil.component';
 import { StorageModule } from '@ngx-pwa/local-storage';
 
+import { faFacebookF, faTwitter, faLinkedinIn, faGooglePlusG, faPinterestP, faRedditAlien, faTumblr,
+        faWhatsapp, faVk, faFacebookMessenger, faTelegramPlane, faMix, faXing, faLine, fab
+        } from '@fortawesome/free-brands-svg-icons';
+
+import { fas, faCommentAlt,
+    faEnvelope, faCheck, faPrint, faExclamation, faLink, faEllipsisH, faMinus } from '@fortawesome/free-solid-svg-icons'
 
 
 @NgModule({
@@ -71,6 +77,7 @@ import { StorageModule } from '@ngx-pwa/local-storage';
         BrowserModule.withServerTransition({ appId: 'deserveme' }),
         AppRoutingModule,
         HttpClientModule,
+        FontAwesomeModule,
         FormsModule,
         MatIconModule,
         MatButtonModule,
@@ -91,4 +98,11 @@ import { StorageModule } from '@ngx-pwa/local-storage';
     providers: [],
     bootstrap: [AppComponent, FooterComponent]
 })
-export class AppModule { }
+export class AppModule {
+      constructor(library: FaIconLibrary) {
+           library.addIconPacks(fas, fab);
+           library.addIcons(faFacebookF, faTwitter, faLinkedinIn, faGooglePlusG, faPinterestP, faRedditAlien, faTumblr,
+               faWhatsapp, faVk, faFacebookMessenger, faTelegramPlane, faMix, faXing, faLine, faCommentAlt,
+               faEnvelope, faCheck, faPrint, faExclamation, faLink, faEllipsisH, faMinus);
+    }
+}

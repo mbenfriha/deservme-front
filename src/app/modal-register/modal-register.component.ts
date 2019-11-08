@@ -1,4 +1,6 @@
 import {Component, Input, OnInit, OnChanges, Output, EventEmitter} from '@angular/core';
+import { faFacebook, faTwitter  } from '@fortawesome/free-brands-svg-icons';
+
 
 import { environment } from '../../environments/environment';
 

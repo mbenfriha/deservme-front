@@ -2,6 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../models/user';
 import {environment} from '../../environments/environment';
 
+import { faSortAlphaDown, faSortNumericDown } from '@fortawesome/free-solid-svg-icons';
+
+
 @Component({
     selector: 'app-answers-list',
     templateUrl: './answers-list.component.html',
@@ -12,6 +15,8 @@ export class AnswersListComponent implements OnInit {
     @Input() allAnswer: [];
 
     asc = true;
+    faSortAlphaDown = faSortAlphaDown;
+    faSortNumericDown = faSortNumericDown;
 
     constructor() { }
 
