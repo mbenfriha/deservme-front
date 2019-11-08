@@ -11,6 +11,8 @@ import { environment } from '../../environments/environment';
 import {Subject} from 'rxjs';
 import {debounceTime, takeUntil} from 'rxjs/operators';
 import {StorageMap} from '@ngx-pwa/local-storage';
+declare var jQuery: any;
+
 
 
 @Component({
@@ -42,6 +44,7 @@ export class AnswerQuizzComponent implements OnInit {
     modalDelete = false;
     subjectState: Subject<any> = new Subject();
     subjectReport: Subject<any> = new Subject();
+    tab = 'top'
 
     constructor(private api: ApiService,
                 private route: ActivatedRoute,
@@ -88,6 +91,8 @@ export class AnswerQuizzComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        jQuery('.tabs').tabs();
 
         // create subject for debouncetime, anti spam backend
         this.subjectState
@@ -272,6 +277,10 @@ export class AnswerQuizzComponent implements OnInit {
     }
     closeModal() {
         this.modal = false;
+    }
+
+    displayTab(tab) {
+        this.tab = tab;
     }
 
 }

@@ -32,22 +32,31 @@
           </div>
           <div class="col s12">
             <button class="purple-border col s12 btn" (click)="setState()">Rendre mon quizz <span color="red-text">{{quizz.private ? "public" : "privé"}}</span></button>
-            <button class="purple-border col s12 btn" (click)="openModalDelete()">Supprimer mon quizz</button>
+            <button class="green-button col s12 btn" (click)="openModalDelete()">Supprimer mon quizz</button>
           </div>
-
         </div>
-        <div class="col s12 l8 right">
-          <div class="title-page">Les bonnes réponses</div>
+
+        <div class="row">
+          <div class="col s12">
+            <ul class="tabs">
+              <li class="tab col s6"><a (click)="displayTab('top')" class="{{tab == 'top' ? 'active' : ''}}">Classement</a></li>
+              <li class="tab col s6"><a (click)="displayTab('resp')" class="{{tab == 'resp' ? 'active' : ''}}">Réponses</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col s12 s12 right" *ngIf="tab == 'resp'" >
+          <div class="title-page">Réponses</div>
           <ul class="collection z-depth-3">
             <li class="collection-item" *ngFor="let q of quizz.questions">
-              <span class="title">{{q.name}}: </span>
+              <b class="title">{{q.name}} : </b>
               <ng-container *ngFor="let a of q.choices">
                 <span class="text-green" *ngIf="a.rep == true"> {{a.name}}</span>
               </ng-container>
             </li>
           </ul>
         </div>
-        <div class="col s12">
+        <div class="col s12" *ngIf="tab == 'top'">
           <app-answers-list [allAnswer]="allAnswer"></app-answers-list>
         </div>
 
@@ -193,11 +202,11 @@
 
             </share-buttons>
 
-            <button class="btn purple-border right col s12" (click)="sendReport()" [disabled]="report">
-              Signaler le quizz
-            </button>
-            <button class="btn purple-border right col s12" (click)="openModal()">Créer un compte</button>
           </div>
+          <button class="btn purple-border right col s12" (click)="sendReport()" [disabled]="report">
+            Signaler le quizz
+          </button>
+          <button class="btn green-button right col s12" (click)="openModal()">S'inscire / Se connecter</button>
         </div>
         <div class="col s12 l8 offset-l1 answer-quizz">
           <div class="title-answer">{{quizz.title}}</div>

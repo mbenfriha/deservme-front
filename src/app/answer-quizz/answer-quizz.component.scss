@@ -159,3 +159,13 @@ share-buttons {
 .title-modal {
   font-size: 16px;
 }
+
+.tabs {
+ a {
+   color: var(--color-green);
+
+ }
+  a.active {
+    border-bottom: 2px solid var(--color-green);
+  }
+}

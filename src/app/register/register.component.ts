@@ -45,6 +45,7 @@ export class RegisterComponent implements OnInit {
     this.api.getCurrentUser().subscribe((v: User) => {
         this.storage.set('user', v).subscribe(() => {})
       if (v.banned) {
+          this.storage.clear().subscribe(() => {})
           this.router.navigate(['/'], { queryParams: { banned: true } });
       } else if (v.username) {
         this.router.navigate(['/discover']);
@@ -53,6 +54,7 @@ export class RegisterComponent implements OnInit {
       }
     }, error => {
       if (error) {
+        this.storage.clear().subscribe(() => {})
         this.router.navigate(['/']);
       }
     });

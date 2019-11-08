@@ -37,6 +37,7 @@ export class ProfilComponent implements OnInit, OnChanges {
               && this.currentRoute !== 'privacy' && this.currentRoute !== 'contact'
               && this.currentRoute !== 'profil/:id') {
               this.router.navigate(['/']);
+              this.storage.clear().subscribe(() => {})
 
           }
       }
@@ -61,6 +62,7 @@ export class ProfilComponent implements OnInit, OnChanges {
                     && this.currentRoute !== 'privacy' && this.currentRoute !== 'contact'
                     && this.currentRoute !== 'profil/:id') {
                     this.router.navigate(['/']);
+                    this.storage.clear().subscribe(() => {})
                 }
             }
         });
