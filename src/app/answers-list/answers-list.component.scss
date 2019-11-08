@@ -19,6 +19,13 @@ button {
   border-radius: 0px;
 }
 
+button:focus {
+  background: white;
+  i {
+    color: var(--color-purple);
+  }
+}
+
 .buttons button:first-of-type {
   border-right: 1px solid white;
 }

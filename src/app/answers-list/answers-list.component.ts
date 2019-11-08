@@ -32,7 +32,7 @@ export class AnswersListComponent implements OnInit {
             }
         });
 
-        return (100 * good / total).toFixed();
+        return parseInt((100 * good / total).toFixed());
     }
 
     sortBy() {
