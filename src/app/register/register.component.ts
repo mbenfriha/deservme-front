@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
   subject: Subject<any> = new Subject();
   step = 1;
   quizz: Quizz;
-  shortUrl: environment.shortUrl;
+    shortUrl = environment.shortUrl;
 
   constructor(private api: ApiService,
               private route: ActivatedRoute,
