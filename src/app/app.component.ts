@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnChanges, OnInit, SimpleChange} from '@angular/core';
+import {Component, ElementRef, OnChanges, OnInit, SimpleChange,PLATFORM_ID, Inject } from '@angular/core';
 import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
 import { MetafrenzyService } from 'ngx-metafrenzy';
 import {AuthenticationService} from './services/authentication.service';
@@ -6,6 +6,9 @@ import {User} from './models/user';
 import {StorageMap} from '@ngx-pwa/local-storage';
 import {ToastrService} from 'ngx-toastr';
 import { first } from 'rxjs/operators';
+
+import { DOCUMENT } from '@angular/common';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 
 @Component({
@@ -26,8 +29,14 @@ export class AppComponent implements OnInit {
         private authenticationService: AuthenticationService,
         private route: ActivatedRoute,
         private storage: StorageMap,
-        private toastr: ToastrService,) {
+        private toastr: ToastrService,
+        @Inject(DOCUMENT) private document: Document,
+        @Inject(PLATFORM_ID) private platformId: any,
+    ) {
 
+        if (isPlatformBrowser(this.platformId)) {
+            // Your client side code
+        }
         this.metafrenzyService.setOpenGraph({
             type: 'website',
             url: 'https://myquizzy.com',

@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 
 import {environment} from 'src/environments/environment';
 import {User} from '../models/user';
-import {StorageMap} from '@ngx-pwa/local-storage';
 
 
 @Injectable({ providedIn: 'root' })
@@ -13,10 +12,9 @@ export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
-    constructor(private http: HttpClient,
-                private storage: StorageMap) {
+    constructor(private http: HttpClient) {
 
-                this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(window.localStorage.getItem('user')));
+                this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
                 this.currentUser = this.currentUserSubject.asObservable();
 
     }
@@ -34,7 +32,7 @@ export class AuthenticationService {
             .pipe(map(user => {
                 console.log('caca');
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                window.localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem('user', JSON.stringify(user));
                 this.currentUserSubject.next(user);
                 return user;
             }));
@@ -43,7 +41,7 @@ export class AuthenticationService {
     logout() {
         // remove user from local storage to log user out
         //this.storage.delete('user').subscribe(() => {});
-        window.localStorage.removeItem('user');
+        localStorage.removeItem('user');
 
         this.currentUserSubject.next(null);
     }
