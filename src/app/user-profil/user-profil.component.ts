@@ -37,7 +37,7 @@ export class UserProfilComponent implements OnInit {
             return false;
         }
 
-        if(this.currentUser._id == this.id) {
+        if(this.currentUser && this.currentUser._id == this.id) {
             this.myProfil = true;
         }
         this.api.getUserQuizz(this.id).subscribe((resp: any) => {

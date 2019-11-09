@@ -68,7 +68,7 @@
                 <ul class="collection z-depth-3">
                     <li class="collection-item avatar" *ngFor="let answer of answers">
                         <img src="{{getAvatar(answer.avatar)}}" alt="img" class="circle" [routerLink]="['/profil/', answer.avatar]">
-                        <div [routerLink]="['/answer/'+answer.quizz_id]">
+                        <div [routerLink]="['/quizz/'+answer.quizz_id]">
                             <div class="title col s11">{{answer.title}} </div>
                             <div class="col s11 result">Ton score : {{returnResult(answer)}}%</div>
 
