@@ -26,6 +26,30 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 const DIST_FOLDER = join(process.cwd(), 'dist/browser');
 
+const domino = require("domino");
+const fs = require("fs");
+import "localstorage-polyfill";
+
+const templateA = fs.readFileSync(join(DIST_FOLDER, "index.html")).toString();
+const win = domino.createWindow(templateA);
+win.Object = Object;
+win.Math = Math;
+global["window"] = win;
+global["document"] = win.document;
+global["branch"] = null;
+global["object"] = win.object;
+global["HTMLElement"] = win.HTMLElement;
+global["navigator"] = win.navigator;
+global["localStorage"] = localStorage;
+global["sessionStorage"] = localStorage;
+global["getComputedStyle"] = () => {
+    return {
+        getPropertyValue() {
+            return "";
+        }
+    };
+};
+
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack
 const {AppServerModuleNgFactory, LAZY_MODULE_MAP, ngExpressEngine, provideModuleMap} = require('./dist/server/main');
 
