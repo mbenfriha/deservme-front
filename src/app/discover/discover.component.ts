@@ -16,6 +16,7 @@ export class DiscoverComponent implements OnInit {
               private readonly metafrenzyService: MetafrenzyService) {
       this.metafrenzyService.setAllTitleTags('MyQuizzy - Découvre les quizz de la semaine');
       this.metafrenzyService.setAllDescriptionTags('Découvre tous les meilleurs quizz crée cette semaine');
+      console.log('discover');
 
   }
 

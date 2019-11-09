@@ -11,6 +11,8 @@ import { environment } from '../../environments/environment';
 import {Subject} from 'rxjs';
 import {debounceTime, takeUntil} from 'rxjs/operators';
 import {StorageMap} from '@ngx-pwa/local-storage';
+import {AuthenticationService} from '../services/authentication.service';
+
 declare var jQuery: any;
 
 
@@ -51,13 +53,16 @@ export class AnswerQuizzComponent implements OnInit {
                 private toastr: ToastrService,
                 private router: Router,
                 private readonly metafrenzyService: MetafrenzyService,
-                private storage: StorageMap) {
+                private storage: StorageMap,
+                private authenticationService: AuthenticationService) {
         this.id = this.route.snapshot.paramMap.get('id');
-        this.storage.get('user').subscribe((user: User) => {
-            if(user != null) {
-                this.currentUser = user;
+        this.authenticationService.currentUser.subscribe(x => {
+
+            this.currentUser = x;
+            if(this.currentUser) {
                 this.isConnected = true;
             }
+
             this.api.getQuizz(this.id).subscribe((q: Quizz) => {
                 this.metafrenzyService.setAllTitleTags('MyQuizzy - ' + q.title);
                 this.metafrenzyService.setAllDescriptionTags('Viens répondre au quizz de ' + q.username);
@@ -87,10 +92,15 @@ export class AnswerQuizzComponent implements OnInit {
             }, err => {
                 this.exist = false;
             });
-        });
+
+        }, error => {} );
+
+        console.log(this.currentUser);
     }
 
     ngOnInit() {
+
+
 
         jQuery('.tabs').tabs();
 

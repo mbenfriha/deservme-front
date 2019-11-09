@@ -7,6 +7,7 @@ import {User} from '../models/user';
 import { ToastrService } from 'ngx-toastr';
 import {MetafrenzyService} from 'ngx-metafrenzy';
 import {StorageMap} from '@ngx-pwa/local-storage';
+import {AuthenticationService} from '../services/authentication.service';
 
 
 @Component({
@@ -26,24 +27,23 @@ export class MyQuizzComponent implements OnInit {
               private route: ActivatedRoute,
               private toastr: ToastrService,
               private readonly metafrenzyService: MetafrenzyService,
-              private storage: StorageMap) {
+              private storage: StorageMap,
+              private authenticationService: AuthenticationService) {
       this.metafrenzyService.setAllTitleTags('MyQuizzy - Mes quizz');
       this.metafrenzyService.setAllDescriptionTags('Liste de tes quizz');
+
+      this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+
   }
 
   ngOnInit() {
       this.id = this.route.snapshot.paramMap.get('id');
-      this.storage.get('user').subscribe((user: any) => {
-          if(user != null) {
-              this.currentUser = user;
               if (this.id == this.currentUser._id) {
                   this.myQuizz = true;
                   this.api.getMyQuizz(this.id).subscribe((q: Quizz[]) => {
                       this.quizzs = q;
                   });
               }
-          }
-      });
 
 
   }

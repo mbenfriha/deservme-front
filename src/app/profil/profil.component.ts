@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../services/api.service';
 import {Quizz} from '../models/quizz';
 import {StorageMap} from '@ngx-pwa/local-storage';
+import {AuthenticationService} from '../services/authentication.service';
 
 @Component({
   selector: 'app-profil',
@@ -20,10 +21,15 @@ export class ProfilComponent implements OnInit, OnChanges {
   constructor(private api: ApiService,
               private route: ActivatedRoute,
               private router: Router,
-              private storage: StorageMap) { }
+              private storage: StorageMap,
+              private authenticationService: AuthenticationService,) {
+      console.log('profil');
+      this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+
+  }
 
   ngOnInit() {
-    this.api.getCurrentUser().subscribe((v: User) => {
+ /*   this.api.getCurrentUser().subscribe((v: User) => {
         this.storage.set('user', v).subscribe(() => {})
 
       if (!v.username) {
@@ -41,11 +47,11 @@ export class ProfilComponent implements OnInit, OnChanges {
 
           }
       }
-    });
+    });*/
   }
 
     ngOnChanges() {
-        this.api.getCurrentUser().subscribe((v: User) => {
+      /*  this.api.getCurrentUser().subscribe((v: User) => {
             this.storage.get('ID').subscribe((data: any) => {
                 if(data == null){
                     this.storage.set('user', v).subscribe(() => {})
@@ -65,7 +71,7 @@ export class ProfilComponent implements OnInit, OnChanges {
                     this.storage.clear().subscribe(() => {})
                 }
             }
-        });
+        });*/
     }
 
 }

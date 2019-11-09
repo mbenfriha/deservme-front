@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 
 import { environment } from '../../environments/environment';
 import {StorageMap} from '@ngx-pwa/local-storage';
+import {AuthenticationService} from '../services/authentication.service';
+import {User} from '../models/user';
 
 
 @Component({
@@ -15,44 +17,37 @@ import {StorageMap} from '@ngx-pwa/local-storage';
 export class HomeComponent implements OnInit {
   modal = false;
   environment = environment;
+  user: User;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private readonly metafrenzyService: MetafrenzyService,
               private toastr: ToastrService,
-              private storage: StorageMap) {
+              private storage: StorageMap,
+              private authenticationService: AuthenticationService) {
 
       this.metafrenzyService.setAllTitleTags('MyQuizzy - Crée, joue et partage des tas de quizz');
       this.metafrenzyService.setAllDescriptionTags('Crée, participe et partage des quizz avec tes amis');
 
+
   }
 
   ngOnInit() {
-      this.storage.get('user').subscribe((data: any) => {
-         if(data != null) {
-             this.router.navigate(['/discover']);
-         }
+      this.authenticationService.currentUser.subscribe(x => {
+          if (x) {
+              this.user = x;
+              this.router.navigate(['/discover']);
+
+          }
       });
-    this.route.queryParams.subscribe(params => {
-      if (params['id']) {
-        this.router.navigate(['/register']);
-      }
-      if (params['banned']) {
-          this.storage.delete('user').subscribe(() => {});
-          this.toastr.error('Vous avez été bannis');
-      }
-    });
   }
 
   openModal() {
-    console.log(this.modal);
-      this.storage.get('user').subscribe((data: any) => {
-          if(data == null) {
+          if(!this.user) {
               this.modal = true;
           } else {
               this.router.navigate(['/register']);
           }
-      });
   }
 
   closeModal() {

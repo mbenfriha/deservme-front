@@ -30,7 +30,8 @@ export class NavComponent implements OnInit {
     }
 
     disconnect() {
-        this.storage.delete('user').subscribe(() => {});
+        localStorage.removeItem('user');
+
         window.location.href = environment.baseUrl + 'logout';
     }
 }

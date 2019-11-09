@@ -21,7 +21,6 @@ export class ModalRegisterComponent implements OnInit, OnChanges {
     ngOnInit() {
     }
     ngOnChanges() {
-      console.log(this.modal);
     }
     closeModal() {
         this.modal = false;

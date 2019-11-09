@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
         }
       );
     // check if user is connected and have username ?
-    this.api.getCurrentUser().subscribe((v: User) => {
+ /*   this.api.getCurrentUser().subscribe((v: User) => {
         this.storage.set('user', v).subscribe(() => {})
       if (v.banned) {
           this.storage.clear().subscribe(() => {})
@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
         this.storage.clear().subscribe(() => {})
         this.router.navigate(['/']);
       }
-    });
+    });*/
   }
 
   // get form fields
@@ -71,8 +71,10 @@ export class RegisterComponent implements OnInit {
     }
 
     // display form values on success
-    this.api.updateUser({username: this.registerForm.value.username}).subscribe((v: User) => {
-        this.storage.set('user', v).subscribe(() => {})
+    this.api.updateUser({username: this.registerForm.value.username}).subscribe((user: User) => {
+      //  this.storage.set('user', v).subscribe(() => {})
+        localStorage.setItem('user', JSON.stringify(user));
+
         this.step = 2;
     }, (error) => {
       console.log('une erreur est survenue');

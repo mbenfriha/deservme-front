@@ -11,23 +11,26 @@ import {NewQuizzComponent} from './new-quizz/new-quizz.component';
 import {MyQuizzComponent} from './my-quizz/my-quizz.component';
 import {AnswerQuizzComponent} from './answer-quizz/answer-quizz.component';
 import {UserProfilComponent} from './user-profil/user-profil.component';
+import {AuthGuard} from './_helpers';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'terms', component: TermsComponent },
-  { path: 'privacy', component: PrivacyComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'profil', component: ProfilComponent},
-  { path: 'discover', component: DiscoverComponent},
-  { path: 'createQuizz', component: NewQuizzComponent},
-  { path: 'allQuizz/:id', component: MyQuizzComponent},
-  { path: 'quizz/:id', component: AnswerQuizzComponent},
-  { path: 'profil/:id', component: UserProfilComponent},
+    { path: '', component: HomeComponent },
+    { path: 'terms', component: TermsComponent },
+    { path: 'privacy', component: PrivacyComponent},
+    { path: 'contact', component: ContactComponent },
+    { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
+    { path: 'profil', component: ProfilComponent},
+    { path: 'discover', component: DiscoverComponent, canActivate: [AuthGuard] },
+    { path: 'createQuizz', component: NewQuizzComponent, canActivate: [AuthGuard] },
+    { path: 'allQuizz/:id', component: MyQuizzComponent, canActivate: [AuthGuard]},
+    { path: 'quizz/:id', component: AnswerQuizzComponent},
+    { path: 'profil/:id', component: UserProfilComponent},
+    { path: '**', redirectTo: '' }
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }

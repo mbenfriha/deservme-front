@@ -2,9 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 
-import { HttpClientModule } from '@angular/common/http';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -12,6 +13,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { MetafrenzyModule } from 'ngx-metafrenzy';
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 
@@ -95,7 +97,8 @@ import { fas, faCommentAlt,
         StorageModule.forRoot({ IDBNoWrap: true }),
 
     ],
-    providers: [],
+    providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],
     bootstrap: [AppComponent, FooterComponent]
 })
 export class AppModule {

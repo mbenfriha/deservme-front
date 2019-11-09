@@ -35,7 +35,8 @@ export class ApiService {
       console.error('An error occurred:', error.error.message);
     } else {
       if (error.status == 401) {
-          this.storage.delete('user').subscribe(() => {});
+          localStorage.clear();
+
       }
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
