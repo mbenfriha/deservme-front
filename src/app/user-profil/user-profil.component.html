@@ -15,8 +15,15 @@
                 </p>
 
             </div>
+            <div class="col s12">
+                <div class="copy-profil">
+                    <input class="col s8" type="text" value="{{shortUrl + user.username}}" disabled>
+                    <button class="btn purple-border col s4" (click)="copyUrl(shortUrl + user.username)">Copier profil</button>
+
+                </div>
+            </div>
         </div>
-        <div class="col s12 l8 ">
+        <div class="col s12 l8 " *ngIf="!myProfil">
             <div class="title-page" >Ses quizz</div>
 
             <ul class="collection" >
@@ -27,6 +34,60 @@
                 <i class="material-icons">
                     error_outline
                 </i>
+            </div>
+        </div>
+
+        <div class="col s12 l8" *ngIf="myProfil">
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+                        <li class="tab col s6"><a (click)="displayTab('q')" class="{{tab == 'q' ? 'active' : ''}}">Mes Quizz</a></li>
+                        <li class="tab col s6"><a (click)="displayTab('r')" class="{{tab == 'r' ? 'active' : ''}}">Mes Réponses</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col s12 right" *ngIf="tab == 'q'" >
+                <div class="title-page">Quizz</div>
+                <ul class="collection z-depth-3">
+                    <app-single-quizz-list *ngFor="let quizz of quizzs" [quizz]="quizz"></app-single-quizz-list>
+                </ul>
+                <div class="empty" *ngIf="quizzs.length < 1">
+                    tu n'as pas encore crée de quizz <br>
+                    <i class="material-icons">
+                        error_outline
+                    </i>
+
+                    <button class="btn green-button" [routerLink]="['/createQuizz']">Créer mon premier quizz</button>
+
+                </div>
+            </div>
+            <div class="col s12" *ngIf="tab == 'r'">
+                <div class="title-page">Réponses</div>
+
+                <ul class="collection z-depth-3">
+                    <li class="collection-item avatar" *ngFor="let answer of answers">
+                        <img src="{{getAvatar(answer.avatar)}}" alt="img" class="circle" [routerLink]="['/profil/', answer.avatar]">
+                        <div [routerLink]="['/answer/'+answer.quizz_id]">
+                            <div class="title col s11">{{answer.title}} </div>
+                            <div class="col s11 result">Ton score : {{returnResult(answer)}}%</div>
+
+                        </div>
+                        <div>
+                            <a [routerLink]="['/answer/'+answer.quizz_id]" class="secondary-content col s1"><i class="material-icons right">
+                                chevron_right
+                            </i></a>
+                        </div>
+                    </li>
+                    <div class="empty" *ngIf="answers.length < 1">
+                        tu n'as encore répondu à aucun quizz <br>
+                        <i class="material-icons">
+                            error_outline
+                        </i>
+                    </div>
+
+                </ul>
+
             </div>
         </div>
     </div>

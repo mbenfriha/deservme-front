@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../services/api.service';
 import {User} from '../models/user';
 import {Quizz} from '../models/quizz';
-import {environment} from '../../environments/environment';
+import { environment } from '../../environments/environment';
 import {Answer} from '../models/answer';
+import {AuthenticationService} from '../services/authentication.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'app-user-profil',
@@ -17,11 +19,27 @@ export class UserProfilComponent implements OnInit {
     user: User;
     quizzs: Quizz;
     answers: Answer;
+    currentUser: User;
+    myProfil: boolean;
+    shortUrl = 'qzzy.in/';
+
+    tab = 'q'
 
     constructor(private route: ActivatedRoute,
-                private api: ApiService) {
+                private router: Router,
+                private api: ApiService,
+                private authenticationService: AuthenticationService,
+                private toastr: ToastrService,) {
         this.id = this.route.snapshot.paramMap.get('id');
-        console.log('ok');
+        this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+
+        this.router.routeReuseStrategy.shouldReuseRoute = function(){
+            return false;
+        }
+
+        if(this.currentUser._id == this.id) {
+            this.myProfil = true;
+        }
         this.api.getUserQuizz(this.id).subscribe((resp: any) => {
             if(resp.user) {
                 this.user = resp.user;
@@ -37,11 +55,42 @@ export class UserProfilComponent implements OnInit {
     }
 
 
+    copyUrl(val) {
+        let selBox = document.createElement('textarea');
+        selBox.style.position = 'fixed';
+        selBox.style.left = '0';
+        selBox.style.top = '0';
+        selBox.style.opacity = '0';
+        selBox.value = val;
+        document.body.appendChild(selBox);
+        selBox.focus();
+        selBox.select();
+        document.execCommand('copy');
+        document.body.removeChild(selBox);
+        this.toastr.success('Lien du profil copié ')
+    }
 
     getAvatar(id) {
         return environment.baseUrl + 'avatar/' + id + '.jpg';
     }
     ngOnInit() {
+    }
+
+    displayTab(tab) {
+        this.tab = tab;
+    }
+
+    returnResult(answer) {
+        const total = answer.questions.length;
+        let good = 0;
+
+        answer.questions.map(a => {
+            if (a.answer.rep) {
+                good++;
+            }
+        });
+
+        return (100 * good / total).toFixed();
     }
 
 }

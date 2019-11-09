@@ -88,7 +88,7 @@ export class AppComponent implements OnInit {
                         });
             }
             if (params['banned']) {
-                this.toastr.error('Vous avez été bannis ');
+               // this.toastr.error('Vous avez été bannis ');
             }
         });
 

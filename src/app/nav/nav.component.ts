@@ -17,6 +17,7 @@ export class NavComponent implements OnInit {
 
     @Input() currentUser: User;
     @Input() currentRoute: String;
+    
     constructor(private el: ElementRef,
                 private route: Router,
                 private storage: StorageMap) { }

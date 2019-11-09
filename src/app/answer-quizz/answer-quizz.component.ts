@@ -71,6 +71,7 @@ export class AnswerQuizzComponent implements OnInit {
                 this.quizz = q;
                 this.answer = new Answer;
                 this.answer.questions = [new Question()];
+                this.answer.avatar = this.quizz.user_id;
                 if(this.isConnected) {
                     console.log(this.currentUser, 'ok');
                     this.isConnected = true;
@@ -82,10 +83,9 @@ export class AnswerQuizzComponent implements OnInit {
                         if (this.quizz.user_id == this.currentUser._id) {
                             this.myQuizz = true;
                         }
-
+                        this.answer.title = this.quizz.title
                         this.answer.user_id = this.currentUser._id;
                         this.answer.username = this.currentUser.username;
-                        this.answer.avatar = this.currentUser.avatar;
                         this.answer.avatar_type = this.currentUser.avatar_type;
                         this.answer.questions = [new Question()];
                     });

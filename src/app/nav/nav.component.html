@@ -3,7 +3,7 @@
     <a class="right hide-on-med-and-down" (click)="disconnect()"><i class="material-icons disconnect-button">
       exit_to_app
     </i></a>
-    <a class="user right">
+    <a class="user right" [routerLink]="['/profil/' + currentUser._id]">
       <img src="{{getAvatar(currentUser._id)}}" alt="img {{currentUser.username}}">
       {{currentUser.username}}
     </a>
