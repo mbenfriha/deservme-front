@@ -44,8 +44,8 @@ export class UserProfilComponent implements OnInit {
         }
         this.api.getUserQuizz(this.id).subscribe((resp: any) => {
             if(resp.user) {
-                this.metafrenzyService.setAllTitleTags('MyQuizzy - Les quizz de ' + user.username);
-                this.metafrenzyService.setAllDescriptionTags('Viens répondre au quizz de ' + user.username);
+                this.metafrenzyService.setAllTitleTags('MyQuizzy - Les quizz de ' + resp.user.username);
+                this.metafrenzyService.setAllDescriptionTags('Viens répondre au quizz de ' + resp.user.username);
                 this.user = resp.user;
                 this.quizzs = resp.quizz;
                 this.answers = resp.answers;
