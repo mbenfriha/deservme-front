@@ -75,8 +75,6 @@ export class AppComponent implements OnInit {
                             }
                         },
                         error => {
-                            console.log(error, 'bah nnn');
-                          //  this.storage.clear().subscribe(() => {})
                             this.router.navigate(['/'], {queryParams: {banned: true}});
                         });
             }

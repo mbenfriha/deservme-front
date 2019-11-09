@@ -23,9 +23,14 @@ export class UserProfilComponent implements OnInit {
         this.id = this.route.snapshot.paramMap.get('id');
         console.log('ok');
         this.api.getUserQuizz(this.id).subscribe((resp: any) => {
-          this.user = resp.user;
-          this.quizzs = resp.quizz;
-          this.answers = resp.answers;
+            if(resp.user) {
+                this.user = resp.user;
+                this.quizzs = resp.quizz;
+                this.answers = resp.answers;
+            } else {
+                
+            }
+           
         }, err => {
           console.log(err);
         });
