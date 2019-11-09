@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment';
 import {Answer} from '../models/answer';
 import {AuthenticationService} from '../services/authentication.service';
 import {ToastrService} from 'ngx-toastr';
+import {MetafrenzyService} from 'ngx-metafrenzy';
 
 @Component({
     selector: 'app-user-profil',
@@ -29,7 +30,8 @@ export class UserProfilComponent implements OnInit {
                 private router: Router,
                 private api: ApiService,
                 private authenticationService: AuthenticationService,
-                private toastr: ToastrService,) {
+                private toastr: ToastrService,
+                private readonly metafrenzyService: MetafrenzyService,) {
         this.id = this.route.snapshot.paramMap.get('id');
         this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
 
@@ -42,6 +44,8 @@ export class UserProfilComponent implements OnInit {
         }
         this.api.getUserQuizz(this.id).subscribe((resp: any) => {
             if(resp.user) {
+                this.metafrenzyService.setAllTitleTags('MyQuizzy - Les quizz de ' + user.username);
+                this.metafrenzyService.setAllDescriptionTags('Viens répondre au quizz de ' + user.username);
                 this.user = resp.user;
                 this.quizzs = resp.quizz;
                 this.answers = resp.answers;
