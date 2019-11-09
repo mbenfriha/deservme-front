@@ -42,6 +42,7 @@ import { ModalRegisterComponent } from './modal-register/modal-register.componen
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {UserProfilComponent} from './user-profil/user-profil.component';
+import {SettingsComponent} from './settings/settings.component'
 import { StorageModule } from '@ngx-pwa/local-storage';
 
 import { faFacebookF, faTwitter, faLinkedinIn, faGooglePlusG, faPinterestP, faRedditAlien, faTumblr,
@@ -73,7 +74,8 @@ import { fas, faCommentAlt,
         NewQuizzComponent,
         MyQuizzComponent,
         ModalRegisterComponent,
-        UserProfilComponent
+        UserProfilComponent,
+        SettingsComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'deserveme' }),
