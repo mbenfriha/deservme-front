@@ -37,6 +37,10 @@ app.engine('html', ngExpressEngine({
   ]
 }));
 
+
+
+global['localStorage'] = global['window'].localStorage;
+
 app.set('view engine', 'html');
 app.set('views', DIST_FOLDER);
 
