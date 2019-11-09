@@ -29,49 +29,11 @@ export class ProfilComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
- /*   this.api.getCurrentUser().subscribe((v: User) => {
-        this.storage.set('user', v).subscribe(() => {})
 
-      if (!v.username) {
-        this.router.navigate(['/register']);
-      } else {
-        this.currentUser = v;
-      }
-    }, error => {
-      if (error) {
-          if (this.currentRoute !== 'quizz/:id' && this.currentRoute !== 'terms'
-              && this.currentRoute !== 'privacy' && this.currentRoute !== 'contact'
-              && this.currentRoute !== 'profil/:id') {
-              this.router.navigate(['/']);
-              this.storage.clear().subscribe(() => {})
-
-          }
-      }
-    });*/
   }
 
     ngOnChanges() {
-      /*  this.api.getCurrentUser().subscribe((v: User) => {
-            this.storage.get('ID').subscribe((data: any) => {
-                if(data == null){
-                    this.storage.set('user', v).subscribe(() => {})
-                }
-            }, () => {});
-            if (!v.username) {
-                this.router.navigate(['/register']);
-            } else {
-                this.currentUser = v;
-            }
-        }, error => {
-            if (error) {
-                if (this.currentRoute !== 'quizz/:id' && this.currentRoute !== 'terms'
-                    && this.currentRoute !== 'privacy' && this.currentRoute !== 'contact'
-                    && this.currentRoute !== 'profil/:id') {
-                    this.router.navigate(['/']);
-                    this.storage.clear().subscribe(() => {})
-                }
-            }
-        });*/
+
     }
 
 }
