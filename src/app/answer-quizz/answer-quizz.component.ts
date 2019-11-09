@@ -47,6 +47,7 @@ export class AnswerQuizzComponent implements OnInit {
     subjectState: Subject<any> = new Subject();
     subjectReport: Subject<any> = new Subject();
     tab = 'top'
+    shortUrl = environment.shortUrl;
 
     constructor(private api: ApiService,
                 private route: ActivatedRoute,

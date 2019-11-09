@@ -7,6 +7,8 @@ import {debounceTime} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {Quizz} from '../models/quizz';
 import {StorageMap} from '@ngx-pwa/local-storage';
+import { environment } from '../../environments/environment';
+
 
 @Component({
   selector: 'app-register',
@@ -21,6 +23,7 @@ export class RegisterComponent implements OnInit {
   subject: Subject<any> = new Subject();
   step = 1;
   quizz: Quizz;
+  shortUrl: environment.shortUrl;
 
   constructor(private api: ApiService,
               private route: ActivatedRoute,

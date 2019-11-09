@@ -22,7 +22,7 @@
                            [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"
                            [show]="6"
                            [size]="4"
-                           [url]="'https://myquizzy.com/quizz/'+ quizz._id"
+                           [url]="shortUrl + 'q/' + quizz.shortUrl"
                            [title]="'Mon quizz : '+ quizz.title"
                            [description]="'Essaye de répondre au mieux à mon quizz'"
                            [autoSetMeta]="false">
@@ -80,12 +80,14 @@
                              [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"
                              [show]="6"
                              [size]="4"
-                             [url]="'https://myquizzy.com/quizz/'+ quizz._id"
+                             [url]="shortUrl + 'q/' + quizz.shortUrl"
                              [title]="'Mon quizz : '+ quizz.title"
                              [description]="'Essaye de répondre au mieux à mon quizz'"
                              [autoSetMeta]="false">
 
               </share-buttons>
+
+
             </div>
 
             <button class="btn purple-border right col s12" (click)="sendReport()" [disabled]="report">
@@ -151,7 +153,7 @@
                              [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"
                              [show]="6"
                              [size]="4"
-                             [url]="'https://myquizzy.com/quizz/'+ quizz._id"
+                             [url]="shortUrl+ 'q/' + quizz.shortUrl"
                              [title]="'Mon quizz : '+ quizz.title"
                              [description]="'Essaye de répondre au mieux à mon quizz'"
                              [autoSetMeta]="false">
@@ -195,7 +197,7 @@
                            [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"
                            [show]="6"
                            [size]="4"
-                           [url]="'https://myquizzy.com/quizz/'+ quizz._id"
+                           [url]="shortUrl + 'q/' + quizz.shortUrl"
                            [title]="'Mon quizz : '+ quizz.title"
                            [description]="'Essaye de répondre au mieux à mon quizz'"
                            [autoSetMeta]="false">
@@ -264,7 +266,7 @@
                            [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"
                            [show]="6"
                            [size]="4"
-                           [url]="'https://myquizzy.com/quizz/'+ quizz._id"
+                           [url]="shortUrl + 'q/' + quizz.shortUrl"
                            [title]="'Mon quizz : '+ quizz.title"
                            [description]="'Essaye de répondre au mieux à mon quizz'"
                            [autoSetMeta]="false">
