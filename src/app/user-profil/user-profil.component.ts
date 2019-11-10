@@ -85,10 +85,10 @@ export class UserProfilComponent implements OnInit {
     }
 
     returnResult(answer) {
-        const total = answer.questions.length;
+        const total = answer.questions.filter(q => q.name).length;
         let good = 0;
 
-        answer.questions.map(a => {
+        answer.questions.filter(q => q.name).map(a => {
             if (a.answer.rep) {
                 good++;
             }

@@ -144,7 +144,9 @@ export class AnswerQuizzComponent implements OnInit {
     }
 
     calculResult(answer, alr) {
-        const total = answer.questions.length;
+
+
+        const total = answer.questions.filter(q => q.name).length;
         let good = 0;
 
         this.api.getQuizz(this.id).subscribe((q: Quizz) => {
@@ -152,7 +154,7 @@ export class AnswerQuizzComponent implements OnInit {
         });
 
         this.answer = answer;
-        answer.questions.map(a => {
+        answer.questions.filter(q => q.name).map(a => {
             if (a.answer.rep) {
                 good++;
             }
@@ -167,10 +169,10 @@ export class AnswerQuizzComponent implements OnInit {
     }
 
     returnResult(answer) {
-        const total = answer.questions.length;
+        const total = answer.questions.filter(q => q.name).length;
         let good = 0;
 
-        answer.questions.map(a => {
+        answer.questions.filter(q => q.name).map(a => {
             if (a.answer.rep) {
                 good++;
             }
@@ -232,6 +234,7 @@ export class AnswerQuizzComponent implements OnInit {
                 if (!this.isConnected) {
                     this.answer.questions.pop();
                 }
+
                 this.api.createAnswer(this.answer, this.quizz._id).subscribe((answer) => {
                     this.calculResult(answer, false);
                     this.alreadyAnswer = true;
