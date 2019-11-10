@@ -15,7 +15,6 @@ button {
   background: transparent;
   cursor: pointer;
   text-transform: none;
-  margin-right: 4px;
   box-shadow: none;
   border-radius: 0px;
 }
@@ -37,6 +36,9 @@ button:hover {
 
 .buttons button:first-of-type {
   border-right: 1px solid white;
+}
+.buttons button:last-of-type {
+  border-left: 1px solid white;
 }
 .title-page {
   overflow: hidden;

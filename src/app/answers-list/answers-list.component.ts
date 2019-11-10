@@ -15,9 +15,12 @@ export class AnswersListComponent implements OnInit {
     @Input() allAnswer: [];
     @Input() myQuizz: false;
     change= false;
-    elm = 'date'
-
-    asc = true;
+    asc = {
+        date: true,
+        alpha: false,
+        top: false
+    };
+    elm ='date'
     faSortAlphaDown = faSortAlphaDown;
     faSortNumericDown = faSortNumericDown;
     faSortAlphaUp = faSortAlphaUp;
@@ -48,34 +51,38 @@ export class AnswersListComponent implements OnInit {
     }
 
     sortBy(filter) {
+
+
         if(filter == 'alpha') {
-            this.elm = filter
-            this.asc = !this.asc;
-            if (!this.asc) {
+            this.asc.alpha = !this.asc.alpha;
+            this.asc.date = false;
+            this.asc.top = false;
+            this.elm = 'alpha';
+            if (!this.asc.alpha) {
                 this.allAnswer.sort((a: any, b: any) => (a.username > b.username) ? 1 : -1);
             } else {
                 this.allAnswer.sort((a: any, b: any) => (a.username < b.username) ? 1 : -1);
             }
         } else if(filter == 'date') {
-            this.elm = filter
-            this.asc = !this.asc;
-            if (!this.asc) {
-                this.allAnswer.sort((a: any, b: any) => (a.createdAT > b.createdAT) ? 1 : -1);
+            this.asc.date = !this.asc.date;
+            this.asc.alpha = false;
+            this.asc.top = false;
+            this.elm = 'date';
+            if (!this.asc.date) {
+                this.allAnswer.sort((a: any, b: any) => (a.createdAt > b.createdAt) ? 1 : -1);
             } else {
-                this.allAnswer.sort((a: any, b: any) => (a.createdAT < b.createdAT) ? 1 : -1);
+                this.allAnswer.sort((a: any, b: any) => (a.createdAt < b.createdAt) ? 1 : -1);
+            }
+        } else if(filter == 'top') {
+            this.asc.top = !this.asc.top;
+            this.asc.alpha = false;
+            this.asc.date = false;
+            this.elm = 'top';
+            if (!this.asc.top) {
+                this.allAnswer.sort((a: any, b: any) => (this.returnResult(a) > this.returnResult(b)) ? 1 : -1);
+            } else {
+                this.allAnswer.sort((a: any, b: any) => (this.returnResult(a) < this.returnResult(b)) ? 1 : -1);
             }
         }
     }
-
-    top() {
-        this.elm = 'num'
-        this.asc = !this.asc;
-        if (!this.asc) {
-            this.allAnswer.sort((a: any, b: any) => (this.returnResult(a) > this.returnResult(b)) ? 1 : -1);
-        } else {
-            this.allAnswer.sort((a: any, b: any) => (this.returnResult(a) < this.returnResult(b)) ? 1 : -1);
-        }
-
-    }
-
 }

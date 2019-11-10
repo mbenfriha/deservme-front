@@ -1,16 +1,19 @@
 <ng-container *ngIf="!myQuizz">
     <ul class="collection allanswers z-depth-3" *ngIf="allAnswer && allAnswer.length > 0">
-        <div class="title-page">
+        <div class="title-page ">
             <div class="left">Classement</div>
             <div class="right buttons">
-                <button class="btn" (click)="sortBy('date')">
-                    <fa-icon [icon]="faSortAmountDown"></fa-icon>
+                <button class="btn {{elm == 'date' ? 'sel' : ''}}" (click)="sortBy('date')">
+                    <fa-icon *ngIf="!asc.date" [icon]="faSortAmountDown"></fa-icon>
+                    <fa-icon *ngIf="asc.date" [icon]="faSortAmountUp"></fa-icon>
                 </button>
-                <button class="btn" (click)="sortBy('alpha')">
-                    <fa-icon [icon]="faSortAlphaDown"></fa-icon>
+                <button class="btn {{elm == 'alpha' ? 'sel' : ''}}" (click)="sortBy('alpha')">
+                    <fa-icon *ngIf="!asc.alpha"  [icon]="faSortAlphaDown"></fa-icon>
+                    <fa-icon *ngIf="asc.alpha"  [icon]="faSortAlphaUp"></fa-icon>
                 </button>
-                <button class="right btn" (click)="top()">
-                    <fa-icon [icon]="faSortNumericDown"></fa-icon>
+                <button class=" btn {{elm == 'top' ? 'sel' : ''}}" (click)="sortBy('top')" >
+                    <fa-icon *ngIf="!asc.top"  [icon]="faSortNumericDown"></fa-icon>
+                    <fa-icon *ngIf="asc.top"  [icon]="faSortNumericUp"></fa-icon>
                 </button>
             </div>
         </div>
