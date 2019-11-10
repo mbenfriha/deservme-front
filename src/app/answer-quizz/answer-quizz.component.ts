@@ -45,9 +45,11 @@ export class AnswerQuizzComponent implements OnInit {
     modal = false;
     modalDelete = false;
     subjectState: Subject<any> = new Subject();
+    subjectClose: Subject<any> = new Subject();
     subjectReport: Subject<any> = new Subject();
     tab = 'top'
     shortUrl = environment.shortUrl;
+    load = true;
 
     constructor(private api: ApiService,
                 private route: ActivatedRoute,
@@ -112,6 +114,12 @@ export class AnswerQuizzComponent implements OnInit {
                     this.changeState();
                 }
             );
+        this.subjectClose
+            .pipe(debounceTime(500))
+            .subscribe(() => {
+                    this.changeClose();
+                }
+            );
         this.subjectReport
             .pipe(debounceTime(500))
             .subscribe(() => {
@@ -125,6 +133,7 @@ export class AnswerQuizzComponent implements OnInit {
             this.allAnswer = answers;
         });
 
+        this.load = false;
     }
     previewQ() {
         this.nbrQ--;
@@ -256,6 +265,15 @@ export class AnswerQuizzComponent implements OnInit {
             }, (err) => this.toastr.error('Une erreur est survenue'));
         }
     }
+    
+    changeClose() {
+        if (this.quizz.user_id == this.currentUser._id) {
+            this.api.changeCloseQuizz(this.id).subscribe((q: Quizz) => {
+                this.quizz = q;
+                this.toastr.success('ton quizz est maintenant en ' + (this.quizz.close ? 'fermé' : 'ouvert'));
+            }, (err) => this.toastr.error('Une erreur est survenue'));
+        }
+    }
 
     openModalDelete() {
         this.modalDelete = true;
@@ -271,6 +289,11 @@ export class AnswerQuizzComponent implements OnInit {
     setState() {
         this.subjectState.next();
     }
+    setClose() {
+        this.subjectClose.next();
+    }
+    
+    
     deleteQuizz() {
         if (this.quizz.user_id == this.currentUser._id) {
             this.api.deleteQuizz(this.id).subscribe((q: Quizz) => {

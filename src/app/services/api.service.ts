@@ -188,6 +188,16 @@ export class ApiService {
             );
     }
 
+    // change state quizz
+    changeCloseQuizz(quizz_id: string): Observable<Quizz> {
+        return this.http
+            .get<Quizz>(this.base_path + 'closeQuizz/' + quizz_id, this.httpOptions)
+            .pipe(
+                retry(0),
+                catchError(this.handleError)
+            );
+    }
+
     // delete state quizz
     deleteQuizz(quizz_id: string): Observable<Quizz> {
         return this.http

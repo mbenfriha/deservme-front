@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="!load" class="container">
   <div class="row">
   <ng-container *ngIf="exist && quizz">
     <ng-container *ngIf="isConnected">
@@ -12,6 +12,8 @@
           <div class="col s10">
             <p>
               - <span>Ce quizz est <span class="{{quizz.private ? 'red-text' : 'green-text'}}">{{quizz.private ? "privé" : "public"}}</span></span> <br>
+              - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
+                <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
               - Ce quizz contient {{quizz.questions.length}} questions <br>
               - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
               <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
@@ -31,7 +33,12 @@
 
           </div>
           <div class="col s12">
-            <button class="purple-border col s12 btn" (click)="setState()">Rendre mon quizz <span color="red-text">{{quizz.private ? "public" : "privé"}}</span></button>
+            <button class="purple-border col s12 btn" (click)="setState()">Rendre mon quizz
+              <span color="red-text"> {{quizz.private ? "public" : "privé"}} </span>
+            </button>
+            <button class="purple-border col s12 btn" (click)="setClose()">
+              {{quizz.close ? "Ouvrir" : "Fermé"}} mon quizz
+            </button>
             <button class="green-button col s12 btn" (click)="openModalDelete()">Supprimer mon quizz</button>
           </div>
         </div>
@@ -72,6 +79,8 @@
 
             <div class="col s10">
               <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}}</a> <br>
+                - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
+                <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
                 - Ce quizz contient {{quizz.questions.length}} questions <br>
                 - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
                 <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
@@ -146,6 +155,8 @@
 
             <div class="col s10">
               <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}}</a> <br>
+                - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
+                <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
                 - Ce quizz contient {{answer.questions.length}} questions <br>
                 - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
                 <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
@@ -189,6 +200,8 @@
 
           <div class="col s10">
             <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}}</a> <br>
+              - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
+              <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
               - Ce quizz contient {{quizz.questions.length}} questions <br>
               - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
               <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
@@ -229,7 +242,7 @@
                 <h2>Choisis une réponse :</h2>
                 <p *ngFor="let choice of q.choices; let j = index">
                   <label>
-                    <input name="group{{i}}" type="radio" (click)="setAnswer(choice, q)"  [checked]="answer?.questions[i]?.answer?.name == choice.name" />
+                    <input [disabled]="quizz.close" name="group{{i}}" type="radio" (click)="setAnswer(choice, q)"  [checked]="answer?.questions[i]?.answer?.name == choice.name" />
                     <span>{{choice.name}}</span>
                   </label>
                 </p>
@@ -239,7 +252,8 @@
           <div class="row answer-end">
             <div class="col s12">
               <button (click)="previewQ()" class="white-button left btn" *ngIf="nbrQ > 0">Précédent</button>
-              <button (click)="nextQ()" class="white-button right btn" *ngIf="nbrQ < quizz.questions.length">Suivant</button>
+              <button (click)="openModal()" class="white-button left btn col s12" *ngIf="quizz.close">Tu dois te connecter pour participer</button>
+              <button (click)="nextQ()" class="white-button right btn" *ngIf="nbrQ < quizz.questions.length && !quizz.close" [disabled]="quizz.close">Suivant</button>
               <button (click)="validateAnswer()" class="white-button right btn" *ngIf="nbrQ == quizz.questions.length">Valider</button>
             </div>
           </div>
@@ -259,6 +273,8 @@
 
           <div class="col s10">
             <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}} </a><br>
+              - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
+              <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
               - Ce quizz contient {{answer.questions.length}} questions <br>
               - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
               <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
@@ -303,6 +319,24 @@
     </div>
   </ng-container>
   </div>
+</div>
+
+<div *ngIf="load" class="container loading">
+
+  <svg>
+    <g>
+      <path d="M 50,100 A 1,1 0 0 1 50,0"/>
+    </g>
+    <g>
+      <path d="M 50,75 A 1,1 0 0 0 50,-25"/>
+    </g>
+    <defs>
+      <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#9851f4;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#03da7d;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+  </svg>
 </div>
 
 <app-modal-register (modalClose)="closeModal()" [modal]="modal"></app-modal-register>

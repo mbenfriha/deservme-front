@@ -30,6 +30,7 @@ export class CreateQuizzComponent implements OnInit {
     this.quizz = new Quizz;
     this.quizz.title = '';
     this.quizz.private = false;
+    this.quizz.close = false;
     this.question = new Question;
     this.question.name = '';
     this.answers = [new Choice, new Choice] ;

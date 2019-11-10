@@ -9,6 +9,7 @@ export class Quizz {
   questions: [Question];
   username: string;
   private: boolean;
+  close: boolean;
   shortUrl: string;
 }
 
