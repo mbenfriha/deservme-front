@@ -30,6 +30,9 @@ button:focus {
 button:hover {
   color: var(--color-purple);
   background: white;
+  svg {
+    color: var(--color-purple);
+  }
 }
 
 .buttons button:first-of-type {

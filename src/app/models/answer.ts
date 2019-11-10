@@ -5,7 +5,7 @@ export class Answer {
   username: string;
   avatar: string;
   avatar_type: string;
-  createdAt: string;
+  createdAt: Date;
   questions: [Question];
 }
 
