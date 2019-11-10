@@ -40,7 +40,6 @@ export class AuthenticationService {
 
     logout() {
         // remove user from local storage to log user out
-        //this.storage.delete('user').subscribe(() => {});
         localStorage.removeItem('user');
 
         this.currentUserSubject.next(null);

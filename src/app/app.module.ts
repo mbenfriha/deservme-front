@@ -6,16 +6,16 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
-import { UserRegisterComponent } from './user-register/user-register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ToastrModule } from 'ngx-toastr';
+import { IconModule } from './icon.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { MetafrenzyModule } from 'ngx-metafrenzy';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 import { MaterializeAccordionModule, MaterializeCollapsibleModule, MaterializeTabGroupModule } from 'materialize-angular';
 
@@ -46,20 +46,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {UserProfilComponent} from './user-profil/user-profil.component';
 import {SettingsComponent} from './settings/settings.component'
-import { StorageModule } from '@ngx-pwa/local-storage';
-
-import { faFacebookF, faTwitter, faLinkedinIn, faGooglePlusG, faPinterestP, faRedditAlien, faTumblr,
-        faWhatsapp, faVk, faFacebookMessenger, faTelegramPlane, faMix, faXing, faLine, fab
-        } from '@fortawesome/free-brands-svg-icons';
-
-import { fas, faCommentAlt,
-    faEnvelope, faCheck, faPrint, faExclamation, faLink, faEllipsisH, faMinus } from '@fortawesome/free-solid-svg-icons'
-
 
 @NgModule({
     declarations: [
         AppComponent,
-        UserRegisterComponent,
         HomeComponent,
         TermsComponent,
         PrivacyComponent,
@@ -99,20 +89,14 @@ import { fas, faCommentAlt,
         BrowserAnimationsModule,
         MetafrenzyModule.forRoot(),
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-        StorageModule.forRoot({ IDBNoWrap: true }),
         MaterializeAccordionModule,
         MaterializeCollapsibleModule,
-        MaterializeTabGroupModule
+        MaterializeTabGroupModule,
+        IconModule
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],
     bootstrap: [AppComponent, FooterComponent]
 })
 export class AppModule {
-      constructor(library: FaIconLibrary) {
-           library.addIconPacks(fas, fab);
-           library.addIcons(faFacebookF, faTwitter, faLinkedinIn, faGooglePlusG, faPinterestP, faRedditAlien, faTumblr,
-               faWhatsapp, faVk, faFacebookMessenger, faTelegramPlane, faMix, faXing, faLine, faCommentAlt,
-               faEnvelope, faCheck, faPrint, faExclamation, faLink, faEllipsisH, faMinus);
-    }
 }

@@ -4,7 +4,6 @@ import { MetafrenzyService } from 'ngx-metafrenzy';
 import { ToastrService } from 'ngx-toastr';
 
 import { environment } from '../../environments/environment';
-import {StorageMap} from '@ngx-pwa/local-storage';
 import {AuthenticationService} from '../services/authentication.service';
 import {User} from '../models/user';
 
@@ -23,7 +22,6 @@ export class HomeComponent implements OnInit {
               private router: Router,
               private readonly metafrenzyService: MetafrenzyService,
               private toastr: ToastrService,
-              private storage: StorageMap,
               private authenticationService: AuthenticationService) {
 
       this.metafrenzyService.setAllTitleTags('MyQuizzy - Crée, joue et partage des tas de quizz');

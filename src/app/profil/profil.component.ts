@@ -3,7 +3,6 @@ import {User} from '../models/user';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../services/api.service';
 import {Quizz} from '../models/quizz';
-import {StorageMap} from '@ngx-pwa/local-storage';
 import {AuthenticationService} from '../services/authentication.service';
 
 @Component({
@@ -21,7 +20,6 @@ export class ProfilComponent implements OnInit, OnChanges {
   constructor(private api: ApiService,
               private route: ActivatedRoute,
               private router: Router,
-              private storage: StorageMap,
               private authenticationService: AuthenticationService,) {
       console.log('profil');
       this.authenticationService.currentUser.subscribe(x => this.currentUser = x);

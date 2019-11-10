@@ -5,7 +5,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 declare var jQuery: any;
 
 import { environment } from '../../environments/environment';
-import {StorageMap} from '@ngx-pwa/local-storage';
 
 
 @Component({
@@ -19,8 +18,7 @@ export class NavComponent implements OnInit {
     @Input() currentRoute: String;
     
     constructor(private el: ElementRef,
-                private route: Router,
-                private storage: StorageMap) { }
+                private route: Router) { }
 
     ngOnInit() {
         jQuery('.sidenav').sidenav();

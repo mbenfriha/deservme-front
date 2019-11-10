@@ -6,7 +6,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {debounceTime} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {Quizz} from '../models/quizz';
-import {StorageMap} from '@ngx-pwa/local-storage';
 import { environment } from '../../environments/environment';
 
 
@@ -28,8 +27,7 @@ export class RegisterComponent implements OnInit {
   constructor(private api: ApiService,
               private route: ActivatedRoute,
               private router: Router,
-              private formBuilder: FormBuilder,
-              private storage: StorageMap) { }
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     // create username form

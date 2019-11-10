@@ -6,7 +6,6 @@ import { retry, catchError } from 'rxjs/operators';
 import {Quizz} from '../models/quizz';
 import {Answer} from '../models/answer';
 import { environment } from '../../environments/environment';
-import {StorageMap} from '@ngx-pwa/local-storage';
 
 
 @Injectable({
@@ -17,8 +16,7 @@ export class ApiService {
   // API path
   base_path = environment.baseUrl;
 
-  constructor(private http: HttpClient,
-              private storage: StorageMap) { }
+  constructor(private http: HttpClient) { }
 
   // Http Options
   httpOptions = {

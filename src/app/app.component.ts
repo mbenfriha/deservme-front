@@ -3,7 +3,6 @@ import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router} from '@an
 import { MetafrenzyService } from 'ngx-metafrenzy';
 import {AuthenticationService} from './services/authentication.service';
 import {User} from './models/user';
-import {StorageMap} from '@ngx-pwa/local-storage';
 import {ToastrService} from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 
@@ -28,7 +27,6 @@ export class AppComponent implements OnInit {
         private readonly metafrenzyService: MetafrenzyService,
         private authenticationService: AuthenticationService,
         private route: ActivatedRoute,
-        private storage: StorageMap,
         private toastr: ToastrService,
         @Inject(DOCUMENT) private document: Document,
         @Inject(PLATFORM_ID) private platformId: any,

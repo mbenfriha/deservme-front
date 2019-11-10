@@ -6,7 +6,6 @@ import {Quizz} from '../models/quizz';
 import {User} from '../models/user';
 import { ToastrService } from 'ngx-toastr';
 import {MetafrenzyService} from 'ngx-metafrenzy';
-import {StorageMap} from '@ngx-pwa/local-storage';
 import {AuthenticationService} from '../services/authentication.service';
 
 
@@ -27,7 +26,6 @@ export class MyQuizzComponent implements OnInit {
               private route: ActivatedRoute,
               private toastr: ToastrService,
               private readonly metafrenzyService: MetafrenzyService,
-              private storage: StorageMap,
               private authenticationService: AuthenticationService) {
       this.metafrenzyService.setAllTitleTags('MyQuizzy - Mes quizz');
       this.metafrenzyService.setAllDescriptionTags('Liste de tes quizz');

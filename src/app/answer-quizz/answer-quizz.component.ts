@@ -10,7 +10,6 @@ import { MetafrenzyService } from 'ngx-metafrenzy';
 import { environment } from '../../environments/environment';
 import {Subject} from 'rxjs';
 import {debounceTime, takeUntil} from 'rxjs/operators';
-import {StorageMap} from '@ngx-pwa/local-storage';
 import {AuthenticationService} from '../services/authentication.service';
 
 declare var jQuery: any;
@@ -56,7 +55,6 @@ export class AnswerQuizzComponent implements OnInit {
                 private toastr: ToastrService,
                 private router: Router,
                 private readonly metafrenzyService: MetafrenzyService,
-                private storage: StorageMap,
                 private authenticationService: AuthenticationService) {
         this.id = this.route.snapshot.paramMap.get('id');
         this.authenticationService.currentUser.subscribe(x => {
