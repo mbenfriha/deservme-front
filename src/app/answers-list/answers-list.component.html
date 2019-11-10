@@ -1,28 +1,62 @@
+<ng-container *ngIf="!myQuizz">
+    <ul class="collection allanswers z-depth-3" *ngIf="allAnswer && allAnswer.length > 0">
+        <div class="title-page">
+            <div class="left">Classement</div>
+            <div class="right buttons">
+                <button class="btn" (click)="sortBy()">
+                    <fa-icon [icon]="faSortAlphaDown"></fa-icon>
 
-<ul class="collection allanswers z-depth-3" *ngIf="allAnswer && allAnswer.length > 0">
+                </button>
+                <button class="right btn" (click)="top()">
+                    <fa-icon [icon]="faSortNumericDown"></fa-icon>
+                </button>
+            </div>
+        </div>
+        <li class="collection-item avatar" *ngFor="let answer of allAnswer">
+
+            <img *ngIf="answer.user_id" src="{{getAvatar(answer.user_id)}}" alt="img avatar {{answer.username}}" [routerLink]="['/profil/'+answer.user_id]" class="circle">
+            <img *ngIf="!answer.user_id" src="../assets/images/android-icon-144x144.png" alt="img avatar {{answer.username}}" class="circle">
+
+
+            <span class="title">{{answer.username}}</span>
+            <p> Score de {{returnResult(answer)}}%<br>
+            </p>
+        </li>
+    </ul>
+</ng-container>
+
+<ng-container *ngIf="myQuizz">
     <div class="title-page">
         <div class="left">Classement</div>
-        <div class="right buttons">
-        <button class="btn" (click)="sortBy()">
-            <fa-icon [icon]="faSortAlphaDown"></fa-icon>
+    <!--    <div class="right buttons">
+            <button class="btn" (click)="sortBy()">
+                <fa-icon [icon]="faSortAlphaDown"></fa-icon>
 
-        </button>
-        <button class="right btn" (click)="top()">
-            <fa-icon [icon]="faSortNumericDown"></fa-icon>
-        </button>
-        </div>
+            </button>
+            <button class="right btn" (click)="top()">
+                <fa-icon [icon]="faSortNumericDown"></fa-icon>
+            </button>
+        </div>-->
     </div>
-    <li class="collection-item avatar" *ngFor="let answer of allAnswer">
-
+    <materialize-accordion>
+          <materialize-collapsible *ngFor="let answer of allAnswer">
+            <materialize-collapsible-title class="valign-wrapper">
         <img *ngIf="answer.user_id" src="{{getAvatar(answer.user_id)}}" alt="img avatar {{answer.username}}" [routerLink]="['/profil/'+answer.user_id]" class="circle">
         <img *ngIf="!answer.user_id" src="../assets/images/android-icon-144x144.png" alt="img avatar {{answer.username}}" class="circle">
+        <span class="title">{{answer.username}} - Score de {{returnResult(answer)}}%</span>
 
+        </materialize-collapsible-title>
+                <materialize-collapsible-content>
+            <ul>
+                <li *ngFor="let r of answer.questions">
+                    {{r.name}} :  <span class="{{r.answer.rep ? 'green-text' : 'red-text'}}">{{r.answer.name}}</span>
+                </li>
+            </ul>
+        </materialize-collapsible-content>
+          </materialize-collapsible>
+    </materialize-accordion>
+</ng-container>
 
-        <span class="title">{{answer.username}}</span>
-        <p> Score de {{returnResult(answer)}}%<br>
-        </p>
-    </li>
-</ul>
 <div class="empty" *ngIf="allAnswer?.length < 1">
     Personne n'a encore participer au quizz <br>
     <i class="material-icons">

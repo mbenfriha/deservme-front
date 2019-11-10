@@ -46,27 +46,36 @@
        <div class="col s12 l8">
         <div class="row">
           <div class="col s12">
-            <ul class="tabs">
+          <!--  <ul class="tabs">
               <li class="tab col s6"><a (click)="displayTab('top')" class="{{tab == 'top' ? 'active' : ''}}">Classement</a></li>
               <li class="tab col s6"><a (click)="displayTab('resp')" class="{{tab == 'resp' ? 'active' : ''}}">Réponses</a></li>
-            </ul>
+            </ul>-->
+
+            <materialize-tab-group>
+                <materialize-tab title="Classement">
+              <div class="col s12">
+                <app-answers-list [allAnswer]="allAnswer" [myQuizz]="true"></app-answers-list>
+              </div>
+            </materialize-tab>
+                <materialize-tab title="Réponses">
+
+              <div class="col s12 right">
+                <div class="title-page">Réponses</div>
+                <ul class="collection z-depth-3">
+                  <li class="collection-item" *ngFor="let q of quizz.questions">
+                    <b class="title">{{q.name}} : </b>
+                    <ng-container *ngFor="let a of q.choices">
+                      <span class="text-green" *ngIf="a.rep == true"> {{a.name}}</span>
+                    </ng-container>
+                  </li>
+                </ul>
+              </div>
+
+            </materialize-tab>
+            </materialize-tab-group>
           </div>
         </div>
 
-        <div class="col s12 right" *ngIf="tab == 'resp'" >
-          <div class="title-page">Réponses</div>
-          <ul class="collection z-depth-3">
-            <li class="collection-item" *ngFor="let q of quizz.questions">
-              <b class="title">{{q.name}} : </b>
-              <ng-container *ngFor="let a of q.choices">
-                <span class="text-green" *ngIf="a.rep == true"> {{a.name}}</span>
-              </ng-container>
-            </li>
-          </ul>
-        </div>
-        <div class="col s12" *ngIf="tab == 'top'">
-          <app-answers-list [allAnswer]="allAnswer"></app-answers-list>
-        </div>
        </div>
 
       </ng-container>

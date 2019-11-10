@@ -1,5 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
+$materialize-tab-group-indicator-background: #01da7d !important;
+$materialize-tab-group-active-item-color: #01da7d !important;
+$materialize-fonts-path: '~materialize-angular/fonts';
+@import '~materialize-angular/styles/materialize-angular.scss';
+
+
+
 html, body { height: 100%; }
 body {
   margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;

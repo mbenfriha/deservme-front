@@ -17,6 +17,9 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 
+import { MaterializeAccordionModule, MaterializeCollapsibleModule, MaterializeTabGroupModule } from 'materialize-angular';
+
+
 
 import {
     MatIconModule,
@@ -97,7 +100,9 @@ import { fas, faCommentAlt,
         MetafrenzyModule.forRoot(),
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
         StorageModule.forRoot({ IDBNoWrap: true }),
-
+        MaterializeAccordionModule,
+        MaterializeCollapsibleModule,
+        MaterializeTabGroupModule
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],

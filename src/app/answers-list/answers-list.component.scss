@@ -1,3 +1,4 @@
+
 .collection {
   margin-top: 0;
 }
@@ -36,8 +37,8 @@ button:hover {
 }
 .title-page {
   overflow: hidden;
-  padding: 7px 15px;
-  font-size: 20px;
+ /* padding: 7px 15px;
+  font-size: 20px;*/
 }
 
 .already {
@@ -57,5 +58,12 @@ button:hover {
   font-size: 24px;
   i {
     font-size: 6em;
+  }
+}
+
+materialize-collapsible-title {
+  img {
+    width: 30px;
+    margin-right: 1em;
   }
 }

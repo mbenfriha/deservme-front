@@ -4,6 +4,7 @@ import {environment} from '../../environments/environment';
 
 import { faSortAlphaDown, faSortNumericDown } from '@fortawesome/free-solid-svg-icons';
 
+declare var jQuery: any;
 
 @Component({
     selector: 'app-answers-list',
@@ -13,6 +14,8 @@ import { faSortAlphaDown, faSortNumericDown } from '@fortawesome/free-solid-svg-
 export class AnswersListComponent implements OnInit {
 
     @Input() allAnswer: [];
+    @Input() myQuizz: false;
+    change= false;
 
     asc = true;
     faSortAlphaDown = faSortAlphaDown;
@@ -41,12 +44,13 @@ export class AnswersListComponent implements OnInit {
     }
 
     sortBy() {
-      this.asc = !this.asc;
+        this.asc = !this.asc;
       if (!this.asc) {
           this.allAnswer.sort((a: any, b: any) => (a.username > b.username) ? 1 : -1);
       } else {
           this.allAnswer.sort((a: any, b: any) => (a.username < b.username) ? 1 : -1);
       }
+        this.allAnswer;
     }
 
     top() {
@@ -56,6 +60,7 @@ export class AnswersListComponent implements OnInit {
         } else {
             this.allAnswer.sort((a: any, b: any) => (this.returnResult(a) < this.returnResult(b)) ? 1 : -1);
         }
+
     }
 
 }
