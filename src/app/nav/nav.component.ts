@@ -16,6 +16,7 @@ export class NavComponent implements OnInit {
 
     @Input() currentUser: User;
     @Input() currentRoute: String;
+    environment = environment;
     
     constructor(private el: ElementRef,
                 private route: Router) { }

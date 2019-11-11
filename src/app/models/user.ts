@@ -6,6 +6,7 @@ export class User {
   facebook: FacebookUser;
   twitter: TwitterUser;
   instagram: InstagramUser;
+  google: GoogleUser;
   avatar: string;
   avatar_type: string;
   banned: boolean;
@@ -29,6 +30,13 @@ class InstagramUser {
   token: string;
   email: string;
   name: string;
+}
+
+class GoogleUser {
+    id: string;
+    token: string;
+    email: string;
+    name: string;
 }
 
 export class UserRegister {
