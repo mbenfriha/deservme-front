@@ -10,6 +10,7 @@ export class User {
   avatar: string;
   avatar_type: string;
   banned: boolean;
+  role: string;
 }
 
 class FacebookUser {
