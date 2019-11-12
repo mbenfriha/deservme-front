@@ -222,11 +222,11 @@ export class AnswerQuizzComponent implements OnInit {
                 this.answer.username = this.username;
             }
 
-            if (!this.answer.username) {
+            if (!this.answer.username && !this.isConnected) {
                 this.toastr.error('Vous devez rentrer un pseudo');
-            } else if (!RegExp('^[A-Za-zÀ-ÖØ-öø-ÿ0-9._-]*$').test(this.answer.username)) {
+            } else if (!RegExp('^[A-Za-zÀ-ÖØ-öø-ÿ0-9._-]*$').test(this.answer.username) && !this.isConnected) {
                 this.toastr.error('Le pseudo ne peut contenir que des chiffres et lettres et les caractères : "_" "-" "."' );
-            } else if (this.answer.username.length < 3 || this.answer.username.length > 16) {
+            } else if (!this.isConnected && (this.answer.username.length < 3 || this.answer.username.length > 16)) {
                 this.toastr.error('Le pseudo doit faire 3 caractères au minimum');
             } else {
                 if (!this.isConnected) {

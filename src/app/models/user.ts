@@ -47,4 +47,3 @@ export class UserRegister {
   password2: string;
   email: string;
 }
-
