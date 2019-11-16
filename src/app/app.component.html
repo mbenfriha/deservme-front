@@ -1,12 +1,23 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<app-header *ngIf="!home" ></app-header>
-<app-profil [nav]="home" [currentRoute]="currentRoute">
+<app-nav *ngIf="!home" [currentRoute]="currentRoute" [currentUser]="user"></app-nav>
 
-  <router-outlet></router-outlet>
-</app-profil>
-
+  <router-outlet *ngIf="loaded">
+  </router-outlet>
 
 
+<div *ngIf="!loaded" class="loader-wrapper">
+    <div class="loader-home">
+        <div class="roller"></div>
+        <div class="roller"></div>
+    </div>
 
+    <div id="loader2" class="loader-home">
+        <div class="roller"></div>
+        <div class="roller"></div>
+    </div>
 
-
+    <div id="loader3" class="loader-home">
+        <div class="roller"></div>
+        <div class="roller"></div>
+    </div>
+</div>

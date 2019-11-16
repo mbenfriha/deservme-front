@@ -11,6 +11,7 @@ export class User {
   avatar_type: string;
   banned: boolean;
   role: string;
+  token: string;
 }
 
 class FacebookUser {

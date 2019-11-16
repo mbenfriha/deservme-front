@@ -1,0 +1,38 @@
+.title {
+  font-size: 16px;
+  font-weight: 900;
+  overflow: hidden;
+}
+
+.collection-item{
+  p {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+}
+
+.collection-item:last-child {
+  border-bottom: 1px solid #e2e2e2 !important;
+}
+
+.secondary-content {
+  top: 24px !important;
+  right: 0px !important;
+
+  i {
+    color:  var(--color-purple);
+    font-size:40px;
+  }
+}
+
+.avatar {
+  overflow: hidden;
+}
+
+
+.lock {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+}

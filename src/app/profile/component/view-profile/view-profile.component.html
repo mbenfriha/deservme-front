@@ -1,0 +1,109 @@
+
+<div class="container" *ngIf="quizzs">
+    <div class="row">
+
+        <div class="col s12 l4 user z-depth-3">
+            <div class="title-page">{{user.username}}</div>
+            <div class="col s2">
+                <img class="circle" src="{{getAvatar(user.user_id)}}" alt="img {{user.username}}">
+            </div>
+
+            <div class="col s10">
+                <p>
+                    <span *ngIf="quizzs?.length > 0">- {{quizzs.length}} Quizz crée</span>
+                    <span *ngIf="quizzs?.length < 1">- Aucun quizz crée</span><br>
+                    <span *ngIf="answers?.length > 0">- A joué à {{answers.length}} Quizz</span>
+                    <span *ngIf="answers?.length < 1">- Aucun quizz joué</span><br>
+                </p>
+
+            </div>
+            <div class="col s12">
+                <div class="copy-profil">
+                    <input class="col s8" type="text" value="{{shortUrl + user.username}}" disabled>
+                    <button class="btn purple-border col s4" (click)="copyUrl(shortUrl + user.username)">Copier profil</button>
+
+                </div>
+            </div>
+        </div>
+        <div class="col s12 l8 no-padding" *ngIf="!myProfil">
+            <div class="title-page" >Ses quizz</div>
+
+            <ul class="collection" *ngIf="quizzs.length > 0">
+                <app-single-quizz-list *ngFor="let quizz of quizzs" [quizz]="quizz"></app-single-quizz-list>
+            </ul>
+            <div class="empty" *ngIf="quizzs.length < 1">
+                {{user.username}} n'a pas encore crée de quizz <br>
+                <i class="material-icons">
+                    error_outline
+                </i>
+            </div>
+        </div>
+
+        <div class="col s12 l8 nopadding" *ngIf="myProfil">
+            <div class="col s12 nopadding">
+                <materialize-tab-group>
+                      <materialize-tab title="Quizz">
+                    <ul class="collection" *ngIf="quizzs.length > 0">
+                        <app-single-quizz-list *ngFor="let quizz of quizzs" [quizz]="quizz"></app-single-quizz-list>
+                    </ul>
+                    <div class="empty col s12" *ngIf="quizzs.length < 1">
+                        Tu n'as pas encore crée de quizz <br>
+                        <i class="material-icons">
+                            error_outline
+                        </i>
+
+                    </div>
+
+                    <button *ngIf="quizzs.length < 1" class="btn green-button col s8 offset-s2 l4 offset-l4" [routerLink]="['/createQuizz']">Créer mon premier quizz</button>
+
+                </materialize-tab>
+                      <materialize-tab title="Réponses">
+
+                    <ul class="collection" *ngIf="answers.length > 0">
+                        <li class="collection-item avatar" *ngFor="let answer of answers">
+                            <img src="{{getAvatar(answer.avatar)}}" alt="img" class="circle" [routerLink]="['/profil/', answer.avatar]">
+                            <div [routerLink]="['/quizz/'+answer.quizz_id]">
+                                <div class="title col s11">{{answer.title}} </div>
+                                <div class="col s11 result">Ton score : {{returnResult(answer)}}%</div>
+
+                            </div>
+                            <div>
+                                <a [routerLink]="['/answer/'+answer.quizz_id]" class="secondary-content col s1"><i class="material-icons right">
+                                    chevron_right
+                                </i></a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="empty col s12" *ngIf="answers.length < 1">
+                        Tu n'as encore répondu à aucun quizz <br>
+                        <i class="material-icons">
+                            error_outline
+                        </i>
+                    </div>
+                    <button *ngIf="answers.length < 1" class="btn green-button col s8 offset-s2 l4 offset-l4" [routerLink]="['/discover']">Aller sur discover</button>
+
+                </materialize-tab>
+                    <materialize-tab title="Paramètres">
+                        ..
+                    </materialize-tab>
+                </materialize-tab-group>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<ng-container *ngIf="!user && notExist">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="empty" >
+                    Cet utilisateur n'existe pas ou a été banni <br>
+                    <i class="material-icons">
+                        error_outline
+                    </i>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

@@ -1,0 +1,347 @@
+<div class="container">
+    <div class="row">
+        <ng-container *ngIf="exist && quizz">
+            <ng-container *ngIf="isConnected">
+                <ng-container *ngIf="myQuizz">
+                    <div class="col s12 l4 user z-depth-3">
+                        <div class="title-page">{{quizz.title}}</div>
+                        <div class="col s2">
+                            <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}">
+                        </div>
+
+                        <div class="col s10">
+                            <p>
+                                - <span>Ce quizz est <span class="{{quizz.private ? 'red-text' : 'green-text'}}">{{quizz.private ? "privé" : "public"}}</span></span> <br>
+                                - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
+                                <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
+                                - Ce quizz contient {{quizz.questions.length}} questions <br>
+                                - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
+                                <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
+                                <span *ngIf="quizz?.answer_count > 1">{{quizz.answer_count}} ont participés à ce quizz</span>
+                            </p>
+
+                            <share-buttons class="right" [theme]="'default'"
+                                           [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"
+                                           [show]="6"
+                                           [size]="4"
+                                           [url]="shortUrl + 'q/' + quizz.shortUrl"
+                                           [title]="'Mon quizz : '+ quizz.title"
+                                           [description]="'Essaye de répondre au mieux à mon quizz'"
+                                           [autoSetMeta]="false">
+
+                            </share-buttons>
+
+                        </div>
+                        <div class="col s12">
+                            <button class="purple-border col s12 btn" (click)="setState()">Rendre mon quizz
+                                <span color="red-text"> {{quizz.private ? "public" : "privé"}} </span>
+                            </button>
+                            <button class="purple-border col s12 btn" (click)="setClose()">
+                                {{quizz.close ? "Ouvrir" : "Fermé"}} mon quizz
+                            </button>
+                            <button class="green-button col s12 btn" (click)="openModalDelete()">Supprimer mon quizz</button>
+                        </div>
+                    </div>
+
+                    <div class="col s12 l8">
+                        <div class="row">
+                            <div class="col s12">
+                                <!--  <ul class="tabs">
+                                    <li class="tab col s6"><a (click)="displayTab('top')" class="{{tab == 'top' ? 'active' : ''}}">Classement</a></li>
+                                    <li class="tab col s6"><a (click)="displayTab('resp')" class="{{tab == 'resp' ? 'active' : ''}}">Réponses</a></li>
+                                  </ul>-->
+
+                                <materialize-tab-group>
+                                      <materialize-tab title="Classement">
+                                    <div class="col s12 no-padding">
+                                        <app-answers-list [allAnswer]="allAnswer" [myQuizz]="true"></app-answers-list>
+                                    </div>
+                                </materialize-tab>
+                                      <materialize-tab title="Réponses">
+
+                                    <div class="col s12 right">
+                                        <div class="title-page">Réponses</div>
+                                        <ul class="collection z-depth-3">
+                                            <li class="collection-item" *ngFor="let q of quizz.questions">
+                                                <b class="title">{{q.name}} : </b>
+                                                <ng-container *ngFor="let a of q.choices">
+                                                    <span class="text-green" *ngIf="a.rep == true"> {{a.name}}</span>
+                                                </ng-container>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </materialize-tab>
+                                </materialize-tab-group>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </ng-container>
+                <ng-container *ngIf="!myQuizz">
+                    <ng-container *ngIf="!alreadyAnswer">
+                        <div class="col s12 l4 user z-depth-3">
+                            <div class="col s2">
+                                <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" [routerLink]="['/profil/'+quizz.user_id]">
+                            </div>
+
+                            <div class="col s10">
+                                <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}}</a> <br>
+                                    - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
+                                    <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
+                                    - Ce quizz contient {{quizz.questions.length}} questions <br>
+                                    - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
+                                    <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
+                                    <span *ngIf="quizz?.answer_count > 1">{{quizz.answer_count}} ont participés à ce quizz</span>
+                                </p>
+
+                                <share-buttons class="right" [theme]="'default'"
+                                               [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"
+                                               [show]="6"
+                                               [size]="4"
+                                               [url]="shortUrl + 'q/' + quizz.shortUrl"
+                                               [title]="'Mon quizz : '+ quizz.title"
+                                               [description]="'Essaye de répondre au mieux à mon quizz'"
+                                               [autoSetMeta]="false">
+
+                                </share-buttons>
+
+
+                            </div>
+
+                            <button class="btn purple-border right col s12" (click)="sendReport()" [disabled]="report">
+                                Signaler le quizz
+                            </button>
+
+                        </div>
+                        <div class="col s12 l8 offset-l1 answer-quizz">
+                            <div class="title-answer">{{quizz.title}}</div>
+                            <div class="row question z-depth-3" *ngIf="nbrQ == quizz.questions.length">
+                                <div class="col s12">
+                                    <div class="title-question col s12 ">Rentre un pseudo </div>
+
+                                    <input type="text" placeholder="Pseudo" maxlength="16" [(ngModel)]="username">
+                                </div>
+                            </div>
+                            <ng-container  *ngFor="let q of quizz.questions, let i = index;">
+                                <div class="row question z-depth-3" *ngIf="nbrQ == i" >
+                                    <div class="title-question col s12 ">{{q.name}} </div>
+
+                                    <div class="row answers" >
+                                        <h2 class="choice-answer">Choisis une réponse :</h2>
+                                        <p *ngFor="let choice of q.choices; let j = index">
+                                            <label>
+                                                <input name="group{{i}}" type="radio" (click)="setAnswer(choice, q)"  [checked]="answer?.questions[i]?.answer?.name == choice.name" />
+                                                <span>{{choice.name}}</span>
+                                            </label>
+                                        </p>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <div class="row answer-end">
+                                <div class="col s12">
+                                    <button (click)="previewQ()" class="white-button left btn" *ngIf="nbrQ > 0">Précédent</button>
+                                    <button (click)="nextQ()" class="white-button right btn" *ngIf="nbrQ < quizz.questions.length - 1 ">Suivant</button>
+                                    <button (click)="validateAnswer()" class="white-button right btn" *ngIf="nbrQ == quizz.questions.length - 1 ">Valider</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col s12 no-padding">
+
+                            <app-answers-list [allAnswer]="allAnswer"></app-answers-list>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="alreadyAnswer">
+                        <div class="title-page">{{quizz.title}}</div>
+
+                        <div class="col s12  user z-depth-3">
+                            <div class="col s2">
+                                <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" [routerLink]="['/profil/'+quizz.user_id]">
+                            </div>
+
+                            <div class="col s10">
+                                <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}}</a> <br>
+                                    - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
+                                    <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
+                                    - Ce quizz contient {{answer.questions.length}} questions <br>
+                                    - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
+                                    <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
+                                    <span *ngIf="quizz?.answer_count > 1">{{quizz.answer_count}} ont participés à ce quizz</span>
+                                </p>
+                                <share-buttons class="right" [theme]="'default'"
+                                               [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"
+                                               [show]="6"
+                                               [size]="4"
+                                               [url]="shortUrl+ 'q/' + quizz.shortUrl"
+                                               [title]="'Mon quizz : '+ quizz.title"
+                                               [description]="'Essaye de répondre au mieux à mon quizz'"
+                                               [autoSetMeta]="false">
+
+                                </share-buttons>
+                            </div>
+
+                            <button class="btn purple-border right col s12" (click)="sendReport()" [disabled]="report">
+                                Signaler le quizz
+                            </button>
+                        </div>
+
+                        <div  class="already col s12">
+                            {{finalString}}<br>
+                            <span> {{result}} % </span>
+                        </div>
+
+                        <div class="col s12 no-padding">
+                            <app-answers-list [allAnswer]="allAnswer"></app-answers-list>
+                        </div>
+                    </ng-container>
+                </ng-container>
+
+            </ng-container>
+            <ng-container *ngIf="!isConnected">
+                <ng-container *ngIf="!alreadyAnswer">
+                    <div class="col s12 l4 user z-depth-3">
+                        <div class="col s2">
+                            <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" [routerLink]="['/profil/'+quizz.user_id]">
+                        </div>
+
+                        <div class="col s10">
+                            <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}}</a> <br>
+                                - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
+                                <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
+                                - Ce quizz contient {{quizz.questions.length}} questions <br>
+                                - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
+                                <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
+                                <span *ngIf="quizz?.answer_count > 1">{{quizz.answer_count}} ont participés à ce quizz</span>
+                            </p>
+
+                            <share-buttons class="right" [theme]="'default'"
+                                           [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"
+                                           [show]="6"
+                                           [size]="4"
+                                           [url]="shortUrl + 'q/' + quizz.shortUrl"
+                                           [title]="'Mon quizz : '+ quizz.title"
+                                           [description]="'Essaye de répondre au mieux à mon quizz'"
+                                           [autoSetMeta]="false">
+
+                            </share-buttons>
+
+                        </div>
+                        <button class="btn purple-border right col s12" (click)="sendReport()" [disabled]="report">
+                            Signaler le quizz
+                        </button>
+                        <button class="btn green-button right col s12" (click)="openModal()">S'inscire / Se connecter</button>
+                    </div>
+                    <div class="col s12 l8 offset-l1 answer-quizz">
+                        <div class="title-answer">{{quizz.title}}</div>
+                        <div class="row question z-depth-3" *ngIf="nbrQ == quizz.questions.length">
+                            <div class="col s12">
+                                <div class="title-question col s12 ">Rentre un pseudo </div>
+
+                                <input type="text" placeholder="Pseudo" minlength="3" maxlength="16" [(ngModel)]="username">
+                            </div>
+                        </div>
+                        <ng-container  *ngFor="let q of quizz.questions, let i = index;">
+                            <div class="row question z-depth-3" *ngIf="nbrQ == i" >
+                                <div class="title-question col s12 ">{{q.name}} </div>
+
+                                <div class="row answers" >
+                                    <h2>Choisis une réponse :</h2>
+                                    <p *ngFor="let choice of q.choices; let j = index">
+                                        <label>
+                                            <input [disabled]="quizz.close" name="group{{i}}" type="radio" (click)="setAnswer(choice, q)"  [checked]="answer?.questions[i]?.answer?.name == choice.name" />
+                                            <span>{{choice.name}}</span>
+                                        </label>
+                                    </p>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div class="row answer-end">
+                            <div class="col s12">
+                                <button (click)="previewQ()" class="white-button left btn" *ngIf="nbrQ > 0">Précédent</button>
+                                <button (click)="openModal()" class="white-button left btn col s12" *ngIf="quizz.close">Tu dois te connecter pour participer</button>
+                                <button (click)="nextQ()" class="white-button right btn" *ngIf="nbrQ < quizz.questions.length && !quizz.close" [disabled]="quizz.close">Suivant</button>
+                                <button (click)="validateAnswerAnony()" class="white-button right btn" *ngIf="nbrQ == quizz.questions.length">Valider</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col s12 l8 offset-l1 no-padding">
+                        <app-answers-list [allAnswer]="allAnswer"></app-answers-list>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="alreadyAnswer">
+                    <div class="title-page">{{quizz.title}}</div>
+
+                    <div class="col s12  user z-depth-3">
+                        <div class="col s2">
+                            <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" [routerLink]="['/profil/'+quizz.user_id]">
+                        </div>
+
+                        <div class="col s10">
+                            <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}} </a><br>
+                                - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
+                                <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
+                                - Ce quizz contient {{answer.questions.length}} questions <br>
+                                - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
+                                <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
+                                <span *ngIf="quizz?.answer_count > 1">{{quizz.answer_count}} ont participés à ce quizz</span>
+                            </p>
+                            <share-buttons class="right" [theme]="'default'"
+                                           [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"
+                                           [show]="6"
+                                           [size]="4"
+                                           [url]="shortUrl + 'q/' + quizz.shortUrl"
+                                           [title]="'Mon quizz : '+ quizz.title"
+                                           [description]="'Essaye de répondre au mieux à mon quizz'"
+                                           [autoSetMeta]="false">
+
+                            </share-buttons>
+                        </div>
+                        <button class="btn purple-border right col s12" (click)="sendReport()" [disabled]="report">
+                            Signaler le quizz
+                        </button>
+
+                    </div>
+
+                    <div  class="already col s12">
+                        <button class="btn green-button col s12" (click)="openModal()">Inscris toi pour créer ton quizz</button>
+
+                        {{finalString}}<br>
+                        <span> {{result}} % </span>
+                    </div>
+
+                    <div class="col s12 no-padding">
+                        <app-answers-list [allAnswer]="allAnswer"></app-answers-list>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="!exist">
+            <div class="empty" *ngIf="!exist">
+                Ce quizz n'existe pas ou a été supprimé <br>
+                <i class="material-icons">
+                    error_outline
+                </i>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<app-modal-register (modalClose)="closeModal()" [modal]="modal"></app-modal-register>
+
+<div class="overlay" (click)="closeModalDelete()" *ngIf="modalDelete"></div>
+
+<div class="modal-connexion modal" *ngIf="modalDelete">
+    <div class="modal-content row">
+        <h4>Est-tu sûr de vouloir supprimer ton quizz ?</h4>
+
+        <div class="col s12">
+            <button class="btn col s5 waves-effect waves-light green" (click)="deleteQuizz()">Oui</button>
+            <button class="btn col s5 offset-s2 waves-effect waves-light red" (click)="closeModalDelete()">Annuler</button>
+        </div>
+    </div>
+</div>

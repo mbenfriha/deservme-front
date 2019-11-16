@@ -1,0 +1,143 @@
+.create-quizz {
+  background: white;
+  .title-quizz {
+    background: var(--color-purple);
+    padding-bottom: 5px;
+
+    [type="checkbox"].filled-in:checked + span:not(.lever):after {
+      border: 2px solid white;
+      background-color: var(--color-green);
+    }
+
+    [type="checkbox"].filled-in:not(:checked) + span:not(.lever):after {
+      border-color: white;
+    }
+
+    input {
+      color:white;
+      text-align: center;
+      padding: 0;
+    }
+
+    label {
+      /* float: right;*/
+      margin-top: 10px;
+    }
+
+    span {
+      padding-left: 25px;
+      color: white;
+    }
+
+    margin: 0;
+    input:focus {
+      border-bottom: 1px solid #d6d6d6;
+      box-shadow: 0 1px 0 0 var(--color-purple);
+      color:white !important;
+      font-weight: 900;
+    }
+  }
+  input {
+    border-bottom: 1px solid white;
+    box-shadow: 0 1px 0 0 var(--color-purple);
+    font-weight: 600;
+    padding-left:10px;
+  }
+  input:focus {
+    border-bottom: 1px solid #d6d6d6;
+    box-shadow: 0 1px 0 0 var(--color-purple);
+    font-weight: 900;
+  }
+
+  label {
+
+    font-size: 20px;
+  }
+
+  .questions {
+    border: 1px solid white;
+    margin-bottom: 25px;
+    padding-top: 6px;
+    hr {
+      width: 33%;
+      height: 1px;
+      background: white;
+      box-sizing: unset;
+      overflow: auto;
+    }
+    .delete-question {
+      margin-top: 5px;
+      margin-right: 5px;
+    }
+  }
+  .answer-right {
+    margin: 0em 1em;
+  }
+  .answers {
+    margin-bottom:0em;
+    h2 {
+      font-size: 18px;
+      color:black;
+    }
+    .answer {
+      height: 5em;
+      padding-left: 0;
+      .white-button {
+        margin: 1em 0em;
+      }
+      input {
+        box-shadow: none;
+      }
+
+      [type="checkbox"] + span:not(.lever) {
+        font-size: 15px;
+        padding-left: 25px;
+      }
+    }
+    .true-answer {
+      input {
+        border: 1px solid #00ff00;
+      }
+    }
+
+    .false-answer {
+      input {
+        border-bottom: 1px solid #ff0020;
+      }
+    }
+  }
+
+  .question {
+    margin: 3em 0em 0em 0em;
+    input {
+      border: 1px solid var(--color-purple);
+    }
+
+  }
+
+  .add-question {
+    margin-top: 2em;
+  }
+
+  .large-answer {
+    padding: 1em 0em;
+  }
+
+  .create-end {
+    margin: 0;
+    background: var(--color-green);
+    padding-top: 1em;
+
+  }
+
+  [type="checkbox"].filled-in:checked + span:not(.lever):after {
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-purple);
+    background-color: var(--color-purple);
+    z-index: 0;
+  }
+
+
+}

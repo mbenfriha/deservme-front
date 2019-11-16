@@ -1,0 +1,49 @@
+<nav>
+  <div class="nav-wrapper">
+    <a data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <ul id="nav-mobile" class="left hide-on-med-and-down">
+      <li *ngIf="currentUser"><a [ngClass]="{'text-purple': currentRoute=='quizz/discover'}" [routerLink]="['/quizz/discover']">Découverte</a></li>
+      <li *ngIf="currentUser"><a [ngClass]="{'text-purple': currentRoute=='quizz/creat'}"  [routerLink]="['/quizz/create']">Créer un quizz</a></li>
+      <li *ngIf="currentUser"><a [ngClass]="{'text-purple': currentRoute=='profile/:id'}" [routerLink]="['/profile/'+currentUser._id]">Mes quizz</a></li>
+      <li *ngIf="!currentUser"><a href="">Se connecter</a></li>
+    </ul>
+
+    <a class="right hide-on-med-and-down" (click)="disconnect()"><i class="material-icons disconnect-button"  *ngIf="currentUser">
+      exit_to_app
+    </i></a>
+    <a class="user right" [routerLink]="['/profile/' + currentUser._id]" *ngIf="currentUser">
+      <img src="{{getAvatar(currentUser._id)}}" alt="img {{currentUser.username}}">
+      <span class="hide-on-small-and-down"> {{currentUser.username}}</span>
+    </a>
+    <div class="logo-nav">
+      <img src="../../assets/images/white-logo.png" alt="logo myquizzy myquizz quizz">
+    </div>
+  </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
+  <li class="header-nav background-gradient-fixed">
+    <div class="row">
+      <div class="col s12 logo-top">
+        <img routerLink="/"  src="../../assets/images/white-logo.png" alt="logo myquizzy.com myquizzy quizz">
+      </div>
+    </div>
+    </li>
+  <li *ngIf="currentUser"><a class="sidenav-close" [ngClass]="{'text-purple': currentRoute=='quizz/discover'}" [routerLink]="['/quizz/discover']">Découverte</a></li>
+  <li *ngIf="currentUser"><a class="sidenav-close" [ngClass]="{'text-purple': currentRoute=='quizz/creat'}"  [routerLink]="['/quizz/create']">Créer un quizz</a></li>
+  <li *ngIf="currentUser"><a class="sidenav-close" [ngClass]="{'text-purple': currentRoute=='profile/:id'}" [routerLink]="['/profile/'+currentUser?._id]">Mes quizz</a></li>
+  <li *ngIf="currentUser">
+    <a class="sidenav-close"  (click)="disconnect()">Deconnexion</a>
+  </li>
+  <li *ngIf="!currentUser">
+    <a class="sidenav-close" (click)="openModal()" >Se connecter</a>
+  </li>
+
+  <li class="grey-text lighten-4 bottom-nav-menu logo">
+    <img routerLink="/"  src="../../assets/images/color-logo.png" alt="logo myquizzy.com myquizzy quizz">
+  </li>
+</ul>
+
+
+
+<app-modal-register (modalClose)="closeModal()" [modal]="modal"></app-modal-register>

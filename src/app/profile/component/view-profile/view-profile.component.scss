@@ -1,0 +1,76 @@
+.user {
+  margin-bottom: 1em;
+  padding:0;
+  img {
+    margin-top: 20px;
+    width: 48px;
+    height: 48px;
+  }
+  p{
+    padding: 1em 0em;
+  }
+}
+
+.empty {
+  color: #00000038;
+  margin-top: 1em;
+  text-align: center;
+  font-size: 24px;
+  i {
+    font-size: 6em;
+  }
+}
+
+
+.tabs {
+  a {
+    color: var(--color-green);
+
+  }
+  a.active {
+    border-bottom: 2px solid var(--color-green);
+  }
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.collection-item{
+  p {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+}
+
+.secondary-content {
+  top: 24px !important;
+  i {
+    color:  var(--color-purple);
+    font-size:40px;
+  }
+}
+
+.avatar {
+  overflow: hidden;
+}
+
+
+.lock {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+}
+
+.result {
+  color: grey;
+}
+
+@media screen and (max-width: 992px){
+  .nopadding {
+    padding: 0;
+  }
+
+}

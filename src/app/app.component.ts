@@ -1,13 +1,15 @@
 import {Component, ElementRef, OnChanges, OnInit, SimpleChange,PLATFORM_ID, Inject } from '@angular/core';
 import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
 import { MetafrenzyService } from 'ngx-metafrenzy';
-import {AuthenticationService} from './services/authentication.service';
+import {AuthenticationService} from './core/authentication/authentication.service';
 import {User} from './models/user';
 import {ToastrService} from 'ngx-toastr';
 import { first } from 'rxjs/operators';
+import  { LoaderService } from "./core/service/loader.service";
 
 import { DOCUMENT } from '@angular/common';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import {isNullOrUndefined} from "util";
 
 
 @Component({
@@ -20,12 +22,13 @@ export class AppComponent implements OnInit {
     home = true;
     currentRoute = '';
     user: User;
-
+    loaded = null;
 
     constructor(
         private router: Router,
         private readonly metafrenzyService: MetafrenzyService,
         private authenticationService: AuthenticationService,
+        private loaderService: LoaderService,
         private route: ActivatedRoute,
         private toastr: ToastrService,
         @Inject(DOCUMENT) private document: Document,
@@ -46,10 +49,12 @@ export class AppComponent implements OnInit {
             rel: 'canonical',
             href: 'https://myquizzy.com'
         });
-            this.authenticationService.currentUser.subscribe(x => this.user = x);
+        this.authenticationService.currentUser.subscribe(x => this.user = x);
 
     }
     ngOnInit() {
+
+        this.loaderService.load.subscribe((l) => this.loaded = isNullOrUndefined(l) || l);
         //get if is home
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
@@ -58,43 +63,11 @@ export class AppComponent implements OnInit {
                     this.home = true;
                     this.currentRoute = '';
                 } else {
-                    this.currentRoute = this.getDeepestTitle(this.router.routerState.snapshot.root)
-
+                    this.currentRoute = this.getDeepestTitle(this.router.routerState.snapshot.root);
                     this.home = false;
                 }
             }
         });
-
-        //check login
-        this.route.queryParams.subscribe(params => {
-            if (params['id']) {
-                console.log("j'ai un param id")
-                this.authenticationService.login()
-                    .subscribe(
-                        (user: User) => {
-                            console.log('un user')
-                            if(!user.username) {
-                                this.router.navigate(['/register']);
-                            } else {
-                                if(this.home) {
-                                    this.router.navigate(['/discover'])
-                                }
-                            }
-                        },
-                        error => {
-                            this.router.navigate(['/'], {queryParams: {banned: true}});
-                        });
-            }
-            if (params['banned']) {
-               // this.toastr.error('Vous avez été bannis ');
-            }
-        });
-
-        if(this.user && !this.user.username) {
-            console.log('go register');
-            this.router.navigate(['/register']);
-        }
-        
     }
 
     getDeepestTitle(routeSnapshot: ActivatedRouteSnapshot) {

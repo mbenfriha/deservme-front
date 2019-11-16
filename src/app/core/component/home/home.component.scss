@@ -1,0 +1,56 @@
+.header-home {
+
+  button {
+    font-size: 20px;
+  }
+
+  #register {
+    background: white;
+    span {
+
+      background: -webkit-linear-gradient(256deg, var(--color-purple), var(--color-green));
+      background-size: 400% 400%;
+
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-animation: AnimationName 10s infinite linear;
+    }
+  }
+
+  .card-image {
+    img {
+      max-width: 350px;
+    }
+  }
+  .header-text {
+    text-align: center;
+    color:white;
+    font-size:20px;
+  }
+}
+
+
+.main {
+ .card {
+   box-shadow: none;
+   border: none;
+   background: transparent;
+   .btn-floating {
+     text-align: center;
+     color: white;
+     font-weight: 900;
+   }
+   .card-title {
+     font-weight: 900;
+     text-shadow: black 0px 0Px 3Px;
+   }
+ }
+}
+
+.logo {
+  text-align: center;
+  img {
+    width: 100px;
+    margin: 1em 0em;
+  }
+}

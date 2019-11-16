@@ -1,0 +1,45 @@
+
+<div class="background-gradient-fixed row register">
+    <div class="col s12 l4 center-align offset-l4" *ngIf="step == 1">
+        <h2>Saisis un pseudo</h2>
+        <form [formGroup]="registerForm">
+            <input  type="text" (keyup)="usernameChange()" maxlength="16" formControlName="username" class="form-control"/>
+            <div class="invalid-feedback col s8">
+                <div> <i *ngIf="name.unique" class="fa fa-check-square green-text"></i> <i *ngIf="!name.unique" class="fa fa-minus-circle red-text"></i> Pseudo libre</div>
+                <div> <i *ngIf="name.length" class="fa fa-check-square green-text"></i> <i *ngIf="!name.length" class="fa fa-minus-circle red-text"></i> 3 caractères minimum </div>
+                <div> <i *ngIf="name.alpha" class="fa fa-check-square green-text"></i> <i *ngIf="!name.alpha" class="fa fa-minus-circle red-text"></i> uniquement chiffres, lettres, caractères : "_" "-" "."' autorisé </div>
+            </div>
+            <div class="col s12">
+                <button (click)="onSubmit()" [disabled]="!name.unique || !name.length || !name.alpha" class="white-button col s4 offset-s4 center-align">Valider</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col s12 l4 center-align offset-l4" *ngIf="step == 2">
+        <h2>Créée ton premier quizz</h2>
+
+        <!--
+            <app-create-quizz (quizzCreated)="checkQuizzCreate($event)"></app-create-quizz>
+        -->
+
+        <button class="btn white-button" (click)="goToProfile()">Créer mon quizz plus-tard</button>
+    </div>
+
+    <div class="col s12 l4 center-align offset-l4" *ngIf="step == 3">
+        <h2>Partage ton premier quizz</h2>
+
+        <!--    <share-buttons [theme]="'default'"
+                           [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"
+                           [show]="5"
+                           [size]="4"
+                           [url]="shortUrl + 'q/' + quizz.shortUrl"
+                           [title]="'Mon quizz : '+ quizz.title"
+                           [description]="'Essaye de répondre au mieux à mon quizz'"
+                           [autoSetMeta]="false">
+
+            </share-buttons>-->
+        <button class="btn white-button" (click)="goToProfile()">Terminer</button>
+
+
+    </div>
+</div>

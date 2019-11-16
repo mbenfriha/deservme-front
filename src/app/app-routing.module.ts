@@ -1,31 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {HomeComponent} from './home/home.component';
-import {TermsComponent} from './terms/terms.component';
-import {PrivacyComponent} from './privacy/privacy.component';
-import {ContactComponent} from './contact/contact.component';
-import {RegisterComponent} from './register/register.component';
-import {ProfilComponent} from './profil/profil.component';
-import {DiscoverComponent} from './discover/discover.component';
-import {NewQuizzComponent} from './new-quizz/new-quizz.component';
-import {MyQuizzComponent} from './my-quizz/my-quizz.component';
-import {AnswerQuizzComponent} from './answer-quizz/answer-quizz.component';
-import {UserProfilComponent} from './user-profil/user-profil.component';
-import {AuthGuard} from './_helpers';
+import {TermsComponent} from './core/component/terms/terms.component';
+import {PrivacyComponent} from './core/component/privacy/privacy.component';
+import {ContactComponent} from './core/component/contact/contact.component';
+import {UsernameGuard} from "./core/authentication/guard/username.guard";
 
 const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'terms', component: TermsComponent },
-    { path: 'privacy', component: PrivacyComponent},
-    { path: 'contact', component: ContactComponent },
-    { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
-    { path: 'profil', component: ProfilComponent},
-    { path: 'discover', component: DiscoverComponent, canActivate: [AuthGuard] },
-    { path: 'createQuizz', component: NewQuizzComponent, canActivate: [AuthGuard] },
-    { path: 'allQuizz/:id', component: MyQuizzComponent, canActivate: [AuthGuard]},
-    { path: 'quizz/:id', component: AnswerQuizzComponent},
-    { path: 'profil/:id', component: UserProfilComponent},
-    { path: '**', redirectTo: '' }
+    { path: '',         loadChildren: () => import('./core/component/home/home.module').then(value => value.HomeModule)},
+    { path: 'terms',    loadChildren: () => import('./core/component/terms/terms.module').then(value => value.TermsModule)},
+    { path: 'privacy',  loadChildren: () => import('./core/component/privacy/privacy.module').then(value => value.PrivacyModule)},
+    { path: 'contact',  loadChildren: () => import('./core/component/contact/contact.module').then(value => value.ContactModule)},
+    { path: 'quizz',    loadChildren: () => import('./quizz/quizz.module').then(value => value.QuizzModule), canActivate: [UsernameGuard]},
+    { path: 'profile',  loadChildren: () => import('./profile/profile.module').then(value => value.ProfileModule)},
+    { path: '**',       redirectTo: '' }
 
 ];
 
