@@ -31,7 +31,7 @@
                         <div class="col large-answer">
                             <button class="purple-border " (click)="deleteAnswer(i, j)">X</button>
                         </div>
-                        <div class="col s9 l9 ">
+                        <div class="col s8 l9 ">
                             <input type="text" id="answer" name="answer" placeholder="réponse {{j+1}}" maxlength="90" [(ngModel)]="choice.name">
                         </div>
                         <div class="col s2 large-answer">
@@ -49,7 +49,6 @@
                 <button class="green-border btn col s12" *ngIf="question.choices.length < 4" (click)="addAnswer(i)">Ajouter une réponse </button>
             </div>
         </div>
-
         <div class="row create-quizz create-end">
             <div class="col s12">
                 <button class="white-button left btn" (click)="addQuestion()" *ngIf="quizz.questions.length < 20"> Ajouter une question </button>
