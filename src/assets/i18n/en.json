@@ -19,7 +19,9 @@
     "privacy": "Privacy policy",
     "terms": "Terms of use",
     "true": "true",
-    "false": "false"
+    "false": "false",
+    "yes": "yes",
+    "cancel": "cancel"
   },
 
   "quizz": {
@@ -55,6 +57,7 @@
     "successanswer": "Bravo you're done, here's your result:",
     "needconnection": "You have to login to play",
     "proposeregister": "Register to create your quiz",
+    "askdelete": "Are you sure you want to delete your quizz ?",
 
     "titleofquizz": "quizz title",
     "setprivate": "Private quizz (Only accessible via the url)",
@@ -112,7 +115,7 @@
     "report": "Thank you for reporting the quizz",
     "changestate": "Your quiz is now in {{value}}",
     "changeclose": "Your quiz is now {{value}}",
-    "uploadprofile": "Your profile has been uploaded"
+    "uploadprofile": "Your profile has been uploaded",
   }
 
 }

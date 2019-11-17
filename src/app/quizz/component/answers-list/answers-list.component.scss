@@ -40,6 +40,10 @@ button:hover {
 .buttons button:last-of-type {
   border-left: 1px solid white;
 }
+
+.buttons button {
+    padding: 0px 10px;
+}
 .title-page {
   overflow: hidden;
  /* padding: 7px 15px;

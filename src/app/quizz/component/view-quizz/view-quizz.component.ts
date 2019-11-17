@@ -221,7 +221,7 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
                 this.toastr.error(res);
             });
         } else if (!RegExp('^[A-Za-zÀ-ÖØ-öø-ÿ0-9._-]*$').test(this.answer.username) && !this.isConnected) {
-            this.translate.get('error.regex',).subscribe((res: string) => {
+            this.translate.get('error.needregex',).subscribe((res: string) => {
                 this.toastr.error(res);
             });
         } else if (!this.isConnected && (this.answer.username.length < 3 || this.answer.username.length > 16)) {

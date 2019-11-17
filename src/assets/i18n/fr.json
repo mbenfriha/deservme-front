@@ -20,7 +20,9 @@
     "privacy": "Politique de confidentialité",
     "terms": "Conditions d'utilisation",
     "true": "vrai",
-    "false": "faux"
+    "false": "faux",
+    "yes": "oui",
+    "cancel": "annuler"
   },
 
   "quizz": {
@@ -56,6 +58,7 @@
     "successanswer": "Bravo tu as terminé, voici ton résultat :",
     "needconnection": "Tu dois te connecter pour participer",
     "proposeregister": "Inscris toi pour créer ton quizz",
+    "askdelete": "Es-tu sûr de vouloir supprimer ton quizz ?",
 
     "titleofquizz": "titre du quizz",
     "setprivate": "Quizz Privé (Uniquement accessible via l'url)",
