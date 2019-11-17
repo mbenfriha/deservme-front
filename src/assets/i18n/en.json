@@ -76,7 +76,13 @@
     "createfirst": "Create my first quizz",
     "godiscover": "Go to discover",
     "usernoexist": "This user does not exist or has been banned",
-    "settings": "Settings"
+    "settings": "Settings",
+    "password": "password",
+    "repassword": "Retype password",
+    "mail": "Mail",
+    "avatar": "My picture",
+    "file": "File",
+    "update": "Update"
   },
   "nav": {
     "createquizz": "Create quizz",
@@ -97,12 +103,16 @@
     "needusername": "You must enter a username",
     "needregex": "The nickname can only contain numbers and letters and the characters : '_', '-', '.'",
     "needusernamelength": "The username must be at least 3 characters",
-    "error": "An error has occurred"
+    "error": "An error has occurred",
+    "avatartomuch": "Avatar doit faire < 3mb",
+    "samepass": "Password are not same",
+    "alreadytaken": "Mail has already been taken"
   },
   "success" : {
     "report": "Thank you for reporting the quizz",
     "changestate": "Your quiz is now in {{value}}",
-    "changeclose": "Your quiz is now {{value}}"
+    "changeclose": "Your quiz is now {{value}}",
+    "uploadprofile": "Your profile has been uploaded"
   }
 
 }

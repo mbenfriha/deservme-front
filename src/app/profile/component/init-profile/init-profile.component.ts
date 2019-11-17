@@ -78,6 +78,7 @@ export class InitProfileComponent implements OnInit, OnDestroy {
                     this.authenticationService.setUser(currentUser);
                     return;
                 } else {
+
                 }
 
             });

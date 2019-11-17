@@ -77,7 +77,13 @@
     "createfirst": "Créer mon premier quizz",
     "godiscover": "Aller sur discover",
     "usernoexist": "Cet utilisateur n'existe pas ou a été banni",
-    "settings": "Paramètres"
+    "settings": "Paramètres",
+    "password": "Mot de passe",
+    "repassword": "Retaper Mot de passe",
+    "mail": "Email",
+    "avatar": "Mon avatar",
+    "file": "Fichier",
+    "update": "Mettre à jour"
   },
   "nav": {
     "createquizz": "Créer un quizz",
@@ -98,11 +104,15 @@
     "needusername": "Vous devez rentrer un pseudo",
     "needregex": "Le pseudo ne peut contenir que des chiffres et lettres et les caractères : '_', '-', '.'",
     "needusernamelength": "Le pseudo doit faire 3 caractères au minimum",
-    "error": "Une erreur est survenue"
+    "error": "Une erreur est survenue",
+    "avatartomuch": "Avatar doit faire < 3mb",
+    "samepass": "Les mots de passe doivent être pareil",
+    "alreadytaken": "Cet email a déjà été pris"
   },
   "success" : {
     "report": "Merci d'avoir signalé le quizz",
     "changestate": "Ton quizz est maintenant en {{value}}",
-    "changeclose": "Ton quizz est maintenant  {{value}}"
+    "changeclose": "Ton quizz est maintenant  {{value}}",
+    "uploadprofile": "Ton profil a été mise à jour"
   }
 }

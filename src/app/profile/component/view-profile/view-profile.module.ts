@@ -5,6 +5,7 @@ import {RouterModule} from "@angular/router";
 import {CoreModule} from "../../../core/core.module";
 import {MaterializeAccordionModule, MaterializeCollapsibleModule, MaterializeTabGroupModule} from "materialize-angular";
 import {SingleQuizzListModule} from "../../../share/component/single-quizz-list/single-quizz-list.module";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {SingleQuizzListModule} from "../../../share/component/single-quizz-list/
       MaterializeTabGroupModule,
       MaterializeCollapsibleModule,
       MaterializeAccordionModule,
-      SingleQuizzListModule
+      SingleQuizzListModule,
+      FormsModule
   ]
 })
 export class ViewProfileModule { }

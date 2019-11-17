@@ -83,8 +83,50 @@
                     <button *ngIf="answers.length < 1" class="btn green-button col s8 offset-s2 l4 offset-l4" [routerLink]="['/quizz/discover']">{{"profile.godiscover" | translate}}</button>
 
                 </materialize-tab>
-                    <materialize-tab style="display: none" title="{{'profile.settings' | translate }}">
+                    <materialize-tab title="{{'profile.settings' | translate }}">
 
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="col s12">{{"profile.mail" | translate}}</div>
+                                <div class="input-field col s12">
+                                    <input placeholder="{{currentUser.email}}" id="email" type="email" class="validate" [(ngModel)]="acc.newEmail">
+                                    <label for="email">{{"profile.mail" | translate}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="col s12">{{"profile.password" | translate}}</div>
+                                <div class="input-field col s6">
+                                    <input id="password" type="password" class="validate" [(ngModel)]="acc.password">
+                                    <label for="password">{{"profile.password" | translate}}</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="password2" type="password" class="validate" [(ngModel)]="acc.password2">
+                                    <label for="password2">{{"profile.repassword" | translate}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="col s12">{{"profile.avatar" | translate}}</div>
+                                <div class="file-field input-field col s12">
+                                    <button class="btn purple-border">
+                                        <span>{{"profile.file" | translate}}</span>
+                                        <input type="file" (change)="uploadAvatar($event)" accept="image/*">
+                                    </button>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text" >
+                                    </div>
+                                </div>
+                                <div class="image-preview mb-3 col s12" *ngIf="previewUrl">
+                                    <img [src]="previewUrl" height="300" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12">
+                            <button class="btn purple-border col s12" (click)="updateProfil()">{{"profile.update" | translate}}</button>
+                        </div>
                     </materialize-tab>
                 </materialize-tab-group>
             </div>

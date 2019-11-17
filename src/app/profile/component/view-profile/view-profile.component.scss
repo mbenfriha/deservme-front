@@ -68,6 +68,15 @@
   color: grey;
 }
 
+.image-preview {
+  text-align: center;
+  img {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+  }
+}
+
 @media screen and (max-width: 992px){
   .nopadding {
     padding: 0;

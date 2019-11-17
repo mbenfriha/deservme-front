@@ -19,16 +19,22 @@ export class UserService {
         }),
     };
 
-    // Get single student data by ID
+    // Get username
     getCurrentUsername(username): Observable<User> {
         return this.http
             .get<User>(this.base_path + 'username/' + username, { withCredentials: true })
     }
 
-    // Create a new item
+    // Update user
     updateUser(user): Observable<User> {
         return this.http
             .post<User>(this.base_path + 'update', JSON.stringify(user), this.httpOptions)
+    }
+
+    // Update avatar
+    updateAvatar(file): Observable<any> {
+        return this.http
+            .post<any>(this.base_path + 'user/avatar', file)
     }
 
 

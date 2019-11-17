@@ -7,11 +7,13 @@ import {AuthenticationService} from "../../../core/authentication/authentication
 import {ToastrService} from "ngx-toastr";
 import {MetafrenzyService} from "ngx-metafrenzy";
 import {environment} from "../../../../environments/environment";
-import {Subscription} from "rxjs";
+import {Subject, Subscription} from "rxjs";
 import {LoaderService} from "../../../core/service/loader.service";
 import {isNullOrUndefined} from "util";
 import {UserService} from "../../service/user.service";
 import {TranslateService} from "@ngx-translate/core";
+import {FileUploadControl, FileUploadValidators} from "@iplab/ngx-file-upload";
+import {debounceTime, take} from "rxjs/operators";
 
 @Component({
   selector: 'app-view-profile',
@@ -29,6 +31,12 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
     myProfil: boolean;
     shortUrl = 'qzzy.in/';
     getUser: Subscription;
+    subjectUpdate: Subject<any> = new Subject();
+    acc = {newEmail: '', password: '', password2: ''};
+    file: File;
+    public fileUploadControl = new FileUploadControl(FileUploadValidators.filesLimit(1));
+
+    previewUrl:any = null;
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
@@ -72,6 +80,13 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.loaderService.load.next(false);
 
+        this.subjectUpdate
+            .pipe(debounceTime(500))
+            .subscribe(() => {
+                    this.updateAccount();
+                }
+            );
+
         this.getUser = this.authenticationService.currentUser.subscribe(x => {
             this.currentUser = x;
             if(this.currentUser && this.currentUser._id == this.id) {
@@ -92,7 +107,6 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
                 }
 
                 this.loaderService.load.next(true);
-                console.log('loaded');
 
             }, err => {
                 this.notExist = true;
@@ -130,6 +144,78 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
         return (100 * good / total).toFixed();
     }
 
+    updateAccount() {
+
+        const formData = new FormData();
+        formData.append('file', this.file);
+
+        if(this.acc.password || this.acc.password2 || this.acc.newEmail) {
+            if (this.acc.password != this.acc.password2) {
+                this.translate.get('error.samepass').subscribe((res: string) => {
+                    this.toastr.error(res);
+                });
+            } else {
+                this.userService.updateUser(this.acc).pipe(take(1)).subscribe(user => {
+                    if (user) {
+                        var currentUser = user;
+                        currentUser.token = this.currentUser.token;
+                        this.authenticationService.setUser(currentUser);
+                        this.translate.get('success.uploadprofile').subscribe((res: string) => {
+                            this.toastr.success(res);
+                        })
+                        return;
+                    } else {
+                        this.translate.get('error.error').subscribe((res: string) => {
+                            this.toastr.error(res);
+                        });
+                    }
+
+                }, err => {
+                    console.log(err);
+                    this.translate.get('error.alreadytaken',).subscribe((res: string) => {
+                        this.toastr.error(res);
+                    });
+                })
+            }
+        }
+
+        if(this.file) {
+            if (this.file.size > 3032642) {
+                this.translate.get('error.avatartomuch').subscribe((res: string) => {
+                    this.toastr.error(res);
+                });
+            } else {
+                this.userService.updateAvatar(formData).subscribe(r => {
+                    if (r.status) {
+                        location.reload()
+                    } else {
+                        this.translate.get('error.error').subscribe((res: string) => {
+                            this.toastr.error(res);
+                        });
+                    }
+                }, err => {
+                    this.translate.get('error.error').subscribe((res: string) => {
+                        this.toastr.error(res);
+                    });
+                });
+            }
+        }
+    }
+
+
+    updateProfil() {
+        this.subjectUpdate.next();
+    }
+
+    uploadAvatar(event) {
+        this.file = <File>event.target.files[0];
+
+        var reader = new FileReader();
+        reader.readAsDataURL(this.file);
+        reader.onload = (_event) => {
+            this.previewUrl = reader.result;
+        }
+    }
     ngOnDestroy() {
         if(!isNullOrUndefined(this.getUser)) {
             this.getUser.unsubscribe();
