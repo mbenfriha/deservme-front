@@ -12,7 +12,6 @@ import {LoaderService} from "../../../core/service/loader.service";
 import {isNullOrUndefined} from "util";
 import {UserService} from "../../service/user.service";
 import {TranslateService} from "@ngx-translate/core";
-import {FileUploadControl, FileUploadValidators} from "@iplab/ngx-file-upload";
 import {debounceTime, take} from "rxjs/operators";
 
 @Component({
@@ -34,7 +33,6 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
     subjectUpdate: Subject<any> = new Subject();
     acc = {newEmail: '', password: '', password2: ''};
     file: File;
-    public fileUploadControl = new FileUploadControl(FileUploadValidators.filesLimit(1));
 
     previewUrl:any = null;
 
