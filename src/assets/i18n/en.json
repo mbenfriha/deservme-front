@@ -115,7 +115,7 @@
     "report": "Thank you for reporting the quizz",
     "changestate": "Your quiz is now in {{value}}",
     "changeclose": "Your quiz is now {{value}}",
-    "uploadprofile": "Your profile has been uploaded",
+    "uploadprofile": "Your profile has been uploaded"
   }
 
 }
