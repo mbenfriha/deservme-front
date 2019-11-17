@@ -10,29 +10,29 @@
 
             <div class="col s10">
                 <p>
-                    <span *ngIf="quizzs?.length > 0">- {{quizzs.length}} Quizz crée</span>
-                    <span *ngIf="quizzs?.length < 1">- Aucun quizz crée</span><br>
-                    <span *ngIf="answers?.length > 0">- A joué à {{answers.length}} Quizz</span>
-                    <span *ngIf="answers?.length < 1">- Aucun quizz joué</span><br>
+                    <span *ngIf="quizzs?.length > 0">- {{quizzs.length}} {{"profile.quizzcreated" | translate}}</span>
+                    <span *ngIf="quizzs?.length < 1">- {{"profile.noquizz" | translate}}</span><br>
+                    <span *ngIf="answers?.length > 0">- {{"profile.answercreated" | translate:({nbr: answers.length})}}</span>
+                    <span *ngIf="answers?.length < 1">- {{"profile.noquizz" | translate}}</span><br>
                 </p>
 
             </div>
             <div class="col s12">
                 <div class="copy-profil">
                     <input class="col s7" type="text" value="{{shortUrl + user.username}}" disabled>
-                    <button class="btn purple-border col s5" (click)="copyUrl(shortUrl + user.username)">Copier profil</button>
+                    <button class="btn purple-border col s5" (click)="copyUrl(shortUrl + user.username)">{{"profile.copy" | translate}}</button>
 
                 </div>
             </div>
         </div>
         <div class="col s12 l8 no-padding" *ngIf="!myProfil">
-            <div class="title-page" >Ses quizz</div>
+            <div class="title-page" >Quizz</div>
 
             <ul class="collection" *ngIf="quizzs.length > 0">
                 <app-single-quizz-list *ngFor="let quizz of quizzs" [quizz]="quizz"></app-single-quizz-list>
             </ul>
             <div class="empty" *ngIf="quizzs.length < 1">
-                {{user.username}} n'a pas encore crée de quizz <br>
+                {{user.username}} {{"profile.nocreated" | translate}} <br>
                 <i class="material-icons">
                     error_outline
                 </i>
@@ -47,21 +47,21 @@
                         <app-single-quizz-list *ngFor="let quizz of quizzs" [quizz]="quizz"></app-single-quizz-list>
                     </ul>
                     <div class="empty col s12" *ngIf="quizzs.length < 1">
-                        Tu n'as pas encore crée de quizz <br>
+                        {{"profile.menotcreated" | translate}} <br>
                         <i class="material-icons">
                             error_outline
                         </i>
 
                     </div>
 
-                    <button *ngIf="quizzs.length < 1" class="btn green-button col s8 offset-s2 l4 offset-l4" [routerLink]="['/createQuizz']">Créer mon premier quizz</button>
+                    <button *ngIf="quizzs.length < 1" class="btn green-button col s8 offset-s2 l4 offset-l4" [routerLink]="['/quizz/create']">{{"profile.createfirst" | translate}}</button>
 
                 </materialize-tab>
-                      <materialize-tab title="Réponses">
+                      <materialize-tab title="{{'quizz.answers' | translate}}">
 
                     <ul class="collection" *ngIf="answers.length > 0">
                         <li class="collection-item avatar" *ngFor="let answer of answers">
-                            <img src="{{getAvatar(answer.avatar)}}" alt="img" class="circle" [routerLink]="['/profil/', answer.avatar]">
+                            <img src="{{getAvatar(answer.avatar)}}" alt="img" class="circle" [routerLink]="['/profile/', answer.avatar]">
                             <div [routerLink]="['/quizz/'+answer.quizz_id]">
                                 <div class="title col s11">{{answer.title}} </div>
                                 <div class="col s11 result">Ton score : {{returnResult(answer)}}%</div>
@@ -75,16 +75,16 @@
                         </li>
                     </ul>
                     <div class="empty col s12" *ngIf="answers.length < 1">
-                        Tu n'as encore répondu à aucun quizz <br>
+                        {{"profile.menotanswer" | translate}}<br>
                         <i class="material-icons">
                             error_outline
                         </i>
                     </div>
-                    <button *ngIf="answers.length < 1" class="btn green-button col s8 offset-s2 l4 offset-l4" [routerLink]="['/discover']">Aller sur discover</button>
+                    <button *ngIf="answers.length < 1" class="btn green-button col s8 offset-s2 l4 offset-l4" [routerLink]="['/quizz/discover']">{{"profile.godiscover" | translate}}</button>
 
                 </materialize-tab>
-                    <materialize-tab title="Paramètres">
-                        ..
+                    <materialize-tab style="display: none" title="{{'profile.settings' | translate }}">
+
                     </materialize-tab>
                 </materialize-tab-group>
             </div>
@@ -98,7 +98,7 @@
         <div class="row">
             <div class="col s12">
                 <div class="empty" >
-                    Cet utilisateur n'existe pas ou a été banni <br>
+                    {{"profile.usernoexist" | translate}} <br>
                     <i class="material-icons">
                         error_outline
                     </i>

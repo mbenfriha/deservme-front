@@ -27,3 +27,17 @@
     -webkit-animation: headerGradient 10s infinite linear;
   }
 }
+.flag {
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/209282/flags.png");
+  background-position: -4px -129px;
+  display: inline-block;
+  height: 17px;
+  width: 26px;
+}
+
+.flag-FR {
+  background-position: -37px -297px;
+}
+.flag-US {
+  background-position: -4px -1011px;
+}

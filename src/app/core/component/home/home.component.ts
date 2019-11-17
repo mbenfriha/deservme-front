@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../../environments/environment';
 import {AuthenticationService} from '../../authentication/authentication.service';
 import {User} from '../../../models/user';
+import {TranslateService} from "@ngx-translate/core";
 
 
 @Component({
@@ -22,7 +23,11 @@ export class HomeComponent implements OnInit {
               private router: Router,
               private readonly metafrenzyService: MetafrenzyService,
               private toastr: ToastrService,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              private translate: TranslateService) {
+      this.translate.setDefaultLang('en');
+      this.translate.use(this.translate.getBrowserLang())
+      console.log(this.translate.getBrowserLang())
 
       this.metafrenzyService.setAllTitleTags('MyQuizzy - Crée, joue et partage des tas de quizz');
       this.metafrenzyService.setAllDescriptionTags('Crée, participe et partage des quizz avec tes amis');

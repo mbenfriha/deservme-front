@@ -11,6 +11,7 @@ import {Subscription} from "rxjs";
 import {LoaderService} from "../../../core/service/loader.service";
 import {isNullOrUndefined} from "util";
 import {UserService} from "../../service/user.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-view-profile',
@@ -35,7 +36,10 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
                 private authenticationService: AuthenticationService,
                 private toastr: ToastrService,
                 private readonly metafrenzyService: MetafrenzyService,
-                private loaderService: LoaderService) {
+                private loaderService: LoaderService,
+                private readonly translate: TranslateService) {
+        this.translate.setDefaultLang('en');
+        this.translate.use(this.translate.getBrowserLang());
 
         this.loaderService.load.next(false);
         this.id = this.route.snapshot.paramMap.get('id');
@@ -71,7 +75,6 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
         this.getUser = this.authenticationService.currentUser.subscribe(x => {
             this.currentUser = x;
             if(this.currentUser && this.currentUser._id == this.id) {
-                console.log('profileeeeeee')
                 this.myProfil = true;
             }
         });

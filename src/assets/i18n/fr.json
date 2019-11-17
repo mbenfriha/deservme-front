@@ -1,0 +1,108 @@
+{
+  "home": {
+    "title": "Translation demo",
+    "connection": "Connexion",
+    "register": "Inscription",
+    "description": "Crée, participe et partage tes quizz avec tes amis\nTout est gratuit il te suffit de créer un compte.",
+    "step1": "Crée ton profil",
+    "step2": "Crée ton quizz",
+    "step3": "Partage ton quiz quizz",
+    "step4": "Regarde les résultats"
+  },
+  "modal": {
+    "title": "Connexion",
+    "description": "Tu peux te connecter ou créer un compte via facebook ou twitter puis compléter ton profil par la suite.\nSache que nous ne posterons jamais sans ta permission !",
+    "accept1": "En t'inscrivant tu acceptes les ",
+    "accept2": " et la "
+  },
+
+  "word": {
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "true": "vrai",
+    "false": "faux"
+  },
+
+  "quizz": {
+    "discover": "Découverte de la semaine",
+    "ranking": "Classement",
+    "answers": "Réponses",
+    "answer": "Réponse",
+    "noone": "Personne n'a encore participé au quizz",
+    "noexist": "Ce quizz n'existe pas ou a été supprimé",
+    "score": "Score de ",
+    "private": "privé",
+    "public": "public",
+    "quizzare": "Ce quizz est ",
+    "open": "Ce quizz est ouvert à tout le monde",
+    "close": "Seuls les inscrits peuvent répondre à ce quizz",
+    "quizzcontain": "Ce quizz contient {{nbr}} questions",
+    "firstanswer" : "Tu es le premier a participer à ce quizz",
+    "oneanswer": "1 personne a participé à ce quizz",
+    "answersplay" : "{{nbr}}  ont participés à ce quizz",
+    "buttonprivate": "Rendre mon quizz privé",
+    "buttonpublic": "Rendre mon quizz public",
+    "openquizz": "Ouvrir mon quizz",
+    "closequizz": "Fermer mon quizz",
+    "buttondelete": "Supprimer mon quizz",
+    "author": "Ce Quizz a été crée par ",
+    "buttonreport": "Signaler le quizz",
+    "enterusername": "Rentrer un pseudo",
+    "choiceanswer": "Choisis une réponse",
+    "validate": "Valider",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "alreadyanswer": "Tu as déjà participé à ce quizz, ton résultat :",
+    "successanswer": "Bravo tu as terminé, voici ton résultat :",
+    "needconnection": "Tu dois te connecter pour participer",
+    "proposeregister": "Inscris toi pour créer ton quizz",
+
+    "titleofquizz": "titre du quizz",
+    "setprivate": "Quizz Privé (Uniquement accessible via l'url)",
+    "setclose": "Quizz Fermé (Seuls les inscrits peuvent répondre)",
+    "answercreate": "Les réponses (2 à 4)",
+    "addanswer": "Ajouter une réponse",
+    "addquestion": "Ajouter une question",
+    "createquizz": "Créer mon quizz"
+  },
+  "profile": {
+    "quizzcreated": "Quizz crée",
+    "noquizz": "Aucun quizz crée",
+    "answercreated": "A joué à {{nbr}} quizz",
+    "noanswer": "Aucun quizz joué",
+    "copy": "copier profil",
+    "nocreated": " n'a pas encore crée de quizz",
+    "menotcreated": "Tu n'as pas encore crée de quizz",
+    "menotanswer": "Tu n'as encore répondu à aucun quizz ",
+    "createfirst": "Créer mon premier quizz",
+    "godiscover": "Aller sur discover",
+    "usernoexist": "Cet utilisateur n'existe pas ou a été banni",
+    "settings": "Paramètres"
+  },
+  "nav": {
+    "createquizz": "Créer un quizz",
+    "myquizz": "Mes quizzy",
+    "discover": "Découverte",
+    "disconnect": "Déconnexion",
+    "connect": "Se connecter"
+  },
+  "footer": {
+    "contact": "Contact"
+  },
+  "error": {
+    "nbranswers": "Deux réponses minimum par question",
+    "emptyquestion": "Vérifiez qu'aucune questions/réponses n'est vide",
+    "onequestion": "Votre quizz doit comporter au moins une question",
+    "needtitle": "Vous devez donner un titre à votre quizz",
+    "needanswer": "Vous devez choisir une réponse",
+    "needusername": "Vous devez rentrer un pseudo",
+    "needregex": "Le pseudo ne peut contenir que des chiffres et lettres et les caractères : '_', '-', '.'",
+    "needusernamelength": "Le pseudo doit faire 3 caractères au minimum",
+    "error": "Une erreur est survenue"
+  },
+  "success" : {
+    "report": "Merci d'avoir signalé le quizz",
+    "changestate": "Ton quizz est maintenant en {{value}}",
+    "changeclose": "Ton quizz est maintenant  {{value}}"
+  }
+}

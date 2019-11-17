@@ -5,10 +5,10 @@
     <div class="title col s11"><b>{{quizz.username}}</b> {{quizz.title}} </div> <div *ngIf="quizz.private" class="red-text right col s1"><i class="material-icons lock">
     lock
   </i></div>
-    <div class="col s11">Le quizz contient {{quizz.questions.length}} question<span *ngIf="quizz.questions.length > 1"></span><br>
-      <span  *ngIf="quizz.answer_count > 1">{{quizz.answer_count}} personnes ont participé à ce quizz</span>
-      <span  *ngIf="quizz.answer_count == 1">{{quizz.answer_count}} personne a participé à ce quizz</span>
-      <span  *ngIf="quizz.answer_count < 1">Soit le premier à participer à ce quizz</span>
+    <div class="col s11">{{ "quizz.quizzcontain" | translate:({nbr:  quizz.questions.length}) }}<span *ngIf="quizz.questions.length > 1"></span><br>
+      <span  *ngIf="quizz.answer_count > 1">{{ "quizz.answersplay" | translate:({nbr:  quizz.answer_count}) }}</span>
+      <span  *ngIf="quizz.answer_count == 1">{{ "quizz.oneanswer" | translate }}</span>
+      <span  *ngIf="quizz.answer_count < 1">{{ "quizz.firstanswer" | translate}}</span>
     </div>
     <a [routerLink]="['/quizz/'+quizz._id]" class="secondary-content col s1"><i class="material-icons right">
       chevron_right

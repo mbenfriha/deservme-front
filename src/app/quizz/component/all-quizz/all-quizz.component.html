@@ -1,5 +1,5 @@
 <div class="container">
-    <h2 class="title-page">Découverte de la semaine</h2>
+    <h2 class="title-page">{{ "quizz.discover" | translate }}</h2>
     <ul class="collection">
         <app-single-quizz-list *ngFor="let quizz of quizzs" [quizz]="quizz"></app-single-quizz-list>
     </ul>

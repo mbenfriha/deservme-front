@@ -76,10 +76,8 @@ export class InitProfileComponent implements OnInit, OnDestroy {
                     var currentUser = user;
                     currentUser.token = this.user.token;
                     this.authenticationService.setUser(currentUser);
-                    console.log('caca');
                     return;
                 } else {
-                    console.log('erreur');
                 }
 
             });

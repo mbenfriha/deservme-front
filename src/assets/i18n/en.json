@@ -1,0 +1,108 @@
+{
+  "home": {
+    "title": "Translation demo",
+    "connection": "Connection",
+    "register": "Register",
+    "description": "Create, participate and share your quizz with your friends\nEverything is free just create an account.",
+    "step1": "Create your profile",
+    "step2": "Create your quizz",
+    "step3": "Share your quizz",
+    "step4": "Watch the results"
+  },
+  "modal": {
+    "title": "Connection",
+    "description": "You can login or create an account via facebook or twitter and then complete your profile.\nKnow that we will never post without your permission!",
+    "accept1": "By registering you accept the ",
+    "accept2": " and "
+  },
+  "word": {
+    "privacy": "Privacy policy",
+    "terms": "Terms of use",
+    "true": "true",
+    "false": "false"
+  },
+
+  "quizz": {
+    "discover": "Discovery of the week",
+    "ranking": "Ranking",
+    "answers": "Answers",
+    "answer": "Answer",
+    "noone": "No one has participated in the quizz yet",
+    "noexist": "This quizz does not exist or has been removed",
+    "score": "Score of ",
+    "private": "private",
+    "public": "public",
+    "quizzare": "This quizz is ",
+    "open": "This quizz is open to everyone",
+    "close": "Only registered users can answer this quizz",
+    "quizzcontain": "This quizz contains {{nbr}} questions",
+    "firstanswer" : "You are the first to play this quizz",
+    "oneanswer": "1 person played this quizz",
+    "answersplay" : "{{nbr}} played on this quizz",
+    "buttonprivate": "Put my quizz in private",
+    "buttonpublic": "Put my quizz in public",
+    "openquizz": "Open my quizz",
+    "closequizz": "Close my quizz",
+    "buttondelete": "Delete my quizz",
+    "author": "This quizz was created by",
+    "buttonreport": "Report quizz",
+    "enterusername": "Enter username",
+    "choiceanswer": "Choose an answer",
+    "validate": "Validate",
+    "next": "Next",
+    "previous": "Previous",
+    "alreadyanswer": "You have already participated in this quizz, your result : ",
+    "successanswer": "Bravo you're done, here's your result:",
+    "needconnection": "You have to login to play",
+    "proposeregister": "Register to create your quiz",
+
+    "titleofquizz": "quizz title",
+    "setprivate": "Private quizz (Only accessible via the url)",
+    "setclose": "Closed Quizz (Only registered users can answer)",
+    "answercreate": "The answers (2 to 4)",
+    "addanswer": "Add an answer",
+    "addquestion": "Add an question",
+    "createquizz": "Create my quizzy"
+  },
+  "profile": {
+    "quizzcreated": "quizz created",
+    "noquizz": "No quizz creates",
+    "answercreated": "Played {{nbr}} quizz",
+    "noanswer": "No quizz played",
+    "copy": "copy profile",
+    "nocreated": " has not created any quizz yet",
+    "menotcreated": "Tu n'as pas encore crée de quizz",
+    "menotanswer": "You have not played any quizz yet",
+    "createfirst": "Create my first quizz",
+    "godiscover": "Go to discover",
+    "usernoexist": "This user does not exist or has been banned",
+    "settings": "Settings"
+  },
+  "nav": {
+    "createquizz": "Create quizz",
+    "myquizz": "My quizzy",
+    "discover": "Discover",
+    "disconnect": "Disconnect",
+    "connect": "Connect"
+  },
+  "footer": {
+    "contact": "Contact"
+  },
+  "error": {
+    "nbranswers": "Two minimum answers per question",
+    "emptyquestion": "Check that no questions/answers are empty",
+    "onequestion": "Your quizz must have at least one question",
+    "needtitle": "You must give a title to your quizz",
+    "needanswer": "You must choose an answer",
+    "needusername": "You must enter a username",
+    "needregex": "The nickname can only contain numbers and letters and the characters : '_', '-', '.'",
+    "needusernamelength": "The username must be at least 3 characters",
+    "error": "An error has occurred"
+  },
+  "success" : {
+    "report": "Thank you for reporting the quizz",
+    "changestate": "Your quiz is now in {{value}}",
+    "changeclose": "Your quiz is now {{value}}"
+  }
+
+}

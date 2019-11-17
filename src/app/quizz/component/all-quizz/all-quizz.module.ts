@@ -4,8 +4,9 @@ import {AllQuizzComponent} from "./all-quizz.component";
 import {RouterModule} from "@angular/router";
 import {AuthGuard} from "../../../core/authentication/guard/auth.guard";
 import {UsernameGuard} from "../../../core/authentication/guard/username.guard";
-import {SingleQuizzListComponent} from "../../../share/component/single-quizz-list/single-quizz-list.component";
 import {SingleQuizzListModule} from "../../../share/component/single-quizz-list/single-quizz-list.module";
+import {CoreModule} from "../../../core/core.module";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [AllQuizzComponent],
@@ -14,7 +15,9 @@ import {SingleQuizzListModule} from "../../../share/component/single-quizz-list/
       RouterModule.forChild([
           { path: '', component: AllQuizzComponent, canActivate: [AuthGuard, UsernameGuard] }
       ]),
-      SingleQuizzListModule
+      SingleQuizzListModule,
+      CoreModule,
+      TranslateModule
   ]
 })
 export class AllQuizzModule { }

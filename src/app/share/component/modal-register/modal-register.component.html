@@ -3,30 +3,24 @@
 
     <div class="modal-connexion modal" *ngIf="modal">
         <div class="modal-content">
-            <h4>Connexion</h4>
-            <p>Tu peux te connecter ou créer un compte via facebook ou twitter puis compléter ton profil par la suite.
-                <br> Sache que nous ne posterons jamais sans ta permission !</p>
+            <h4>{{ 'modal.title' | translate }}</h4>
+            <p>{{ 'modal.description' | translate }}</p>
             <p class="center-align hide-on-med-and-down">
                 <a href="{{environment.baseUrl}}auth/facebook">
                 <button class="loginBtn loginBtn--facebook">
-                    Connexion via Facebook
+                    {{ 'home.connection' | translate }} via Facebook
                 </button>
             </a>
                 <a href="{{environment.baseUrl}}auth/twitter">
                     <button class="loginBtn loginBtn--twitter">
-                        Connexion via Twitter
+                        {{ 'home.connection' | translate }} via Twitter
                     </button>
                 </a>
                 <a href="{{environment.baseUrl}}auth/google">
                     <button class="loginBtn loginBtn--google">
-                        Connexion via Google
+                        {{ 'home.connection' | translate }} via Google
                     </button>
                 </a>
-                <!--  <a href="{{environment.baseUrl}}auth/instagram">
-                    <button class="loginBtn loginBtn&#45;&#45;instagram">
-                      Connexion via Instagram
-                    </button>
-                  </a>-->
             </p>
             <p class="center-align hide-on-large-only">
                 <a href="{{environment.baseUrl}}auth/facebook">
@@ -52,7 +46,7 @@
                   </a>-->
             </p>
             <p class="center-align">
-                En t'inscrivant tu acceptes les <a routerLink="'/terms'">conditions d'utilisation</a> et la <a routerLink="'/privacy'">politique de confidentialité</a>
+                {{  'modal.accept1' | translate }} <a routerLink="'/terms'">{{ 'word.terms' | translate }}</a> {{ 'modal.accept2' | translate  }} <a routerLink="'/privacy'">{{ 'word.privacy' | translate }}</a>
             </p>
         </div>
     </div>

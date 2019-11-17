@@ -5,6 +5,7 @@ import {RouterModule} from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import {AuthGuard} from "../../../core/authentication/guard/auth.guard";
 import {UsernameGuard} from "../../../core/authentication/guard/username.guard";
+import {CoreModule} from "../../../core/core.module";
 
 
 
@@ -15,7 +16,8 @@ import {UsernameGuard} from "../../../core/authentication/guard/username.guard";
         RouterModule.forChild([
             { path: '', component: CreateQuizzComponent, canActivate: [AuthGuard, UsernameGuard] }
         ]),
-        FormsModule
+        FormsModule,
+        CoreModule
     ],
     exports: [RouterModule]
 })

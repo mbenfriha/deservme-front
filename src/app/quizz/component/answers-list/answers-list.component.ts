@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from '../../../models/user';
 import {environment} from '../../../../environments/environment';
 
 import { faSortAlphaDown, faSortNumericDown, faSortAlphaUp, faSortNumericUp, faSortAmountDown, faSortAmountUp } from '@fortawesome/free-solid-svg-icons';
+import {TranslateService} from "@ngx-translate/core";
 
 declare var jQuery: any;
 @Component({
@@ -28,7 +28,10 @@ export class AnswersListComponent implements OnInit {
     faSortAmountDown = faSortAmountDown;
     faSortAmountUp  = faSortAmountUp;
 
-    constructor() { }
+    constructor(private readonly translate: TranslateService) {
+    this.translate.setDefaultLang('en');
+    this.translate.use(this.translate.getBrowserLang());
+    }
 
     ngOnInit() {
     }

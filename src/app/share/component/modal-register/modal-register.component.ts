@@ -1,6 +1,8 @@
 import {Component, Input, OnInit, OnChanges, Output, EventEmitter} from '@angular/core';
 
+
 import { environment } from '../../../../environments/environment';
+import {TranslateService} from "@ngx-translate/core";
 
 
 @Component({
@@ -14,7 +16,8 @@ export class ModalRegisterComponent {
     @Output() modalClose = new EventEmitter<any>();
     environment = environment;
 
-    constructor() { }
+    constructor(private readonly translate: TranslateService) {
+        translate.setDefaultLang(translate.getBrowserLang()); }
 
     closeModal() {
         this.modal = false;

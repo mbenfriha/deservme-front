@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {QuizzService} from "../../service/quizz.service";
 import {Subscription} from "rxjs";
 import {take} from "rxjs/operators";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-create-quizz',
@@ -24,7 +25,12 @@ export class CreateQuizzComponent implements OnInit, OnDestroy {
 
     constructor(private quizzService: QuizzService,
                 private toastr: ToastrService,
-                private route: Router) { }
+                private route: Router,
+                private readonly translate: TranslateService) {
+
+        this.translate.setDefaultLang('en');
+        this.translate.use(this.translate.getBrowserLang());
+    }
 
     ngOnInit() {
         this.quizz = new Quizz;
@@ -85,13 +91,19 @@ export class CreateQuizzComponent implements OnInit, OnDestroy {
 
     createQuizz()  {
         if (!this.verifyQuestion(this.quizz.questions)) {
-            this.toastr.error('Vérifiez qu\'aucune questions/réponses n\'est vide');
+            this.translate.get('error.emptyquestion',).subscribe((res: string) => {
+                this.toastr.error(res);
+            });
 
         } else if (this.quizz.questions.length < 1) {
-            this.toastr.error('Votre quizz doit comporter au moins une question');
+            this.translate.get('error.onequestion',).subscribe((res: string) => {
+                this.toastr.error(res);
+            });
 
         } else if (!this.quizz.title) {
-            this.toastr.error('Vous devez donner un titre à votre quizz');
+            this.translate.get('error.needtitle',).subscribe((res: string) => {
+                this.toastr.error(res);
+            });
 
         } else {
           this.createQuizzSub =  this.quizzService.createQuizz(this.quizz).pipe(take(1)).subscribe((v: Quizz) => {
@@ -115,7 +127,9 @@ export class CreateQuizzComponent implements OnInit, OnDestroy {
                 this.quizz.questions[q].choices[0].rep = true;
             }
         } else {
-            this.toastr.error('Deux réponses minimum par question');
+            this.translate.get('error.nbranswers',).subscribe((res: string) => {
+                this.toastr.error(res);
+            });
         }
     }
 

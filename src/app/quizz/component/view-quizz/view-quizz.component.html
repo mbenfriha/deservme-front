@@ -11,14 +11,16 @@
 
                         <div class="col s10">
                             <p>
-                                - <span>Ce quizz est <span class="{{quizz.private ? 'red-text' : 'green-text'}}">{{quizz.private ? "privé" : "public"}}</span></span> <br>
-                                - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
-                                <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
-                                - Ce quizz contient {{quizz.questions.length}} questions <br>
-                                - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
-                                <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
-                                <span *ngIf="quizz?.answer_count > 1">{{quizz.answer_count}} ont participés à ce quizz</span>
+                                - <span>{{ "quizz.quizzare" | translate}} <span class="{{quizz.private ? 'red-text' : 'green-text'}}">{{ (quizz.private ? "quizz.private" : "quizz.public") | translate }}</span></span> <br>
+                                - <span *ngIf="!quizz.close">{{ "quizz.open" | translate }} </span>
+                                <span *ngIf="quizz.close">{{ "quizz.close" | translate }} </span><br>
+                                - {{ "quizz.quizzcontain" | translate:({nbr:  quizz.questions.length}) }}<br>
+                                - <span *ngIf="quizz?.answer_count < 1">{{ "quizz.firstanswer" | translate}}</span>
+                                <span *ngIf="quizz?.answer_count == 1">{{ "quizz.oneanswer" | translate }}</span>
+                                <span *ngIf="quizz?.answer_count > 1">{{ "quizz.answersplay" | translate:({nbr:  quizz.answer_count}) }}</span>
                             </p>
+                        </div>
+                        <div class="col s11 offset-s1">
 
                             <share-buttons class="right" [theme]="'default'"
                                            [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"
@@ -30,16 +32,15 @@
                                            [autoSetMeta]="false">
 
                             </share-buttons>
-
                         </div>
                         <div class="col s12">
-                            <button class="purple-border col s12 btn" (click)="setState()">Rendre mon quizz
-                                <span color="red-text"> {{quizz.private ? "public" : "privé"}} </span>
+                            <button class="purple-border col s12 btn" (click)="setState()">
+                                {{(quizz.private ? "quizz.buttonprivate" : "quizz.buttonpublic") | translate }}
                             </button>
                             <button class="purple-border col s12 btn" (click)="setClose()">
-                                {{quizz.close ? "Ouvrir" : "Fermé"}} mon quizz
+                                {{(quizz.close ? "quizz.openquizz" : "quizz.closequizz") | translate }}
                             </button>
-                            <button class="green-button col s12 btn" (click)="openModalDelete()">Supprimer mon quizz</button>
+                            <button class="green-button col s12 btn" (click)="openModalDelete()">{{ "quizz.buttondelete" | translate}}</button>
                         </div>
                     </div>
 
@@ -52,15 +53,14 @@
                                   </ul>-->
 
                                 <materialize-tab-group>
-                                      <materialize-tab title="Classement">
+                                      <materialize-tab title="{{'quizz.ranking' | translate}}">
                                     <div class="col s12 no-padding">
                                         <app-answers-list [allAnswer]="allAnswer" [myQuizz]="true"></app-answers-list>
                                     </div>
                                 </materialize-tab>
-                                      <materialize-tab title="Réponses">
+                                      <materialize-tab title="{{'quizz.answers' | translate}}">
 
                                     <div class="col s12 right">
-                                        <div class="title-page">Réponses</div>
                                         <ul class="collection z-depth-3">
                                             <li class="collection-item" *ngFor="let q of quizz.questions">
                                                 <b class="title">{{q.name}} : </b>
@@ -83,19 +83,22 @@
                     <ng-container *ngIf="!alreadyAnswer">
                         <div class="col s12 l4 user z-depth-3">
                             <div class="col s2">
-                                <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" [routerLink]="['/profil/'+quizz.user_id]">
+                                <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" [routerLink]="['/profile/'+quizz.user_id]">
                             </div>
 
                             <div class="col s10">
-                                <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}}</a> <br>
-                                    - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
-                                    <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
-                                    - Ce quizz contient {{quizz.questions.length}} questions <br>
-                                    - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
-                                    <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
-                                    <span *ngIf="quizz?.answer_count > 1">{{quizz.answer_count}} ont participés à ce quizz</span>
+                                <p> - {{"quizz.author" | translate}} <a [routerLink]="['/profile/'+quizz.user_id]">{{quizz.username}}</a> <br>
+                                    - <span>{{ "quizz.quizzare" | translate}} <span class="{{quizz.private ? 'red-text' : 'green-text'}}">{{ (quizz.private ? "quizz.private" : "quizz.public") | translate }}</span></span> <br>
+                                    - <span *ngIf="!quizz.close">{{ "quizz.open" | translate }} </span>
+                                    <span *ngIf="quizz.close">{{ "quizz.close" | translate }} </span><br>
+                                    - {{ "quizz.quizzcontain" | translate:({nbr:  quizz.questions.length}) }}<br>
+                                    - <span *ngIf="quizz?.answer_count < 1">{{ "quizz.firstanswer" | translate}}</span>
+                                    <span *ngIf="quizz?.answer_count == 1">{{ "quizz.oneanswer" | translate }}</span>
+                                    <span *ngIf="quizz?.answer_count > 1">{{ "quizz.answersplay" | translate:({nbr:  quizz.answer_count}) }}</span>
                                 </p>
+                            </div>
 
+                            <div class="col s11 offset-s1">
                                 <share-buttons class="right" [theme]="'default'"
                                                [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"
                                                [show]="6"
@@ -107,11 +110,10 @@
 
                                 </share-buttons>
 
-
                             </div>
 
                             <button class="btn purple-border right col s12" (click)="sendReport()" [disabled]="report">
-                                Signaler le quizz
+                                {{"quizz.buttonreport" | translate }}
                             </button>
 
                         </div>
@@ -119,7 +121,7 @@
                             <div class="title-answer">{{quizz.title}}</div>
                             <div class="row question z-depth-3" *ngIf="nbrQ == quizz.questions.length">
                                 <div class="col s12">
-                                    <div class="title-question col s12 ">Rentre un pseudo </div>
+                                    <div class="title-question col s12 ">{{"quizz.enterusername"| translate}} </div>
 
                                     <input type="text" placeholder="Pseudo" maxlength="16" [(ngModel)]="username">
                                 </div>
@@ -129,7 +131,7 @@
                                     <div class="title-question col s12 ">{{q.name}} </div>
 
                                     <div class="row answers" >
-                                        <h2 class="choice-answer">Choisis une réponse :</h2>
+                                        <h2 class="choice-answer">{{"quizz.choiceanswer" | translate}} :</h2>
                                         <p *ngFor="let choice of q.choices; let j = index">
                                             <label>
                                                 <input name="group{{i}}" type="radio" (click)="setAnswer(choice, q)"  [checked]="answer?.questions[i]?.answer?.name == choice.name" />
@@ -141,9 +143,9 @@
                             </ng-container>
                             <div class="row answer-end">
                                 <div class="col s12">
-                                    <button (click)="previewQ()" class="white-button left btn" *ngIf="nbrQ > 0">Précédent</button>
-                                    <button (click)="nextQ()" class="white-button right btn" *ngIf="nbrQ < quizz.questions.length - 1 ">Suivant</button>
-                                    <button (click)="validateAnswer()" class="white-button right btn" *ngIf="nbrQ == quizz.questions.length - 1 ">Valider</button>
+                                    <button (click)="previewQ()" class="white-button left btn" *ngIf="nbrQ > 0">{{ "quizz.previous" | translate}}</button>
+                                    <button (click)="nextQ()" class="white-button right btn" *ngIf="nbrQ < quizz.questions.length - 1 ">{{ "quizz.next" | translate}}</button>
+                                    <button (click)="validateAnswer()" class="white-button right btn" *ngIf="nbrQ == quizz.questions.length - 1 ">{{ "quizz.validate" | translate}}</button>
                                 </div>
                             </div>
 
@@ -159,17 +161,18 @@
 
                         <div class="col s12  user z-depth-3">
                             <div class="col s2">
-                                <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" [routerLink]="['/profil/'+quizz.user_id]">
+                                <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" [routerLink]="['/profile/'+quizz.user_id]">
                             </div>
 
                             <div class="col s10">
-                                <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}}</a> <br>
-                                    - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
-                                    <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
-                                    - Ce quizz contient {{answer.questions.length}} questions <br>
-                                    - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
-                                    <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
-                                    <span *ngIf="quizz?.answer_count > 1">{{quizz.answer_count}} ont participés à ce quizz</span>
+                                <p> - {{"quizz.author" | translate}} <a [routerLink]="['/profile/'+quizz.user_id]">{{quizz.username}}</a> <br>
+                                    - <span>{{ "quizz.quizzare" | translate}} <span class="{{quizz.private ? 'red-text' : 'green-text'}}">{{ (quizz.private ? "quizz.private" : "quizz.public") | translate }}</span></span> <br>
+                                    - <span *ngIf="!quizz.close">{{ "quizz.open" | translate }} </span>
+                                    <span *ngIf="quizz.close">{{ "quizz.close" | translate }} </span><br>
+                                    - {{ "quizz.quizzcontain" | translate:({nbr:  quizz.questions.length}) }}<br>
+                                    - <span *ngIf="quizz?.answer_count < 1">{{ "quizz.firstanswer" | translate}}</span>
+                                    <span *ngIf="quizz?.answer_count == 1">{{ "quizz.oneanswer" | translate }}</span>
+                                    <span *ngIf="quizz?.answer_count > 1">{{ "quizz.answersplay" | translate:({nbr:  quizz.answer_count}) }}</span>
                                 </p>
                                 <share-buttons class="right" [theme]="'default'"
                                                [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"
@@ -184,12 +187,12 @@
                             </div>
 
                             <button class="btn purple-border right col s12" (click)="sendReport()" [disabled]="report">
-                                Signaler le quizz
+                                {{"quizz.buttonreport" | translate}}
                             </button>
                         </div>
 
                         <div  class="already col s12">
-                            {{finalString}}<br>
+                            {{finalString | translate}}<br>
                             <span> {{result}} % </span>
                         </div>
 
@@ -204,17 +207,18 @@
                 <ng-container *ngIf="!alreadyAnswer">
                     <div class="col s12 l4 user z-depth-3">
                         <div class="col s2">
-                            <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" [routerLink]="['/profil/'+quizz.user_id]">
+                            <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" [routerLink]="['/profile/'+quizz.user_id]">
                         </div>
 
                         <div class="col s10">
-                            <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}}</a> <br>
-                                - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
-                                <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
-                                - Ce quizz contient {{quizz.questions.length}} questions <br>
-                                - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
-                                <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
-                                <span *ngIf="quizz?.answer_count > 1">{{quizz.answer_count}} ont participés à ce quizz</span>
+                            <p> - {{"quizz.author" | translate}} <a [routerLink]="['/profile/'+quizz.user_id]">{{quizz.username}}</a> <br>
+                                - <span>{{ "quizz.quizzare" | translate}} <span class="{{quizz.private ? 'red-text' : 'green-text'}}">{{ (quizz.private ? "quizz.private" : "quizz.public") | translate }}</span></span> <br>
+                                - <span *ngIf="!quizz.close">{{ "quizz.open" | translate }} </span>
+                                <span *ngIf="quizz.close">{{ "quizz.close" | translate }} </span><br>
+                                - {{ "quizz.quizzcontain" | translate:({nbr:  quizz.questions.length}) }}<br>
+                                - <span *ngIf="quizz?.answer_count < 1">{{ "quizz.firstanswer" | translate}}</span>
+                                <span *ngIf="quizz?.answer_count == 1">{{ "quizz.oneanswer" | translate }}</span>
+                                <span *ngIf="quizz?.answer_count > 1">{{ "quizz.answersplay" | translate:({nbr:  quizz.answer_count}) }}</span>
                             </p>
 
                             <share-buttons class="right" [theme]="'default'"
@@ -230,15 +234,15 @@
 
                         </div>
                         <button class="btn purple-border right col s12" (click)="sendReport()" [disabled]="report">
-                            Signaler le quizz
+                            {{"quizz.buttonreport" | translate}}
                         </button>
-                        <button class="btn green-button right col s12" (click)="openModal()">S'inscire / Se connecter</button>
+                        <button class="btn green-button right col s12" (click)="openModal()">{{"home.register" | translate}} / {{"home.connection" | translate}}</button>
                     </div>
                     <div class="col s12 l8 offset-l1 answer-quizz">
                         <div class="title-answer">{{quizz.title}}</div>
                         <div class="row question z-depth-3" *ngIf="nbrQ == quizz.questions.length">
                             <div class="col s12">
-                                <div class="title-question col s12 ">Rentre un pseudo </div>
+                                <div class="title-question col s12 ">{{"quizz.enterusername" | translate}}</div>
 
                                 <input type="text" placeholder="Pseudo" minlength="3" maxlength="16" [(ngModel)]="username">
                             </div>
@@ -248,7 +252,7 @@
                                 <div class="title-question col s12 ">{{q.name}} </div>
 
                                 <div class="row answers" >
-                                    <h2>Choisis une réponse :</h2>
+                                    <h2>{{"quizz.choiceanswer" | translate}} :</h2>
                                     <p *ngFor="let choice of q.choices; let j = index">
                                         <label>
                                             <input [disabled]="quizz.close" name="group{{i}}" type="radio" (click)="setAnswer(choice, q)"  [checked]="answer?.questions[i]?.answer?.name == choice.name" />
@@ -260,10 +264,10 @@
                         </ng-container>
                         <div class="row answer-end">
                             <div class="col s12">
-                                <button (click)="previewQ()" class="white-button left btn" *ngIf="nbrQ > 0">Précédent</button>
-                                <button (click)="openModal()" class="white-button left btn col s12" *ngIf="quizz.close">Tu dois te connecter pour participer</button>
-                                <button (click)="nextQ()" class="white-button right btn" *ngIf="nbrQ < quizz.questions.length && !quizz.close" [disabled]="quizz.close">Suivant</button>
-                                <button (click)="validateAnswerAnony()" class="white-button right btn" *ngIf="nbrQ == quizz.questions.length">Valider</button>
+                                <button (click)="previewQ()" class="white-button left btn" *ngIf="nbrQ > 0">{{"quizz.previous" | translate}}</button>
+                                <button (click)="openModal()" class="white-button left btn col s12" *ngIf="quizz.close">{{"quizz.needconnection" | translate}}</button>
+                                <button (click)="nextQ()" class="white-button right btn" *ngIf="nbrQ < quizz.questions.length && !quizz.close" [disabled]="quizz.close">{{"quizz.next" | translate}}</button>
+                                <button (click)="validateAnswerAnony()" class="white-button right btn" *ngIf="nbrQ == quizz.questions.length">{{"quizz.validate" | translate}}</button>
                             </div>
                         </div>
 
@@ -277,17 +281,18 @@
 
                     <div class="col s12  user z-depth-3">
                         <div class="col s2">
-                            <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" [routerLink]="['/profil/'+quizz.user_id]">
+                            <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" [routerLink]="['/profile/'+quizz.user_id]">
                         </div>
 
                         <div class="col s10">
-                            <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}} </a><br>
-                                - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
-                                <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
-                                - Ce quizz contient {{answer.questions.length}} questions <br>
-                                - <span *ngIf="quizz?.answer_count < 1">Tu es le premier a participer à ce quizz</span>
-                                <span *ngIf="quizz?.answer_count == 1">1 personne a participé à ce quizz</span>
-                                <span *ngIf="quizz?.answer_count > 1">{{quizz.answer_count}} ont participés à ce quizz</span>
+                            <p> - {{"quizz.author" | translate}} <a [routerLink]="['/profile/'+quizz.user_id]">{{quizz.username}}</a> <br>
+                                - <span>{{ "quizz.quizzare" | translate}} <span class="{{quizz.private ? 'red-text' : 'green-text'}}">{{ (quizz.private ? "quizz.private" : "quizz.public") | translate }}</span></span> <br>
+                                - <span *ngIf="!quizz.close">{{ "quizz.open" | translate }} </span>
+                                <span *ngIf="quizz.close">{{ "quizz.close" | translate }} </span><br>
+                                - {{ "quizz.quizzcontain" | translate:({nbr:  quizz.questions.length}) }}<br>
+                                - <span *ngIf="quizz?.answer_count < 1">{{ "quizz.firstanswer" | translate}}</span>
+                                <span *ngIf="quizz?.answer_count == 1">{{ "quizz.oneanswer" | translate }}</span>
+                                <span *ngIf="quizz?.answer_count > 1">{{ "quizz.answersplay" | translate:({nbr:  quizz.answer_count}) }}</span>
                             </p>
                             <share-buttons class="right" [theme]="'default'"
                                            [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"
@@ -301,15 +306,15 @@
                             </share-buttons>
                         </div>
                         <button class="btn purple-border right col s12" (click)="sendReport()" [disabled]="report">
-                            Signaler le quizz
+                            {{"quizz.buttonreport" | translate}}
                         </button>
 
                     </div>
 
                     <div  class="already col s12">
-                        <button class="btn green-button col s12" (click)="openModal()">Inscris toi pour créer ton quizz</button>
+                        <button class="btn green-button col s12" (click)="openModal()">{{"quizz.proposeregister" | translate}}</button>
 
-                        {{finalString}}<br>
+                        {{finalString | translate}}<br>
                         <span> {{result}} % </span>
                     </div>
 
@@ -322,7 +327,7 @@
 
         <ng-container *ngIf="!exist">
             <div class="empty" *ngIf="!exist">
-                Ce quizz n'existe pas ou a été supprimé <br>
+                {{ 'quizz.noexist' | translate }} <br>
                 <i class="material-icons">
                     error_outline
                 </i>

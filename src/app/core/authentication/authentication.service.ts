@@ -7,7 +7,7 @@ import {environment} from 'src/environments/environment';
 import {User} from '../../models/user';
 import {CookieService} from "ngx-cookie";
 import { JwtHelperService } from "@auth0/angular-jwt";
-import {isNull, isNullOrUndefined} from "util";
+import {isNullOrUndefined} from "util";
 
 
 @Injectable({ providedIn: 'root' })

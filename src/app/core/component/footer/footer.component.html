@@ -4,19 +4,27 @@
   <div class="footer-copyright ">
 
     <div class="container black-text row">
+
+      <div class="col s12 center-align hide-on-large-only">
+        <i class="flag flag-US" (click)="changeLanguage('en')"></i>
+        <i class="flag flag-FR"(click)="changeLanguage('fr')"></i>
+      </div>
       <div class="logo col s12">
         <img routerLink="/" src="../../../../assets/images/color-logo.png" alt="logo myquizzy.com myquizzy quizz">
 
       </div>
       <div class="col l6 s12 right hide-on-med-and-down">
-        <a class="right" routerLink="/contact">Contact</a>
-        <a class="right" routerLink="/terms">Conditions d'utilisation</a>
-        <a class="right" routerLink="/privacy">Politique de confidentialité</a>
+
+        <i class="flag flag-US right" (click)="changeLanguage('en')"></i>
+        <i class="flag flag-FR right"(click)="changeLanguage('fr')"></i>
+        <a class="right" routerLink="/contact">{{"footer.contact" | translate}}</a>
+        <a class="right" routerLink="/terms">{{"word.terms" | translate}}</a>
+        <a class="right" routerLink="/privacy">{{"word.privacy" | translate}}</a>
       </div>
       <div class="col l6 s12 hide-on-large-only center" >
-        <a routerLink="/contact" class="left-align">Contact</a>
-        <a routerLink="/terms" class="left-align">Conditions d'utilisation</a>
-        <a routerLink="/privacy" class="left-align">Politique de confidentialité</a>
+        <a routerLink="/contact" class="left-align">{{"footer.contact" | translate}}</a>
+        <a routerLink="/terms" class="left-align">{{"word.terms" | translate}}</a>
+        <a routerLink="/privacy" class="left-align">{{"word.privacy" | translate}}</a>
       </div>
       <div class="col l6 s12 left hide-on-med-and-down">
         © 2019 Copyright myquizzy.com

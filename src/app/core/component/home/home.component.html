@@ -6,21 +6,20 @@
   </div>
   <div class="col s12 l4 offset-l4 center-align">
 
-    <button class="white-button col l5 s12" (click)="openModal()">Connexion</button>
+    <button class="white-button col l5 s12" (click)="openModal()">{{ 'home.connection' | translate }}</button>
     <div class="col l2"></div>
-    <button class="white-button col l5 s12" (click)="openModal()" id="register"><span>Inscription</span></button>
+    <button class="white-button col l5 s12" (click)="openModal()" id="register"><span>{{ 'home.register' | translate }}</span></button>
   </div>
 
   <div class="header-text col s12">
-    Crée, participe et partage tes quizz avec tes amis<br>
-    Tout est gratuit il te suffit de créer un compte.
+    {{ 'home.description' | translate }}
   </div>
 
   <div class="main row">
     <div class="card col s12 l3">
       <div class="card-image">
         <img src="../assets/images/home1.png" alt="myquizzy myquizzy.com quizz">
-        <span class="card-title">Crée ton profil</span>
+        <span class="card-title">{{ 'home.step1' | translate }}</span>
         <a class="btn-floating halfway-fab waves-effect waves-light background-gradient-invert">1</a>
       </div>
     </div>
@@ -28,7 +27,7 @@
     <div class="card col s12 l3">
       <div class="card-image">
         <img src="../assets/images/home2.png" alt="myquizzy myquizzy.com quizz">
-        <span class="card-title">Crée ton Quizz</span>
+        <span class="card-title">{{ 'home.step2' | translate }}</span>
         <a class="btn-floating halfway-fab waves-effect waves-light background-gradient-invert">2</a>
       </div>
     </div>
@@ -36,7 +35,7 @@
     <div class="card col s12 l3">
       <div class="card-image">
         <img src="../assets/images/home3.png" alt="myquizzy myquizzy.com quizz">
-        <span class="card-title">Partage ton Quizz</span>
+        <span class="card-title">{{ 'home.step3' | translate }}</span>
         <a class="btn-floating halfway-fab waves-effect waves-light background-gradient-invert">3</a>
       </div>
     </div>
@@ -44,7 +43,7 @@
     <div class="card col s12 l3">
       <div class="card-image">
         <img src="../assets/images/home4.png" alt="myquizzy myquizzy.com quizz">
-        <span class="card-title">Regarde les résultats</span>
+        <span class="card-title">{{ 'home.step4' | translate }}</span>
         <a class="btn-floating halfway-fab waves-effect waves-light background-gradient-invert">4</a>
       </div>
     </div>

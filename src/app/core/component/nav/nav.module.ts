@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {NavComponent} from "./nav.component";
 import {AppRoutingModule} from "../../../app-routing.module";
 import {ModalRegisterModule} from "../../../share/component/modal-register/modal-register.module";
+import {CoreModule} from "../../core.module";
 
 
 
@@ -11,8 +12,8 @@ import {ModalRegisterModule} from "../../../share/component/modal-register/modal
     imports: [
         CommonModule,
         AppRoutingModule,
-        ModalRegisterModule
-
+        ModalRegisterModule,
+        CoreModule
     ],
     exports: [
         NavComponent

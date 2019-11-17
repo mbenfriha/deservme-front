@@ -4,13 +4,10 @@ import { MetafrenzyService } from 'ngx-metafrenzy';
 import {AuthenticationService} from './core/authentication/authentication.service';
 import {User} from './models/user';
 import {ToastrService} from 'ngx-toastr';
-import { first } from 'rxjs/operators';
 import  { LoaderService } from "./core/service/loader.service";
 
 import { DOCUMENT } from '@angular/common';
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import {isNullOrUndefined} from "util";
-
 
 @Component({
     selector: 'app-root',
@@ -32,12 +29,9 @@ export class AppComponent implements OnInit {
         private route: ActivatedRoute,
         private toastr: ToastrService,
         @Inject(DOCUMENT) private document: Document,
-        @Inject(PLATFORM_ID) private platformId: any,
-    ) {
+        @Inject(PLATFORM_ID) private platformId: any) {
 
-        if (isPlatformBrowser(this.platformId)) {
-            // Your client side code
-        }
+
         this.metafrenzyService.setOpenGraph({
             type: 'website',
             url: 'https://myquizzy.com',
