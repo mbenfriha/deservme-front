@@ -1,4 +1,7 @@
 
+<li class="collection-item avatar" *ngIf="index == 2">
+  <div class="adsbygoogle"></div>
+</li>
 <li class="collection-item avatar">
   <img src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" class="circle" [routerLink]="['/profile/'+quizz.user_id]">
   <div [routerLink]="['/quizz/'+quizz._id]">

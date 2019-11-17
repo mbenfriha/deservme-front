@@ -29,7 +29,7 @@
             <div class="title-page" >Quizz</div>
 
             <ul class="collection" *ngIf="quizzs.length > 0">
-                <app-single-quizz-list *ngFor="let quizz of quizzs" [quizz]="quizz"></app-single-quizz-list>
+                <app-single-quizz-list *ngFor="let quizz of quizzs; let i = index" [quizz]="quizz" [index]="i"></app-single-quizz-list>
             </ul>
             <div class="empty" *ngIf="quizzs.length < 1">
                 {{user.username}} {{"profile.nocreated" | translate}} <br>
@@ -44,7 +44,7 @@
                 <materialize-tab-group>
                       <materialize-tab title="Quizz">
                     <ul class="collection" *ngIf="quizzs.length > 0">
-                        <app-single-quizz-list *ngFor="let quizz of quizzs" [quizz]="quizz"></app-single-quizz-list>
+                        <app-single-quizz-list *ngFor="let quizz of quizzs; let i = index" [quizz]="quizz" [index]="i"></app-single-quizz-list>
                     </ul>
                     <div class="empty col s12" *ngIf="quizzs.length < 1">
                         {{"profile.menotcreated" | translate}} <br>

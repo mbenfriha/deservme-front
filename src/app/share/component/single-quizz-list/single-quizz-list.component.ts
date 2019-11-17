@@ -11,6 +11,7 @@ import {TranslateService} from "@ngx-translate/core";
 export class SingleQuizzListComponent implements OnInit {
 
   @Input() quizz: Quizz;
+  @Input() index: number;
 
   constructor(private readonly translate: TranslateService) {
       this.translate.setDefaultLang('en');
