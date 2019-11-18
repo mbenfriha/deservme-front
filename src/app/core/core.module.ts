@@ -10,6 +10,8 @@ import {RouterModule} from "@angular/router";
 import {LoaderService} from "./service/loader.service";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {NgcCookieConsentModule} from 'ngx-cookieconsent';
+
 
 @NgModule({
     declarations: [],
@@ -25,6 +27,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
             },
             isolate: false
         }),
+        NgcCookieConsentModule
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
