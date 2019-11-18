@@ -19,6 +19,30 @@ import { NavModule } from "./core/component/nav/nav.module";
 import {FooterComponent} from "./core/component/footer/footer.component";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
+
+const cookieConfig:NgcCookieConsentConfig = {
+    cookie: {
+        domain: 'myquizzy.com' // or 'your.domain.com' // it is mandatory to set a domain, for cookies to work properly (see https://goo.gl/S2Hy2A)
+    },
+    palette: {
+        popup: {
+            background: "#ffffff",
+            text: "#000000",
+            link: "#9851f4"
+        },
+        button: {
+            background: "#9851f4",
+            text: "#ffffff",
+            border: "transparent"
+        },
+    },
+    theme: 'edgeless',
+    type: 'opt-out',
+    content: {
+        href: "https://myquizzy.com/terms",
+    }
+};
 
 @NgModule({
     declarations: [AppComponent, FooterComponent],
@@ -45,7 +69,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
             },
             isolate : false
         }),
-
+        NgcCookieConsentModule.forRoot(cookieConfig)
     ],
     providers: [],
     bootstrap: [AppComponent, FooterComponent],

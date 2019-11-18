@@ -116,6 +116,14 @@
     "changestate": "Your quiz is now in {{value}}",
     "changeclose": "Your quiz is now {{value}}",
     "uploadprofile": "Your profile has been uploaded"
+  },
+  "cookie": {
+    "header": "Cookies used on the website!",
+    "message": "This website uses cookies to ensure you get the best experience on our website.",
+    "dismiss": "Got it!",
+    "allow": "Allow cookies",
+    "deny": "Decline",
+    "link": "Learn more",
+    "policy": "Cookie Policy"
   }
-
 }

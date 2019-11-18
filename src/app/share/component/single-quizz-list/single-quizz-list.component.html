@@ -5,7 +5,7 @@
 <li class="collection-item avatar">
   <img src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}" class="circle" [routerLink]="['/profile/'+quizz.user_id]">
   <div [routerLink]="['/quizz/'+quizz._id]">
-    <div class="title col s11"><b>{{quizz.username}}</b> {{quizz.title}} </div> <div *ngIf="quizz.private" class="red-text right col s1"><i class="material-icons lock">
+    <div class="title col s11">{{quizz.title}} - <b>{{quizz.username}}</b>  </div> <div *ngIf="quizz.private" class="red-text right col s1"><i class="material-icons lock">
     lock
   </i></div>
     <div class="col s11">{{ "quizz.quizzcontain" | translate:({nbr:  quizz.questions.length}) }}<span *ngIf="quizz.questions.length > 1"></span><br>

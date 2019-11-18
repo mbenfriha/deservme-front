@@ -117,5 +117,14 @@
     "changestate": "Ton quizz est maintenant en {{value}}",
     "changeclose": "Ton quizz est maintenant  {{value}}",
     "uploadprofile": "Ton profil a été mise à jour"
+  },
+  "cookie": {
+    "header": "Ce site utilise des cookies",
+    "message": "Ce site utilise des cookies pour vous garantir la meilleure expérience sur notre site.",
+    "dismiss": "Je l'ai!",
+    "allow": "Autorise les cookies",
+    "deny": "Refuser",
+    "link": "Voir +",
+    "policy": "Politique de cookie"
   }
 }
