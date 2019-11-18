@@ -6,9 +6,9 @@ import {User} from './models/user';
 import {ToastrService} from 'ngx-toastr';
 import  { LoaderService } from "./core/service/loader.service";
 
-import {
-    NgcCookieConsentService
-} from 'ngx-cookieconsent';
+
+import { NgcInitializeEvent , NgcStatusChangeEvent, NgcCookieConsentService } from 'ngx-cookieconsent';
+
 
 import { DOCUMENT } from '@angular/common';
 import {isNullOrUndefined} from "util";
@@ -80,7 +80,31 @@ export class AppComponent implements OnInit, OnDestroy {
             }
         });
 
+        // subscribe to cookieconsent observables to react to main events
+        this.popupOpenSubscription = this.ccService.popupOpen$.subscribe(
+            () => {
+                // you can use this.ccService.getConfig() to do stuff...
+            });
 
+        this.popupCloseSubscription = this.ccService.popupClose$.subscribe(
+            () => {
+                // you can use this.ccService.getConfig() to do stuff...
+            });
+
+        this.initializeSubscription = this.ccService.initialize$.subscribe(
+            (event: NgcInitializeEvent) => {
+                // you can use this.ccService.getConfig() to do stuff...
+            });
+
+        this.statusChangeSubscription = this.ccService.statusChange$.subscribe(
+            (event: NgcStatusChangeEvent) => {
+                // you can use this.ccService.getConfig() to do stuff...
+            });
+
+        this.revokeChoiceSubscription = this.ccService.revokeChoice$.subscribe(
+            () => {
+                // you can use this.ccService.getConfig() to do stuff...
+            });
 
         this.translateService//
             .get(['cookie.header', 'cookie.message', 'cookie.dismiss', 'cookie.allow', 'cookie.deny', 'cookie.link', 'cookie.policy'])
@@ -114,6 +138,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         // unsubscribe to cookieconsent observables to prevent memory leaks
-
+        this.popupOpenSubscription.unsubscribe();
+        this.popupCloseSubscription.unsubscribe();
+        this.initializeSubscription.unsubscribe();
+        this.statusChangeSubscription.unsubscribe();
+        this.revokeChoiceSubscription.unsubscribe();
+        this.noCookieLawSubscription.unsubscribe();
     }
 }
