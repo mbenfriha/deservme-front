@@ -19,6 +19,7 @@ import { NavModule } from "./core/component/nav/nav.module";
 import {FooterComponent} from "./core/component/footer/footer.component";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {CookieLawModule} from "angular2-cookie-law";
 
 
 
@@ -47,6 +48,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
             },
             isolate : false
         }),
+        CookieLawModule
     ],
     providers: [],
     bootstrap: [AppComponent, FooterComponent],

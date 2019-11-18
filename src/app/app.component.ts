@@ -5,6 +5,7 @@ import {AuthenticationService} from './core/authentication/authentication.servic
 import {User} from './models/user';
 import {ToastrService} from 'ngx-toastr';
 import  { LoaderService } from "./core/service/loader.service";
+
 import { DOCUMENT } from '@angular/common';
 import {isNullOrUndefined} from "util";
 
