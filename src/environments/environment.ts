@@ -6,7 +6,8 @@ export const environment = {
     production: false,
     baseUrl: 'http://localhost:3000/',
     shortUrl: 'http://localhost:4100/',
-    admin: 'http://localhost:4200/'
+    admin: 'http://localhost:4200/',
+    cookieDomain: 'localhost'
 };
 
 /*

@@ -23,7 +23,7 @@ import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent'
 
 const cookieConfig:NgcCookieConsentConfig = {
     cookie: {
-        domain: 'myquizzy.com' // or 'your.domain.com' // it is mandatory to set a domain, for cookies to work properly (see https://goo.gl/S2Hy2A)
+        domain: environment.cookieDomain 
     },
     palette: {
         popup: {
