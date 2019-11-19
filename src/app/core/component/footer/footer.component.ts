@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
+import { faFacebookF, faTwitter} from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-footer',
@@ -7,6 +8,9 @@ import {TranslateService} from "@ngx-translate/core";
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
+
+    faFacebookF = faFacebookF;
+    faTwitter = faTwitter;
 
   constructor(private readonly translate: TranslateService) {
       this.translate.setDefaultLang('en');

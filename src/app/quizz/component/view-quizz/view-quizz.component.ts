@@ -57,6 +57,10 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
                 private readonly translate: TranslateService) {
         this.translate.setDefaultLang('en');
         this.translate.use(this.translate.getBrowserLang());
+        this.quizzService.getQuizzById(this.id).pipe(take(1)).subscribe((q: Quizz) => {
+            this.metafrenzyService.setAllTitleTags('MyQuizzy - ' + q.title);
+            this.metafrenzyService.setAllDescriptionTags('Viens répondre au quizz de ' + q.username);
+        })
 
         this.id = this.route.snapshot.paramMap.get('id');
         console.log(this.currentUser);

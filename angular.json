@@ -33,13 +33,11 @@
               "src/assets/style/_variable.scss",
               "node_modules/materialize-css/dist/css/materialize.css",
               "node_modules/ngx-toastr/toastr.css",
-              "./node_modules/cookieconsent/build/cookieconsent.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/hammerjs/hammer.js",
               "node_modules/materialize-css/dist/js/materialize.js",
-              "./node_modules/cookieconsent/build/cookieconsent.min.js"
             ]
           },
           "configurations": {
@@ -101,13 +99,11 @@
               "src/assets/style/_variable.scss",
               "node_modules/materialize-css/dist/css/materialize.css",
               "node_modules/ngx-toastr/toastr.css",
-              "./node_modules/cookieconsent/build/cookieconsent.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/hammerjs/hammer.js",
               "node_modules/materialize-css/dist/js/materialize.js",
-              "./node_modules/cookieconsent/build/cookieconsent.min.js"
             ],
             "assets": [
               "src/favicon.ico",
