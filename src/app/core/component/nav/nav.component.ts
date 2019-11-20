@@ -1,11 +1,11 @@
 import {Component, Input, OnInit, ElementRef} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {AuthenticationService} from "../../authentication/authentication.service";
 import {User} from 'src/app/models/user';
 import {environment} from 'src/environments/environment';
 
+declare var $: any;
 declare var jQuery: any;
-
 
 
 @Component({

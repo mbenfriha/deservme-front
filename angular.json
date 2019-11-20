@@ -38,6 +38,7 @@
               "node_modules/jquery/dist/jquery.js",
               "node_modules/hammerjs/hammer.js",
               "node_modules/materialize-css/dist/js/materialize.js",
+              "../node_modules/jquery/dist/jquery.min.js"
             ]
           },
           "configurations": {
@@ -104,6 +105,7 @@
               "node_modules/jquery/dist/jquery.js",
               "node_modules/hammerjs/hammer.js",
               "node_modules/materialize-css/dist/js/materialize.js",
+              "node_modules/jquery/dist/jquery.min.js"
             ],
             "assets": [
               "src/favicon.ico",

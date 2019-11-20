@@ -12,6 +12,7 @@ import {AuthenticationService} from "../../../core/authentication/authentication
 import {debounceTime, take} from "rxjs/operators";
 import {isNullOrUndefined} from "util";
 
+declare var $: any;
 declare var jQuery: any;
 
 @Component({
