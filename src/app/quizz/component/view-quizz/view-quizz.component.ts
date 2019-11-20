@@ -55,12 +55,6 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
                 private readonly metafrenzyService: MetafrenzyService,
                 private authenticationService: AuthenticationService) {
         this.id = this.route.snapshot.paramMap.get('id');
-        this.quizzService.getQuizzById(this.route.snapshot.paramMap.get('id')).pipe(take(1)).subscribe((q: Quizz) => {
-            this.metafrenzyService.setAllTitleTags('MyQuizzy - ' + q.title);
-            this.metafrenzyService.setAllDescriptionTags('Viens répondre au quizz de ' + q.username);
-        })
-
-        console.log(this.currentUser);
     }
 
     ngOnInit() {
