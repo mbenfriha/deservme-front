@@ -31,9 +31,6 @@ export class AppComponent implements OnInit {
         @Inject(DOCUMENT) private document: Document,
         @Inject(PLATFORM_ID) private platformId: any) {
 
-
-        this.metafrenzyService.setAllTitleTags('MyQuizzy - Crée, joue et partage des tas de quizz');
-        this.metafrenzyService.setAllDescriptionTags('Crée, participe et partage des quizz avec tes amis');
         this.metafrenzyService.setOpenGraph({
             type: 'website',
             url: 'https://myquizzy.com',
