@@ -55,9 +55,6 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
                 private readonly metafrenzyService: MetafrenzyService,
                 private authenticationService: AuthenticationService) {
         this.id = this.route.snapshot.paramMap.get('id');
-    }
-
-    ngOnInit() {
         this.getUser = this.authenticationService.currentUser.subscribe(x => {
             this.currentUser = x;
             if(this.currentUser) {
@@ -96,6 +93,10 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
             });
 
         }, error => {} );
+
+    }
+
+    ngOnInit() {
 
 
         jQuery('.tabs').tabs();
