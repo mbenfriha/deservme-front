@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {environment} from "../../../../environments/environment";
 import {Quizz} from "../../../models/quizz";
-import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-single-quizz-list',
@@ -13,10 +12,7 @@ export class SingleQuizzListComponent implements OnInit {
   @Input() quizz: Quizz;
   @Input() index: number;
 
-  constructor(private readonly translate: TranslateService) {
-      this.translate.setDefaultLang('en');
-      this.translate.use(this.translate.getBrowserLang());
-  }
+  constructor() {}
 
   ngOnInit() {
   }

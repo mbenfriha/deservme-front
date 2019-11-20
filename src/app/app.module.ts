@@ -20,14 +20,24 @@ import {FooterComponent} from "./core/component/footer/footer.component";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {CookieLawModule} from "angular2-cookie-law";
+import {from} from "rxjs";
+import {TransferHttpCacheModule} from "@nguniversal/common";
 
-
+/*
+* @desc Loads translations files in `src/assets/i18n/${lang}.json`
+export class WebpackTranslateLoader implements TranslateLoader {
+    getTranslation(lang: string) {
+        return from(import(`../assets/i18n/${lang}.json`));
+    }
+}
+*/
 
 @NgModule({
     declarations: [AppComponent, FooterComponent],
     imports: [
         CoreModule,
         BrowserModule.withServerTransition({ appId: 'deserveme' }),
+       // TransferHttpCacheModule,
         AppRoutingModule,
         HttpClientModule,
         FontAwesomeModule,
@@ -37,17 +47,16 @@ import {CookieLawModule} from "angular2-cookie-law";
         }),
         BrowserAnimationsModule,
         MetafrenzyModule.forRoot(),
-        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+      //  ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
         IconModule,
         NavModule,
-        TranslateModule.forRoot({
+/*        TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
+                useClass: WebpackTranslateLoader,
             },
             isolate : false
-        }),
+        }),*/
         CookieLawModule
     ],
     providers: [],
@@ -55,8 +64,3 @@ import {CookieLawModule} from "angular2-cookie-law";
     exports: []
 })
 export class AppModule { }
-
-
-export function HttpLoaderFactory(http: HttpClient) {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}

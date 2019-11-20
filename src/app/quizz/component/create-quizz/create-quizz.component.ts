@@ -5,12 +5,11 @@ import {Router} from "@angular/router";
 import {QuizzService} from "../../service/quizz.service";
 import {Subscription} from "rxjs";
 import {take} from "rxjs/operators";
-import {TranslateService} from "@ngx-translate/core";
 
 @Component({
-  selector: 'app-create-quizz',
-  templateUrl: './create-quizz.component.html',
-  styleUrls: ['./create-quizz.component.scss']
+    selector: 'app-create-quizz',
+    templateUrl: './create-quizz.component.html',
+    styleUrls: ['./create-quizz.component.scss']
 })
 export class CreateQuizzComponent implements OnInit, OnDestroy {
 
@@ -25,12 +24,7 @@ export class CreateQuizzComponent implements OnInit, OnDestroy {
 
     constructor(private quizzService: QuizzService,
                 private toastr: ToastrService,
-                private route: Router,
-                private readonly translate: TranslateService) {
-
-        this.translate.setDefaultLang('en');
-        this.translate.use(this.translate.getBrowserLang());
-    }
+                private route: Router) { }
 
     ngOnInit() {
         this.quizz = new Quizz;
@@ -91,22 +85,16 @@ export class CreateQuizzComponent implements OnInit, OnDestroy {
 
     createQuizz()  {
         if (!this.verifyQuestion(this.quizz.questions)) {
-            this.translate.get('error.emptyquestion',).subscribe((res: string) => {
-                this.toastr.error(res);
-            });
+            this.toastr.error('Vérifiez qu\'aucune questions/réponses n\'est vide');
 
         } else if (this.quizz.questions.length < 1) {
-            this.translate.get('error.onequestion',).subscribe((res: string) => {
-                this.toastr.error(res);
-            });
+            this.toastr.error('Votre quizz doit comporter au moins une question');
 
         } else if (!this.quizz.title) {
-            this.translate.get('error.needtitle',).subscribe((res: string) => {
-                this.toastr.error(res);
-            });
+            this.toastr.error('Vous devez donner un titre à votre quizz');
 
         } else {
-          this.createQuizzSub =  this.quizzService.createQuizz(this.quizz).pipe(take(1)).subscribe((v: Quizz) => {
+            this.createQuizzSub =  this.quizzService.createQuizz(this.quizz).pipe(take(1)).subscribe((v: Quizz) => {
                 console.log(v);
                 this.quizzCreated.emit(v);
                 this.route.navigate(['/quizz/'+v._id])
@@ -127,9 +115,7 @@ export class CreateQuizzComponent implements OnInit, OnDestroy {
                 this.quizz.questions[q].choices[0].rep = true;
             }
         } else {
-            this.translate.get('error.nbranswers',).subscribe((res: string) => {
-                this.toastr.error(res);
-            });
+            this.toastr.error('Deux réponses minimum par question');
         }
     }
 

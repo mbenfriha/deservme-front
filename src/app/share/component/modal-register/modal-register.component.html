@@ -3,22 +3,23 @@
 
     <div class="modal-connexion modal" *ngIf="modal">
         <div class="modal-content">
-            <h4>{{ 'modal.title' | translate }}</h4>
-            <p>{{ 'modal.description' | translate }}</p>
+            <h4>Connexion</h4>
+            <p>Tu peux te connecter ou créer un compte via facebook ou twitter puis compléter ton profil par la suite.
+                Sache que nous ne posterons jamais sans ta permission !</p>
             <p class="center-align hide-on-med-and-down">
                 <a href="{{environment.baseUrl}}auth/facebook">
                 <button class="loginBtn loginBtn--facebook">
-                    {{ 'home.connection' | translate }} via Facebook
+                    Connexion via Facebook
                 </button>
             </a>
                 <a href="{{environment.baseUrl}}auth/twitter">
                     <button class="loginBtn loginBtn--twitter">
-                        {{ 'home.connection' | translate }} via Twitter
+                        Connexion via Twitter
                     </button>
                 </a>
                 <a href="{{environment.baseUrl}}auth/google">
                     <button class="loginBtn loginBtn--google">
-                        {{ 'home.connection' | translate }} via Google
+                        Connexion via Google
                     </button>
                 </a>
             </p>
@@ -46,7 +47,7 @@
                   </a>-->
             </p>
             <p class="center-align">
-                {{  'modal.accept1' | translate }} <a routerLink="'/terms'">{{ 'word.terms' | translate }}</a> {{ 'modal.accept2' | translate  }} <a routerLink="'/privacy'">{{ 'word.privacy' | translate }}</a>
+                En t'inscrivant tu acceptes les  <a routerLink="'/terms'">Conditions d'utilisation</a> et la <a routerLink="'/privacy'">Politique de confidentialité</a>
             </p>
         </div>
     </div>

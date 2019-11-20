@@ -1,7 +1,7 @@
 <ng-container *ngIf="!myQuizz">
     <ul class="collection allanswers z-depth-3" *ngIf="allAnswer && allAnswer.length > 0">
         <div class="title-page ">
-            <div class="left">{{ 'quizz.ranking' | translate }}</div>
+            <div class="left">Classement</div>
             <div class="right buttons">
                 <button class="btn {{elm == 'date' ? 'sel' : ''}}" (click)="sortBy('date')">
                     <fa-icon *ngIf="!asc.date" [icon]="faSortAmountDown"></fa-icon>
@@ -24,7 +24,7 @@
 
 
             <span class="title">{{answer.username}}</span>
-            <p> {{ 'quizz.score' | translate }} {{returnResult(answer)}}%<br>
+            <p> Score de {{returnResult(answer)}}%<br>
             </p>
         </li>
     </ul>
@@ -36,7 +36,7 @@
             <materialize-collapsible-title class="valign-wrapper">
         <img *ngIf="answer.user_id" src="{{getAvatar(answer.user_id)}}" alt="img avatar {{answer.username}}" [routerLink]="['/profile/'+answer.user_id]" class="circle">
         <img *ngIf="!answer.user_id" src="../assets/images/android-icon-144x144.png" alt="img avatar {{answer.username}}" class="circle">
-        <span class="title">{{answer.username}} - {{ 'quizz.score' | translate }} {{returnResult(answer)}}%</span>
+        <span class="title">{{answer.username}} - Score de {{returnResult(answer)}}%</span>
 
         </materialize-collapsible-title>
                 <materialize-collapsible-content>
@@ -51,7 +51,7 @@
 </ng-container>
 
 <div class="empty col s12" *ngIf="allAnswer?.length < 1">
-    {{ "quizz.noone" | translate }} <br>
+    Personne n'a encore participer au quizz <br>
     <i class="material-icons">
         error_outline
     </i>

@@ -2,9 +2,9 @@
   <div class="nav-wrapper">
     <a data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <ul id="nav-mobile" class="left hide-on-med-and-down">
-      <li *ngIf="currentUser"><a [ngClass]="{'text-purple': currentRoute=='quizz/discover'}" [routerLink]="['/quizz/discover']">{{ "nav.discover" | translate}}</a></li>
-      <li *ngIf="currentUser"><a [ngClass]="{'text-purple': currentRoute=='quizz/creat'}"  [routerLink]="['/quizz/create']">{{"nav.createquizz" | translate}}</a></li>
-      <li *ngIf="currentUser"><a [ngClass]="{'text-purple': currentRoute=='profile/:id'}" [routerLink]="['/profile/'+currentUser._id]">{{"nav.myquizz" | translate}}</a></li>
+      <li *ngIf="currentUser"><a [ngClass]="{'text-purple': currentRoute=='quizz/discover'}" [routerLink]="['/quizz/discover']">Découverte</a></li>
+      <li *ngIf="currentUser"><a [ngClass]="{'text-purple': currentRoute=='quizz/creat'}"  [routerLink]="['/quizz/create']">Créer un quizz</a></li>
+      <li *ngIf="currentUser"><a [ngClass]="{'text-purple': currentRoute=='profile/:id'}" [routerLink]="['/profile/'+currentUser._id]">Mes quizzy</a></li>
       <li *ngIf="!currentUser"><a href="">Se connecter</a></li>
     </ul>
 
@@ -29,14 +29,14 @@
       </div>
     </div>
     </li>
-  <li *ngIf="currentUser"><a class="sidenav-close" [ngClass]="{'text-purple': currentRoute=='quizz/discover'}" [routerLink]="['/quizz/discover']">{{"nav.discover" | translate}}</a></li>
-  <li *ngIf="currentUser"><a class="sidenav-close" [ngClass]="{'text-purple': currentRoute=='quizz/creat'}"  [routerLink]="['/quizz/create']">{{"nav.createquizz" | translate}}</a></li>
-  <li *ngIf="currentUser"><a class="sidenav-close" [ngClass]="{'text-purple': currentRoute=='profile/:id'}" [routerLink]="['/profile/'+currentUser?._id]">{{"nav.myquizz" | translate}}</a></li>
+  <li *ngIf="currentUser"><a class="sidenav-close" [ngClass]="{'text-purple': currentRoute=='quizz/discover'}" [routerLink]="['/quizz/discover']">Découverte</a></li>
+  <li *ngIf="currentUser"><a class="sidenav-close" [ngClass]="{'text-purple': currentRoute=='quizz/creat'}"  [routerLink]="['/quizz/create']">Créer un quizz</a></li>
+  <li *ngIf="currentUser"><a class="sidenav-close" [ngClass]="{'text-purple': currentRoute=='profile/:id'}" [routerLink]="['/profile/'+currentUser?._id]">Mes quizzy</a></li>
   <li *ngIf="currentUser">
-    <a class="sidenav-close"  (click)="disconnect()">{{"nav.disconnect" | translate}}</a>
+    <a class="sidenav-close"  (click)="disconnect()">Déconnexion</a>
   </li>
   <li *ngIf="!currentUser">
-    <a class="sidenav-close" (click)="openModal()" >{{"nav.connect" | translate}}</a>
+    <a class="sidenav-close" (click)="openModal()" >Connexion</a>
   </li>
 
   <li class="grey-text lighten-4 bottom-nav-menu logo">

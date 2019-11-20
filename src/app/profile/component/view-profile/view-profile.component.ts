@@ -11,7 +11,6 @@ import {Subject, Subscription} from "rxjs";
 import {LoaderService} from "../../../core/service/loader.service";
 import {isNullOrUndefined} from "util";
 import {UserService} from "../../service/user.service";
-import {TranslateService} from "@ngx-translate/core";
 import {debounceTime, take} from "rxjs/operators";
 
 @Component({
@@ -42,10 +41,7 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
                 private authenticationService: AuthenticationService,
                 private toastr: ToastrService,
                 private readonly metafrenzyService: MetafrenzyService,
-                private loaderService: LoaderService,
-                private readonly translate: TranslateService) {
-        this.translate.setDefaultLang('en');
-        this.translate.use(this.translate.getBrowserLang());
+                private loaderService: LoaderService) {
 
         this.loaderService.load.next(false);
         this.id = this.route.snapshot.paramMap.get('id');
@@ -149,52 +145,36 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 
         if(this.acc.password || this.acc.password2 || this.acc.newEmail) {
             if (this.acc.password != this.acc.password2) {
-                this.translate.get('error.samepass').subscribe((res: string) => {
-                    this.toastr.error(res);
-                });
+                    this.toastr.error("Les mots de passe doivent être pareil");
             } else {
                 this.userService.updateUser(this.acc).pipe(take(1)).subscribe(user => {
                     if (user) {
                         var currentUser = user;
                         currentUser.token = this.currentUser.token;
-                        this.authenticationService.setUser(currentUser);
-                        this.translate.get('success.uploadprofile').subscribe((res: string) => {
-                            this.toastr.success(res);
-                        })
+                            this.toastr.success("Ton profil a été mise à jour");
                         return;
                     } else {
-                        this.translate.get('error.error').subscribe((res: string) => {
-                            this.toastr.error(res);
-                        });
+                            this.toastr.error("Une erreur est survenue");
                     }
-
                 }, err => {
                     console.log(err);
-                    this.translate.get('error.alreadytaken',).subscribe((res: string) => {
-                        this.toastr.error(res);
-                    });
+                        this.toastr.error("Cet email a déjà été pris");
                 })
             }
         }
 
         if(this.file) {
             if (this.file.size > 3032642) {
-                this.translate.get('error.avatartomuch').subscribe((res: string) => {
-                    this.toastr.error(res);
-                });
+                    this.toastr.error("Avatar doit faire < 3mb");
             } else {
                 this.userService.updateAvatar(formData).subscribe(r => {
                     if (r.status) {
                         location.reload()
                     } else {
-                        this.translate.get('error.error').subscribe((res: string) => {
-                            this.toastr.error(res);
-                        });
+                            this.toastr.error("Une erreur est survenue");
                     }
                 }, err => {
-                    this.translate.get('error.error').subscribe((res: string) => {
-                        this.toastr.error(res);
-                    });
+                        this.toastr.error("Une erreur est survenue");
                 });
             }
         }

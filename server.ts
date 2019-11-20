@@ -16,6 +16,8 @@
  */
 
 import 'zone.js/dist/zone-node';
+import 'reflect-metadata';
+
 
 import * as express from 'express';
 import {join} from 'path';
@@ -34,6 +36,7 @@ const templateA = fs.readFileSync(join(DIST_FOLDER, "index.html")).toString();
 const win = domino.createWindow(templateA);
 win.Object = Object;
 win.Math = Math;
+win.navigator.language='fr';
 global["window"] = win;
 global["document"] = win.document;
 global["branch"] = null;

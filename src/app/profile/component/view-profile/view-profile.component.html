@@ -10,17 +10,17 @@
 
             <div class="col s10">
                 <p>
-                    <span *ngIf="quizzs?.length > 0">- {{quizzs.length}} {{"profile.quizzcreated" | translate}}</span>
-                    <span *ngIf="quizzs?.length < 1">- {{"profile.noquizz" | translate}}</span><br>
-                    <span *ngIf="answers?.length > 0">- {{"profile.answercreated" | translate:({nbr: answers.length})}}</span>
-                    <span *ngIf="answers?.length < 1">- {{"profile.noquizz" | translate}}</span><br>
+                    <span *ngIf="quizzs?.length > 0">- {{quizzs.length}} Quizz crée</span>
+                    <span *ngIf="quizzs?.length < 1">- Aucun quizz crée</span><br>
+                    <span *ngIf="answers?.length > 0">- A joué à {{answers.length}} Quizz</span>
+                    <span *ngIf="answers?.length < 1">- Aucun quizz joué</span><br>
                 </p>
 
             </div>
             <div class="col s12">
                 <div class="copy-profil">
                     <input class="col s7" type="text" value="{{shortUrl + user.username}}" disabled>
-                    <button class="btn purple-border col s5" (click)="copyUrl(shortUrl + user.username)">{{"profile.copy" | translate}}</button>
+                    <button class="btn purple-border col s5" (click)="copyUrl(shortUrl + user.username)">Copier profil</button>
 
                 </div>
             </div>
@@ -32,7 +32,7 @@
                 <app-single-quizz-list *ngFor="let quizz of quizzs; let i = index" [quizz]="quizz" [index]="i"></app-single-quizz-list>
             </ul>
             <div class="empty" *ngIf="quizzs.length < 1">
-                {{user.username}} {{"profile.nocreated" | translate}} <br>
+                {{user.username}} n'a pas encore crée de quizz <br>
                 <i class="material-icons">
                     error_outline
                 </i>
@@ -47,17 +47,17 @@
                         <app-single-quizz-list *ngFor="let quizz of quizzs; let i = index" [quizz]="quizz" [index]="i"></app-single-quizz-list>
                     </ul>
                     <div class="empty col s12" *ngIf="quizzs.length < 1">
-                        {{"profile.menotcreated" | translate}} <br>
+                        Tu n'as pas encore crée de quizz <br>
                         <i class="material-icons">
                             error_outline
                         </i>
 
                     </div>
 
-                    <button *ngIf="quizzs.length < 1" class="btn green-button col s8 offset-s2 l4 offset-l4" [routerLink]="['/quizz/create']">{{"profile.createfirst" | translate}}</button>
+                    <button *ngIf="quizzs.length < 1" class="btn green-button col s8 offset-s2 l4 offset-l4" [routerLink]="['/createQuizz']">Créer mon premier quizz</button>
 
                 </materialize-tab>
-                      <materialize-tab title="{{'quizz.answers' | translate}}">
+                      <materialize-tab title="Réponses">
 
                     <ul class="collection" *ngIf="answers.length > 0">
                         <li class="collection-item avatar" *ngFor="let answer of answers">
@@ -75,44 +75,44 @@
                         </li>
                     </ul>
                     <div class="empty col s12" *ngIf="answers.length < 1">
-                        {{"profile.menotanswer" | translate}}<br>
+                        Tu n'as encore répondu à aucun quizz <br>
                         <i class="material-icons">
                             error_outline
                         </i>
                     </div>
-                    <button *ngIf="answers.length < 1" class="btn green-button col s8 offset-s2 l4 offset-l4" [routerLink]="['/quizz/discover']">{{"profile.godiscover" | translate}}</button>
+                    <button *ngIf="answers.length < 1" class="btn green-button col s8 offset-s2 l4 offset-l4" [routerLink]="['/discover']">Aller sur discover</button>
 
                 </materialize-tab>
-                    <materialize-tab title="{{'profile.settings' | translate }}">
+                    <materialize-tab title="Paramètres">
 
                         <div class="col s12">
                             <div class="row">
-                                <div class="col s12">{{"profile.mail" | translate}}</div>
+                                <div class="col s12">Email</div>
                                 <div class="input-field col s12">
                                     <input placeholder="{{currentUser.email}}" id="email" type="email" class="validate" [(ngModel)]="acc.newEmail">
-                                    <label for="email">{{"profile.mail" | translate}}</label>
+                                    <label for="email">email</label>
                                 </div>
                             </div>
                         </div>
                         <div class="col s12">
                             <div class="row">
-                                <div class="col s12">{{"profile.password" | translate}}</div>
+                                <div class="col s12">Mot de passe</div>
                                 <div class="input-field col s6">
                                     <input id="password" type="password" class="validate" [(ngModel)]="acc.password">
-                                    <label for="password">{{"profile.password" | translate}}</label>
+                                    <label for="password">mot de passe</label>
                                 </div>
                                 <div class="input-field col s6">
                                     <input id="password2" type="password" class="validate" [(ngModel)]="acc.password2">
-                                    <label for="password2">{{"profile.repassword" | translate}}</label>
+                                    <label for="password2">retape ton mot de passe</label>
                                 </div>
                             </div>
                         </div>
                         <div class="col s12">
                             <div class="row">
-                                <div class="col s12">{{"profile.avatar" | translate}}</div>
+                                <div class="col s12">Mon avatar</div>
                                 <div class="file-field input-field col s12">
                                     <button class="btn purple-border">
-                                        <span>{{"profile.file" | translate}}</span>
+                                        <span>fichier</span>
                                         <input type="file" (change)="uploadAvatar($event)" accept="image/*">
                                     </button>
                                     <div class="file-path-wrapper">
@@ -125,7 +125,7 @@
                             </div>
                         </div>
                         <div class="col s12">
-                            <button class="btn purple-border col s12" (click)="updateProfil()">{{"profile.update" | translate}}</button>
+                            <button class="btn purple-border col s12" (click)="updateProfil()">Mettre à jour</button>
                         </div>
                     </materialize-tab>
                 </materialize-tab-group>
@@ -140,7 +140,7 @@
         <div class="row">
             <div class="col s12">
                 <div class="empty" >
-                    {{"profile.usernoexist" | translate}} <br>
+                    Cet utilisateur n'existe pas ou a été banni <br>
                     <i class="material-icons">
                         error_outline
                     </i>

@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {environment} from '../../../../environments/environment';
 
 import { faSortAlphaDown, faSortNumericDown, faSortAlphaUp, faSortNumericUp, faSortAmountDown, faSortAmountUp } from '@fortawesome/free-solid-svg-icons';
-import {TranslateService} from "@ngx-translate/core";
 
 declare var jQuery: any;
 @Component({
@@ -20,7 +19,7 @@ export class AnswersListComponent implements OnInit {
         alpha: false,
         top: false
     };
-    elm ='date'
+    elm ='date';
     faSortAlphaDown = faSortAlphaDown;
     faSortNumericDown = faSortNumericDown;
     faSortAlphaUp = faSortAlphaUp;
@@ -28,10 +27,7 @@ export class AnswersListComponent implements OnInit {
     faSortAmountDown = faSortAmountDown;
     faSortAmountUp  = faSortAmountUp;
 
-    constructor(private readonly translate: TranslateService) {
-    this.translate.setDefaultLang('en');
-    this.translate.use(this.translate.getBrowserLang());
-    }
+    constructor() {}
 
     ngOnInit() {
     }

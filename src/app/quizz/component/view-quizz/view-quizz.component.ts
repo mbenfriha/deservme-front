@@ -11,7 +11,6 @@ import {MetafrenzyService} from "ngx-metafrenzy";
 import {AuthenticationService} from "../../../core/authentication/authentication.service";
 import {debounceTime, take} from "rxjs/operators";
 import {isNullOrUndefined} from "util";
-import {TranslateService} from "@ngx-translate/core";
 
 declare var jQuery: any;
 
@@ -53,10 +52,7 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
                 private toastr: ToastrService,
                 private router: Router,
                 private readonly metafrenzyService: MetafrenzyService,
-                private authenticationService: AuthenticationService,
-                private readonly translate: TranslateService) {
-        this.translate.setDefaultLang('en');
-        this.translate.use(this.translate.getBrowserLang());
+                private authenticationService: AuthenticationService) {
         this.id = this.route.snapshot.paramMap.get('id');
         this.quizzService.getQuizzById(this.route.snapshot.paramMap.get('id')).pipe(take(1)).subscribe((q: Quizz) => {
             this.metafrenzyService.setAllTitleTags('MyQuizzy - ' + q.title);
@@ -162,9 +158,9 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
         const number = (100 * good / total).toFixed();
         this.result = number;
         if (alr) {
-            this.finalString = 'quizz.alreadyanswer';
+            this.finalString = 'Tu as déjà participé à ce quizz, ton résultat :';
         } else {
-            this.finalString = 'quizz.successanswer';
+            this.finalString = 'Bravo tu as terminé, voici ton résultat :';
         }
     }
 
@@ -183,15 +179,9 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
 
     nextQ() {
         if (!this.currentAnswer) {
-            this.translate.get('error.needanswer',).subscribe((res: string) => {
-                this.toastr.error(res);
-            });
-
+            this.toastr.error('Vous devez choisir une réponse');
         } else if (!this.currentAnswer.name) {
-            this.translate.get('error.needanswer',).subscribe((res: string) => {
-                this.toastr.error(res);
-            });
-
+            this.toastr.error('Vous devez choisir une réponse');
         } else {
             this.answer.questions[this.nbrQ].name = this.currentQuestion.name;
             this.answer.questions[this.nbrQ].question_id = this.currentQuestion._id;
@@ -221,22 +211,16 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
     validateAnswerAnony() {
         this.answer.username = this.username;
         if (isNullOrUndefined(this.answer.username)) {
-            this.translate.get('error.username',).subscribe((res: string) => {
-                this.toastr.error(res);
-            });
+            this.toastr.error('Vous devez rentrer un pseudo');
         } else if (!RegExp('^[A-Za-zÀ-ÖØ-öø-ÿ0-9._-]*$').test(this.answer.username) && !this.isConnected) {
-            this.translate.get('error.needregex',).subscribe((res: string) => {
-                this.toastr.error(res);
-            });
+            this.toastr.error('Le pseudo ne peut contenir que des chiffres et lettres et les caractères : "_" "-" "."' );
         } else if (!this.isConnected && (this.answer.username.length < 3 || this.answer.username.length > 16)) {
-            this.translate.get('error.needusernamelength',).subscribe((res: string) => {
-                this.toastr.error(res);
-            });
+            this.toastr.error('Le pseudo doit faire 3 caractères au minimum');
+
         } else {
             if (!this.currentAnswer) {
-                this.translate.get('error.needanswer',).subscribe((res: string) => {
-                    this.toastr.error(res);
-                });
+                this.toastr.error('Vous devez choisir une réponse');
+
             } else {
                 this.answer.questions[this.nbrQ].name = this.currentQuestion.name;
                 this.answer.questions[this.nbrQ].question_id = this.currentQuestion._id;
@@ -251,19 +235,14 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
                     this.allAnswer = answers;
                 });
             }, (error) => {
-                this.translate.get('error.error',).subscribe((res: string) => {
-                    this.toastr.error(res);
-                });
+                this.toastr.error('Une erreur est survenue');
             });
         }
     }
 
     validateAnswer() {
         if (!this.currentAnswer) {
-
-            this.translate.get('error.needanswer',).subscribe((res: string) => {
-                this.toastr.error(res);
-            });
+            this.toastr.error('Vous devez choisir une réponse');
         } else {
             this.answer.questions[this.nbrQ].name = this.currentQuestion.name;
             this.answer.questions[this.nbrQ].question_id = this.currentQuestion._id;
@@ -276,10 +255,8 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
                 this.allAnswer = answers;
             });
         }, (error) => {
+            this.toastr.error('Une erreur est survenue');
 
-            this.translate.get('error.error',).subscribe((res: string) => {
-                this.toastr.error(res);
-            });
         });
 
     }
@@ -287,9 +264,7 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
 
     reportQuizz() {
         this.quizzService.reportQuizz(this.id).pipe(take(1)).subscribe((r: any) => {
-            this.translate.get('success.report',).subscribe((res: string) => {
-                this.toastr.success(res);
-            });
+            this.toastr.success('Merci d\'avoir signalé le quizz');
             this.report = true;
         }, (err) => {
             console.log(err);
@@ -302,13 +277,9 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
         if (this.quizz.user_id == this.currentUser._id) {
             this.quizzService.changeStateQuizz(this.id).pipe(take(1)).subscribe((q: Quizz) => {
                 this.quizz = q;
-                    this.translate.get('success.changestate', {value: (this.quizz.private ? 'privé' : 'public')}).subscribe((res: string) => {
-                        this.toastr.success(res);
-                    });
-            }, (err) =>
-                this.translate.get('error.error',).subscribe((res: string) => {
-                    this.toastr.error(res);
-                })
+                    this.toastr.success('ton quizz est maintenant en ' + (this.quizz.private ? 'privé' : 'public'));
+                }, (err) =>
+                this.toastr.error('Une erreur est survenue')
             );
         }
     }
@@ -317,13 +288,9 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
         if (this.quizz.user_id == this.currentUser._id) {
             this.quizzService.changeCloseQuizz(this.id).pipe(take(1)).subscribe((q: Quizz) => {
                 this.quizz = q;
-                    this.translate.get('success.changeclose', {value: (this.quizz.close ? 'fermé' : 'ouvert')}).subscribe((res: string) => {
-                        this.toastr.success(res);
-                    });
-            }, (err) =>
-                this.translate.get('error.error',).subscribe((res: string) => {
-                    this.toastr.error(res);
-                })
+                    this.toastr.success('ton quizz est maintenant en ' + (this.quizz.close ? 'fermé' : 'ouvert'));
+                }, (err) =>
+                this.toastr.error('Une erreur est survenue')
             );
         }
     }
@@ -352,9 +319,7 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
             this.quizzService.deleteQuizz(this.id).subscribe((q: Quizz) => {
                 this.router.navigate(['/profile/' + this.currentUser._id]);
             }, (err) =>
-                this.translate.get('error.error',).subscribe((res: string) => {
-                    this.toastr.error(res);
-                })
+                this.toastr.error('Une erreur est survenue')
             );
         }
     }

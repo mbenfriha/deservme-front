@@ -8,9 +8,8 @@ import { CookieModule } from 'ngx-cookie';
 import {UsernameGuard} from "./authentication/guard/username.guard";
 import {RouterModule} from "@angular/router";
 import {LoaderService} from "./service/loader.service";
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-
+//import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+//import {WebpackTranslateLoader} from "../app.module";
 
 
 @NgModule({
@@ -19,14 +18,13 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
         CommonModule,
         CookieModule.forRoot(),
         RouterModule,
-        TranslateModule.forChild({
+        /*TranslateModule.forChild({
             loader: {
                 provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
+                useClass: WebpackTranslateLoader,
             },
             isolate: false
-        }),
+        }),*/
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -35,10 +33,8 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
         UsernameGuard,
         LoaderService
     ],
-    exports: [TranslateModule]
+    exports: []
 })
 export class CoreModule { }
 
-export function HttpLoaderFactory(http: HttpClient) {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
+

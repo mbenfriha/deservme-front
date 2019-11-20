@@ -2,17 +2,17 @@
     <div class="row create-quizz">
         <div class="row title-quizz">
             <div class="col s12">
-                <input type="text" id="title" name="title" placeholder="{{'quizz.titleofquizz' | translate}}" maxlength="50" [(ngModel)]="quizz.title">
+                <input type="text" id="title" name="title" placeholder="Titre du quizz" maxlength="50" [(ngModel)]="quizz.title">
                 <br>
                 <label>
                     <input type="checkbox" class="filled-in" (click)="checkPrivate()" (change)="quizz.private = !quizz.private"  />
-                    <span>{{'quizz.setprivate' | translate}}</span>
+                    <span>Quizz Privé (Uniquement accessible via l'url)</span>
                 </label>
                 <br>
 
                 <label>
                     <input type="checkbox" class="filled-in" (change)="quizz.close = !quizz.close"  />
-                    <span>{{'quizz.setclose' | translate}}</span>
+                    <span>Quizz Fermé (Seuls les inscrits peuvent répondre)</span>
                 </label>
             </div>
         </div>
@@ -25,20 +25,20 @@
             </div>
             <div class="row answers" >
                 <div class="col s12">
-                    <h2>{{'quizz.answercreate' | translate}}</h2>
+                    <h2>Les réponses (2 à 4)</h2>
                     <div class="col s12 answer {{choice.rep ? 'true-answer': 'false-answer'}}" *ngFor="let choice of question.choices; let j = index">
 
                         <div class="col large-answer">
                             <button class="purple-border " (click)="deleteAnswer(i, j)">X</button>
                         </div>
                         <div class="col s8 l9 ">
-                            <input type="text" id="answer" name="answer" placeholder="{{'quizz.answer' | translate}} {{j+1}}" maxlength="90" [(ngModel)]="choice.name">
+                            <input type="text" id="answer" name="answer" placeholder="réponse {{j+1}}" maxlength="90" [(ngModel)]="choice.name">
                         </div>
                         <div class="col s2 large-answer">
                             <p class="answer-right">
                                 <label>
                                     <input (click)="uncheckAll(i, j)" type="checkbox" class="filled-in" [checked]="choice.rep" [(ngModel)]="choice.rep"/>
-                                    <span>{{(choice.rep ? 'word.true': 'word.false') | translate}}</span>
+                                    <span>{{choice.rep ? 'Vrai': 'Faux'}}</span>
                                 </label>
                             </p>
                         </div>
@@ -46,14 +46,14 @@
                 </div>
             </div>
             <div class="col s12 l8 add-answer">
-                <button class="green-border btn col s12" *ngIf="question.choices.length < 4" (click)="addAnswer(i)">{{'quizz.addanswer' | translate}} </button>
+                <button class="green-border btn col s12" *ngIf="question.choices.length < 4" (click)="addAnswer(i)">Ajouter une réponse </button>
             </div>
         </div>
         <div class="row create-quizz create-end">
             <div class="col s12">
-                <button class="white-button left btn" (click)="addQuestion()" *ngIf="quizz.questions.length < 20"> {{'quizz.addquestion' | translate}} </button>
+                <button class="white-button left btn" (click)="addQuestion()" *ngIf="quizz.questions.length < 20"> Ajouter une question </button>
 
-                <button class="white-button right btn" (click)="createQuizz()">{{'quizz.createquizz' | translate}}</button>
+                <button class="white-button right btn" (click)="createQuizz()">Créer mon quizz</button>
             </div>
         </div>
     </div>

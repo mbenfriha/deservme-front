@@ -6,7 +6,6 @@ import {AuthGuard} from "../../../core/authentication/guard/auth.guard";
 import {UsernameGuard} from "../../../core/authentication/guard/username.guard";
 import {SingleQuizzListModule} from "../../../share/component/single-quizz-list/single-quizz-list.module";
 import {CoreModule} from "../../../core/core.module";
-import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [AllQuizzComponent],
@@ -16,8 +15,7 @@ import {TranslateModule} from "@ngx-translate/core";
           { path: '', component: AllQuizzComponent, canActivate: [AuthGuard, UsernameGuard] }
       ]),
       SingleQuizzListModule,
-      CoreModule,
-      TranslateModule
+      CoreModule
   ]
 })
 export class AllQuizzModule { }

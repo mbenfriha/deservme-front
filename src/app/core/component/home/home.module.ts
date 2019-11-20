@@ -4,6 +4,7 @@ import {HomeComponent} from "./home.component";
 import {RouterModule} from "@angular/router";
 import { ModalRegisterModule } from "../../../share/component/modal-register/modal-register.module";
 import {CoreModule} from "../../core.module";
+import {MetafrenzyModule} from "ngx-metafrenzy";
 
 @NgModule({
   declarations: [HomeComponent],
@@ -14,6 +15,8 @@ import {CoreModule} from "../../core.module";
       ]),
       ModalRegisterModule,
       CoreModule,
+      MetafrenzyModule
+
   ]
 })
 export class HomeModule { }

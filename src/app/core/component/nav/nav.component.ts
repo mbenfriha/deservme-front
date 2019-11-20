@@ -3,7 +3,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from "../../authentication/authentication.service";
 import {User} from 'src/app/models/user';
 import {environment} from 'src/environments/environment';
-import {TranslateService} from "@ngx-translate/core";
 
 declare var jQuery: any;
 
@@ -23,10 +22,7 @@ export class NavComponent implements OnInit {
 
     constructor(private el: ElementRef,
                 private route: Router,
-                private auth: AuthenticationService,
-                private readonly translate: TranslateService) {
-        this.translate.setDefaultLang('en');
-        this.translate.use(this.translate.getBrowserLang());
+                private auth: AuthenticationService) {
     }
 
     ngOnInit() {
