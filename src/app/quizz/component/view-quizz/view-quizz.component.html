@@ -97,7 +97,7 @@
                             </div>
 
                             <div class="col s10">
-                                <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}}</a> <br>
+                                <p>- Ce Quizz a été crée par <a [routerLink]="['/profile/'+quizz.user_id]">{{quizz.username}}</a> <br>
                                     - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
                                     <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
                                     - Ce quizz contient {{quizz.questions.length}} questions <br>
@@ -188,7 +188,7 @@
                             </div>
 
                             <div class="col s10">
-                                <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}}</a> <br>
+                                <p>- Ce Quizz a été crée par <a [routerLink]="['/profile/'+quizz.user_id]">{{quizz.username}}</a> <br>
                                     - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
                                     <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
                                     - Ce quizz contient {{answer.questions.length}} questions <br>
@@ -251,7 +251,7 @@
                         </div>
 
                         <div class="col s10">
-                            <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}}</a> <br>
+                            <p>- Ce Quizz a été crée par <a [routerLink]="['/profile/'+quizz.user_id]">{{quizz.username}}</a> <br>
                                 - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
                                 <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
                                 - Ce quizz contient {{quizz.questions.length}} questions <br>
@@ -343,7 +343,7 @@
                         </div>
 
                         <div class="col s10">
-                            <p>- Ce Quizz a été crée par <a [routerLink]="['/profil/'+quizz.user_id]">{{quizz.username}} </a><br>
+                            <p>- Ce Quizz a été crée par <a [routerLink]="['/profile/'+quizz.user_id]">{{quizz.username}} </a><br>
                                 - <span *ngIf="!quizz.close">Ce quizz est ouvert à tout le monde</span>
                                 <span *ngIf="quizz.close">Seuls les inscrits peuvent répondre à ce quizz</span><br>
                                 - Ce quizz contient {{answer.questions.length}} questions <br>
