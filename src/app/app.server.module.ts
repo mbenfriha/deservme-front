@@ -14,7 +14,7 @@ import {TranslateInterceptor} from "./i18n/services/translate.interceptor";
         AppModule,
         ServerModule,
         ModuleMapLoaderModule,
-        ServerTransferStateModule
+      //  ServerTransferStateModule
     ],
     providers: [{ provide: CookieService, useClass: CookieBackendService },
    //     { provide: HTTP_INTERCEPTORS, useClass: TranslateInterceptor, multi: true }
