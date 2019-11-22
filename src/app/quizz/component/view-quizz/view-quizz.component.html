@@ -106,7 +106,6 @@
                                     <span *ngIf="quizz?.answer_count > 1">{{quizz.answer_count}} ont participés à ce quizz</span>
                                 </p>
                             </div>
-                            </div>
                         <div class="col s11 offset-s1">
                             <share-buttons class="right" [theme]="'default'"
                                            [include]="['facebook','twitter','messenger','whatsapp','sms', 'copy']"
@@ -122,6 +121,8 @@
                             <button class="btn purple-border right col s12" (click)="sendReport()" [disabled]="report">
                                 Signaler le quizz
                             </button>
+
+                        </div>
 
                         </div>
                         <div class="col s12 l8 offset-l1 answer-quizz">

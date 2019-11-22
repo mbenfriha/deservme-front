@@ -15,11 +15,10 @@ import {isNullOrUndefined} from "util";
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    title = 'MyQuizzy';
+    title = 'MyQuizzy - Crée, joue et partage des tas de quizz';
     home = true;
     currentRoute = '';
     user: User;
-    loaded = null;
 
     constructor(
         private router: Router,
@@ -37,7 +36,6 @@ export class AppComponent implements OnInit {
             image: 'https://myquizzy.com/assets/images/logomyquizzy.png',
             site_name: 'MyQuizzy'
         });
-        this.metafrenzyService.setMetaTag('fb:app_id', '396653554338782');
         this.metafrenzyService.setLinkTag({
             rel: 'canonical',
             href: 'https://myquizzy.com'
@@ -47,7 +45,7 @@ export class AppComponent implements OnInit {
     }
     ngOnInit() {
 
-        this.loaderService.load.subscribe((l) => this.loaded = isNullOrUndefined(l) || l);
+       // this.loaderService.load.subscribe((l) => this.loaded = isNullOrUndefined(l) || l);
         //get if is home
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
