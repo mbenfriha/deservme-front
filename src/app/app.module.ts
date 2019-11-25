@@ -37,7 +37,7 @@ export class WebpackTranslateLoader implements TranslateLoader {
     imports: [
         CoreModule,
         BrowserModule.withServerTransition({ appId: 'deserveme' }),
-       // TransferHttpCacheModule,
+        TransferHttpCacheModule,
         AppRoutingModule,
         HttpClientModule,
         FontAwesomeModule,
@@ -47,7 +47,7 @@ export class WebpackTranslateLoader implements TranslateLoader {
         }),
         BrowserAnimationsModule,
         MetafrenzyModule.forRoot(),
-      //  ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
         IconModule,
         NavModule,
 /*        TranslateModule.forRoot({

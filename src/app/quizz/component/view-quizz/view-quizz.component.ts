@@ -55,27 +55,30 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
                 private readonly metafrenzyService: MetafrenzyService,
                 private authenticationService: AuthenticationService) {
         this.id = this.route.snapshot.paramMap.get('id');
-        this.metafrenzyService.setAllTitleTags('MyQuizzy - Teste tes connaissances !' );
-        this.metafrenzyService.setAllDescriptionTags('Viens répondre à mon quizz ');
+        this.quizzService.getQuizzById(this.id).pipe(take(1)).subscribe((q: Quizz) => {
+
+            this.metafrenzyService.setAllTitleTags('MyQuizzy - ' + q.title);
+            this.metafrenzyService.setAllDescriptionTags('Viens répondre au quizz de ' + q.username);
+
+            this.exist = true;
+            this.quizz = q;
+        }, err => {
+            this.exist = false;
+        });
     }
 
     ngOnInit() {
-        this.getUser = this.authenticationService.currentUser.subscribe(x => {
-            this.currentUser = x;
-            if(this.currentUser) {
-                this.isConnected = true;
-            }
-            this.quizzService.getQuizzById(this.id).pipe(take(1)).subscribe((q: Quizz) => {
+        if(this.quizz) {
+            this.getUser = this.authenticationService.currentUser.subscribe(x => {
+                this.currentUser = x;
+                if (this.currentUser) {
+                    this.isConnected = true;
+                }
 
-                this.metafrenzyService.setAllTitleTags('MyQuizzy - ' + q.title);
-                this.metafrenzyService.setAllDescriptionTags('Viens répondre au quizz de ' + q.username);
-
-                this.exist = true;
-                this.quizz = q;
                 this.answer = new Answer;
                 this.answer.questions = [new Question()];
                 this.answer.avatar = this.quizz.user_id;
-                if(this.isConnected) {
+                if (this.isConnected) {
                     console.log(this.currentUser, 'ok');
                     this.isConnected = true;
                     this.quizzService.getAnswerByUserAndQuizz(this.id).pipe(take(1)).subscribe((a: Answer) => {
@@ -93,14 +96,13 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
                         this.answer.questions = [new Question()];
                     });
                 }
-            }, err => {
-                this.exist = false;
+
+            }, error => {
             });
+        }
 
-        }, error => {} );
 
-
-        jQuery('.tabs').tabs();
+       // jQuery('.tabs').tabs();
 
         // create subject for debouncetime, anti spam backend
         this.subjectState
