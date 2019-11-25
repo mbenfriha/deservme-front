@@ -60,6 +60,12 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
             this.metafrenzyService.setAllTitleTags('MyQuizzy - ' + q.title);
             this.metafrenzyService.setAllDescriptionTags('Viens répondre au quizz de ' + q.username);
 
+            this.metafrenzyService.setOpenGraph({
+                type: 'website',
+                url: 'https://myquizzy.com/quizz/' + q._id,
+                image: 'https://myquizzy.com/assets/images/cliquetoplay.png',
+            });
+
             this.exist = true;
             this.quizz = q;
         }, err => {

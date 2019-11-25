@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
     ngOnInit() {
 
        // this.loaderService.load.subscribe((l) => this.loaded = isNullOrUndefined(l) || l);
-        //get if is home
+        // get if is home
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 if (!this.getDeepestTitle(this.router.routerState.snapshot.root) ||
