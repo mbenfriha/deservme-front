@@ -28,7 +28,7 @@ export class AuthenticationService {
                     this.currentUserSubject.next(JSON.parse(localStorage.getItem('user')))
     }
 
-    public get currentUser(): Observable<User> {
+    public get currentUser(): BehaviorSubject<User> {
            return this.currentUserSubject;
     }
 

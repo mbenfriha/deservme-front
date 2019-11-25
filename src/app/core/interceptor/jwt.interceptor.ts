@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 
 import {AuthenticationService} from '../authentication/authentication.service';
 import {flatMap, map} from "rxjs/operators";
+import {User} from '../../models/user';
+import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -11,17 +13,15 @@ export class JwtInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // add authorization header with jwt token if available
-       this.authenticationService.currentUser.subscribe(user => {
-            if (user && user.token) {
+       const user: User = this.authenticationService.currentUser.getValue();
+            if (isNotNullOrUndefined(user) && isNotNullOrUndefined(user.token)) {
                 request = request.clone({
                     setHeaders: {
                         Authorization: `Bearer ${user.token}`
                     }
                 });
             }
-        } );
 
         return next.handle(request);
-
     }
 }
