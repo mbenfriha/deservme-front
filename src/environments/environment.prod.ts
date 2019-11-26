@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    baseUrl: 'https://api.myquizzy.com/',
+    baseUrl: 'http://localhost:3000/',
     shortUrl: 'https://qzzy.in/',
     admin: 'https://admin.myquizzy.com/',
     cookieDomain: '.myquizzy.com'

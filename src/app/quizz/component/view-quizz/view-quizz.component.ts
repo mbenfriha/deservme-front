@@ -27,7 +27,7 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
     id: string;
     nbrQ: number;
     answer: Answer;
-    currentUser: User;
+    currentUser: User = null;
     currentAnswer: Choice;
     currentQuestion: Question;
     alreadyAnswer: boolean;
@@ -46,8 +46,6 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
     subjectReport: Subject<any> = new Subject();
     shortUrl = environment.shortUrl;
 
-    private  getUser: Subscription;
-
     constructor(private quizzService: QuizzService,
                 private route: ActivatedRoute,
                 private toastr: ToastrService,
@@ -55,7 +53,7 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
                 private readonly metafrenzyService: MetafrenzyService,
                 private authenticationService: AuthenticationService) {
         this.id = this.route.snapshot.paramMap.get('id');
-        this.quizzService.getQuizzById(this.id).pipe(take(1)).subscribe((q: Quizz) => {
+        this.quizzService.getQuizzById(this.id).subscribe((q: Quizz) => {
 
             this.metafrenzyService.setAllTitleTags('MyQuizzy - ' + q.title);
             this.metafrenzyService.setAllDescriptionTags('Viens répondre au quizz de ' + q.username);
@@ -68,29 +66,21 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
 
             this.exist = true;
             this.quizz = q;
-        }, err => {
-            this.exist = false;
-        });
-    }
+            console.log(this.quizz);
 
-    ngOnInit() {
-        if(this.quizz) {
-            this.getUser = this.authenticationService.currentUser.subscribe(x => {
-                this.currentUser = x;
-                if (this.currentUser) {
-                    this.isConnected = true;
-                }
-
-                this.answer = new Answer;
-                this.answer.questions = [new Question()];
-                this.answer.avatar = this.quizz.user_id;
-                if (this.isConnected) {
-                    console.log(this.currentUser, 'ok');
-                    this.isConnected = true;
-                    this.quizzService.getAnswerByUserAndQuizz(this.id).pipe(take(1)).subscribe((a: Answer) => {
+            this.answer = new Answer;
+            this.answer.questions = [new Question()];
+            this.answer.avatar = this.quizz.user_id;
+            this.currentUser =  this.authenticationService.currentUser.getValue();
+            if (!isNullOrUndefined(this.currentUser)) {
+                this.isConnected = true;
+                    console.log('caca2');
+                    this.quizzService.getAnswerByUserAndQuizz(this.id).subscribe((a: Answer) => {
                         this.calculResult(a, true);
                         this.alreadyAnswer = true;
                     }, error => {
+                        console.log('caca3');
+
                         this.alreadyAnswer = false;
                         if (this.quizz.user_id == this.currentUser._id) {
                             this.myQuizz = true;
@@ -101,11 +91,15 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
                         this.answer.avatar_type = this.currentUser.avatar_type;
                         this.answer.questions = [new Question()];
                     });
-                }
+            }
+        }, err => {
+            this.exist = false;
+        });
 
-            }, error => {
-            });
-        }
+
+    }
+
+    ngOnInit() {
 
 
        // jQuery('.tabs').tabs();
@@ -341,10 +335,5 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
         this.modal = false;
     }
 
-    ngOnDestroy(): void {
-        if(!isNullOrUndefined(this.getUser)) {
-            this.getUser.unsubscribe();
-
-        }
-    }
+    ngOnDestroy(): void {}
 }

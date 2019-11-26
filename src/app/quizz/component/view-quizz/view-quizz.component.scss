@@ -27,8 +27,6 @@
 
   .question {
     border: 1px solid white;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
     padding: 1em 1em;
     margin: 0;
     overflow: hidden;
@@ -107,11 +105,13 @@
 
 .already {
   color: #00000038;
-  margin: 1em 1em;
   text-align: center;
   font-size: 24px;
   span {
     font-size: 5em;
+  }
+  .title-page {
+    margin-bottom: 1em;
   }
 }
 
@@ -193,9 +193,30 @@ share-buttons {
   }
 }
 
+@media only screen and (min-width: 993px) {
+  .user {
+    padding: 10px;
+    min-height: 25em;
+    position:relative;
+    .buttons {
+      bottom: 0;
+      position: absolute;
+      left: 0;
+    }
+  }
+  .answer-quizz {
+    min-height: 25em;
+    margin-bottom:0;
+    .question {
+      min-height: 17em;
+    }
+  }
+}
+
 @media screen and (max-width: 992px){
   .nopadding {
     padding: 0;
   }
+
 
 }
