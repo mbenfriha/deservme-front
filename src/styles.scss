@@ -164,6 +164,9 @@ button.green-border:focus {
   font-size: 1.56rem;
 }
 
+.background-green {
+  background: var(--color-green);
+}
 
 .background-gradient-fixed {
   background: linear-gradient(41deg, var(--color-purple), var(--color-green));
@@ -608,4 +611,8 @@ button.green-border:focus {
 #loader3 .roller {
   -webkit-animation-delay: 0.3s;
   animation-delay: 0.3s;
+}
+
+.carousel .indicators .indicator-item {
+  margin: 10px 4px !important;
 }

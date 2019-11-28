@@ -32,6 +32,11 @@ export class QuizzService {
             .get<Quizz[]>(this.base_path + 'quizz', this.httpOptions);
     }
 
+    // get all quizz rand
+    getAllQuizzRand(): Observable<Quizz[]> {
+        return this.http
+            .get<Quizz[]>(this.base_path + 'quizz/rand', this.httpOptions);
+    }
     // get quizz by user id
     getQuizzByUser(id: string): Observable<Quizz[]> {
         return this.http

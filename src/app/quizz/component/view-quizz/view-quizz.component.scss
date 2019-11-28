@@ -98,9 +98,34 @@
 
   }
 }
+.carousel {
+  height: 120px !important;
+
+  .other-quizz {
+    font-size: 14px;
+    z-index: 1;
+    position: absolute;
+    color: white;
+    left: 5px;
+    top: 5px;
+    width: 100%;
+  }
+  .carousel-item {
+    height: 120px !important;
+    background: var(--color-green);
+    cursor: pointer;
+  }
+  h2 {
+    margin-bottom: 1px;
+    margin-top: 35px;
+  }
 
 
+}
 
+li.indicator-item {
+  margin: 10px 4Px ;
+}
 
 
 .already {
@@ -108,7 +133,7 @@
   text-align: center;
   font-size: 24px;
   span {
-    font-size: 5em;
+    font-size: 4em;
   }
   .title-page {
     margin-bottom: 1em;
@@ -125,13 +150,6 @@
   }
 }
 
-@media only screen and (min-width: 993px) {
-  .row .col.offset-l1 { margin-left: 2.333333%; }
-}
-
-@media only screen and (min-width: 993px) {
-  .row .col.l4 { width: 30.9%; margin-left: auto; left: auto; right: auto; }
-}
 
 .collection {
   margin-top: 0;
@@ -194,6 +212,8 @@ share-buttons {
 }
 
 @media only screen and (min-width: 993px) {
+  .row .col.offset-l1 { margin-left: 2.333333%; }
+  .row .col.l4 { width: 30.9%; margin-left: auto; left: auto; right: auto; }
   .user {
     padding: 10px;
     min-height: 25em;
@@ -211,12 +231,18 @@ share-buttons {
       min-height: 17em;
     }
   }
+
+  .already {
+    .message {
+      height: 7.5em;
+    }
+  }
 }
 
 @media screen and (max-width: 992px){
   .nopadding {
     padding: 0;
   }
-
-
 }
+
+

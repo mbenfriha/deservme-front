@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterContentChecked, AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {environment} from "../../../../environments/environment";
 import {Quizz} from "../../../models/quizz";
 import {Answer, Choice, Question} from "../../../models/answer";
@@ -20,10 +20,11 @@ declare var jQuery: any;
     templateUrl: './view-quizz.component.html',
     styleUrls: ['./view-quizz.component.scss']
 })
-export class ViewQuizzComponent implements OnInit, OnDestroy {
+export class ViewQuizzComponent implements OnInit, OnDestroy, AfterViewInit {
 
     avatar = environment.baseUrl + '/avatar/';
     quizz: Quizz;
+    allQuizz: Quizz[] = null;
     id: string;
     nbrQ: number;
     answer: Answer;
@@ -45,6 +46,7 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
     subjectClose: Subject<any> = new Subject();
     subjectReport: Subject<any> = new Subject();
     shortUrl = environment.shortUrl;
+    getCarous = false;
 
     constructor(private quizzService: QuizzService,
                 private route: ActivatedRoute,
@@ -52,8 +54,12 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private readonly metafrenzyService: MetafrenzyService,
                 private authenticationService: AuthenticationService) {
+
+        this.router.routeReuseStrategy.shouldReuseRoute = function () {
+            return false;
+        };
         this.id = this.route.snapshot.paramMap.get('id');
-        this.quizzService.getQuizzById(this.id).subscribe((q: Quizz) => {
+        this.quizzService.getQuizzById(this.id).pipe(take(1)).subscribe((q: Quizz) => {
 
             this.metafrenzyService.setAllTitleTags('MyQuizzy - ' + q.title);
             this.metafrenzyService.setAllDescriptionTags('Viens répondre au quizz de ' + q.username);
@@ -74,35 +80,51 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
             this.currentUser =  this.authenticationService.currentUser.getValue();
             if (!isNullOrUndefined(this.currentUser)) {
                 this.isConnected = true;
-                    console.log('caca2');
-                    this.quizzService.getAnswerByUserAndQuizz(this.id).subscribe((a: Answer) => {
-                        this.calculResult(a, true);
-                        this.alreadyAnswer = true;
-                    }, error => {
-                        console.log('caca3');
+                this.quizzService.getAnswerByUserAndQuizz(this.id).pipe(take(1)).subscribe((a: Answer) => {
+                    this.calculResult(a, true);
+                    this.alreadyAnswer = true;
+                    this.quizzService.getAllQuizzRand().pipe(take(1)).subscribe((allq: Quizz[]) => {
+                        this.allQuizz = allq;
+                    }, err => {
+                        console.log(err);
+                    }, () => {
+                            setInterval(() => {
 
-                        this.alreadyAnswer = false;
-                        if (this.quizz.user_id == this.currentUser._id) {
-                            this.myQuizz = true;
-                        }
-                        this.answer.title = this.quizz.title;
-                        this.answer.user_id = this.currentUser._id;
-                        this.answer.username = this.currentUser.username;
-                        this.answer.avatar_type = this.currentUser.avatar_type;
-                        this.answer.questions = [new Question()];
+                                if (!this.getCarous) {
+                                    jQuery('.carousel.carousel-slider').carousel({
+                                        indicators: true,
+                                        fullWidth: true,
+                                    });
+                                    this.getCarous = true;
+                                }
+                            }, 100);
                     });
+                }, error => {
+
+                    this.alreadyAnswer = false;
+                    if (this.quizz.user_id == this.currentUser._id) {
+                        this.myQuizz = true;
+                    }
+                    this.answer.title = this.quizz.title;
+                    this.answer.user_id = this.currentUser._id;
+                    this.answer.username = this.currentUser.username;
+                    this.answer.avatar_type = this.currentUser.avatar_type;
+                    this.answer.questions = [new Question()];
+                }, () => {});
             }
         }, err => {
             this.exist = false;
+        }, () => {
+            this.quizzService.getAnswerOfQuizz(this.id).pipe(take(1)).subscribe((answers: Answer[]) => {
+                this.allAnswer = answers;
+                console.log(this.alreadyAnswer);
+            });
         });
 
 
     }
-
+    ngAfterViewInit() {}
     ngOnInit() {
-
-
-       // jQuery('.tabs').tabs();
 
         // create subject for debouncetime, anti spam backend
         this.subjectState
@@ -125,10 +147,6 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
             );
         this.nbrQ = 0;
         this.id = this.route.snapshot.paramMap.get('id');
-
-        this.quizzService.getAnswerOfQuizz(this.id).pipe(take(1)).subscribe((answers: Answer[]) => {
-            this.allAnswer = answers;
-        });
     }
     previewQ() {
         this.nbrQ--;
@@ -232,6 +250,23 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
                 this.alreadyAnswer = true;
                 this.quizzService.getAnswerOfQuizz(this.id).pipe(take(1)).subscribe((answers: Answer[]) => {
                     this.allAnswer = answers;
+                    this.quizzService.getAllQuizzRand().pipe(take(1)).subscribe((allq: Quizz[]) => {
+                        this.allQuizz = allq;
+                    }, err => {
+                        console.log(err);
+                    }, () => {
+                        setInterval(() => {
+
+                            if (!this.getCarous) {
+                                jQuery('.carousel.carousel-slider').carousel({
+                                    indicators: true,
+                                    fullWidth: true,
+                                });
+                                this.getCarous = true;
+                            }
+                        }, 100);
+                    });
+
                 });
             }, (error) => {
                 this.toastr.error('Une erreur est survenue');
@@ -250,8 +285,24 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
         this.quizzService.createAnswer(this.answer, this.quizz._id).pipe(take(1)).subscribe((answer) => {
             this.calculResult(answer, false);
             this.alreadyAnswer = true;
-            this.quizzService.getAnswerOfQuizz(this.id).subscribe((answers: Answer[]) => {
+            this.quizzService.getAnswerOfQuizz(this.id).pipe(take(1)).subscribe((answers: Answer[]) => {
                 this.allAnswer = answers;
+                this.quizzService.getAllQuizzRand().pipe(take(1)).subscribe((allq: Quizz[]) => {
+                    this.allQuizz = allq;
+                }, err => {
+                    console.log(err);
+                }, () => {
+                    setInterval(() => {
+
+                        if (!this.getCarous) {
+                            jQuery('.carousel.carousel-slider').carousel({
+                                indicators: true,
+                                fullWidth: true,
+                            });
+                            this.getCarous = true;
+                        }
+                    }, 100);
+                });
             });
         }, (error) => {
             this.toastr.error('Une erreur est survenue');
@@ -275,10 +326,10 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
     changeState() {
         if (this.quizz.user_id == this.currentUser._id) {
             this.quizzService.changeStateQuizz(this.id).pipe(take(1)).subscribe((q: Quizz) => {
-                this.quizz = q;
+                    this.quizz = q;
                     this.toastr.success('ton quizz est maintenant en ' + (this.quizz.private ? 'privé' : 'public'));
                 }, (err) =>
-                this.toastr.error('Une erreur est survenue')
+                    this.toastr.error('Une erreur est survenue')
             );
         }
     }
@@ -286,10 +337,10 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
     changeClose() {
         if (this.quizz.user_id == this.currentUser._id) {
             this.quizzService.changeCloseQuizz(this.id).pipe(take(1)).subscribe((q: Quizz) => {
-                this.quizz = q;
+                    this.quizz = q;
                     this.toastr.success('ton quizz est maintenant en ' + (this.quizz.close ? 'fermé' : 'ouvert'));
                 }, (err) =>
-                this.toastr.error('Une erreur est survenue')
+                    this.toastr.error('Une erreur est survenue')
             );
         }
     }
@@ -316,9 +367,9 @@ export class ViewQuizzComponent implements OnInit, OnDestroy {
     deleteQuizz() {
         if (this.quizz.user_id == this.currentUser._id) {
             this.quizzService.deleteQuizz(this.id).subscribe((q: Quizz) => {
-                this.router.navigate(['/profile/' + this.currentUser._id]);
-            }, (err) =>
-                this.toastr.error('Une erreur est survenue')
+                    this.router.navigate(['/profile/' + this.currentUser._id]);
+                }, (err) =>
+                    this.toastr.error('Une erreur est survenue')
             );
         }
     }

@@ -219,12 +219,25 @@
                             </div>
                         </div>
 
-                        <div  class="already nopadding col s12 l8 offset-l1">
+                        <div  class="already no-padding col s12 l8 offset-l1 z-depth-3">
                             <div class="title-page">{{quizz.title}}</div>
 
-                            <div class="col s12">
+                            <div class="col s12 message">
                                 {{finalString }}<br>
                                 <span> {{result}} % </span>
+                            </div>
+
+                            <div class="col s12 no-padding background-green" *ngIf="allQuizz">
+                                <div class="carousel carousel-slider center">
+                                    <span class="other-quizz">Les autres quizz du moment</span>
+                                    <ng-container *ngFor="let q of allQuizz" >
+                                        <div class="carousel-item  white-text" [routerLink]="['/quizz/'+q._id]" *ngIf="q._id != quizz._id">
+                                            <h2>{{q.title}}</h2>
+                                            <p class="white-text">{{q.answer_count}} ont participé à ce quizz</p>
+
+                                        </div>
+                                    </ng-container>
+                                </div>
                             </div>
                         </div>
 
@@ -392,6 +405,23 @@
                         </div>
 
                         <button class="btn green-button s12 l4 offset-l4" (click)="openModal()">S'inscire / Se connecter</button>
+
+                        <div class="col s12 no-padding">
+                            <div class="carousel carousel-slider center">
+                                <div class="carousel-item  white-text" href="#one!">
+                                    <h2>First Panel</h2>
+                                </div>
+                                <div class="carousel-item  white-text" href="#two!">
+                                    <h2>Second Panel</h2>
+                                </div>
+                                <div class="carousel-item white-text" href="#three!">
+                                    <h2>Third Panel</h2>
+                                </div>
+                                <div class="carousel-item white-text" href="#four!">
+                                    <h2>Fourth Panel</h2>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
 
