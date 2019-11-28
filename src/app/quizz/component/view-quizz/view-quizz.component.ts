@@ -89,8 +89,7 @@ export class ViewQuizzComponent implements OnInit, OnDestroy, AfterViewInit {
                         console.log(err);
                     }, () => {
                             setInterval(() => {
-
-                                if (!this.getCarous) {
+                                if (!this.getCarous && this.allQuizz.length > 0) {
                                     jQuery('.carousel.carousel-slider').carousel({
                                         indicators: true,
                                         fullWidth: true,
@@ -257,7 +256,7 @@ export class ViewQuizzComponent implements OnInit, OnDestroy, AfterViewInit {
                     }, () => {
                         setInterval(() => {
 
-                            if (!this.getCarous) {
+                            if (!this.getCarous && this.allQuizz.length > 0) {
                                 jQuery('.carousel.carousel-slider').carousel({
                                     indicators: true,
                                     fullWidth: true,
@@ -294,7 +293,7 @@ export class ViewQuizzComponent implements OnInit, OnDestroy, AfterViewInit {
                 }, () => {
                     setInterval(() => {
 
-                        if (!this.getCarous) {
+                        if (!this.getCarous && this.allQuizz.length > 0) {
                             jQuery('.carousel.carousel-slider').carousel({
                                 indicators: true,
                                 fullWidth: true,
