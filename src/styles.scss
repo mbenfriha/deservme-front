@@ -615,4 +615,9 @@ button.green-border:focus {
 
 .carousel .indicators .indicator-item {
   margin: 10px 4px !important;
+  background-color: rgb(199, 199, 199) !important;
+}
+
+.carousel .indicators .indicator-item.active {
+background-color: var(--color-purple) !important;
 }

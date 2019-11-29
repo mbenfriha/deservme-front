@@ -3,8 +3,9 @@
         <ng-container *ngIf="exist && quizz">
             <ng-container *ngIf="isConnected">
                 <ng-container *ngIf="myQuizz">
+                    <div class="title-page">{{quizz.title}}</div>
+
                     <div class="col s12 l4 user z-depth-3">
-                        <div class="title-page">{{quizz.title}}</div>
                         <div class="col s2">
                             <img class="circle" src="{{getAvatar(quizz.user_id)}}" alt="img {{quizz.username}}">
                         </div>
@@ -44,22 +45,7 @@
                         </div>
                     </div>
 
-                    <div class="row ads">
-                        <div class="col s12">
-                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                            <!-- display single quizz -->
-                            <ins class="adsbygoogle"
-                                 style="display:block"
-                                 data-ad-client="ca-pub-9393734224464508"
-                                 data-ad-slot="2013634067"
-                                 data-ad-format="auto"
-                                 data-full-width-responsive="true"></ins>
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
-                        </div>
-                    </div>
-                    <div class="col s12 l8">
+                    <div class="col s12 l7 offset-l1">
                         <div class="row">
                             <div class="col s12 nopadding">
                                 <materialize-tab-group>
@@ -137,7 +123,7 @@
                                 </div>
                             </div>
                             <ng-container  *ngFor="let q of quizz.questions, let i = index;">
-                                <div class="row question z-depth-3" *ngIf="nbrQ == i" >
+                                <div class="row question" *ngIf="nbrQ == i" >
                                     <div class="title-question col s12 ">{{q.name}} </div>
 
                                     <div class="row answers" >
@@ -153,9 +139,9 @@
                             </ng-container>
                             <div class="row answer-end">
                                 <div class="col s12">
-                                    <button (click)="previewQ()" class="white-button left btn" *ngIf="nbrQ > 0">Précédent</button>
-                                    <button (click)="nextQ()" class="white-button right btn" *ngIf="nbrQ < quizz.questions.length - 1 ">Suivant</button>
-                                    <button (click)="validateAnswer()" class="white-button right btn" *ngIf="nbrQ == quizz.questions.length - 1 ">Valider</button>
+                                    <button (click)="previewQ()" class="purple-border left btn" *ngIf="nbrQ > 0">Précédent</button>
+                                    <button (click)="nextQ()" class="purple-border right btn" *ngIf="nbrQ < quizz.questions.length - 1 ">Suivant</button>
+                                    <button (click)="validateAnswer()" class="purple-button right btn" *ngIf="nbrQ == quizz.questions.length - 1 ">Valider</button>
                                 </div>
                             </div>
 
@@ -227,13 +213,14 @@
                                 <span> {{result}} % </span>
                             </div>
 
-                            <div class="col s12 no-padding background-green" *ngIf="allQuizz && allQuizz.length > 0">
+                            <div class="col s12 no-padding" *ngIf="allQuizz && allQuizz.length > 0">
                                 <div class="carousel carousel-slider center">
                                     <span class="other-quizz">Les autres quizz du moment</span>
                                     <ng-container *ngFor="let q of allQuizz" >
-                                        <div class="carousel-item  white-text" [routerLink]="['/quizz/'+q._id]" *ngIf="q._id != quizz._id">
+                                        <div class="carousel-item  black-text" *ngIf="q._id != quizz._id">
                                             <h2>{{q.title}}</h2>
-                                            <p class="white-text">{{q.answer_count}} ont participé à ce quizz</p>
+                                            <p class="black-text">{{q.answer_count}} ont participé à ce quizz</p>
+                                            <button class="purple-border btn" [routerLink]="['/quizz/'+q._id]">ouvrir</button>
 
                                         </div>
                                     </ng-container>
@@ -315,7 +302,7 @@
                             </div>
                         </div>
                         <ng-container  *ngFor="let q of quizz.questions, let i = index;">
-                            <div class="row question z-depth-3" *ngIf="nbrQ == i" >
+                            <div class="row question" *ngIf="nbrQ == i" >
                                 <div class="title-question col s12 ">{{q.name}} </div>
 
                                 <div class="row answers" >
@@ -331,10 +318,10 @@
                         </ng-container>
                         <div class="row answer-end">
                             <div class="col s12">
-                                <button (click)="previewQ()" class="white-button left btn" *ngIf="nbrQ > 0">Précédent</button>
-                                <button (click)="openModal()" class="white-button left btn col s12" *ngIf="quizz.close">Tu dois te connecter pour participer</button>
-                                <button (click)="nextQ()" class="white-button right btn" *ngIf="nbrQ < quizz.questions.length && !quizz.close" [disabled]="quizz.close">Suivant</button>
-                                <button (click)="validateAnswerAnony()" class="white-button right btn" *ngIf="nbrQ == quizz.questions.length">Valider</button>
+                                <button (click)="previewQ()" class="purple-border left btn" *ngIf="nbrQ > 0">Précédent</button>
+                                <button (click)="openModal()" class="purple-border left btn col s12" *ngIf="quizz.close">Tu dois te connecter pour participer</button>
+                                <button (click)="nextQ()" class="purple-border right btn" *ngIf="nbrQ < quizz.questions.length && !quizz.close" [disabled]="quizz.close">Suivant</button>
+                                <button (click)="validateAnswerAnony()" class="purple-button right btn" *ngIf="nbrQ == quizz.questions.length">Valider</button>
                             </div>
                         </div>
 
@@ -396,7 +383,7 @@
 
                     </div>
 
-                    <div  class="already nopadding col s12 l8 offset-l1">
+                    <div  class="already col s12 l8 offset-l1 z-depth-3 no-padding">
                         <div class="title-page">{{quizz.title}}</div>
 
                         <div class="col s12">
@@ -406,13 +393,15 @@
 
                         <button class="btn green-button s12 l4 offset-l4" (click)="openModal()">S'inscire / Se connecter</button>
 
-                        <div class="col s12 no-padding background-green" *ngIf="allQuizz && allQuizz.length > 0">
+
+                        <div class="col s12 no-padding" *ngIf="allQuizz && allQuizz.length > 0">
                             <div class="carousel carousel-slider center">
                                 <span class="other-quizz">Les autres quizz du moment</span>
                                 <ng-container *ngFor="let q of allQuizz" >
-                                    <div class="carousel-item  white-text" [routerLink]="['/quizz/'+q._id]" *ngIf="q._id != quizz._id">
+                                    <div class="carousel-item  black-text" *ngIf="q._id != quizz._id">
                                         <h2>{{q.title}}</h2>
-                                        <p class="white-text">{{q.answer_count}} ont participé à ce quizz</p>
+                                        <p class="black-text">{{q.answer_count}} ont participé à ce quizz</p>
+                                        <button class="purple-border btn" [routerLink]="['/quizz/'+q._id]">ouvrir</button>
 
                                     </div>
                                 </ng-container>

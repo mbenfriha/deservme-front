@@ -12,6 +12,7 @@ const routes: Routes = [
     { path: 'contact',  loadChildren: () => import('./core/component/contact/contact.module').then(value => value.ContactModule)},
     { path: 'quizz',    loadChildren: () => import('./quizz/quizz.module').then(value => value.QuizzModule), canActivate: [UsernameGuard]},
     { path: 'profile',  loadChildren: () => import('./profile/profile.module').then(value => value.ProfileModule)},
+    { path: 'profil',  loadChildren: () => import('./profile/profile.module').then(value => value.ProfileModule)},
     { path: '**',       redirectTo: '' }
 
 ];

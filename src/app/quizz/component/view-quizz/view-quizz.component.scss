@@ -48,7 +48,7 @@
   }
   .answer-end {
     margin: 0;
-    background: var(--color-green);
+ //   background: var(--color-green);
     padding-top: 1em;
   }
 
@@ -105,14 +105,14 @@
     font-size: 14px;
     z-index: 1;
     position: absolute;
-    color: white;
+    color: #202020;
     left: 5px;
     top: 5px;
     width: 100%;
   }
   .carousel-item {
     height: 150px !important;
-    background: var(--color-green);
+  //  background: var(--color-green);
     cursor: pointer;
   }
   h2 {
@@ -120,6 +120,11 @@
     margin-top: 35px;
   }
 
+  button {
+    height: 20px;
+    margin-top: 10px;
+    line-height:18px;
+  }
 
 }
 
